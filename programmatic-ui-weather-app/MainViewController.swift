@@ -25,9 +25,15 @@ class MainViewController: UIViewController {
         
         style()
         layout()
-        fetchWeather()
-        print(WeatherData.cityName)
-        print(WeatherData.weatherTemp)
+        
+        DispatchQueue.global().async {
+            self.fetchWeather()
+            print(RawWeatherData.WeatherTempKelvin)
+            
+            DispatchQueue.main.async {
+                self.topCurrentTempLabel.text = "\(RawWeatherData.WeatherTempKelvin)"
+            }
+        }
     }
 
     

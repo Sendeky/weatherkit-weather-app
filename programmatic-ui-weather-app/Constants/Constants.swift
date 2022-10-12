@@ -8,5 +8,5 @@
 import Foundation
 
 struct Constants {
-    let API_KEY = "Insert Api key"
+    let API_KEY = "insert api key"
 }
