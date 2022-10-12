@@ -9,6 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    //Intializes all the elements
     let topStackview = UIStackView()
     let topSubStackview = UIStackView()
     let topRainChanceLabel = UILabel()
