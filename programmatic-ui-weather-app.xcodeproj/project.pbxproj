@@ -54,14 +54,30 @@
 		C034703D28F6221900656AA8 /* programmatic-ui-weather-app */ = {
 			isa = PBXGroup;
 			children = (
-				C034703E28F6221900656AA8 /* AppDelegate.swift */,
-				C034704028F6221900656AA8 /* SceneDelegate.swift */,
+				C034705328F640AD00656AA8 /* Delegates */,
+				C034705228F6406500656AA8 /* Files */,
 				C034704228F6221900656AA8 /* MainViewController.swift */,
-				C034704728F6221A00656AA8 /* Assets.xcassets */,
-				C034704928F6221A00656AA8 /* LaunchScreen.storyboard */,
 				C034704C28F6221A00656AA8 /* Info.plist */,
 			);
 			path = "programmatic-ui-weather-app";
+			sourceTree = "<group>";
+		};
+		C034705228F6406500656AA8 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				C034704728F6221A00656AA8 /* Assets.xcassets */,
+				C034704928F6221A00656AA8 /* LaunchScreen.storyboard */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
+		C034705328F640AD00656AA8 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				C034703E28F6221900656AA8 /* AppDelegate.swift */,
+				C034704028F6221900656AA8 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
