@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     let topCurrentTempLabel = UILabel()
     let topUVIndexLabel = UILabel()
     let topCityNameLabel = UILabel()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,9 @@ class MainViewController: UIViewController {
         
         style()
         layout()
+        fetchWeather()
+        print(WeatherData.cityName)
+        print(WeatherData.weatherTemp)
     }
 
     

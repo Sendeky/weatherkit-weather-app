@@ -12,6 +12,9 @@
 		C034704328F6221900656AA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034704228F6221900656AA8 /* MainViewController.swift */; };
 		C034704828F6221A00656AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C034704728F6221A00656AA8 /* Assets.xcassets */; };
 		C034704B28F6221A00656AA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C034704928F6221A00656AA8 /* LaunchScreen.storyboard */; };
+		C034705528F7363B00656AA8 /* WeatherAPINetworkingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705428F7363B00656AA8 /* WeatherAPINetworkingUtil.swift */; };
+		C034705928F7381700656AA8 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = C034705828F7381700656AA8 /* SwiftyJSON */; };
+		C034705C28F738BC00656AA8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705B28F738BC00656AA8 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,8 @@
 		C034704728F6221A00656AA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C034704A28F6221A00656AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C034704C28F6221A00656AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C034705428F7363B00656AA8 /* WeatherAPINetworkingUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPINetworkingUtil.swift; sourceTree = "<group>"; };
+		C034705B28F738BC00656AA8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C034705928F7381700656AA8 /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,8 +60,10 @@
 		C034703D28F6221900656AA8 /* programmatic-ui-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				C034705A28F738AB00656AA8 /* Constants */,
 				C034705328F640AD00656AA8 /* Delegates */,
 				C034705228F6406500656AA8 /* Files */,
+				C034705628F7363E00656AA8 /* Utils */,
 				C034704228F6221900656AA8 /* MainViewController.swift */,
 				C034704C28F6221A00656AA8 /* Info.plist */,
 			);
@@ -80,6 +88,22 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		C034705628F7363E00656AA8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C034705428F7363B00656AA8 /* WeatherAPINetworkingUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C034705A28F738AB00656AA8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				C034705B28F738BC00656AA8 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -96,6 +120,9 @@
 			dependencies = (
 			);
 			name = "programmatic-ui-weather-app";
+			packageProductDependencies = (
+				C034705828F7381700656AA8 /* SwiftyJSON */,
+			);
 			productName = "programmatic-ui-weather-app";
 			productReference = C034703B28F6221900656AA8 /* programmatic-ui-weather-app.app */;
 			productType = "com.apple.product-type.application";
@@ -124,6 +151,9 @@
 				Base,
 			);
 			mainGroup = C034703228F6221900656AA8;
+			packageReferences = (
+				C034705728F7381700656AA8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = C034703C28F6221900656AA8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -150,7 +180,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C034705C28F738BC00656AA8 /* Constants.swift in Sources */,
 				C034704328F6221900656AA8 /* MainViewController.swift in Sources */,
+				C034705528F7363B00656AA8 /* WeatherAPINetworkingUtil.swift in Sources */,
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,
 				C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */,
 			);
@@ -360,6 +392,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C034705728F7381700656AA8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C034705828F7381700656AA8 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C034705728F7381700656AA8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C034703328F6221900656AA8 /* Project object */;
 }
