@@ -23,6 +23,7 @@ struct RawWeatherData {
     static var sunsetResult = Double()
     static var localSunrise = ""
     static var localSunset = ""
+    static var rainAmount = Double()
 }
 
 class WeatherAPINetworkingUtil{
@@ -44,6 +45,7 @@ extension MainViewController {
                 RawWeatherData.cityName = result["name"].stringValue
                 RawWeatherData.sunriseResult = result["sys"]["sunrise"].doubleValue
                 RawWeatherData.sunsetResult = result["sys"]["sunset"].doubleValue
+                RawWeatherData.rainAmount = result["rain"]["1h"].doubleValue
             }
         }
     }

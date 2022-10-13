@@ -9,10 +9,10 @@ import Foundation
 
 
 struct WeatherData {
-    var WeatherTempCelsius = ""
-    var WeatherFeelsLikeCelsius = ""
-    var WeatherTempMinCelsius = ""
-    var WeatherTempMaxCelsius = ""
+    static var WeatherTempCelsius = 0
+    static var WeatherFeelsLikeCelsius = 0
+    static var WeatherTempMinCelsius = 0
+    static var WeatherTempMaxCelsius = 0
 }
 
 class WeatherUnitConverter {
@@ -20,6 +20,9 @@ class WeatherUnitConverter {
 
 extension MainViewController {
     func convertKelvinIntoCelsius() {
-        RawWeatherData.WeatherTempKelvin
+        WeatherData.WeatherTempCelsius = Int(round(Double(RawWeatherData.WeatherTempKelvin)! - 273.0))
+        WeatherData.WeatherFeelsLikeCelsius = Int(round(Double(RawWeatherData.weatherFeelsLikeKelvin)! - 273.0))
+        WeatherData.WeatherTempMinCelsius = Int(round(Double(RawWeatherData.weatherTempMinKelvin)! - 273.0))
+        WeatherData.WeatherTempMaxCelsius = Int(round(Double(RawWeatherData.weatherTempMaxKelvin)! - 273.0))
     }
 }
