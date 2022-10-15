@@ -10,7 +10,7 @@ import SwiftyJSON
 
 //let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(globalUserLatitude)&lon=\(globalUserLongitude)&appid=\(constants.API_KEY)"
 let constants = Constants()
-let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=51.5072&lon=0.1276&appid=\(constants.API_KEY)" //Testing for London
+let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=38.138591&lon=-122.1885952&appid=\(constants.API_KEY)" //Testing for London
 
 struct RawWeatherData {
     static var WeatherTempKelvin = ""
@@ -21,9 +21,9 @@ struct RawWeatherData {
     static var cityName = ""
     static var sunriseResult = Double()
     static var sunsetResult = Double()
-    static var localSunrise = ""
-    static var localSunset = ""
     static var rainAmount = Double()
+    static var windSpeed = Double()
+    static var humidity = Int()
 }
 
 class WeatherAPINetworkingUtil{
@@ -46,6 +46,8 @@ extension MainViewController {
                 RawWeatherData.sunriseResult = result["sys"]["sunrise"].doubleValue
                 RawWeatherData.sunsetResult = result["sys"]["sunset"].doubleValue
                 RawWeatherData.rainAmount = result["rain"]["1h"].doubleValue
+                RawWeatherData.windSpeed = result["wind"]["speed"].doubleValue
+                RawWeatherData.humidity = result["main"]["humidity"].intValue
             }
         }
     }

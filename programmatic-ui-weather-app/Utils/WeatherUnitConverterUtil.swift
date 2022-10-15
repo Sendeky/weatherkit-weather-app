@@ -13,6 +13,10 @@ struct WeatherData {
     static var WeatherFeelsLikeCelsius = 0
     static var WeatherTempMinCelsius = 0
     static var WeatherTempMaxCelsius = 0
+    static var localSunrise = ""
+    static var localSunset = ""
+    static var windSpeedMPH = 0
+    static var windSpeedKPH = 0
 }
 
 class WeatherUnitConverter {
@@ -25,4 +29,13 @@ extension MainViewController {
         WeatherData.WeatherTempMinCelsius = Int(round(Double(RawWeatherData.weatherTempMinKelvin)! - 273.0))
         WeatherData.WeatherTempMaxCelsius = Int(round(Double(RawWeatherData.weatherTempMaxKelvin)! - 273.0))
     }
+    
+    func convertWindSpeedMPH() {
+        WeatherData.windSpeedMPH = Int(RawWeatherData.windSpeed * 2.2369)
+    }
+    
+    func convertWindSpeedKPH() {
+        WeatherData.windSpeedKPH = Int(RawWeatherData.windSpeed * 3.6)
+    }
 }
+

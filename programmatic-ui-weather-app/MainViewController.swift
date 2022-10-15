@@ -23,6 +23,9 @@ class MainViewController: UIViewController {
     let bottomScrollview = UIScrollView()
     let topScrollStackview = UIStackView()
     let sunsetTimeLabel = UILabel()
+    let feelsLikeTempLabel = UILabel()
+    let windSpeedLabel = UILabel()
+    let humidityLabel = UILabel()
 
     
     override func viewDidLoad() {
@@ -37,6 +40,9 @@ class MainViewController: UIViewController {
             print(RawWeatherData.WeatherTempKelvin)
             self.convertKelvinIntoCelsius()
             print(WeatherData.WeatherTempCelsius)
+            self.convertEpochToDate()
+            self.convertWindSpeedMPH()
+            self.convertWindSpeedKPH()
             
             DispatchQueue.main.async {
                 self.topCurrentTempLabel.text = "Temp: \(Int(WeatherData.WeatherTempCelsius))˚"
@@ -44,8 +50,22 @@ class MainViewController: UIViewController {
                 self.topCityNameLabel.text = "\(RawWeatherData.cityName)"
                 self.topTempMinLabel.text = "Min Temp: \(WeatherData.WeatherTempMinCelsius)"
                 self.topTempMaxLabel.text = "Max Temp: \(WeatherData.WeatherTempMaxCelsius)"
+                //Checks if the current time is greater than the sunset time (text changes depending on it)
+                if self.checkTime() == true {
+                    self.sunsetTimeLabel.text = "Sunset happened at: \(WeatherData.localSunset)"
+                } else {
+                    self.sunsetTimeLabel.text = "Sunset will be at: \(WeatherData.localSunset)"
+                }
+                self.feelsLikeTempLabel.text = "Feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
+                self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
+                self.humidityLabel.text = "Humidity is \(RawWeatherData.humidity)%"
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setGradientBackground() //Function that sets the view to a gradient background
+        super.viewWillAppear(true)
     }
 
     
@@ -104,7 +124,6 @@ class MainViewController: UIViewController {
         //Sets settings for bottomScrollview
         bottomScrollview.translatesAutoresizingMaskIntoConstraints = false
         bottomScrollview.alwaysBounceVertical = true
-        bottomScrollview.backgroundColor = .systemCyan
         
         //Sets settings for topScrollStackview
         topScrollStackview.translatesAutoresizingMaskIntoConstraints = false
@@ -114,6 +133,27 @@ class MainViewController: UIViewController {
         //Sets settings for sunsetTimeLabel
         sunsetTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         sunsetTimeLabel.text = "Sunset happened at: "
+        sunsetTimeLabel.font = .preferredFont(forTextStyle: .title2)
+        sunsetTimeLabel.adjustsFontSizeToFitWidth = true
+        
+        //Sets settings for feelsLikeTempLabel
+        feelsLikeTempLabel.translatesAutoresizingMaskIntoConstraints = false
+        feelsLikeTempLabel.text = "Feels like: "
+        feelsLikeTempLabel.font = .preferredFont(forTextStyle: .title2)
+        feelsLikeTempLabel.adjustsFontSizeToFitWidth = true
+        
+        //Sets settings for windSpeedLabel
+        windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
+        windSpeedLabel.text = "Wind Speed is"
+        windSpeedLabel.font = .preferredFont(forTextStyle: .title2)
+        windSpeedLabel.adjustsFontSizeToFitWidth = false
+        
+        //Sets settings for humidityLabel
+        humidityLabel.translatesAutoresizingMaskIntoConstraints = false
+        humidityLabel.text = "Humidity is"
+        humidityLabel.font = .preferredFont(forTextStyle: .title2)
+        humidityLabel.adjustsFontSizeToFitWidth = false
+        
     }
     
     private func layout(){
@@ -132,7 +172,11 @@ class MainViewController: UIViewController {
         topMinMaxTempView.addArrangedSubview(topTempMinLabel)
         topMinMaxTempView.addArrangedSubview(topTempMaxLabel)
         
+        //Adds sunset, feels like, wind speed, humidity labels into topScrollStackview
         topScrollStackview.addSubview(sunsetTimeLabel)
+        topScrollStackview.addSubview(feelsLikeTempLabel)
+        topScrollStackview.addSubview(windSpeedLabel)
+        topScrollStackview.addSubview(humidityLabel)
         
         //Adds topScrollStackview into bottomScrollview
         bottomScrollview.addSubview(topScrollStackview)
@@ -156,12 +200,32 @@ class MainViewController: UIViewController {
             topMinMaxTempView.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
             topMinMaxTempView.centerYAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 20),
             bottomScrollview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bottomScrollview.topAnchor.constraint(equalTo: view.centerYAnchor),
+            bottomScrollview.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
             bottomScrollview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomScrollview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomScrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            bottomScrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sunsetTimeLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
+            feelsLikeTempLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
+            feelsLikeTempLabel.topAnchor.constraint(equalTo: sunsetTimeLabel.bottomAnchor, constant: 15),
+            windSpeedLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
+            windSpeedLabel.topAnchor.constraint(equalTo: feelsLikeTempLabel.bottomAnchor, constant: 15),
+            humidityLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
+            humidityLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 15)
         ])
     }
-
 }
 
+//A function that makes a gradient background and sets it as the sublayer of the view
+extension MainViewController {
+    func setGradientBackground() {
+        let colorTop =  UIColor(red: 0/255.0, green: 235.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
+        let colorBottom = UIColor(red: 100.0/255.0, green: 50.0/255.0, blue: 235.0/255.0, alpha: 1.0).cgColor
+                    
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.frame = self.view.bounds
+                
+        self.view.layer.insertSublayer(gradientLayer, at:0)
+    }
+}

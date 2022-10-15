@@ -15,7 +15,9 @@
 		C034705528F7363B00656AA8 /* WeatherAPINetworkingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705428F7363B00656AA8 /* WeatherAPINetworkingUtil.swift */; };
 		C034705928F7381700656AA8 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = C034705828F7381700656AA8 /* SwiftyJSON */; };
 		C034705C28F738BC00656AA8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705B28F738BC00656AA8 /* Constants.swift */; };
-		C034705E28F75A5C00656AA8 /* WeatherUnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705D28F75A5C00656AA8 /* WeatherUnitConverter.swift */; };
+		C034705E28F75A5C00656AA8 /* WeatherUnitConverterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705D28F75A5C00656AA8 /* WeatherUnitConverterUtil.swift */; };
+		C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */; };
+		C034706228FB104200656AA8 /* CheckTimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034706128FB104200656AA8 /* CheckTimeUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +30,9 @@
 		C034704C28F6221A00656AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C034705428F7363B00656AA8 /* WeatherAPINetworkingUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPINetworkingUtil.swift; sourceTree = "<group>"; };
 		C034705B28F738BC00656AA8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		C034705D28F75A5C00656AA8 /* WeatherUnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUnitConverter.swift; sourceTree = "<group>"; };
+		C034705D28F75A5C00656AA8 /* WeatherUnitConverterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUnitConverterUtil.swift; sourceTree = "<group>"; };
+		C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverterUtil.swift; sourceTree = "<group>"; };
+		C034706128FB104200656AA8 /* CheckTimeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTimeUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				C034705428F7363B00656AA8 /* WeatherAPINetworkingUtil.swift */,
-				C034705D28F75A5C00656AA8 /* WeatherUnitConverter.swift */,
+				C034705D28F75A5C00656AA8 /* WeatherUnitConverterUtil.swift */,
+				C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */,
+				C034706128FB104200656AA8 /* CheckTimeUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -183,12 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
+				C034706228FB104200656AA8 /* CheckTimeUtil.swift in Sources */,
 				C034705C28F738BC00656AA8 /* Constants.swift in Sources */,
 				C034704328F6221900656AA8 /* MainViewController.swift in Sources */,
 				C034705528F7363B00656AA8 /* WeatherAPINetworkingUtil.swift in Sources */,
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,
 				C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */,
-				C034705E28F75A5C00656AA8 /* WeatherUnitConverter.swift in Sources */,
+				C034705E28F75A5C00656AA8 /* WeatherUnitConverterUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,8 +340,8 @@
 				INFOPLIST_FILE = "programmatic-ui-weather-app/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -359,8 +367,8 @@
 				INFOPLIST_FILE = "programmatic-ui-weather-app/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
