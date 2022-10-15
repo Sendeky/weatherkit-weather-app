@@ -20,6 +20,9 @@ class MainViewController: UIViewController {
     let topMinMaxTempView = UIStackView()
     let topTempMinLabel = UILabel()
     let topTempMaxLabel = UILabel()
+    let bottomScrollview = UIScrollView()
+    let topScrollStackview = UIStackView()
+    let sunsetTimeLabel = UILabel()
 
     
     override func viewDidLoad() {
@@ -65,8 +68,8 @@ class MainViewController: UIViewController {
         
         //Sets settings for topCurrentTempLabel
         topWeatherIconView.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(systemName: "sun.max.fill")!.withTintColor(.yellow)
-        topWeatherIconView.image = image
+        let weatherIcon = UIImage(systemName: "sun.max.fill")!.withTintColor(.yellow)
+        topWeatherIconView.image = weatherIcon
         
         //Sets settings for topCurrentTempLabel
         topCurrentTempLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -93,10 +96,24 @@ class MainViewController: UIViewController {
         topTempMinLabel.text = "Min Temp"
         topTempMinLabel.font = .preferredFont(forTextStyle: .title3)
         
-        //Sets settings for top tempMaxLabel
+        //Sets settings for topTempMaxLabel
         topTempMaxLabel.translatesAutoresizingMaskIntoConstraints = false
         topTempMaxLabel.text = "Max Temp"
         topTempMaxLabel.font = .preferredFont(forTextStyle: .title3)
+        
+        //Sets settings for bottomScrollview
+        bottomScrollview.translatesAutoresizingMaskIntoConstraints = false
+        bottomScrollview.alwaysBounceVertical = true
+        bottomScrollview.backgroundColor = .systemCyan
+        
+        //Sets settings for topScrollStackview
+        topScrollStackview.translatesAutoresizingMaskIntoConstraints = false
+        topScrollStackview.axis = .vertical
+        topScrollStackview.spacing = 30
+        
+        //Sets settings for sunsetTimeLabel
+        sunsetTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        sunsetTimeLabel.text = "Sunset happened at: "
     }
     
     private func layout(){
@@ -105,16 +122,26 @@ class MainViewController: UIViewController {
         topSubStackview.addArrangedSubview(topWeatherIconView)
         topSubStackview.addArrangedSubview(topCurrentTempLabel)
         
+        //Adds topSubStackview, uv index, city name labels, and topMinMaxTempView into topStackView
         topStackview.addSubview(topSubStackview)
         topStackview.addSubview(topUVIndexLabel)
         topStackview.addSubview(topCityNameLabel)
         topStackview.addSubview(topMinMaxTempView)
         
+        //Adds min and max temp labels into topMinMaxTempView
         topMinMaxTempView.addArrangedSubview(topTempMinLabel)
         topMinMaxTempView.addArrangedSubview(topTempMaxLabel)
         
-        view.addSubview(topStackview)
+        topScrollStackview.addSubview(sunsetTimeLabel)
         
+        //Adds topScrollStackview into bottomScrollview
+        bottomScrollview.addSubview(topScrollStackview)
+        
+        //Adds the main stacks into the view
+        view.addSubview(topStackview)
+        view.addSubview(bottomScrollview)
+        
+        //Sets the constraints for everything
         NSLayoutConstraint.activate([
             topStackview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             topStackview.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
@@ -127,7 +154,12 @@ class MainViewController: UIViewController {
             topWeatherIconView.heightAnchor.constraint(equalToConstant: 24),
             topWeatherIconView.widthAnchor.constraint(equalToConstant: 24),
             topMinMaxTempView.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
-            topMinMaxTempView.centerYAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 20)
+            topMinMaxTempView.centerYAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 20),
+            bottomScrollview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bottomScrollview.topAnchor.constraint(equalTo: view.centerYAnchor),
+            bottomScrollview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomScrollview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomScrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 
