@@ -17,6 +17,7 @@ struct WeatherData {
     static var localSunset = ""
     static var windSpeedMPH = 0
     static var windSpeedKPH = 0
+    static var pressureInHg = 0.0
 }
 
 class WeatherUnitConverter {

@@ -18,6 +18,7 @@
 		C034705E28F75A5C00656AA8 /* WeatherUnitConverterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705D28F75A5C00656AA8 /* WeatherUnitConverterUtil.swift */; };
 		C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */; };
 		C034706228FB104200656AA8 /* CompareTimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034706128FB104200656AA8 /* CompareTimeUtil.swift */; };
+		C034706428FE1BA800656AA8 /* ConvertPressureUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034706328FE1BA800656AA8 /* ConvertPressureUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		C034705D28F75A5C00656AA8 /* WeatherUnitConverterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUnitConverterUtil.swift; sourceTree = "<group>"; };
 		C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverterUtil.swift; sourceTree = "<group>"; };
 		C034706128FB104200656AA8 /* CompareTimeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareTimeUtil.swift; sourceTree = "<group>"; };
+		C034706328FE1BA800656AA8 /* ConvertPressureUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertPressureUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				C034705D28F75A5C00656AA8 /* WeatherUnitConverterUtil.swift */,
 				C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */,
 				C034706128FB104200656AA8 /* CompareTimeUtil.swift */,
+				C034706328FE1BA800656AA8 /* ConvertPressureUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
 				C034706228FB104200656AA8 /* CompareTimeUtil.swift in Sources */,
 				C034705C28F738BC00656AA8 /* Constants.swift in Sources */,
+				C034706428FE1BA800656AA8 /* ConvertPressureUtil.swift in Sources */,
 				C034704328F6221900656AA8 /* MainViewController.swift in Sources */,
 				C034705528F7363B00656AA8 /* WeatherAPINetworkingUtil.swift in Sources */,
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,

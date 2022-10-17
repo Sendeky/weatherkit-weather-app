@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
     let windSpeedLabel = UILabel()
     let humidityLabel = UILabel()
     let sunriseTimeLabel = UILabel()
+    let pressureLabel = UILabel()
 
     
     override func viewDidLoad() {
@@ -44,6 +45,7 @@ class MainViewController: UIViewController {
             self.convertEpochToDate()
             self.convertWindSpeedMPH()
             self.convertWindSpeedKPH()
+            self.convertHPAtoInHg()
             
             DispatchQueue.main.async {
                 self.topCurrentTempLabel.text = "Temp: \(Int(WeatherData.WeatherTempCelsius))˚"
@@ -58,13 +60,14 @@ class MainViewController: UIViewController {
                     self.sunsetTimeLabel.text = "Sunset will be at: \(WeatherData.localSunset)"
                 }
                 if self.compareSunriseTime() == true {
-                    self.sunriseTimeLabel.text = "Sunrise happened at: \(WeatherData.localSunrise)"
+                    self.sunriseTimeLabel.text = "Sunrise was at: \(WeatherData.localSunrise)"
                 } else {
                     self.sunriseTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunrise)"
                 }
                 self.feelsLikeTempLabel.text = "Feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
                 self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
                 self.humidityLabel.text = "Humidity is \(RawWeatherData.humidity)%"
+                self.pressureLabel.text = "Pressure is \(WeatherData.pressureInHg) InHg"
             }
         }
     }
@@ -166,6 +169,12 @@ class MainViewController: UIViewController {
         sunriseTimeLabel.font = .preferredFont(forTextStyle: .title2)
         sunriseTimeLabel.adjustsFontSizeToFitWidth = true
         
+        //Seets settings for pressureLabel
+        pressureLabel.translatesAutoresizingMaskIntoConstraints  = false
+        pressureLabel.text = "Pressure is: "
+        pressureLabel.font = .preferredFont(forTextStyle: .title2)
+        pressureLabel.adjustsFontSizeToFitWidth = false
+        
     }
     
     private func layout(){
@@ -189,6 +198,7 @@ class MainViewController: UIViewController {
         topScrollStackview.addSubview(feelsLikeTempLabel)
         topScrollStackview.addSubview(windSpeedLabel)
         topScrollStackview.addSubview(humidityLabel)
+        topScrollStackview.addSubview(pressureLabel)
         topScrollStackview.addSubview(sunriseTimeLabel)
         
         //Adds topScrollStackview into bottomScrollview
@@ -224,8 +234,10 @@ class MainViewController: UIViewController {
             windSpeedLabel.topAnchor.constraint(equalTo: feelsLikeTempLabel.bottomAnchor, constant: 15),
             humidityLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
             humidityLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 15),
+            pressureLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
+            pressureLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 15),
             sunriseTimeLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
-            sunriseTimeLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 15)
+            sunriseTimeLabel.topAnchor.constraint(equalTo: pressureLabel.bottomAnchor, constant: 15)
         ])
     }
 }

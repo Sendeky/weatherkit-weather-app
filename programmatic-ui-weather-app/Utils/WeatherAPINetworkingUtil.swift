@@ -24,6 +24,7 @@ struct RawWeatherData {
     static var rainAmount = Double()
     static var windSpeed = Double()
     static var humidity = Int()
+    static var pressure = Double()
 }
 
 class WeatherAPINetworkingUtil{
@@ -48,6 +49,7 @@ extension MainViewController {
                 RawWeatherData.rainAmount = result["rain"]["1h"].doubleValue
                 RawWeatherData.windSpeed = result["wind"]["speed"].doubleValue
                 RawWeatherData.humidity = result["main"]["humidity"].intValue
+                RawWeatherData.pressure = result["main"]["pressure"].doubleValue
             }
         }
     }
