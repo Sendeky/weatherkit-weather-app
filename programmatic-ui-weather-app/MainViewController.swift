@@ -26,6 +26,7 @@ class MainViewController: UIViewController {
     let feelsLikeTempLabel = UILabel()
     let windSpeedLabel = UILabel()
     let humidityLabel = UILabel()
+    let sunriseTimeLabel = UILabel()
 
     
     override func viewDidLoad() {
@@ -51,10 +52,15 @@ class MainViewController: UIViewController {
                 self.topTempMinLabel.text = "Min Temp: \(WeatherData.WeatherTempMinCelsius)"
                 self.topTempMaxLabel.text = "Max Temp: \(WeatherData.WeatherTempMaxCelsius)"
                 //Checks if the current time is greater than the sunset time (text changes depending on it)
-                if self.checkTime() == true {
+                if self.compareSunsetTime() == true {
                     self.sunsetTimeLabel.text = "Sunset happened at: \(WeatherData.localSunset)"
                 } else {
                     self.sunsetTimeLabel.text = "Sunset will be at: \(WeatherData.localSunset)"
+                }
+                if self.compareSunriseTime() == true {
+                    self.sunriseTimeLabel.text = "Sunrise happened at: \(WeatherData.localSunrise)"
+                } else {
+                    self.sunriseTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunrise)"
                 }
                 self.feelsLikeTempLabel.text = "Feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
                 self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
@@ -154,6 +160,12 @@ class MainViewController: UIViewController {
         humidityLabel.font = .preferredFont(forTextStyle: .title2)
         humidityLabel.adjustsFontSizeToFitWidth = false
         
+        //Sets settings for sunriseTimeLabel
+        sunriseTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        sunriseTimeLabel.text = "Sunrise happened at: "
+        sunriseTimeLabel.font = .preferredFont(forTextStyle: .title2)
+        sunriseTimeLabel.adjustsFontSizeToFitWidth = true
+        
     }
     
     private func layout(){
@@ -177,6 +189,7 @@ class MainViewController: UIViewController {
         topScrollStackview.addSubview(feelsLikeTempLabel)
         topScrollStackview.addSubview(windSpeedLabel)
         topScrollStackview.addSubview(humidityLabel)
+        topScrollStackview.addSubview(sunriseTimeLabel)
         
         //Adds topScrollStackview into bottomScrollview
         bottomScrollview.addSubview(topScrollStackview)
@@ -210,7 +223,9 @@ class MainViewController: UIViewController {
             windSpeedLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
             windSpeedLabel.topAnchor.constraint(equalTo: feelsLikeTempLabel.bottomAnchor, constant: 15),
             humidityLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
-            humidityLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 15)
+            humidityLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 15),
+            sunriseTimeLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
+            sunriseTimeLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 15)
         ])
     }
 }

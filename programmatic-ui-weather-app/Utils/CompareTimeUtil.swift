@@ -11,7 +11,7 @@ class CheckTimeUtil{
 }
 
 extension MainViewController {
-    func checkTime() -> Bool {
+    func compareSunsetTime() -> Bool {
         
         let currentTime = Date().timeIntervalSince1970
         print(currentTime)
@@ -22,6 +22,21 @@ extension MainViewController {
             return true
         } else {
             print("Sunset hasn't happened")
+            return false
+        }
+    }
+    
+    func compareSunriseTime() -> Bool {
+        
+        let currentTime = Date().timeIntervalSince1970
+        print(currentTime)
+        print(RawWeatherData.sunriseResult)
+        
+        if (currentTime >= RawWeatherData.sunriseResult) {
+            print("Sunrise has happened")
+            return true
+        } else {
+            print("Sunrise hasn't happened")
             return false
         }
     }
