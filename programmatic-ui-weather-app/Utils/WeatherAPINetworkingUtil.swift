@@ -8,9 +8,12 @@
 import Foundation
 import SwiftyJSON
 
+struct urlString {
+    static var urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\((UserLocation.userLatitude)!)&lon=\((UserLocation.userLongitude)!)&appid=\(constants.API_KEY)" //
+}
+
 //let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(globalUserLatitude)&lon=\(globalUserLongitude)&appid=\(constants.API_KEY)"
 let constants = Constants()
-let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(UserLocation.userLatitude)&lon=\(UserLocation.userLongitude)&appid=\(constants.API_KEY)" //Testing for London
 
 struct RawWeatherData {
     static var WeatherTempKelvin = ""
@@ -32,9 +35,9 @@ class WeatherAPINetworkingUtil{
 
 extension MainViewController {
     func fetchWeather() {
-        if let url = URL(string: urlString) {
-            if let data = try? Data(contentsOf: url) {
-                let result = JSON(data)
+        if var url = URL(string: urlString.urlString) {
+            if var data = try? Data(contentsOf: url) {
+                var result = JSON(data)
                 
                 print(result)
                 
@@ -50,6 +53,9 @@ extension MainViewController {
                 RawWeatherData.windSpeed = result["wind"]["speed"].doubleValue
                 RawWeatherData.humidity = result["main"]["humidity"].intValue
                 RawWeatherData.pressure = result["main"]["pressure"].doubleValue
+                
+                NotificationCenter.default.post(name: Notification.Name("apiCallFinished"), object: nil)
+                
             }
         }
     }

@@ -9,8 +9,8 @@ import UIKit
 import CoreLocation
 
 struct UserLocation {
-    static var userLatitude = 0.0
-    static var userLongitude = 0.0
+    static var userLatitude: Double? = 0.0
+    static var userLongitude: Double? = 0.0
 }
 
 class MainViewController: UIViewController, CLLocationManagerDelegate {
@@ -35,6 +35,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let sunriseTimeLabel = UILabel()
     let pressureLabel = UILabel()
     
+    var refreshControl = UIRefreshControl()
+    
     //Creates the location manager
     let locationManager = CLLocationManager()
 
@@ -42,6 +44,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+                
         
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
@@ -70,6 +73,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.convertWindSpeedMPH()
             self.convertWindSpeedKPH()
             self.convertHPAtoInHg()
+//            NotificationCenter.default.addObserver(self, selector: #selector(self.updateLabels), name: NSNotification.Name("apiCallFinished"), object: nil)
             
             DispatchQueue.main.async {
                 self.topCurrentTempLabel.text = "Temp: \(Int(WeatherData.WeatherTempCelsius))˚"
@@ -92,6 +96,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
                 self.humidityLabel.text = "Humidity is \(RawWeatherData.humidity)%"
                 self.pressureLabel.text = "Pressure is \(WeatherData.pressureInHg) InHg"
+                
+                if RawWeatherData.cityName != "Globe" {
+                    print("RawWeatherData.cityName != Globe")
+                } else {
+                    self.updateLabels()
+                }
             }
         }
     }
@@ -101,8 +111,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         UserLocation.userLatitude = locValue.latitude
         UserLocation.userLongitude = locValue.longitude
-        print("UserLocation.userLatitude = \(UserLocation.userLatitude)")
-        print("UserLocation.userLongitude = \(UserLocation.userLongitude)")
+        print("UserLocation.userLatitude = \((UserLocation.userLatitude)!)")
+        print("UserLocation.userLongitude = \((UserLocation.userLongitude)!)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -166,6 +176,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         //Sets settings for bottomScrollview
         bottomScrollview.translatesAutoresizingMaskIntoConstraints = false
         bottomScrollview.alwaysBounceVertical = true
+        bottomScrollview.isScrollEnabled = true
         
         //Sets settings for topScrollStackview
         topScrollStackview.translatesAutoresizingMaskIntoConstraints = false
@@ -208,6 +219,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         pressureLabel.font = .preferredFont(forTextStyle: .title2)
         pressureLabel.adjustsFontSizeToFitWidth = false
         
+        //Sets settings for refreshControl
+        refreshControl.attributedTitle = NSAttributedString("pls work")
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
+        
     }
     
     private func layout(){
@@ -236,6 +251,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         //Adds topScrollStackview into bottomScrollview
         bottomScrollview.addSubview(topScrollStackview)
+        bottomScrollview.addSubview(refreshControl)
         
         //Adds the main stacks into the view
         view.addSubview(topStackview)
@@ -287,6 +303,42 @@ extension MainViewController {
         gradientLayer.frame = self.view.bounds
                 
         self.view.layer.insertSublayer(gradientLayer, at:0)
+    }
+    
+    func updateLabels() {
+        self.topCurrentTempLabel.text = "Temp: \(Int(WeatherData.WeatherTempCelsius))˚"
+        self.topRainAmountLabel.text = "Precipitation: \(RawWeatherData.rainAmount)mm"
+        self.topCityNameLabel.text = "\(RawWeatherData.cityName)"
+        self.topTempMinLabel.text = "Min Temp: \(WeatherData.WeatherTempMinCelsius)"
+        self.topTempMaxLabel.text = "Max Temp: \(WeatherData.WeatherTempMaxCelsius)"
+        //Checks if the current time is greater than the sunset time (text changes depending on it)
+        if self.compareSunsetTime() == true {
+            self.sunsetTimeLabel.text = "Sunset was at: \(WeatherData.localSunset)"
+        } else {
+            self.sunsetTimeLabel.text = "Sunset will be at: \(WeatherData.localSunset)"
+        }
+        if self.compareSunriseTime() == true {
+            self.sunriseTimeLabel.text = "Sunrise was at: \(WeatherData.localSunrise)"
+        } else {
+            self.sunriseTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunrise)"
+        }
+        self.feelsLikeTempLabel.text = "Feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
+        self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
+        self.humidityLabel.text = "Humidity is \(RawWeatherData.humidity)%"
+        self.pressureLabel.text = "Pressure is \(WeatherData.pressureInHg) InHg"
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+            // Code to refresh table view
+        self.updateLabels()
+        urlString.urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\((UserLocation.userLatitude)!)&lon=\((UserLocation.userLongitude)!)&appid=\(constants.API_KEY)"
+        print("urlString.urlString: \(urlString.urlString)")
+        print("userLatitude: \((UserLocation.userLatitude)!)")
+        print("userLongitude: \((UserLocation.userLongitude)!)")
+        print("weatherTempCelsius: \(WeatherData.WeatherTempCelsius)")
+        print("City Name: \(RawWeatherData.cityName)")
+        refreshControl.endRefreshing()
+        self.fetchWeather()
     }
 
     /*  Can't get this to work, might implement later
