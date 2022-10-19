@@ -338,7 +338,11 @@ extension MainViewController {
         print("weatherTempCelsius: \(WeatherData.WeatherTempCelsius)")
         print("City Name: \(RawWeatherData.cityName)")
         refreshControl.endRefreshing()
-        self.fetchWeather()
+        fetchFromReload()
+    }
+    
+    func fetchFromReload() {
+        fetchWeather()
     }
 
     /*  Can't get this to work, might implement later

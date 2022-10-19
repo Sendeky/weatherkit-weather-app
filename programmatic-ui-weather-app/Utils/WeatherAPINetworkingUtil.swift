@@ -35,9 +35,9 @@ class WeatherAPINetworkingUtil{
 
 extension MainViewController {
     func fetchWeather() {
-        if var url = URL(string: urlString.urlString) {
-            if var data = try? Data(contentsOf: url) {
-                var result = JSON(data)
+        if let url = URL(string: urlString.urlString) {
+            if let data = try? Data(contentsOf: url) {
+                let result = JSON(data)
                 
                 print(result)
                 
