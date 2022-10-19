@@ -51,17 +51,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
 
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
-
-        DispatchQueue.main.async {
-            if CLLocationManager.locationServicesEnabled() {
-                self.locationManager.delegate = self
-                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-                self.locationManager.startUpdatingLocation()
-            }
-        }
+        
         
         style()
         layout()
+        initializeLocationServices()
 //        drawPressureAnimation()  Cannot get it to work, will implement later
         
         DispatchQueue.global().async {
@@ -106,14 +100,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
-        UserLocation.userLatitude = locValue.latitude
-        UserLocation.userLongitude = locValue.longitude
-        print("UserLocation.userLatitude = \((UserLocation.userLatitude)!)")
-        print("UserLocation.userLongitude = \((UserLocation.userLongitude)!)")
+    private func initializeLocationServices() {
+        locationManager.delegate = self
+        
+        guard CLLocationManager.locationServicesEnabled() else {
+            //Maybe do something
+            return
+        }
+        
+        locationManager.requestAlwaysAuthorization()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         setGradientBackground() //Function that sets the view to a gradient background
@@ -343,6 +340,36 @@ extension MainViewController {
     
     func fetchFromReload() {
         fetchWeather()
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let status = manager.authorizationStatus
+        
+        switch status {
+        case .notDetermined:
+            print("status: notDetermined")
+        case .denied:
+            print("status: denied")
+        case .restricted:
+            print("status: restricted")
+        case .authorizedAlways:
+            print("status: authorizedAlways")
+            locationManager.startUpdatingLocation()
+        case .authorizedWhenInUse:
+            print("status: authorizedWhenInUse")
+            locationManager.startUpdatingLocation()
+        default:
+            print("unknown ")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        UserLocation.userLatitude = locValue.latitude
+        UserLocation.userLongitude = locValue.longitude
+        print("UserLocation.userLatitude = \((UserLocation.userLatitude)!)")
+        print("UserLocation.userLongitude = \((UserLocation.userLongitude)!)")
     }
 
     /*  Can't get this to work, might implement later
