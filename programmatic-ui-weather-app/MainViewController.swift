@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import CoreLocation
 
-class MainViewController: UIViewController {
+struct UserLocation {
+    static var userLatitude = 0.0
+    static var userLongitude = 0.0
+}
+
+class MainViewController: UIViewController, CLLocationManagerDelegate {
 
     //Intializes all the elements
     let topStackview = UIStackView()
@@ -28,14 +34,32 @@ class MainViewController: UIViewController {
     let humidityLabel = UILabel()
     let sunriseTimeLabel = UILabel()
     let pressureLabel = UILabel()
+    
+    //Creates the location manager
+    let locationManager = CLLocationManager()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+
+        DispatchQueue.main.async {
+            if CLLocationManager.locationServicesEnabled() {
+                self.locationManager.delegate = self
+                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                self.locationManager.startUpdatingLocation()
+            }
+        }
+        
         style()
         layout()
+//        drawPressureAnimation()  Cannot get it to work, will implement later
         
         DispatchQueue.global().async {
             self.fetchWeather()
@@ -55,7 +79,7 @@ class MainViewController: UIViewController {
                 self.topTempMaxLabel.text = "Max Temp: \(WeatherData.WeatherTempMaxCelsius)"
                 //Checks if the current time is greater than the sunset time (text changes depending on it)
                 if self.compareSunsetTime() == true {
-                    self.sunsetTimeLabel.text = "Sunset happened at: \(WeatherData.localSunset)"
+                    self.sunsetTimeLabel.text = "Sunset was at: \(WeatherData.localSunset)"
                 } else {
                     self.sunsetTimeLabel.text = "Sunset will be at: \(WeatherData.localSunset)"
                 }
@@ -70,6 +94,15 @@ class MainViewController: UIViewController {
                 self.pressureLabel.text = "Pressure is \(WeatherData.pressureInHg) InHg"
             }
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        UserLocation.userLatitude = locValue.latitude
+        UserLocation.userLongitude = locValue.longitude
+        print("UserLocation.userLatitude = \(UserLocation.userLatitude)")
+        print("UserLocation.userLongitude = \(UserLocation.userLongitude)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -255,4 +288,17 @@ extension MainViewController {
                 
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
+
+    /*  Can't get this to work, might implement later
+    func drawPressureAnimation() {
+        let rect = CGRect(x: 0, y: 0, width: 32, height: 32)
+        let roundedRect = UIBezierPath(roundedRect: rect, cornerRadius: 2)
+        let trackShape = CAShapeLayer()
+        trackShape.path = roundedRect.cgPath
+        trackShape.fillColor = UIColor.clear.cgColor
+        trackShape.lineWidth = 5
+        trackShape.strokeColor = UIColor.lightGray.cgColor
+        topScrollStackview.layer.addSublayer(trackShape)
+    }
+     */
 }

@@ -10,7 +10,7 @@ import SwiftyJSON
 
 //let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(globalUserLatitude)&lon=\(globalUserLongitude)&appid=\(constants.API_KEY)"
 let constants = Constants()
-let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=38.138591&lon=-122.1885952&appid=\(constants.API_KEY)" //Testing for London
+let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(UserLocation.userLatitude)&lon=\(UserLocation.userLongitude)&appid=\(constants.API_KEY)" //Testing for London
 
 struct RawWeatherData {
     static var WeatherTempKelvin = ""
