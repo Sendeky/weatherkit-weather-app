@@ -35,6 +35,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let sunriseTimeLabel = UILabel()
     let pressureLabel = UILabel()
     
+    //Creates a refresh control for the scrollview
     var refreshControl = UIRefreshControl()
     
     //Creates the location manager
@@ -52,13 +53,15 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         
-        
+        //Initalizes settings for UI elements and layout for UI elements
         style()
         layout()
+        //initializes location services
         initializeLocationServices()
-//        drawPressureAnimation()  Cannot get it to work, will implement later
+        
         
         DispatchQueue.global().async {
+            //Calls all the functions (most are from the Utils folder)
             self.fetchWeather()
             print(RawWeatherData.WeatherTempKelvin)
             self.convertKelvinIntoCelsius()
@@ -67,8 +70,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.convertWindSpeedMPH()
             self.convertWindSpeedKPH()
             self.convertHPAtoInHg()
-//            NotificationCenter.default.addObserver(self, selector: #selector(self.updateLabels), name: NSNotification.Name("apiCallFinished"), object: nil)
+            self.viewDidLoadRefresh()
+
             
+            //Updates all the labels asynchronously
             DispatchQueue.main.async {
                 self.topCurrentTempLabel.text = "Temp: \(Int(WeatherData.WeatherTempCelsius))˚"
                 self.topRainAmountLabel.text = "Precipitation: \(RawWeatherData.rainAmount)mm"
@@ -100,21 +105,21 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setGradientBackground() //Function that sets the view to a gradient background
+        viewDidLoadRefresh()
+        super.viewWillAppear(true)
+    }
+    
+    
     private func initializeLocationServices() {
         locationManager.delegate = self
         
         guard CLLocationManager.locationServicesEnabled() else {
-            //Maybe do something
             return
         }
-        
-        locationManager.requestAlwaysAuthorization()
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        setGradientBackground() //Function that sets the view to a gradient background
-        super.viewWillAppear(true)
+        locationManager.requestAlwaysAuthorization() //Requests always authorization for locationServices
     }
 
     
@@ -217,7 +222,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         pressureLabel.adjustsFontSizeToFitWidth = false
         
         //Sets settings for refreshControl
-        refreshControl.attributedTitle = NSAttributedString("pls work")
+        refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         
     }
@@ -288,8 +293,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
 }
 
-//A function that makes a gradient background and sets it as the sublayer of the view
 extension MainViewController {
+    
+    //MARK: - A function that makes a gradient background and sets it as the sublayer of the view
     func setGradientBackground() {
         let colorTop =  UIColor(red: 0/255.0, green: 235.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
         let colorBottom = UIColor(red: 100.0/255.0, green: 50.0/255.0, blue: 235.0/255.0, alpha: 1.0).cgColor
@@ -302,6 +308,7 @@ extension MainViewController {
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
     
+    //MARK: - Function to refresh all of the labels
     func updateLabels() {
         self.topCurrentTempLabel.text = "Temp: \(Int(WeatherData.WeatherTempCelsius))˚"
         self.topRainAmountLabel.text = "Precipitation: \(RawWeatherData.rainAmount)mm"
@@ -325,23 +332,58 @@ extension MainViewController {
         self.pressureLabel.text = "Pressure is \(WeatherData.pressureInHg) InHg"
     }
     
+    //MARK: - Function for the pull to refresh on the scrollview
     @objc func refresh(sender:AnyObject) {
             // Code to refresh table view
-        self.updateLabels()
+        DispatchQueue.main.async {
+            self.updateLabels()
+        }
         urlString.urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\((UserLocation.userLatitude)!)&lon=\((UserLocation.userLongitude)!)&appid=\(constants.API_KEY)"
         print("urlString.urlString: \(urlString.urlString)")
         print("userLatitude: \((UserLocation.userLatitude)!)")
         print("userLongitude: \((UserLocation.userLongitude)!)")
         print("weatherTempCelsius: \(WeatherData.WeatherTempCelsius)")
         print("City Name: \(RawWeatherData.cityName)")
-        refreshControl.endRefreshing()
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+        }
         fetchFromReload()
     }
     
-    func fetchFromReload() {
-        fetchWeather()
+    //Same as refresh but not objc and is used only when viewDidLoad
+    func viewDidLoadRefresh() {
+            // Code to refresh table view
+        DispatchQueue.main.async {
+            self.updateLabels()
+        }
+        urlString.urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\((UserLocation.userLatitude)!)&lon=\((UserLocation.userLongitude)!)&appid=\(constants.API_KEY)"
+        print("urlString.urlString: \(urlString.urlString)")
+        print("userLatitude: \((UserLocation.userLatitude)!)")
+        print("userLongitude: \((UserLocation.userLongitude)!)")
+        print("weatherTempCelsius: \(WeatherData.WeatherTempCelsius)")
+        print("City Name: \(RawWeatherData.cityName)")
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+        }
+        fetchFromReload()
     }
     
+    //Creates a function for running fetchWeather from reload func
+    func fetchFromReload() {
+        fetchWeather()
+        convertKelvinIntoCelsius()
+        convertEpochToDate()
+        convertHPAtoInHg()
+        convertWindSpeedKPH()
+        convertWindSpeedMPH()
+        DispatchQueue.main.async {
+            self.reloadSunriseTime()
+            self.reloadSunsetTime()
+            self.updateLabels()
+        }
+    }
+   
+    //Function for checing location manager status (starts getting the location if allowed)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = manager.authorizationStatus
         
@@ -355,14 +397,33 @@ extension MainViewController {
         case .authorizedAlways:
             print("status: authorizedAlways")
             locationManager.startUpdatingLocation()
+            viewDidLoadRefresh()
         case .authorizedWhenInUse:
             print("status: authorizedWhenInUse")
             locationManager.startUpdatingLocation()
+            viewDidLoadRefresh()
         default:
             print("unknown ")
         }
     }
     
+    func reloadSunriseTime() {
+        if self.compareSunriseTime() == true {
+            self.sunriseTimeLabel.text = "Sunrise was at: \(WeatherData.localSunrise)"
+        } else {
+            self.sunriseTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunrise)"
+        }
+    }
+    
+    func reloadSunsetTime() {
+        if self.compareSunsetTime() == true {
+            self.sunsetTimeLabel.text = "Sunrise was at: \(WeatherData.localSunset)"
+        } else {
+            self.sunsetTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunset)"
+        }
+    }
+    
+    //Function for actually getting the location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
