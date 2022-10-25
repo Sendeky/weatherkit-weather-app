@@ -32,8 +32,35 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let feelsLikeTempLabel = UILabel()
     let windSpeedLabel = UILabel()
     let humidityLabel = UILabel()
-    let sunriseTimeLabel = UILabel()
     let pressureLabel = UILabel()
+    
+    //Sunrise view & labels
+    let sunriseView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
+    //Sets settings for sunriseTitleLabel
+    let sunriseTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Sunrise"
+        label.font = .preferredFont(forTextStyle: .title2)
+        return label
+    }()
+    
+    //Sets settings for sunriseTimeLabel
+    let sunriseTimeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Sunrise happened at: "
+        label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 0
+        return label
+    }()
     
     //Creates a refresh control for the scrollview
     var refreshControl = UIRefreshControl()
@@ -82,14 +109,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 self.topTempMaxLabel.text = "Max Temp: \(WeatherData.WeatherTempMaxCelsius)"
                 //Checks if the current time is greater than the sunset time (text changes depending on it)
                 if self.compareSunsetTime() == true {
-                    self.sunsetTimeLabel.text = "Sunset was at: \(WeatherData.localSunset)"
+                    self.sunsetTimeLabel.text = "happened at: \(WeatherData.localSunset)"
                 } else {
-                    self.sunsetTimeLabel.text = "Sunset will be at: \(WeatherData.localSunset)"
+                    self.sunsetTimeLabel.text = "will be at: \(WeatherData.localSunset)"
                 }
                 if self.compareSunriseTime() == true {
-                    self.sunriseTimeLabel.text = "Sunrise was at: \(WeatherData.localSunrise)"
+                    self.sunriseTimeLabel.text = "happened at: \(WeatherData.localSunrise)"
                 } else {
-                    self.sunriseTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunrise)"
+                    self.sunriseTimeLabel.text = "will be at: \(WeatherData.localSunrise)"
                 }
                 self.feelsLikeTempLabel.text = "Feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
                 self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
@@ -107,7 +134,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        setGradientBackground() //Function that sets the view to a gradient background
+//        setGradientBackground() //Function that sets the view to a gradient background
         viewDidLoadRefresh()
         super.viewWillAppear(true)
     }
@@ -179,47 +206,66 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         bottomScrollview.translatesAutoresizingMaskIntoConstraints = false
         bottomScrollview.alwaysBounceVertical = true
         bottomScrollview.isScrollEnabled = true
+//        bottomScrollview.layer.masksToBounds = true
+//        bottomScrollview.layer.borderWidth = 3
+//        bottomScrollview.layer.cornerRadius = 20
+//        bottomScrollview.layer.borderColor = UIColor.systemCyan.cgColor
+//        bottomScrollview.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
         //Sets settings for topScrollStackview
         topScrollStackview.translatesAutoresizingMaskIntoConstraints = false
         topScrollStackview.axis = .vertical
         topScrollStackview.spacing = 30
         
+        
         //Sets settings for sunsetTimeLabel
         sunsetTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         sunsetTimeLabel.text = "Sunset happened at: "
         sunsetTimeLabel.font = .preferredFont(forTextStyle: .title2)
         sunsetTimeLabel.adjustsFontSizeToFitWidth = true
+//        sunsetTimeLabel.frame = CGRect(x: 0,y: 0, width: 0, height: 0)
+//        sunsetTimeLabel.backgroundColor = .systemRed
+        sunsetTimeLabel.textAlignment = .center
+//        sunsetTimeLabel.layer.masksToBounds = true
+//        sunsetTimeLabel.layer.borderWidth = 2
+//        sunsetTimeLabel.layer.cornerRadius = 5
         
         //Sets settings for feelsLikeTempLabel
         feelsLikeTempLabel.translatesAutoresizingMaskIntoConstraints = false
         feelsLikeTempLabel.text = "Feels like: "
         feelsLikeTempLabel.font = .preferredFont(forTextStyle: .title2)
         feelsLikeTempLabel.adjustsFontSizeToFitWidth = true
+        feelsLikeTempLabel.layer.masksToBounds = true
+        feelsLikeTempLabel.layer.borderWidth = 3
+        feelsLikeTempLabel.layer.cornerRadius = 5
         
         //Sets settings for windSpeedLabel
         windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
         windSpeedLabel.text = "Wind Speed is"
         windSpeedLabel.font = .preferredFont(forTextStyle: .title2)
         windSpeedLabel.adjustsFontSizeToFitWidth = false
+        windSpeedLabel.layer.masksToBounds = true
+        windSpeedLabel.layer.borderWidth = 3
+        windSpeedLabel.layer.cornerRadius = 5
         
         //Sets settings for humidityLabel
         humidityLabel.translatesAutoresizingMaskIntoConstraints = false
         humidityLabel.text = "Humidity is"
         humidityLabel.font = .preferredFont(forTextStyle: .title2)
         humidityLabel.adjustsFontSizeToFitWidth = false
-        
-        //Sets settings for sunriseTimeLabel
-        sunriseTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        sunriseTimeLabel.text = "Sunrise happened at: "
-        sunriseTimeLabel.font = .preferredFont(forTextStyle: .title2)
-        sunriseTimeLabel.adjustsFontSizeToFitWidth = true
+        humidityLabel.layer.masksToBounds = true
+        humidityLabel.layer.borderWidth = 3
+        humidityLabel.layer.cornerRadius = 5
+
         
         //Seets settings for pressureLabel
         pressureLabel.translatesAutoresizingMaskIntoConstraints  = false
         pressureLabel.text = "Pressure is: "
         pressureLabel.font = .preferredFont(forTextStyle: .title2)
         pressureLabel.adjustsFontSizeToFitWidth = false
+        pressureLabel.layer.masksToBounds = true
+        pressureLabel.layer.borderWidth = 3
+        pressureLabel.layer.cornerRadius = 5
         
         //Sets settings for refreshControl
         refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
@@ -254,6 +300,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         //Adds topScrollStackview into bottomScrollview
         bottomScrollview.addSubview(topScrollStackview)
         bottomScrollview.addSubview(refreshControl)
+        bottomScrollview.addSubview(sunriseView)
+        
+        //Adds
+        sunriseView.addSubview(sunriseTitleLabel)
+        sunriseView.addSubview(sunriseTimeLabel)
         
         //Adds the main stacks into the view
         view.addSubview(topStackview)
@@ -278,7 +329,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             bottomScrollview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomScrollview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomScrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sunriseView.leadingAnchor.constraint(equalTo: bottomScrollview.leadingAnchor, constant: 10),
+            sunriseView.trailingAnchor.constraint(equalTo: bottomScrollview.trailingAnchor, constant: -210),
+            sunriseView.topAnchor.constraint(equalTo: bottomScrollview.topAnchor),
+            sunriseView.heightAnchor.constraint(equalToConstant: 100),
+            sunriseTitleLabel.topAnchor.constraint(equalTo: sunriseView.topAnchor, constant: 10),
+            sunriseTitleLabel.centerXAnchor.constraint(equalTo: sunriseView.centerXAnchor, constant: -30),
+            sunriseTimeLabel.topAnchor.constraint(equalTo: sunriseTitleLabel.bottomAnchor, constant: 10),
+            sunriseTimeLabel.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor, constant: 10),
+            sunriseTimeLabel.trailingAnchor.constraint(equalTo: sunriseView.trailingAnchor, constant: -10),
+            sunsetTimeLabel.topAnchor.constraint(equalTo: sunriseView.bottomAnchor, constant: 15),
             sunsetTimeLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
+            sunsetTimeLabel.leadingAnchor.constraint(equalTo: bottomScrollview.leadingAnchor, constant: 5),
+            sunsetTimeLabel.trailingAnchor.constraint(equalTo: bottomScrollview.trailingAnchor, constant: 5),
             feelsLikeTempLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
             feelsLikeTempLabel.topAnchor.constraint(equalTo: sunsetTimeLabel.bottomAnchor, constant: 15),
             windSpeedLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
@@ -287,8 +350,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             humidityLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 15),
             pressureLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
             pressureLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 15),
-            sunriseTimeLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
-            sunriseTimeLabel.topAnchor.constraint(equalTo: pressureLabel.bottomAnchor, constant: 15)
         ])
     }
 }
