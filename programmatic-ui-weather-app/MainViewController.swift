@@ -28,7 +28,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let topTempMaxLabel = UILabel()
     let bottomScrollview = UIScrollView()
     let topScrollStackview = UIStackView()
-    let humidityLabel = UILabel()
     let pressureLabel = UILabel()
     
     //Sunrise view & labels
@@ -104,7 +103,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     //Wind Speed view & labels
     let windSpeedView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(red: 75.0/255.0, green: 205.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         view.layer.cornerRadius = 40
@@ -121,6 +120,29 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Wind speed is: "
+        label.font = .preferredFont(forTextStyle: .body)
+        return label
+    }()
+    
+    //Humidity view & labels
+    let humidityView: UIView = {
+         let view = UIView()
+         view.translatesAutoresizingMaskIntoConstraints = false
+         view.backgroundColor = UIColor(red: 75.0/255.0, green: 205.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+         view.layer.cornerRadius = 40
+         return view
+    }()
+    let humidityTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Humidity"
+        label.font = .preferredFont(forTextStyle: .title2)
+        return label
+    }()
+    let humidityLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Humidity is"
         label.font = .preferredFont(forTextStyle: .body)
         return label
     }()
@@ -275,16 +297,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         topScrollStackview.axis = .vertical
         topScrollStackview.spacing = 30
         
-        //Sets settings for humidityLabel
-        humidityLabel.translatesAutoresizingMaskIntoConstraints = false
-        humidityLabel.text = "Humidity is"
-        humidityLabel.font = .preferredFont(forTextStyle: .title2)
-        humidityLabel.adjustsFontSizeToFitWidth = false
-        humidityLabel.layer.masksToBounds = true
-        humidityLabel.layer.borderWidth = 3
-        humidityLabel.layer.cornerRadius = 5
-
-        
         //Seets settings for pressureLabel
         pressureLabel.translatesAutoresizingMaskIntoConstraints  = false
         pressureLabel.text = "Pressure is: "
@@ -331,6 +343,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         bottomScrollview.addSubview(sunsetView)
         bottomScrollview.addSubview(feelsLikeView)
         bottomScrollview.addSubview(windSpeedView)
+        bottomScrollview.addSubview(humidityView)
         
         //Adds labels to sunriseView
         sunriseView.addSubview(sunriseTitleLabel)
@@ -347,6 +360,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         //Adds labels to windSpeedView
         windSpeedView.addSubview(windSpeedTitleLabel)
         windSpeedView.addSubview(windSpeedLabel)
+        
+        //Adds labels to humidityView
+        humidityView.addSubview(humidityTitleLabel)
+        humidityView.addSubview(humidityLabel)
         
         //Adds the main stacks into the view
         view.addSubview(topStackview)
@@ -419,10 +436,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             windSpeedLabel.topAnchor.constraint(equalTo: windSpeedTitleLabel.bottomAnchor, constant: 15),
             windSpeedLabel.leadingAnchor.constraint(equalTo: windSpeedView.leadingAnchor, constant: 10),
             windSpeedLabel.trailingAnchor.constraint(equalTo: windSpeedView.trailingAnchor, constant: -10),
-            humidityLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
-            humidityLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 15),
-            pressureLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
-            pressureLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 15),
+            //humidityView constraints
+            humidityView.topAnchor.constraint(equalTo: feelsLikeView.bottomAnchor, constant: 15),
+            humidityView.leadingAnchor.constraint(equalTo: feelsLikeView.leadingAnchor),
+            humidityView.trailingAnchor.constraint(equalTo: feelsLikeView.trailingAnchor),
+            humidityView.heightAnchor.constraint(equalToConstant: 100),
+            //humidityTitleLabel constraints
+            humidityTitleLabel.topAnchor.constraint(equalTo: humidityView.topAnchor, constant: 5),
+            humidityTitleLabel.centerXAnchor.constraint(equalTo: humidityView.centerXAnchor),
+            //humidityLabel constraints
+            humidityLabel.topAnchor.constraint(equalTo: humidityTitleLabel.bottomAnchor, constant: 15),
+            humidityLabel.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor, constant: 10),
+            humidityLabel.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor, constant: -10),
         ])
     }
 }
