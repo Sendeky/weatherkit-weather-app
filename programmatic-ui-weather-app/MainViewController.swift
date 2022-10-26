@@ -28,7 +28,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let topTempMaxLabel = UILabel()
     let bottomScrollview = UIScrollView()
     let topScrollStackview = UIStackView()
-    let sunsetTimeLabel = UILabel()
     let feelsLikeTempLabel = UILabel()
     let windSpeedLabel = UILabel()
     let humidityLabel = UILabel()
@@ -38,12 +37,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let sunriseView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray
-        view.layer.cornerRadius = 10
+        view.backgroundColor = UIColor(red: 75.0/255.0, green: 205.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        view.layer.cornerRadius = 40
         return view
     }()
     
-    //Sets settings for sunriseTitleLabel
     let sunriseTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,11 +50,36 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         return label
     }()
     
-    //Sets settings for sunriseTimeLabel
     let sunriseTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Sunrise happened at: "
+        label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    //Sunset view & Labels
+    let sunsetView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 75.0/255.0, green: 205.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        view.layer.cornerRadius = 40
+        return view
+    }()
+    
+    let sunsetTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Sunset"
+        label.font = .preferredFont(forTextStyle: .title2)
+        return label
+    }()
+    
+    let sunsetTimeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Sunset happened at: "
         label.font = .preferredFont(forTextStyle: .body)
         label.numberOfLines = 0
         return label
@@ -134,7 +157,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     
     override func viewWillAppear(_ animated: Bool) {
-//        setGradientBackground() //Function that sets the view to a gradient background
+        setGradientBackground() //Function that sets the view to a gradient background
         viewDidLoadRefresh()
         super.viewWillAppear(true)
     }
@@ -206,29 +229,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         bottomScrollview.translatesAutoresizingMaskIntoConstraints = false
         bottomScrollview.alwaysBounceVertical = true
         bottomScrollview.isScrollEnabled = true
-//        bottomScrollview.layer.masksToBounds = true
-//        bottomScrollview.layer.borderWidth = 3
-//        bottomScrollview.layer.cornerRadius = 20
-//        bottomScrollview.layer.borderColor = UIColor.systemCyan.cgColor
-//        bottomScrollview.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
         //Sets settings for topScrollStackview
         topScrollStackview.translatesAutoresizingMaskIntoConstraints = false
         topScrollStackview.axis = .vertical
         topScrollStackview.spacing = 30
-        
-        
-        //Sets settings for sunsetTimeLabel
-        sunsetTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        sunsetTimeLabel.text = "Sunset happened at: "
-        sunsetTimeLabel.font = .preferredFont(forTextStyle: .title2)
-        sunsetTimeLabel.adjustsFontSizeToFitWidth = true
-//        sunsetTimeLabel.frame = CGRect(x: 0,y: 0, width: 0, height: 0)
-//        sunsetTimeLabel.backgroundColor = .systemRed
-        sunsetTimeLabel.textAlignment = .center
-//        sunsetTimeLabel.layer.masksToBounds = true
-//        sunsetTimeLabel.layer.borderWidth = 2
-//        sunsetTimeLabel.layer.cornerRadius = 5
         
         //Sets settings for feelsLikeTempLabel
         feelsLikeTempLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -301,10 +306,15 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         bottomScrollview.addSubview(topScrollStackview)
         bottomScrollview.addSubview(refreshControl)
         bottomScrollview.addSubview(sunriseView)
+        bottomScrollview.addSubview(sunsetView)
         
-        //Adds
+        //Adds labels to sunriseView
         sunriseView.addSubview(sunriseTitleLabel)
         sunriseView.addSubview(sunriseTimeLabel)
+        
+        //Adds labels to sunsetView
+        sunsetView.addSubview(sunsetTitleLabel)
+        sunsetView.addSubview(sunsetTimeLabel)
         
         //Adds the main stacks into the view
         view.addSubview(topStackview)
@@ -329,19 +339,30 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             bottomScrollview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomScrollview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomScrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            //sunriseView constraints
             sunriseView.leadingAnchor.constraint(equalTo: bottomScrollview.leadingAnchor, constant: 10),
-            sunriseView.trailingAnchor.constraint(equalTo: bottomScrollview.trailingAnchor, constant: -210),
-            sunriseView.topAnchor.constraint(equalTo: bottomScrollview.topAnchor),
+            sunriseView.trailingAnchor.constraint(equalToSystemSpacingAfter: bottomScrollview.centerXAnchor, multiplier: 0.5),
+            sunriseView.topAnchor.constraint(equalTo: bottomScrollview.topAnchor, constant: 10),
             sunriseView.heightAnchor.constraint(equalToConstant: 100),
-            sunriseTitleLabel.topAnchor.constraint(equalTo: sunriseView.topAnchor, constant: 10),
+            //sunriseTitleLabel constraints
+            sunriseTitleLabel.topAnchor.constraint(equalTo: sunriseView.topAnchor, constant: 5),
             sunriseTitleLabel.centerXAnchor.constraint(equalTo: sunriseView.centerXAnchor, constant: -30),
+            //sunriseTimeLabel constraints
             sunriseTimeLabel.topAnchor.constraint(equalTo: sunriseTitleLabel.bottomAnchor, constant: 10),
             sunriseTimeLabel.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor, constant: 10),
             sunriseTimeLabel.trailingAnchor.constraint(equalTo: sunriseView.trailingAnchor, constant: -10),
-            sunsetTimeLabel.topAnchor.constraint(equalTo: sunriseView.bottomAnchor, constant: 15),
-            sunsetTimeLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
-            sunsetTimeLabel.leadingAnchor.constraint(equalTo: bottomScrollview.leadingAnchor, constant: 5),
-            sunsetTimeLabel.trailingAnchor.constraint(equalTo: bottomScrollview.trailingAnchor, constant: 5),
+            //sunsetView constraints
+            sunsetView.leadingAnchor.constraint(equalToSystemSpacingAfter: bottomScrollview.centerXAnchor, multiplier: 0.5),
+            sunsetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            sunsetView.topAnchor.constraint(equalTo: bottomScrollview.topAnchor, constant: 10),
+            sunsetView.heightAnchor.constraint(equalToConstant: 100),
+            //sunsetTitlelabel constraints
+            sunsetTitleLabel.topAnchor.constraint(equalTo: sunsetView.topAnchor, constant: 5),
+            sunsetTitleLabel.centerXAnchor.constraint(equalTo: sunsetView.centerXAnchor, constant: -30),
+            //sunsetTimeLabel constraints
+            sunsetTimeLabel.topAnchor.constraint(equalTo: sunsetTitleLabel.bottomAnchor, constant: 10),
+            sunsetTimeLabel.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor, constant: 10),
+            sunsetTimeLabel.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor, constant: -10),
             feelsLikeTempLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
             feelsLikeTempLabel.topAnchor.constraint(equalTo: sunsetTimeLabel.bottomAnchor, constant: 15),
             windSpeedLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
@@ -407,8 +428,8 @@ extension MainViewController {
         print("City Name: \(RawWeatherData.cityName)")
         DispatchQueue.main.async {
             self.refreshControl.endRefreshing()
+            self.fetchFromReload()
         }
-        fetchFromReload()
     }
     
     //Same as refresh but not objc and is used only when viewDidLoad
