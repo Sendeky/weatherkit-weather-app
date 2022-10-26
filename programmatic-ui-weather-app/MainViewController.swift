@@ -28,7 +28,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let topTempMaxLabel = UILabel()
     let bottomScrollview = UIScrollView()
     let topScrollStackview = UIStackView()
-    let windSpeedLabel = UILabel()
     let humidityLabel = UILabel()
     let pressureLabel = UILabel()
     
@@ -99,6 +98,29 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "It feels like: "
+        label.font = .preferredFont(forTextStyle: .body)
+        return label
+    }()
+    
+    //Wind Speed view & labels
+    let windSpeedView: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 75.0/255.0, green: 205.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        view.layer.cornerRadius = 40
+        return view
+    }()
+    let windSpeedTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Wind   "
+        label.font = .preferredFont(forTextStyle: .title2)
+        return label
+    }()
+    let windSpeedLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Wind speed is: "
         label.font = .preferredFont(forTextStyle: .body)
         return label
     }()
@@ -253,15 +275,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         topScrollStackview.axis = .vertical
         topScrollStackview.spacing = 30
         
-        //Sets settings for windSpeedLabel
-        windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
-        windSpeedLabel.text = "Wind Speed is"
-        windSpeedLabel.font = .preferredFont(forTextStyle: .title2)
-        windSpeedLabel.adjustsFontSizeToFitWidth = false
-        windSpeedLabel.layer.masksToBounds = true
-        windSpeedLabel.layer.borderWidth = 3
-        windSpeedLabel.layer.cornerRadius = 5
-        
         //Sets settings for humidityLabel
         humidityLabel.translatesAutoresizingMaskIntoConstraints = false
         humidityLabel.text = "Humidity is"
@@ -317,6 +330,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         bottomScrollview.addSubview(sunriseView)
         bottomScrollview.addSubview(sunsetView)
         bottomScrollview.addSubview(feelsLikeView)
+        bottomScrollview.addSubview(windSpeedView)
         
         //Adds labels to sunriseView
         sunriseView.addSubview(sunriseTitleLabel)
@@ -329,6 +343,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         //Adds labels to feelsLikeView
         feelsLikeView.addSubview(feelsLikeTitleLabel)
         feelsLikeView.addSubview(feelsLikeTempLabel)
+        
+        //Adds labels to windSpeedView
+        windSpeedView.addSubview(windSpeedTitleLabel)
+        windSpeedView.addSubview(windSpeedLabel)
         
         //Adds the main stacks into the view
         view.addSubview(topStackview)
@@ -385,12 +403,22 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             //feelsLikeTitleLabel constraints
             feelsLikeTitleLabel.topAnchor.constraint(equalTo: feelsLikeView.topAnchor),
             feelsLikeTitleLabel.centerXAnchor.constraint(equalTo: feelsLikeView.centerXAnchor, constant: -30),
-            //feelsLikeTempLabel
+            //feelsLikeTempLabel constraints
             feelsLikeTempLabel.topAnchor.constraint(equalTo: feelsLikeTitleLabel.bottomAnchor, constant: 10),
             feelsLikeTempLabel.leadingAnchor.constraint(equalTo: feelsLikeView.leadingAnchor, constant: 10),
             feelsLikeTempLabel.trailingAnchor.constraint(equalTo: feelsLikeView.trailingAnchor, constant: -10),
-            windSpeedLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
-            windSpeedLabel.topAnchor.constraint(equalTo: feelsLikeTempLabel.bottomAnchor, constant: 15),
+            //windSpeedView constraints
+            windSpeedView.topAnchor.constraint(equalTo: sunsetView.bottomAnchor, constant: 15),
+            windSpeedView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
+            windSpeedView.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor),
+            windSpeedView.heightAnchor.constraint(equalToConstant: 100),
+            //windSpeedTitleLabel constaints
+            windSpeedTitleLabel.topAnchor.constraint(equalTo: windSpeedView.topAnchor),
+            windSpeedTitleLabel.centerXAnchor.constraint(equalTo: windSpeedView.centerXAnchor, constant: -30),
+            //windSpeedLabel constraints
+            windSpeedLabel.topAnchor.constraint(equalTo: windSpeedTitleLabel.bottomAnchor, constant: 15),
+            windSpeedLabel.leadingAnchor.constraint(equalTo: windSpeedView.leadingAnchor, constant: 10),
+            windSpeedLabel.trailingAnchor.constraint(equalTo: windSpeedView.trailingAnchor, constant: -10),
             humidityLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
             humidityLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 15),
             pressureLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
