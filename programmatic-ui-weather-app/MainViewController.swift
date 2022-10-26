@@ -28,7 +28,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let topTempMaxLabel = UILabel()
     let bottomScrollview = UIScrollView()
     let topScrollStackview = UIStackView()
-    let feelsLikeTempLabel = UILabel()
     let windSpeedLabel = UILabel()
     let humidityLabel = UILabel()
     let pressureLabel = UILabel()
@@ -41,7 +40,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         view.layer.cornerRadius = 40
         return view
     }()
-    
     let sunriseTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +47,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.font = .preferredFont(forTextStyle: .title2)
         return label
     }()
-    
     let sunriseTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +56,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         return label
     }()
     
-    //Sunset view & Labels
+    //Sunset view & labels
     let sunsetView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +64,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         view.layer.cornerRadius = 40
         return view
     }()
-    
     let sunsetTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -75,13 +71,35 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.font = .preferredFont(forTextStyle: .title2)
         return label
     }()
-    
     let sunsetTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Sunset happened at: "
         label.font = .preferredFont(forTextStyle: .body)
         label.numberOfLines = 0
+        return label
+    }()
+    
+    //feelsLike view & labels
+    let feelsLikeView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 75.0/255.0, green: 205.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        view.layer.cornerRadius = 40
+        return view
+    }()
+    let feelsLikeTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Feels   "
+        label.font = .preferredFont(forTextStyle: .title2)
+        return label
+    }()
+    let feelsLikeTempLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "It feels like: "
+        label.font = .preferredFont(forTextStyle: .body)
         return label
     }()
     
@@ -141,7 +159,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 } else {
                     self.sunriseTimeLabel.text = "will be at: \(WeatherData.localSunrise)"
                 }
-                self.feelsLikeTempLabel.text = "Feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
+                self.feelsLikeTempLabel.text = "It feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
                 self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
                 self.humidityLabel.text = "Humidity is \(RawWeatherData.humidity)%"
                 self.pressureLabel.text = "Pressure is \(WeatherData.pressureInHg) InHg"
@@ -235,15 +253,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         topScrollStackview.axis = .vertical
         topScrollStackview.spacing = 30
         
-        //Sets settings for feelsLikeTempLabel
-        feelsLikeTempLabel.translatesAutoresizingMaskIntoConstraints = false
-        feelsLikeTempLabel.text = "Feels like: "
-        feelsLikeTempLabel.font = .preferredFont(forTextStyle: .title2)
-        feelsLikeTempLabel.adjustsFontSizeToFitWidth = true
-        feelsLikeTempLabel.layer.masksToBounds = true
-        feelsLikeTempLabel.layer.borderWidth = 3
-        feelsLikeTempLabel.layer.cornerRadius = 5
-        
         //Sets settings for windSpeedLabel
         windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
         windSpeedLabel.text = "Wind Speed is"
@@ -307,6 +316,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         bottomScrollview.addSubview(refreshControl)
         bottomScrollview.addSubview(sunriseView)
         bottomScrollview.addSubview(sunsetView)
+        bottomScrollview.addSubview(feelsLikeView)
         
         //Adds labels to sunriseView
         sunriseView.addSubview(sunriseTitleLabel)
@@ -315,6 +325,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         //Adds labels to sunsetView
         sunsetView.addSubview(sunsetTitleLabel)
         sunsetView.addSubview(sunsetTimeLabel)
+        
+        //Adds labels to feelsLikeView
+        feelsLikeView.addSubview(feelsLikeTitleLabel)
+        feelsLikeView.addSubview(feelsLikeTempLabel)
         
         //Adds the main stacks into the view
         view.addSubview(topStackview)
@@ -363,8 +377,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             sunsetTimeLabel.topAnchor.constraint(equalTo: sunsetTitleLabel.bottomAnchor, constant: 10),
             sunsetTimeLabel.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor, constant: 10),
             sunsetTimeLabel.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor, constant: -10),
-            feelsLikeTempLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
-            feelsLikeTempLabel.topAnchor.constraint(equalTo: sunsetTimeLabel.bottomAnchor, constant: 15),
+            //feelsLikeView constraints
+            feelsLikeView.topAnchor.constraint(equalTo: sunriseView.bottomAnchor, constant: 15),
+            feelsLikeView.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor),
+            feelsLikeView.trailingAnchor.constraint(equalTo: sunriseView.trailingAnchor),
+            feelsLikeView.heightAnchor.constraint(equalToConstant: 100),
+            //feelsLikeTitleLabel constraints
+            feelsLikeTitleLabel.topAnchor.constraint(equalTo: feelsLikeView.topAnchor),
+            feelsLikeTitleLabel.centerXAnchor.constraint(equalTo: feelsLikeView.centerXAnchor, constant: -30),
+            //feelsLikeTempLabel
+            feelsLikeTempLabel.topAnchor.constraint(equalTo: feelsLikeTitleLabel.bottomAnchor, constant: 10),
+            feelsLikeTempLabel.leadingAnchor.constraint(equalTo: feelsLikeView.leadingAnchor, constant: 10),
+            feelsLikeTempLabel.trailingAnchor.constraint(equalTo: feelsLikeView.trailingAnchor, constant: -10),
             windSpeedLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
             windSpeedLabel.topAnchor.constraint(equalTo: feelsLikeTempLabel.bottomAnchor, constant: 15),
             humidityLabel.centerXAnchor.constraint(equalTo: bottomScrollview.centerXAnchor),
@@ -408,7 +432,7 @@ extension MainViewController {
         } else {
             self.sunriseTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunrise)"
         }
-        self.feelsLikeTempLabel.text = "Feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
+        self.feelsLikeTempLabel.text = "It feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
         self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
         self.humidityLabel.text = "Humidity is \(RawWeatherData.humidity)%"
         self.pressureLabel.text = "Pressure is \(WeatherData.pressureInHg) InHg"
