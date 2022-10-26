@@ -28,7 +28,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let topTempMaxLabel = UILabel()
     let bottomScrollview = UIScrollView()
     let topScrollStackview = UIStackView()
-    let pressureLabel = UILabel()
     
     //Sunrise view & labels
     let sunriseView: UIView = {
@@ -143,6 +142,29 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Humidity is"
+        label.font = .preferredFont(forTextStyle: .body)
+        return label
+    }()
+    
+    //Pressure view & labels
+    let pressureView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 75.0/255.0, green: 205.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        view.layer.cornerRadius = 40
+        return view
+    }()
+    let pressureTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Pressure"
+        label.font = .preferredFont(forTextStyle: .title2)
+        return label
+    }()
+    let pressureLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Pressure is "
         label.font = .preferredFont(forTextStyle: .body)
         return label
     }()
@@ -297,15 +319,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         topScrollStackview.axis = .vertical
         topScrollStackview.spacing = 30
         
-        //Seets settings for pressureLabel
-        pressureLabel.translatesAutoresizingMaskIntoConstraints  = false
-        pressureLabel.text = "Pressure is: "
-        pressureLabel.font = .preferredFont(forTextStyle: .title2)
-        pressureLabel.adjustsFontSizeToFitWidth = false
-        pressureLabel.layer.masksToBounds = true
-        pressureLabel.layer.borderWidth = 3
-        pressureLabel.layer.cornerRadius = 5
-        
         //Sets settings for refreshControl
         refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
@@ -344,6 +357,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         bottomScrollview.addSubview(feelsLikeView)
         bottomScrollview.addSubview(windSpeedView)
         bottomScrollview.addSubview(humidityView)
+        bottomScrollview.addSubview(pressureView)
         
         //Adds labels to sunriseView
         sunriseView.addSubview(sunriseTitleLabel)
@@ -364,6 +378,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         //Adds labels to humidityView
         humidityView.addSubview(humidityTitleLabel)
         humidityView.addSubview(humidityLabel)
+        
+        //Adds labels to pressureView
+        pressureView.addSubview(pressureTitleLabel)
+        pressureView.addSubview(pressureLabel)
         
         //Adds the main stacks into the view
         view.addSubview(topStackview)
@@ -418,8 +436,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             feelsLikeView.trailingAnchor.constraint(equalTo: sunriseView.trailingAnchor),
             feelsLikeView.heightAnchor.constraint(equalToConstant: 100),
             //feelsLikeTitleLabel constraints
-            feelsLikeTitleLabel.topAnchor.constraint(equalTo: feelsLikeView.topAnchor),
-            feelsLikeTitleLabel.centerXAnchor.constraint(equalTo: feelsLikeView.centerXAnchor, constant: -30),
+            feelsLikeTitleLabel.topAnchor.constraint(equalTo: feelsLikeView.topAnchor, constant: 5),
+            feelsLikeTitleLabel.leadingAnchor.constraint(equalTo: sunriseTitleLabel.leadingAnchor),
             //feelsLikeTempLabel constraints
             feelsLikeTempLabel.topAnchor.constraint(equalTo: feelsLikeTitleLabel.bottomAnchor, constant: 10),
             feelsLikeTempLabel.leadingAnchor.constraint(equalTo: feelsLikeView.leadingAnchor, constant: 10),
@@ -431,7 +449,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             windSpeedView.heightAnchor.constraint(equalToConstant: 100),
             //windSpeedTitleLabel constaints
             windSpeedTitleLabel.topAnchor.constraint(equalTo: windSpeedView.topAnchor),
-            windSpeedTitleLabel.centerXAnchor.constraint(equalTo: windSpeedView.centerXAnchor, constant: -30),
+            windSpeedTitleLabel.leadingAnchor.constraint(equalTo: sunsetTitleLabel.leadingAnchor),
             //windSpeedLabel constraints
             windSpeedLabel.topAnchor.constraint(equalTo: windSpeedTitleLabel.bottomAnchor, constant: 15),
             windSpeedLabel.leadingAnchor.constraint(equalTo: windSpeedView.leadingAnchor, constant: 10),
@@ -443,13 +461,27 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             humidityView.heightAnchor.constraint(equalToConstant: 100),
             //humidityTitleLabel constraints
             humidityTitleLabel.topAnchor.constraint(equalTo: humidityView.topAnchor, constant: 5),
-            humidityTitleLabel.centerXAnchor.constraint(equalTo: humidityView.centerXAnchor),
+            humidityTitleLabel.leadingAnchor.constraint(equalTo: sunriseTitleLabel.leadingAnchor),
             //humidityLabel constraints
             humidityLabel.topAnchor.constraint(equalTo: humidityTitleLabel.bottomAnchor, constant: 15),
             humidityLabel.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor, constant: 10),
             humidityLabel.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor, constant: -10),
+            //pressureView constraints
+            pressureView.topAnchor.constraint(equalTo: windSpeedView.bottomAnchor, constant: 15),
+            pressureView.leadingAnchor.constraint(equalTo: windSpeedView.leadingAnchor),
+            pressureView.trailingAnchor.constraint(equalTo: windSpeedView.trailingAnchor),
+            pressureView.heightAnchor.constraint(equalToConstant: 100),
+            //pressureTitleLabel constraints
+            pressureTitleLabel.topAnchor.constraint(equalTo: pressureView.topAnchor, constant: 5),
+            pressureTitleLabel.leadingAnchor.constraint(equalTo: sunsetTitleLabel.leadingAnchor),
+            //pressureLabel constraints
+            pressureLabel.topAnchor.constraint(equalTo: pressureTitleLabel.bottomAnchor, constant: 15),
+            pressureLabel.leadingAnchor.constraint(equalTo: pressureView.leadingAnchor, constant: 10),
+            pressureLabel.trailingAnchor.constraint(equalTo: pressureView.trailingAnchor, constant: -10),
         ])
+        
     }
+    
 }
 
 extension MainViewController {
