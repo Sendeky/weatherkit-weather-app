@@ -52,6 +52,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.numberOfLines = 0
         return label
     }()
+    let sunriseIcon: UIImageView = {
+        let imageview = UIImageView()
+        imageview.translatesAutoresizingMaskIntoConstraints = false
+        let sunriseIcon = UIImage(systemName: "sunrise")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
+        imageview.image = sunriseIcon
+        return imageview
+    }()
     
     //Sunset view & labels
     let sunsetView: UIView = {
@@ -76,6 +83,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.numberOfLines = 0
         return label
     }()
+    let sunsetIcon: UIImageView = {
+        let imageview = UIImageView()
+        imageview.translatesAutoresizingMaskIntoConstraints = false
+        let sunsetIcon = UIImage(systemName: "sunset")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
+        imageview.image = sunsetIcon
+        return imageview
+    }()
     
     //feelsLike view & labels
     let feelsLikeView: UIView = {
@@ -88,7 +102,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let feelsLikeTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Feels   "
+        label.text = "Feels"
         label.font = .preferredFont(forTextStyle: .title2)
         return label
     }()
@@ -98,6 +112,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.text = "It feels like: "
         label.font = .preferredFont(forTextStyle: .body)
         return label
+    }()
+    let feelsLikeIcon: UIImageView = {
+        let imageview = UIImageView()
+        imageview.translatesAutoresizingMaskIntoConstraints = false
+        let humidityIcon = UIImage(systemName: "thermometer.medium", withConfiguration: UIImage.SymbolConfiguration(weight: .regular))!.withTintColor(.red, renderingMode: .alwaysOriginal)
+        imageview.image = humidityIcon
+        return imageview
     }()
     
     //Wind Speed view & labels
@@ -111,7 +132,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let windSpeedTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Wind   "
+        label.text = "Wind"
         label.font = .preferredFont(forTextStyle: .title2)
         return label
     }()
@@ -121,6 +142,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.text = "Wind speed is: "
         label.font = .preferredFont(forTextStyle: .body)
         return label
+    }()
+    let windSpeedIcon: UIImageView = {
+        let imageview = UIImageView()
+        imageview.translatesAutoresizingMaskIntoConstraints = false
+        let windIcon = UIImage(systemName: "wind", withConfiguration: UIImage.SymbolConfiguration(weight: .regular))!.withTintColor(.white, renderingMode: .alwaysOriginal)
+        imageview.image = windIcon
+        return imageview
     }()
     
     //Humidity view & labels
@@ -145,6 +173,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.font = .preferredFont(forTextStyle: .body)
         return label
     }()
+    let humidityIcon: UIImageView = {
+        let imageview = UIImageView()
+        imageview.translatesAutoresizingMaskIntoConstraints = false
+        let humidityIcon = UIImage(systemName: "humidity.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .regular))!.withTintColor(UIColor(red: 0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0), renderingMode: .alwaysOriginal)
+        imageview.image = humidityIcon
+        return imageview
+    }()
     
     //Pressure view & labels
     let pressureView: UIView = {
@@ -167,6 +202,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.text = "Pressure is "
         label.font = .preferredFont(forTextStyle: .body)
         return label
+    }()
+    let pressureIcon: UIImageView = {
+        let imageview = UIImageView()
+        imageview.translatesAutoresizingMaskIntoConstraints = false
+        let humidityIcon = UIImage(systemName: "barometer", withConfiguration: UIImage.SymbolConfiguration(weight: .regular))!.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
+        imageview.image = humidityIcon
+        return imageview
     }()
     
     //Creates a refresh control for the scrollview
@@ -216,14 +258,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 self.topTempMaxLabel.text = "Max Temp: \(WeatherData.WeatherTempMaxCelsius)"
                 //Checks if the current time is greater than the sunset time (text changes depending on it)
                 if self.compareSunsetTime() == true {
-                    self.sunsetTimeLabel.text = "happened at: \(WeatherData.localSunset)"
+                    self.sunsetTimeLabel.text = "Happened at: \(WeatherData.localSunset)"
+                    self.sunsetIcon.image = UIImage(systemName: "sunset.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
                 } else {
-                    self.sunsetTimeLabel.text = "will be at: \(WeatherData.localSunset)"
+                    self.sunsetTimeLabel.text = "Will be at: \(WeatherData.localSunset)"
+                    self.sunsetIcon.image = UIImage(systemName: "sunset")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
                 }
                 if self.compareSunriseTime() == true {
-                    self.sunriseTimeLabel.text = "happened at: \(WeatherData.localSunrise)"
+                    self.sunriseTimeLabel.text = "Happened at: \(WeatherData.localSunrise)"
+                    self.sunriseIcon.image = UIImage(systemName: "sunrise.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
                 } else {
-                    self.sunriseTimeLabel.text = "will be at: \(WeatherData.localSunrise)"
+                    self.sunriseTimeLabel.text = "Will be at: \(WeatherData.localSunrise)"
+                    self.sunriseIcon.image = UIImage(systemName: "sunrise")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
                 }
                 self.feelsLikeTempLabel.text = "It feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
                 self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
@@ -249,7 +295,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     private func initializeLocationServices() {
         locationManager.delegate = self
-        
+
         guard CLLocationManager.locationServicesEnabled() else {
             return
         }
@@ -362,26 +408,32 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         //Adds labels to sunriseView
         sunriseView.addSubview(sunriseTitleLabel)
         sunriseView.addSubview(sunriseTimeLabel)
+        sunriseView.addSubview(sunriseIcon)
         
         //Adds labels to sunsetView
         sunsetView.addSubview(sunsetTitleLabel)
         sunsetView.addSubview(sunsetTimeLabel)
+        sunsetView.addSubview(sunsetIcon)
         
         //Adds labels to feelsLikeView
         feelsLikeView.addSubview(feelsLikeTitleLabel)
         feelsLikeView.addSubview(feelsLikeTempLabel)
+        feelsLikeView.addSubview(feelsLikeIcon)
         
         //Adds labels to windSpeedView
         windSpeedView.addSubview(windSpeedTitleLabel)
         windSpeedView.addSubview(windSpeedLabel)
+        windSpeedView.addSubview(windSpeedIcon)
         
         //Adds labels to humidityView
         humidityView.addSubview(humidityTitleLabel)
         humidityView.addSubview(humidityLabel)
+        humidityView.addSubview(humidityIcon)
         
         //Adds labels to pressureView
         pressureView.addSubview(pressureTitleLabel)
         pressureView.addSubview(pressureLabel)
+        pressureView.addSubview(pressureIcon)
         
         //Adds the main stacks into the view
         view.addSubview(topStackview)
@@ -414,6 +466,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             //sunriseTitleLabel constraints
             sunriseTitleLabel.topAnchor.constraint(equalTo: sunriseView.topAnchor, constant: 5),
             sunriseTitleLabel.centerXAnchor.constraint(equalTo: sunriseView.centerXAnchor, constant: -30),
+            //sunriseIcon constraints
+            sunriseIcon.centerYAnchor.constraint(equalTo: sunriseTitleLabel.centerYAnchor),
+            sunriseIcon.leadingAnchor.constraint(equalTo: sunriseTitleLabel.trailingAnchor, constant: 5),
             //sunriseTimeLabel constraints
             sunriseTimeLabel.topAnchor.constraint(equalTo: sunriseTitleLabel.bottomAnchor, constant: 10),
             sunriseTimeLabel.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor, constant: 10),
@@ -426,6 +481,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             //sunsetTitlelabel constraints
             sunsetTitleLabel.topAnchor.constraint(equalTo: sunsetView.topAnchor, constant: 5),
             sunsetTitleLabel.centerXAnchor.constraint(equalTo: sunsetView.centerXAnchor, constant: -30),
+            //sunsetIcon constraints
+            sunsetIcon.centerYAnchor.constraint(equalTo: sunsetTitleLabel.centerYAnchor),
+            sunsetIcon.leadingAnchor.constraint(equalTo: sunsetTitleLabel.trailingAnchor, constant: 5),
             //sunsetTimeLabel constraints
             sunsetTimeLabel.topAnchor.constraint(equalTo: sunsetTitleLabel.bottomAnchor, constant: 10),
             sunsetTimeLabel.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor, constant: 10),
@@ -438,6 +496,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             //feelsLikeTitleLabel constraints
             feelsLikeTitleLabel.topAnchor.constraint(equalTo: feelsLikeView.topAnchor, constant: 5),
             feelsLikeTitleLabel.leadingAnchor.constraint(equalTo: sunriseTitleLabel.leadingAnchor),
+            //feelsLikeIcon
+            feelsLikeIcon.centerYAnchor.constraint(equalTo: feelsLikeTitleLabel.centerYAnchor),
+            feelsLikeIcon.leadingAnchor.constraint(equalTo: feelsLikeTitleLabel.trailingAnchor, constant: 5),
             //feelsLikeTempLabel constraints
             feelsLikeTempLabel.topAnchor.constraint(equalTo: feelsLikeTitleLabel.bottomAnchor, constant: 10),
             feelsLikeTempLabel.leadingAnchor.constraint(equalTo: feelsLikeView.leadingAnchor, constant: 10),
@@ -448,8 +509,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             windSpeedView.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor),
             windSpeedView.heightAnchor.constraint(equalToConstant: 100),
             //windSpeedTitleLabel constaints
-            windSpeedTitleLabel.topAnchor.constraint(equalTo: windSpeedView.topAnchor),
+            windSpeedTitleLabel.topAnchor.constraint(equalTo: windSpeedView.topAnchor, constant: 5),
             windSpeedTitleLabel.leadingAnchor.constraint(equalTo: sunsetTitleLabel.leadingAnchor),
+            //windSpeedIcon
+            windSpeedIcon.centerYAnchor.constraint(equalTo: windSpeedTitleLabel.centerYAnchor),
+            windSpeedIcon.leadingAnchor.constraint(equalTo: windSpeedTitleLabel.trailingAnchor, constant: 5),
             //windSpeedLabel constraints
             windSpeedLabel.topAnchor.constraint(equalTo: windSpeedTitleLabel.bottomAnchor, constant: 15),
             windSpeedLabel.leadingAnchor.constraint(equalTo: windSpeedView.leadingAnchor, constant: 10),
@@ -462,6 +526,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             //humidityTitleLabel constraints
             humidityTitleLabel.topAnchor.constraint(equalTo: humidityView.topAnchor, constant: 5),
             humidityTitleLabel.leadingAnchor.constraint(equalTo: sunriseTitleLabel.leadingAnchor),
+            //humidityIcon constraints
+            humidityIcon.centerYAnchor.constraint(equalTo: humidityTitleLabel.centerYAnchor),
+            humidityIcon.leadingAnchor.constraint(equalTo: humidityTitleLabel.trailingAnchor, constant: 5),
             //humidityLabel constraints
             humidityLabel.topAnchor.constraint(equalTo: humidityTitleLabel.bottomAnchor, constant: 15),
             humidityLabel.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor, constant: 10),
@@ -474,6 +541,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             //pressureTitleLabel constraints
             pressureTitleLabel.topAnchor.constraint(equalTo: pressureView.topAnchor, constant: 5),
             pressureTitleLabel.leadingAnchor.constraint(equalTo: sunsetTitleLabel.leadingAnchor),
+            //pressureIcon
+            pressureIcon.centerYAnchor.constraint(equalTo: pressureTitleLabel.centerYAnchor),
+            pressureIcon.leadingAnchor.constraint(equalTo: pressureTitleLabel.trailingAnchor, constant: 5),
             //pressureLabel constraints
             pressureLabel.topAnchor.constraint(equalTo: pressureTitleLabel.bottomAnchor, constant: 15),
             pressureLabel.leadingAnchor.constraint(equalTo: pressureView.leadingAnchor, constant: 10),
@@ -509,13 +579,17 @@ extension MainViewController {
         //Checks if the current time is greater than the sunset time (text changes depending on it)
         if self.compareSunsetTime() == true {
             self.sunsetTimeLabel.text = "Sunset was at: \(WeatherData.localSunset)"
+            self.sunsetIcon.image = UIImage(systemName: "sunset.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
         } else {
             self.sunsetTimeLabel.text = "Sunset will be at: \(WeatherData.localSunset)"
+            self.sunsetIcon.image = UIImage(systemName: "sunset")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
         }
         if self.compareSunriseTime() == true {
             self.sunriseTimeLabel.text = "Sunrise was at: \(WeatherData.localSunrise)"
+            self.sunriseIcon.image = UIImage(systemName: "sunrise.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
         } else {
             self.sunriseTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunrise)"
+            self.sunriseIcon.image = UIImage(systemName: "sunrise")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
         }
         self.feelsLikeTempLabel.text = "It feels like: \(WeatherData.WeatherFeelsLikeCelsius)˚"
         self.windSpeedLabel.text = "Wind speed is \(WeatherData.windSpeedMPH) MPH"
@@ -561,13 +635,13 @@ extension MainViewController {
     
     //Creates a function for running fetchWeather from reload func
     func fetchFromReload() {
-        fetchWeather()
-        convertKelvinIntoCelsius()
-        convertEpochToDate()
-        convertHPAtoInHg()
-        convertWindSpeedKPH()
-        convertWindSpeedMPH()
         DispatchQueue.main.async {
+            self.fetchWeather()
+            self.convertKelvinIntoCelsius()
+            self.convertEpochToDate()
+            self.convertHPAtoInHg()
+            self.convertWindSpeedKPH()
+            self.convertWindSpeedMPH()
             self.reloadSunriseTime()
             self.reloadSunsetTime()
             self.updateLabels()
