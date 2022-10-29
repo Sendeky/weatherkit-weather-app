@@ -18,6 +18,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     //Intializes all the elements
     let topStackview = UIStackView()
     let topSubStackview = UIStackView()
+    let topWeatherIconStackView = UIStackView()
     let topRainAmountLabel = UILabel()
     let topWeatherIconView = UIImageView()
     let topCurrentTempLabel = UILabel()
@@ -27,7 +28,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let topTempMinLabel = UILabel()
     let topTempMaxLabel = UILabel()
     let bottomScrollview = UIScrollView()
-    let topScrollStackview = UIStackView()
+    let bottomScrollStackview = UIStackView()
     
     //Sunrise view & labels
     let sunriseView: UIView = {
@@ -35,6 +36,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(red: 75.0/255.0, green: 205.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         view.layer.cornerRadius = 40
+        view.isUserInteractionEnabled = true
         return view
     }()
     let sunriseTitleLabel: UILabel = {
@@ -111,6 +113,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "It feels like: "
         label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 0
         return label
     }()
     let feelsLikeIcon: UIImageView = {
@@ -141,6 +144,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Wind speed is: "
         label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 0
         return label
     }()
     let windSpeedIcon: UIImageView = {
@@ -171,6 +175,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Humidity is"
         label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 0
         return label
     }()
     let humidityIcon: UIImageView = {
@@ -201,6 +206,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Pressure is "
         label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 0
         return label
     }()
     let pressureIcon: UIImageView = {
@@ -211,9 +217,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         return imageview
     }()
     
+    //sunrisePopUp
+    let sunrisePopUpViewController: UIViewController = {
+        let vc = UIViewController()
+//        vc.isModalInPresentation = true
+        vc.view.backgroundColor = .systemOrange
+        vc.view.alpha = 0.8
+        return vc
+    }()
+    
     //Creates a refresh control for the scrollview
     var refreshControl = UIRefreshControl()
-    
     //Creates the location manager
     let locationManager = CLLocationManager()
 
@@ -311,9 +325,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         //Sets settings for topSubStackview
         topSubStackview.translatesAutoresizingMaskIntoConstraints = false
-        topSubStackview.axis = .horizontal
-        topSubStackview.spacing = 30
-        topSubStackview.tintColor = .systemYellow
+        topSubStackview.axis = .vertical
+        topSubStackview.spacing = 15
+        
+        //Sets settings for topWeatherIconStackView
+        topWeatherIconStackView.translatesAutoresizingMaskIntoConstraints = false
+        topWeatherIconStackView.axis = .horizontal
         
         //Sets settings for topRainChanceLabel
         topRainAmountLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -360,43 +377,53 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         bottomScrollview.alwaysBounceVertical = true
         bottomScrollview.isScrollEnabled = true
         
-        //Sets settings for topScrollStackview
-        topScrollStackview.translatesAutoresizingMaskIntoConstraints = false
-        topScrollStackview.axis = .vertical
-        topScrollStackview.spacing = 30
+        //Sets settings for bottomScrollStackview
+        bottomScrollStackview.translatesAutoresizingMaskIntoConstraints = false
+        bottomScrollStackview.axis = .vertical
+        bottomScrollStackview.spacing = 30
         
         //Sets settings for refreshControl
         refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         
+        //sunriseTapGesture
+        var sunriseTapGesture: UITapGestureRecognizer {
+            let t = UITapGestureRecognizer(target: self, action: #selector(sunriseTapped))
+            return t
+        }
+        sunriseView.addGestureRecognizer(sunriseTapGesture)
+        
     }
     
     private func layout(){
         //Adds rain chance label, weather icon view, and current temp label into the topSubStackview
-        topSubStackview.addArrangedSubview(topRainAmountLabel)
-        topSubStackview.addArrangedSubview(topWeatherIconView)
-        topSubStackview.addArrangedSubview(topCurrentTempLabel)
+        topSubStackview.addArrangedSubview(topTempMaxLabel)
+        topSubStackview.addArrangedSubview(topTempMinLabel)
+        
+        //Adds weatherIconView to topWeatherIconStackView
+        topWeatherIconStackView.addArrangedSubview(topWeatherIconView)
         
         //Adds topSubStackview, uv index, city name labels, and topMinMaxTempView into topStackView
         topStackview.addSubview(topSubStackview)
+        topStackview.addSubview(topWeatherIconStackView)
         topStackview.addSubview(topUVIndexLabel)
         topStackview.addSubview(topCityNameLabel)
         topStackview.addSubview(topMinMaxTempView)
         
         //Adds min and max temp labels into topMinMaxTempView
-        topMinMaxTempView.addArrangedSubview(topTempMinLabel)
-        topMinMaxTempView.addArrangedSubview(topTempMaxLabel)
+//        topMinMaxTempView.addArrangedSubview(topTempMinLabel)
+//        topMinMaxTempView.addArrangedSubview(topTempMaxLabel)
         
-        //Adds sunset, feels like, wind speed, humidity labels into topScrollStackview
-        topScrollStackview.addSubview(sunsetTimeLabel)
-        topScrollStackview.addSubview(feelsLikeTempLabel)
-        topScrollStackview.addSubview(windSpeedLabel)
-        topScrollStackview.addSubview(humidityLabel)
-        topScrollStackview.addSubview(pressureLabel)
-        topScrollStackview.addSubview(sunriseTimeLabel)
+        //Adds sunset, feels like, wind speed, humidity labels into bottomScrollStackview
+        bottomScrollStackview.addSubview(sunsetTimeLabel)
+        bottomScrollStackview.addSubview(feelsLikeTempLabel)
+        bottomScrollStackview.addSubview(windSpeedLabel)
+        bottomScrollStackview.addSubview(humidityLabel)
+        bottomScrollStackview.addSubview(pressureLabel)
+        bottomScrollStackview.addSubview(sunriseTimeLabel)
         
-        //Adds topScrollStackview into bottomScrollview
-        bottomScrollview.addSubview(topScrollStackview)
+        //Adds bottomScrollStackview into bottomScrollview
+        bottomScrollview.addSubview(bottomScrollStackview)
         bottomScrollview.addSubview(refreshControl)
         bottomScrollview.addSubview(sunriseView)
         bottomScrollview.addSubview(sunsetView)
@@ -441,20 +468,33 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         //Sets the constraints for everything
         NSLayoutConstraint.activate([
-            topStackview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //topStackView constraints
+            topStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             topStackview.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
-            topSubStackview.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
-            topSubStackview.centerYAnchor.constraint(equalTo: topStackview.centerYAnchor),
+            //topWeatherIconStackView constraints
+            topWeatherIconStackView.topAnchor.constraint(equalTo: topStackview.topAnchor),
+            topWeatherIconStackView.widthAnchor.constraint(equalToConstant: 60),
+            topWeatherIconStackView.trailingAnchor.constraint(equalTo: topStackview.centerXAnchor, constant: -30),
+            //topSubStackView constraints
+            topSubStackview.topAnchor.constraint(equalTo: topStackview.topAnchor),
+            topSubStackview.leadingAnchor.constraint(equalTo: topStackview.centerXAnchor),
+            topSubStackview.trailingAnchor.constraint(equalTo: topStackview.trailingAnchor),
+            //topUVIndexLabel constraints
             topUVIndexLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
             topUVIndexLabel.centerYAnchor.constraint(equalTo: topSubStackview.bottomAnchor, constant: 20),
+            //topCityNameLabel constraints
             topCityNameLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
             topCityNameLabel.centerYAnchor.constraint(equalTo: topUVIndexLabel.bottomAnchor, constant: 20),
-            topWeatherIconView.heightAnchor.constraint(equalToConstant: 24),
-            topWeatherIconView.widthAnchor.constraint(equalToConstant: 24),
+            //topWeatherIconView constraints
+            topWeatherIconView.heightAnchor.constraint(equalToConstant: 60),
+            topWeatherIconView.widthAnchor.constraint(equalToConstant: 60),
+            //topMinMaxTempView constraints
             topMinMaxTempView.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
             topMinMaxTempView.centerYAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 20),
+            //bottomScrollView constraints
             bottomScrollview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bottomScrollview.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
+            bottomScrollview.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
             bottomScrollview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomScrollview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomScrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -515,7 +555,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             windSpeedIcon.centerYAnchor.constraint(equalTo: windSpeedTitleLabel.centerYAnchor),
             windSpeedIcon.leadingAnchor.constraint(equalTo: windSpeedTitleLabel.trailingAnchor, constant: 5),
             //windSpeedLabel constraints
-            windSpeedLabel.topAnchor.constraint(equalTo: windSpeedTitleLabel.bottomAnchor, constant: 15),
+            windSpeedLabel.topAnchor.constraint(equalTo: windSpeedTitleLabel.bottomAnchor, constant: 10),
             windSpeedLabel.leadingAnchor.constraint(equalTo: windSpeedView.leadingAnchor, constant: 10),
             windSpeedLabel.trailingAnchor.constraint(equalTo: windSpeedView.trailingAnchor, constant: -10),
             //humidityView constraints
@@ -530,7 +570,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             humidityIcon.centerYAnchor.constraint(equalTo: humidityTitleLabel.centerYAnchor),
             humidityIcon.leadingAnchor.constraint(equalTo: humidityTitleLabel.trailingAnchor, constant: 5),
             //humidityLabel constraints
-            humidityLabel.topAnchor.constraint(equalTo: humidityTitleLabel.bottomAnchor, constant: 15),
+            humidityLabel.topAnchor.constraint(equalTo: humidityTitleLabel.bottomAnchor, constant: 10),
             humidityLabel.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor, constant: 10),
             humidityLabel.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor, constant: -10),
             //pressureView constraints
@@ -545,7 +585,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             pressureIcon.centerYAnchor.constraint(equalTo: pressureTitleLabel.centerYAnchor),
             pressureIcon.leadingAnchor.constraint(equalTo: pressureTitleLabel.trailingAnchor, constant: 5),
             //pressureLabel constraints
-            pressureLabel.topAnchor.constraint(equalTo: pressureTitleLabel.bottomAnchor, constant: 15),
+            pressureLabel.topAnchor.constraint(equalTo: pressureTitleLabel.bottomAnchor, constant: 10),
             pressureLabel.leadingAnchor.constraint(equalTo: pressureView.leadingAnchor, constant: 10),
             pressureLabel.trailingAnchor.constraint(equalTo: pressureView.trailingAnchor, constant: -10),
         ])
@@ -697,6 +737,11 @@ extension MainViewController {
         print("UserLocation.userLatitude = \((UserLocation.userLatitude)!)")
         print("UserLocation.userLongitude = \((UserLocation.userLongitude)!)")
     }
+    
+    @objc func sunriseTapped() {
+        print("sunrise Tapped")
+        present(sunrisePopUpViewController, animated: true)
+    }
 
     /*  Can't get this to work, might implement later
     func drawPressureAnimation() {
@@ -707,7 +752,7 @@ extension MainViewController {
         trackShape.fillColor = UIColor.clear.cgColor
         trackShape.lineWidth = 5
         trackShape.strokeColor = UIColor.lightGray.cgColor
-        topScrollStackview.layer.addSublayer(trackShape)
+        bottomScrollStackview.layer.addSublayer(trackShape)
     }
      */
 }
