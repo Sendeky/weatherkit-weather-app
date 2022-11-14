@@ -9,7 +9,7 @@ import Foundation
 
 class CheckTimeUtil{
 }
-
+/* MARK: DEPRECATED
 extension MainViewController {
     func compareSunsetTime() -> Bool {
         
@@ -41,3 +41,4 @@ extension MainViewController {
         }
     }
 }
+*/

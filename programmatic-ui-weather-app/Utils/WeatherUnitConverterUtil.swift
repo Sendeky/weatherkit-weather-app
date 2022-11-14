@@ -8,6 +8,8 @@
 import Foundation
 
 
+/* MARK: DEPRECATED
+
 struct WeatherData {
     static var WeatherTempCelsius = 0
     static var WeatherFeelsLikeCelsius = 0
@@ -39,4 +41,4 @@ extension MainViewController {
         WeatherData.windSpeedKPH = Int(RawWeatherData.windSpeed * 3.6)
     }
 }
-
+*/
