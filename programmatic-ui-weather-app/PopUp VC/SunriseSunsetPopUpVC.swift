@@ -10,8 +10,8 @@ import Charts
 
 class SunriseSunsetPopUpVC: UIViewController, ChartViewDelegate {
     
-    //Creates topTitleLabel & settings
-    let topTitleLabel: UILabel = {
+    //Creates titleLabel & settings
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Sunrise & Sunset"
@@ -48,7 +48,9 @@ class SunriseSunsetPopUpVC: UIViewController, ChartViewDelegate {
         
         chartView.backgroundColor = .systemBlue
         chartView.translatesAutoresizingMaskIntoConstraints = false
-        chartView.isUserInteractionEnabled = false
+        chartView.isUserInteractionEnabled = true
+        chartView.pinchZoomEnabled = false
+        chartView.doubleTapToZoomEnabled = false
         chartView.rightAxis.enabled = false
         chartView.leftAxis.enabled = false
         let yAxis = chartView.leftAxis
@@ -135,9 +137,9 @@ class SunriseSunsetPopUpVC: UIViewController, ChartViewDelegate {
 //    }
     
     
-    func layout() {
+    private func layout() {
         //Adds stackviews and topLabel to view
-        view.addSubview(topTitleLabel)
+        view.addSubview(titleLabel)
         view.addSubview(topSunriseSunsetTimeStackview)
         view.addSubview(bottomTimeStackview)
         
@@ -161,11 +163,11 @@ class SunriseSunsetPopUpVC: UIViewController, ChartViewDelegate {
         bottomTimeStackview.addArrangedSubview(astronomicalDuskView)
         
         NSLayoutConstraint.activate([
-            //topTitleLabel constraints
-            topTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            topTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //titleLabel constraints
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             //topSunriseSunsetTimeStackview constraints
-            topSunriseSunsetTimeStackview.topAnchor.constraint(equalTo: topTitleLabel.bottomAnchor, constant: 50),
+            topSunriseSunsetTimeStackview.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
             topSunriseSunsetTimeStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             topSunriseSunsetTimeStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             topSunriseSunsetTimeStackview.heightAnchor.constraint(equalToConstant: 300),
@@ -204,7 +206,7 @@ class SunriseSunsetPopUpVC: UIViewController, ChartViewDelegate {
         ])
     }
     
-    func setData() {
+    private func setData() {
         let set1 = LineChartDataSet(entries: yValues, label: "")
         
         set1.drawCirclesEnabled = false

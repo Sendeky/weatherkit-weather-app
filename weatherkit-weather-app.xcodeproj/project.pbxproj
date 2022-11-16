@@ -24,6 +24,10 @@
 		C0B01BF9291F6CAE00D887C6 /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BF8291F6CAE00D887C6 /* ForecastViewController.swift */; };
 		C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpVC.swift */; };
 		C0B01C24292206B600D887C6 /* WindSpeedPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C23292206B600D887C6 /* WindSpeedPopUpVC.swift */; };
+		C0B01C2A2923661100D887C6 /* Settings2View.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0B01C262923661000D887C6 /* Settings2View.xib */; };
+		C0B01C2B2923661100D887C6 /* Settings2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C272923661000D887C6 /* Settings2View.swift */; };
+		C0B01C2C2923661100D887C6 /* Settings2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C282923661000D887C6 /* Settings2Cell.swift */; };
+		C0B01C2D2923661100D887C6 /* Settings2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0B01C292923661100D887C6 /* Settings2Cell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 		C0B01BF8291F6CAE00D887C6 /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
 		C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetPopUpVC.swift; sourceTree = "<group>"; };
 		C0B01C23292206B600D887C6 /* WindSpeedPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVC.swift; sourceTree = "<group>"; };
+		C0B01C262923661000D887C6 /* Settings2View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings2View.xib; sourceTree = "<group>"; };
+		C0B01C272923661000D887C6 /* Settings2View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings2View.swift; sourceTree = "<group>"; };
+		C0B01C282923661000D887C6 /* Settings2Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings2Cell.swift; sourceTree = "<group>"; };
+		C0B01C292923661100D887C6 /* Settings2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings2Cell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,7 @@
 		C034703D28F6221900656AA8 /* programmatic-ui-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				C0B01C25292363E500D887C6 /* SettingsVC */,
 				C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */,
 				C034705A28F738AB00656AA8 /* Constants */,
 				C034705328F640AD00656AA8 /* Delegates */,
@@ -156,6 +165,17 @@
 			path = "PopUp VC";
 			sourceTree = "<group>";
 		};
+		C0B01C25292363E500D887C6 /* SettingsVC */ = {
+			isa = PBXGroup;
+			children = (
+				C0B01C282923661000D887C6 /* Settings2Cell.swift */,
+				C0B01C292923661100D887C6 /* Settings2Cell.xib */,
+				C0B01C272923661000D887C6 /* Settings2View.swift */,
+				C0B01C262923661000D887C6 /* Settings2View.xib */,
+			);
+			path = SettingsVC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -222,6 +242,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0B01C2A2923661100D887C6 /* Settings2View.xib in Resources */,
+				C0B01C2D2923661100D887C6 /* Settings2Cell.xib in Resources */,
 				C034704B28F6221A00656AA8 /* LaunchScreen.storyboard in Resources */,
 				C034704828F6221A00656AA8 /* Assets.xcassets in Resources */,
 			);
@@ -234,10 +256,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0B01C2B2923661100D887C6 /* Settings2View.swift in Sources */,
 				C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpVC.swift in Sources */,
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
 				C034706228FB104200656AA8 /* CompareTimeUtil.swift in Sources */,
 				C0B01BF7291F435800D887C6 /* SettingsViewController.swift in Sources */,
+				C0B01C2C2923661100D887C6 /* Settings2Cell.swift in Sources */,
 				C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */,
 				C034705C28F738BC00656AA8 /* Constants.swift in Sources */,
 				C0B01BF9291F6CAE00D887C6 /* ForecastViewController.swift in Sources */,
@@ -393,14 +417,16 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location helps us determine the most relevant weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -424,14 +450,16 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location helps us determine the most relevant weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

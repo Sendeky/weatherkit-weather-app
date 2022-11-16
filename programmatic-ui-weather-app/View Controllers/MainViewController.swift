@@ -730,7 +730,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
 extension MainViewController {
     
     //MARK: - A function that makes a gradient background and sets it as the sublayer of the view
-    func setGradientBackground() {
+    private func setGradientBackground() {
         let colorTop =  UIColor(red: 0/255.0, green: 235.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
         let colorBottom = UIColor(red: 100.0/255.0, green: 50.0/255.0, blue: 235.0/255.0, alpha: 1.0).cgColor
                     

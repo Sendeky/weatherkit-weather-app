@@ -34,7 +34,7 @@ struct WeatherKitData{
     static var AstronomicalDusk = ""
     static var Pressure = ""
     static var RainChance = 0
-    static var WindSpeedForecast = []
+    static var WindSpeedForecast = [0.0]
 }
 
 let weatherService = WeatherService()
@@ -90,8 +90,12 @@ extension MainViewController {
                 }
                 
                 for i in 0...11 {
+                    let formatter = MeasurementFormatter()
+                    formatter.unitOptions = .temperatureWithoutUnit
                     let windSpeed = result.hourlyForecast.forecast[i].wind.speed
-                    WeatherKitData.WindSpeedForecast.append(formatter.string(from: windSpeed))
+                    let wind = (round(windSpeed.value * 10)) / 10
+                    print(wind)
+                    WeatherKitData.WindSpeedForecast.append(wind)
                     print(WeatherKitData.WindSpeedForecast[i])
                 }
                 
@@ -99,6 +103,12 @@ extension MainViewController {
                 print(uv)
                 print(symbol)
                 print(rainChance)
+                print(result.hourlyForecast.forecast[0].wind)
+                print(Double(WeatherKitData.WindSpeedForecast[1]))
+                print(Double(WeatherKitData.WindSpeedForecast[2]))
+                print(Double(WeatherKitData.WindSpeedForecast[3]))
+                print(Double(WeatherKitData.WindSpeedForecast[4]))
+                print(Double(WeatherKitData.WindSpeedForecast[5]))
                 WeatherKitData.Temp = temp
                 WeatherKitData.TempMax = tempMax
                 WeatherKitData.TempMin = tempMin
@@ -124,6 +134,7 @@ extension MainViewController {
                 print(String(describing: error))
             }
             self.updateLabelsAfterAwait()
+            MainViewController().sunriseView.isUserInteractionEnabled = true
         }
     }
     @MainActor
@@ -133,9 +144,11 @@ extension MainViewController {
         main.topWeatherIconView.image = UIImage(systemName: "\(WeatherKitData.Symbol)", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64))
         main.sunriseTimeLabel.text = "Sunrise was at: \(WeatherKitData.localSunrise)"
         main.sunsetTimeLabel.text = "Sunset was at: \(WeatherKitData.localSunset)"
+        
         print("updateLabelsAfterAwait run")
         getWeatherLabelUpdate()
         DateConverter().convertDateToEpoch()
+        WindSpeedPopUpVC().setData()
     }
 }
 

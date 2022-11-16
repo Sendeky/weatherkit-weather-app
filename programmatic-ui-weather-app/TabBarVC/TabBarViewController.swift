@@ -15,7 +15,7 @@ class TabBarViewController: UITabBarController {
         //Create instance of view controllers
         let mainVC = MainViewController()
         let forecastVC = ForecastVC()
-        let settingsVC = SettingsViewController()
+        let settingsVC = Settings2View()
         
         //Set title
         mainVC.title = "Current"
@@ -25,7 +25,7 @@ class TabBarViewController: UITabBarController {
         //Assign controllers to tab bar
         self.setViewControllers([mainVC, forecastVC, settingsVC], animated: false)
         tabBar.backgroundColor = UIColor(red: 100.0/255.0, green: 50.0/255.0, blue: 235.0/255.0, alpha: 1.0)
-        tabBar.alpha = 0.8
+        tabBar.isOpaque = true
         
         //Array of TabBar icons
         guard let items = self.tabBar.items else { return }
