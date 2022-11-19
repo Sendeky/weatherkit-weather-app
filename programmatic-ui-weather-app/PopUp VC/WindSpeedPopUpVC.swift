@@ -56,8 +56,37 @@ class WindSpeedPopUpVC: UIViewController {
         
         view.backgroundColor = .systemCyan
         view.alpha = 0.9
+        
         layout()
-        setData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.backgroundColor = .systemCyan
+        view.alpha = 0.9
+        
+        if WeatherKitData.WindSpeedForecast.count > 11{
+            print(".count > 10")
+            let yValues: [ChartDataEntry] = [
+                ChartDataEntry(x: 1.0, y: WeatherKitData.WindSpeedForecast[1]),
+                ChartDataEntry(x: 2.0, y: WeatherKitData.WindSpeedForecast[2]),
+                ChartDataEntry(x: 3.0, y: WeatherKitData.WindSpeedForecast[3]),
+                ChartDataEntry(x: 4.0, y: WeatherKitData.WindSpeedForecast[4]),
+                ChartDataEntry(x: 5.0, y: WeatherKitData.WindSpeedForecast[5]),
+                ChartDataEntry(x: 6.0, y: WeatherKitData.WindSpeedForecast[6]),
+                ChartDataEntry(x: 7.0, y: WeatherKitData.WindSpeedForecast[7]),
+                ChartDataEntry(x: 8.0, y: WeatherKitData.WindSpeedForecast[8]),
+                ChartDataEntry(x: 9.0, y: WeatherKitData.WindSpeedForecast[9]),
+                ChartDataEntry(x: 10.0, y: WeatherKitData.WindSpeedForecast[10]),
+                ChartDataEntry(x: 11.0, y: WeatherKitData.WindSpeedForecast[11]),
+            ]
+            setData(entries: yValues)
+            
+        } else {
+            print("not yet")
+        }
+        layout()
     }
     
     private func layout() {
@@ -86,8 +115,8 @@ class WindSpeedPopUpVC: UIViewController {
         ])
     }
     
-    func setData() {
-        let set1 = LineChartDataSet(entries: yValues, label: "")
+    private func setData(entries: [ChartDataEntry]) {
+        let set1 = LineChartDataSet(entries: entries, label: "")
         set1.drawCirclesEnabled = true
         set1.mode = .horizontalBezier
         set1.drawHorizontalHighlightIndicatorEnabled = false
@@ -95,18 +124,4 @@ class WindSpeedPopUpVC: UIViewController {
         let data = LineChartData(dataSet: set1)
         windSpeedChart.data = data
     }
-    
-    let yValues: [ChartDataEntry] = [
-        ChartDataEntry(x: 1.0, y: WeatherKitData.WindSpeedForecast[1]),
-        ChartDataEntry(x: 2.0, y: WeatherKitData.WindSpeedForecast[2]),
-        ChartDataEntry(x: 3.0, y: WeatherKitData.WindSpeedForecast[3]),
-        ChartDataEntry(x: 4.0, y: WeatherKitData.WindSpeedForecast[4]),
-        ChartDataEntry(x: 5.0, y: WeatherKitData.WindSpeedForecast[5]),
-        ChartDataEntry(x: 6.0, y: WeatherKitData.WindSpeedForecast[6]),
-        ChartDataEntry(x: 7.0, y: WeatherKitData.WindSpeedForecast[7]),
-        ChartDataEntry(x: 8.0, y: WeatherKitData.WindSpeedForecast[8]),
-        ChartDataEntry(x: 9.0, y: WeatherKitData.WindSpeedForecast[9]),
-        ChartDataEntry(x: 10.0, y: WeatherKitData.WindSpeedForecast[10]),
-        ChartDataEntry(x: 11.0, y: WeatherKitData.WindSpeedForecast[11]),
-    ]
 }

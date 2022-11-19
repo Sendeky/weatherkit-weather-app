@@ -105,10 +105,6 @@ extension MainViewController {
                 print(rainChance)
                 print(result.hourlyForecast.forecast[0].wind)
                 print(Double(WeatherKitData.WindSpeedForecast[1]))
-                print(Double(WeatherKitData.WindSpeedForecast[2]))
-                print(Double(WeatherKitData.WindSpeedForecast[3]))
-                print(Double(WeatherKitData.WindSpeedForecast[4]))
-                print(Double(WeatherKitData.WindSpeedForecast[5]))
                 WeatherKitData.Temp = temp
                 WeatherKitData.TempMax = tempMax
                 WeatherKitData.TempMin = tempMin
@@ -134,7 +130,6 @@ extension MainViewController {
                 print(String(describing: error))
             }
             self.updateLabelsAfterAwait()
-            MainViewController().sunriseView.isUserInteractionEnabled = true
         }
     }
     @MainActor
@@ -148,7 +143,6 @@ extension MainViewController {
         print("updateLabelsAfterAwait run")
         getWeatherLabelUpdate()
         DateConverter().convertDateToEpoch()
-        WindSpeedPopUpVC().setData()
     }
 }
 
