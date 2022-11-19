@@ -37,8 +37,8 @@ class Settings2Cell: UITableViewCell {
 
 		if isSwitch {
 			switchButton.isHidden = false
-			accessoryType = .none
-			selectionStyle = .none
+            accessoryType = .none
+            selectionStyle = .none
 		}
 		else {
 			switchButton.isHidden = true

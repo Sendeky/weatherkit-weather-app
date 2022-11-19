@@ -77,6 +77,7 @@ class Settings2View: UIViewController {
 		dict3["image"] = ""
 		dict3["title"] = "Friends"
 		dict3["isSwitch"] = true
+        
 
 		var dict4: [String: Any] = [:]
 		dict4["image"] = ""
