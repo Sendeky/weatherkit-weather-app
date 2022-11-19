@@ -15,7 +15,7 @@ class TabBarViewController: UITabBarController {
         //Create instance of view controllers
         let mainVC = MainViewController()
         let forecastVC = ForecastVC()
-        let settingsVC = Settings2View()
+        let settingsVC = SettingsListVC()
         
         //Set title
         mainVC.title = "Current"

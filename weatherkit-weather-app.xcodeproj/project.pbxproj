@@ -24,10 +24,9 @@
 		C0B01BF9291F6CAE00D887C6 /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BF8291F6CAE00D887C6 /* ForecastViewController.swift */; };
 		C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpVC.swift */; };
 		C0B01C24292206B600D887C6 /* WindSpeedPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C23292206B600D887C6 /* WindSpeedPopUpVC.swift */; };
-		C0B01C2A2923661100D887C6 /* Settings2View.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0B01C262923661000D887C6 /* Settings2View.xib */; };
-		C0B01C2B2923661100D887C6 /* Settings2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C272923661000D887C6 /* Settings2View.swift */; };
-		C0B01C2C2923661100D887C6 /* Settings2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C282923661000D887C6 /* Settings2Cell.swift */; };
-		C0B01C2D2923661100D887C6 /* Settings2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0B01C292923661100D887C6 /* Settings2Cell.xib */; };
+		C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCC2929487800359476 /* SettingsCell.swift */; };
+		C0CF2DD12929487800359476 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCE2929487800359476 /* Settings.swift */; };
+		C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCF2929487800359476 /* SettingsListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,10 +48,9 @@
 		C0B01BF8291F6CAE00D887C6 /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
 		C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetPopUpVC.swift; sourceTree = "<group>"; };
 		C0B01C23292206B600D887C6 /* WindSpeedPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVC.swift; sourceTree = "<group>"; };
-		C0B01C262923661000D887C6 /* Settings2View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings2View.xib; sourceTree = "<group>"; };
-		C0B01C272923661000D887C6 /* Settings2View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings2View.swift; sourceTree = "<group>"; };
-		C0B01C282923661000D887C6 /* Settings2Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings2Cell.swift; sourceTree = "<group>"; };
-		C0B01C292923661100D887C6 /* Settings2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings2Cell.xib; sourceTree = "<group>"; };
+		C0CF2DCC2929487800359476 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		C0CF2DCE2929487800359476 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		C0CF2DCF2929487800359476 /* SettingsListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,12 +166,19 @@
 		C0B01C25292363E500D887C6 /* SettingsVC */ = {
 			isa = PBXGroup;
 			children = (
-				C0B01C282923661000D887C6 /* Settings2Cell.swift */,
-				C0B01C292923661100D887C6 /* Settings2Cell.xib */,
-				C0B01C272923661000D887C6 /* Settings2View.swift */,
-				C0B01C262923661000D887C6 /* Settings2View.xib */,
+				C0CF2DCD2929487800359476 /* Settings Model */,
+				C0CF2DCC2929487800359476 /* SettingsCell.swift */,
+				C0CF2DCF2929487800359476 /* SettingsListVC.swift */,
 			);
 			path = SettingsVC;
+			sourceTree = "<group>";
+		};
+		C0CF2DCD2929487800359476 /* Settings Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0CF2DCE2929487800359476 /* Settings.swift */,
+			);
+			path = "Settings Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,8 +247,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0B01C2A2923661100D887C6 /* Settings2View.xib in Resources */,
-				C0B01C2D2923661100D887C6 /* Settings2Cell.xib in Resources */,
 				C034704B28F6221A00656AA8 /* LaunchScreen.storyboard in Resources */,
 				C034704828F6221A00656AA8 /* Assets.xcassets in Resources */,
 			);
@@ -256,16 +259,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0B01C2B2923661100D887C6 /* Settings2View.swift in Sources */,
+				C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */,
 				C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpVC.swift in Sources */,
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
 				C034706228FB104200656AA8 /* CompareTimeUtil.swift in Sources */,
 				C0B01BF7291F435800D887C6 /* SettingsViewController.swift in Sources */,
-				C0B01C2C2923661100D887C6 /* Settings2Cell.swift in Sources */,
 				C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */,
 				C034705C28F738BC00656AA8 /* Constants.swift in Sources */,
 				C0B01BF9291F6CAE00D887C6 /* ForecastViewController.swift in Sources */,
+				C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */,
 				C034704328F6221900656AA8 /* MainViewController.swift in Sources */,
+				C0CF2DD12929487800359476 /* Settings.swift in Sources */,
 				C0B01C24292206B600D887C6 /* WindSpeedPopUpVC.swift in Sources */,
 				C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */,
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,

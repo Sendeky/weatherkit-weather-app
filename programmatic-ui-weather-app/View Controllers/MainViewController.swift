@@ -885,13 +885,13 @@ extension MainViewController {
     //Function for actually getting the location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
         UserLocation.userLatitude = locValue.latitude
         UserLocation.userLongitude = locValue.longitude
-        print("UserLocation.userLatitude = \((UserLocation.userLatitude)!)")
-        print("UserLocation.userLongitude = \((UserLocation.userLongitude)!)")
+//        print("UserLocation.userLatitude = \((UserLocation.userLatitude)!)")
+//        print("UserLocation.userLongitude = \((UserLocation.userLongitude)!)")
         UserLocation.userCLLocation = locations[0]
-        print(UserLocation.userCLLocation)
+//        print(UserLocation.userCLLocation)
     }
     
     @objc func sunriseTapped() {
