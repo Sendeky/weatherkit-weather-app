@@ -284,23 +284,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         return imageView
     }()
     
-    //Visibility view & lables
-    let visibiltyView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 40
-        view.backgroundColor = UIColor(red: 75.0/255.0, green: 205.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-        return view
-    }()
-    
-    //sunrisePopUp
-//    let sunrisePopUpViewController: UIViewController = {
-//        let vc = UIViewController()
-//        vc.isModalInPresentation = true
-//        vc.view.backgroundColor = .systemOrange
-//        vc.view.alpha = 0.8
-//        return vc
-//    }()
     
     //Creates a refresh control for the scrollview
     var refreshControl = UIRefreshControl()
@@ -327,15 +310,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         
         DispatchQueue.global().async {
-            //Calls all the functions (most are from the Utils folder)
-//            self.fetchWeather() DEPRECATED
-//            print(RawWeatherData.WeatherTempKelvin) DEPRECATED
-//            self.convertKelvinIntoCelsius()
-//            print(WeatherData.WeatherTempCelsius) DEPRECATED
-//            self.convertEpochToDate() DEPRECATED
-//            self.convertWindSpeedMPH() DEPRECATED
-//            self.convertWindSpeedKPH() DEPRECATED
-//            self.convertHPAtoInHg() DEPRECATED
             self.viewDidLoadRefresh()
             
 
@@ -347,32 +321,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
                 self.topTempMinLabel.text = "Min Temp: \(WeatherKitData.TempMin)"
                 self.topTempMaxLabel.text = "Max Temp: \(WeatherKitData.TempMax)"
                 self.topUVIndexLabel.text = "UV Index: \(WeatherKitData.UV)"
-                //Checks if the current time is greater than the sunset time (text changes depending on it) MARK: DEPRECATED
-//                if self.compareSunsetTime() == true {
-//                    self.sunsetTimeLabel.text = "Happened at: \(WeatherKitData.localSunset)"
-//                    self.sunsetIcon.image = UIImage(systemName: "sunset.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-//                } else {
-//                    self.sunsetTimeLabel.text = "Will be at: \(WeatherKitData.localSunset)"
-//                    self.sunsetIcon.image = UIImage(systemName: "sunset")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-//                }
-//                if self.compareSunriseTime() == true {
-//                    self.sunriseTimeLabel.text = "Happened at: \(WeatherKitData.localSunrise)"
-//                    self.sunriseIcon.image = UIImage(systemName: "sunrise.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-//                } else {
-//                    self.sunriseTimeLabel.text = "Will be at: \(WeatherKitData.localSunrise)"
-//                    self.sunriseIcon.image = UIImage(systemName: "sunrise")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-//                }
                 self.feelsLikeTempLabel.text = "It feels like: \(WeatherKitData.TempFeels)"
                 self.windSpeedLabel.text = "Wind speed is \(WeatherKitData.WindSpeed) MPH"
                 self.humidityLabel.text = "Humidity is \(WeatherKitData.Humidity)%"
                 self.pressureLabel.text = "Pressure is \(WeatherKitData.Pressure)"
-                
-//                MARK: - DEPRECATED::
-//                if RawWeatherData.cityName != "Globe" {
-//                    print("RawWeatherData.cityName != Globe")
-//                } else {
-//                    self.updateLabels()
-//                }
             }
         }
     }
@@ -749,21 +701,6 @@ extension MainViewController {
         self.topTempMinLabel.text = "Min Temp: \(WeatherKitData.TempMin)"
         self.topTempMaxLabel.text = "Max Temp: \(WeatherKitData.TempMax)"
         self.topUVIndexLabel.text = "UV Index: \(WeatherKitData.UV)"
-        //Checks if the current time is greater than the sunset time (text changes depending on it)
-//        if self.compareSunsetTime() == true {
-//            self.sunsetTimeLabel.text = "Sunset was at: \(WeatherData.localSunset)"
-//            self.sunsetIcon.image = UIImage(systemName: "sunset.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-//        } else {
-//            self.sunsetTimeLabel.text = "Sunset will be at: \(WeatherData.localSunset)"
-//            self.sunsetIcon.image = UIImage(systemName: "sunset")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-//        }
-//        if self.compareSunriseTime() == true {
-//            self.sunriseTimeLabel.text = "Sunrise was at: \(WeatherData.localSunrise)"
-//            self.sunriseIcon.image = UIImage(systemName: "sunrise.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-//        } else {
-//            self.sunriseTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunrise)"
-//            self.sunriseIcon.image = UIImage(systemName: "sunrise")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
-//        }
         self.sunriseTimeLabel.text = "Sunrise was at: \(WeatherKitData.localSunrise)"
         self.sunsetTimeLabel.text = "Sunset was at: \(WeatherKitData.localSunset)"
         self.feelsLikeTempLabel.text = "It feels like: \(WeatherKitData.Temp)"
@@ -777,16 +714,9 @@ extension MainViewController {
     
     //MARK: - Function for the pull to refresh on the scrollview
     @objc func refresh(sender:AnyObject) {
-            // Code to refresh table view
-        DispatchQueue.main.async {
-//            self.updateLabels()
-        }
-//        urlString.urlString = DEPRECATED "https://api.openweathermap.org/data/2.5/weather?lat=\((UserLocation.userLatitude)!)&lon=\((UserLocation.userLongitude)!)&appid=\(constants.API_KEY)"
-//        print("urlString.urlString: \(urlString.urlString)") DEPRECATED
+        // Code to refresh table view
         print("userLatitude: \((UserLocation.userLatitude)!)")
         print("userLongitude: \((UserLocation.userLongitude)!)")
-//        print("weatherTempCelsius: \(WeatherKitData.WeatherTempCelsius)") DEPRECATED
-//        print("City Name: \(RawWeatherData.cityName)") DEPRECATED
         DispatchQueue.main.async {
             self.refreshControl.endRefreshing()
             self.fetchFromReload()
@@ -814,14 +744,6 @@ extension MainViewController {
     //Creates a function for running fetchWeather from reload func
     func fetchFromReload() {
         DispatchQueue.main.async {
-//            self.fetchWeather() DEPRECATED
-//            self.convertKelvinIntoCelsius() DEPRECATED
-//            self.convertEpochToDate() DEPRECATED
-//            self.convertHPAtoInHg() DEPRECATED
-//            self.convertWindSpeedKPH() DEPRECATED
-//            self.convertWindSpeedMPH() DEPRECATED
-//            self.reloadSunriseTime() DEPRECATED
-//            self.reloadSunsetTime() DEPRECATED
             if UserLocation.userCLLocation != nil {
                 self.getWeather(location: UserLocation.userCLLocation!)
             } else {
@@ -832,10 +754,6 @@ extension MainViewController {
     
     func getWeatherLabelUpdate() {
         DispatchQueue.main.async {
-//            self.convertEpochToDate() DEPRECATED 
-//            self.convertHPAtoInHg() DEPRECATED
-//            self.reloadSunriseTime() DEPRECATED
-//            self.reloadSunsetTime() DEPRECATED
             self.updateLabels()
         }
     }
@@ -864,23 +782,6 @@ extension MainViewController {
             print("unknown ")
         }
     }
-    /* MARK: Deprecated
-    func reloadSunriseTime() {
-        if self.compareSunriseTime() == true {
-            self.sunriseTimeLabel.text = "Sunrise was at: \(WeatherData.localSunrise)"
-        } else {
-            self.sunriseTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunrise)"
-        }
-    }
-    
-    func reloadSunsetTime() {
-        if self.compareSunsetTime() == true {
-            self.sunsetTimeLabel.text = "Sunrise was at: \(WeatherData.localSunset)"
-        } else {
-            self.sunsetTimeLabel.text = "Sunrise will be at: \(WeatherData.localSunset)"
-        }
-    }
-    */
     
     //Function for actually getting the location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -894,12 +795,14 @@ extension MainViewController {
 //        print(UserLocation.userCLLocation)
     }
     
+    //func for sunrise cell tapped
     @objc func sunriseTapped() {
         print("sunrise Tapped")
         let sunriseSunsetPop = SunriseSunsetPopUpVC()
         present(sunriseSunsetPop, animated: true)
     }
     
+    //func for windSpeed cell tapped
     @objc func windSpeedTapped() {
         print("windSpeedView tapped")
         let windSpeedPopUp = WindSpeedPopUpVC()

@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController {
 
         //Create instance of view controllers
         let mainVC = MainViewController()
-        let forecastVC = ForecastVC()
+        let forecastVC = ForecastListVC()
         let settingsVC = SettingsListVC()
         
         //Set title
@@ -35,12 +35,6 @@ class TabBarViewController: UITabBarController {
             items[x].image = UIImage(systemName: images[x])
         }
 
-    }
-}
-class ForecastVC: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .lightGray
     }
 }
 

@@ -17,9 +17,11 @@ class SettingsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.backgroundColor = .clear
         title = "Settings"
         settings = makeSettingsCells()
         configureTableView()
+        setGradientBackground()
     }
     
     func configureTableView() {
@@ -56,6 +58,7 @@ class SettingsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         switchView.tag = indexPath.row // for detect which row switch Changed
         switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
         cell.accessoryView = switchView
+        cell.backgroundColor = .clear
         
         let setting = settings[indexPath.row]           //indexPath will have 3
         cell.set(settings: setting)
@@ -75,6 +78,8 @@ class SettingsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         case 1:
             if sender.isOn == true {
                 print("sender.tag = 1 and sender is ON")
+                //metric Units func
+                
             } else if sender.isOn == false {
                 print("sender.tag = 1 and sender is OFF")
             }
@@ -93,6 +98,18 @@ class SettingsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func setTableViewDelegates() {
         tableView.delegate = self       //signs up videoListVC to be delegate and datasource
         tableView.dataSource = self
+    }
+    
+    private func setGradientBackground() {
+        let colorTop =  UIColor(red: 0/255.0, green: 235.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
+        let colorBottom = UIColor(red: 100.0/255.0, green: 50.0/255.0, blue: 235.0/255.0, alpha: 1.0).cgColor
+                    
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.frame = self.view.bounds
+                
+        self.view.layer.insertSublayer(gradientLayer, at:0)
     }
 
 }

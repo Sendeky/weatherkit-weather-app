@@ -129,7 +129,7 @@
             startingLineNumber = "70"
             endingLineNumber = "70"
             landmarkName = "viewWillAppear(_:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -145,7 +145,7 @@
             startingLineNumber = "85"
             endingLineNumber = "85"
             landmarkName = "viewWillAppear(_:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -161,7 +161,7 @@
             startingLineNumber = "69"
             endingLineNumber = "69"
             landmarkName = "viewWillAppear(_:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -177,7 +177,7 @@
             startingLineNumber = "86"
             endingLineNumber = "86"
             landmarkName = "viewWillAppear(_:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -193,7 +193,7 @@
             startingLineNumber = "87"
             endingLineNumber = "87"
             landmarkName = "viewWillAppear(_:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
