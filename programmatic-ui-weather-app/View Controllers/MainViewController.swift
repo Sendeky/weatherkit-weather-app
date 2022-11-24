@@ -31,11 +31,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let bottomScrollview = UIScrollView()
     let bottomScrollStackview = UIStackView()
     
-    let bottomLabel: UILabel = {
-        let label = UILabel()
-        label.text = "test"
-        return label
-    }()
     
     //Sunrise view & labels
     let sunriseView: UIView = {
@@ -294,6 +289,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        print("TempMaxForecast Array: \(WeatherKitData.TempMaxForecast)")
                 
         
         // Ask for Authorisation from the User.
@@ -469,7 +465,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         bottomScrollview.addSubview(pressureView)
         bottomScrollview.addSubview(precipitationView)
         bottomScrollview.addSubview(uvIndexView)
-        bottomScrollview.addSubview(bottomLabel)
+//        bottomScrollview.addSubview(bottomLabel)
         
         //Adds labels to sunriseView
         sunriseView.addSubview(sunriseTitleLabel)
@@ -520,7 +516,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             //topStackView constraints
             topStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topStackview.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            topStackview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             //topWeatherIconStackView constraints
             topWeatherIconStackView.topAnchor.constraint(equalTo: topStackview.topAnchor),
 //            topWeatherIconStackView.widthAnchor.constraint(equalToConstant: 60),
@@ -709,7 +705,7 @@ extension MainViewController {
         self.pressureLabel.text = "Pressure is \(WeatherKitData.Pressure)"
         self.precipitationLabel.text = "\(WeatherKitData.RainChance)% chance of rain today"
         self.uvLabel.text = "UV Index is currently \(WeatherKitData.UV)"
-        self.topWeatherIconView.image = UIImage(systemName: "\(WeatherKitData.Symbol)")
+        self.topWeatherIconView.image = UIImage(systemName: "\(WeatherKitData.Symbol)",withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0, weight: .bold))
     }
     
     //MARK: - Function for the pull to refresh on the scrollview

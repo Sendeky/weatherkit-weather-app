@@ -36,7 +36,7 @@ class SettingsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),      //top constraint set to top safe margin
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -79,15 +79,24 @@ class SettingsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             if sender.isOn == true {
                 print("sender.tag = 1 and sender is ON")
                 //metric Units func
-                
+                UserDefaults.standard.set(true, forKey: "METRIC_UNITS")             //True value is set for "METRIC_UNITS" UserDefault key
+                print(UserDefaults.standard.bool(forKey: "METRIC_UNITS"))
             } else if sender.isOn == false {
                 print("sender.tag = 1 and sender is OFF")
+                UserDefaults.standard.set(false, forKey: "METRIC_UNITS")             //False value is set for "METRIC_UNITS" UserDefault key
+                print(UserDefaults.standard.bool(forKey: "METRIC_UNITS"))
             }
         case 2:
             if sender.isOn == true {
                 print("sender.tag = 2 and sender is ON")
             } else if sender.isOn == false {
                 print("sender.tag = 2 and sender is OFF")
+            }
+        case 3:
+            if sender.isOn == true {
+                print("sender.tag = 3 and sender is ON")
+            } else if sender.isOn == false{
+                print("sender.tag = 3 and sender is OFF")
             }
         default:
             print("test")

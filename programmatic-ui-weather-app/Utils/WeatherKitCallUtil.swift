@@ -26,6 +26,7 @@ struct WeatherKitData{
     static var UV = 0
     static var WindSpeed = ""
     static var Symbol = ""
+    static var forecastSymbol = [String]()
     static var Humidity = 0
     static var localSunrise = ""
     static var localSunset = ""
@@ -54,12 +55,22 @@ extension MainViewController {
                 dateFormatter.timeZone = .current
                 
                 let formatter = MeasurementFormatter()
-                formatter.locale = Locale.current
-                formatter.numberFormatter.maximumFractionDigits = 0
-                formatter.numberFormatter.roundingMode = .up
-                
+                if UserDefaults.standard.bool(forKey: "METRIC_UNITS") == true{
+                    formatter.locale = Locale.current
+                    formatter.numberFormatter.maximumFractionDigits = 0
+                    formatter.numberFormatter.roundingMode = .up
+                    formatter.unitOptions = [.providedUnit]
+                } else if UserDefaults.standard.bool(forKey: "METRIC_UNITS") == false {
+                    formatter.locale = Locale.current
+                    formatter.numberFormatter.maximumFractionDigits = 0
+                    formatter.numberFormatter.roundingMode = .up
+//                    formatter.unitOptions = .providedUnit
+                }
                 //Data from currentWeather
+                print(result.currentWeather.temperature.converted(to: .fahrenheit))
+                print(formatter.string(from: result.currentWeather.temperature.converted(to: .fahrenheit)))
                 let temp = formatter.string(from: result.currentWeather.temperature)
+                print("supposed to be fahrenheit:\(temp)")
                 let uv = result.currentWeather.uvIndex.value
                 let wind = formatter.string(from: result.currentWeather.wind.speed)
                 let symbol = result.currentWeather.symbolName
@@ -80,12 +91,16 @@ extension MainViewController {
                     rainChance = 0
                 } else {}
                 
+                
                 //For loop for the tempMax for 5 days
                 for i in 0...9 {
 //                    print(result.dailyForecast[i].highTemperature)
                     let maxTemp = result.dailyForecast[i].highTemperature
                     WeatherKitData.TempMaxForecast.append(formatter.string(from: maxTemp))        //Append is needed to append into array
-                    print(WeatherKitData.TempMaxForecast[i])
+                    print("TempMaxForecast: \(WeatherKitData.TempMaxForecast[i])")
+                    let forecastSymbol = result.dailyForecast[i].symbolName
+                    WeatherKitData.forecastSymbol.append(forecastSymbol)
+                    print("forecastSymbol: \(WeatherKitData.forecastSymbol[i])")
 //                    print("WEATHERKITDATA TempMax array: \(WeatherKitData.TempMaxForecast[i])")
                 }
                 
@@ -140,6 +155,8 @@ extension MainViewController {
         main.sunriseTimeLabel.text = "Sunrise was at: \(WeatherKitData.localSunrise)"
         main.sunsetTimeLabel.text = "Sunset was at: \(WeatherKitData.localSunset)"
         
+        
+        ForecastListVC().forecastTableView.reloadData()
         print("updateLabelsAfterAwait run")
         getWeatherLabelUpdate()
         DateConverter().convertDateToEpoch()

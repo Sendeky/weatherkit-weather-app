@@ -16,9 +16,14 @@ class ForecastListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
 
         forecastTableView.backgroundColor = .clear
-        forecasts = makeForecastCells()
+        makeForecasts()
         configureTableView()
         setGradientBackground()
+        forecastTableView.reloadData()
+    }
+    
+    func makeForecasts(){
+        forecasts = makeForecastCells()
     }
     
     func configureTableView() {
@@ -33,7 +38,7 @@ class ForecastListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         forecastTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            forecastTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            forecastTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),        //top constraint set to top safe margin
             forecastTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             forecastTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             forecastTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
