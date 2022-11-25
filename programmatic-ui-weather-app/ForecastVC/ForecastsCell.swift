@@ -50,19 +50,25 @@ class ForecastsCell: UITableViewCell {
     
     func layout() {
         forecastImageView.translatesAutoresizingMaskIntoConstraints = false
+        forecastImageView.sizeToFit()
+        forecastImageView.contentMode = .scaleAspectFill
+        forecastImageView.clipsToBounds = true
+        forecastImageView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(paletteColors: [.white, .yellow, .gray])
         forecastMaxTemp.translatesAutoresizingMaskIntoConstraints = false
+        forecastMaxTemp.font = .preferredFont(forTextStyle: .title2)
         forecastMinTemp.translatesAutoresizingMaskIntoConstraints = false
+        forecastMinTemp.font = .preferredFont(forTextStyle: .title2)
         
         NSLayoutConstraint.activate([
             //forecastImageView constraints
             forecastImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             forecastImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             //forecastMaxTemp constraints
-            forecastMaxTemp.topAnchor.constraint(equalTo: topAnchor, constant: 2),
-            forecastMaxTemp.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            forecastMaxTemp.centerYAnchor.constraint(equalTo: centerYAnchor),
+            forecastMaxTemp.leadingAnchor.constraint(equalTo: forecastMinTemp.trailingAnchor),
             //forecastMinTemp constraints
-            forecastMinTemp.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
-            forecastMinTemp.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            forecastMinTemp.centerYAnchor.constraint(equalTo: centerYAnchor),
+            forecastMinTemp.leadingAnchor.constraint(equalTo: forecastImageView.trailingAnchor, constant: 15),
         ])
     }
 }
@@ -71,20 +77,16 @@ extension ForecastListVC {
     
     func makeForecastCells() -> [Forecasts] {
         
-        var forecasts1 = Forecasts(image: UIImage(systemName: "questionmark")!, maxTemp: "error", minTemp: "error")
-        var forecasts2 = Forecasts(image: UIImage(systemName: "questionmark")!, maxTemp: "error", minTemp: "error")
-        var forecasts3 = Forecasts(image: UIImage(systemName: "sun.min.fill")!, maxTemp: "20", minTemp: "5")
-        var forecasts4 = Forecasts(image: UIImage(systemName: "sun.min.fill")!, maxTemp: "20", minTemp: "5")
-        
         if WeatherKitData.TempMaxForecast.isEmpty == false {
-            forecasts1 = Forecasts(image: UIImage(systemName: "\(WeatherKitData.forecastSymbol[0])", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0, weight: .bold))!.withRenderingMode(.alwaysOriginal), maxTemp: "\(WeatherKitData.TempMaxForecast[0])", minTemp: "0.0")
-            forecasts2 = Forecasts(image: UIImage(systemName: "\(WeatherKitData.forecastSymbol[1])", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0, weight: .bold))!, maxTemp: "\(WeatherKitData.TempMaxForecast[1])", minTemp: "0.0")
-            forecasts3 = Forecasts(image: UIImage(systemName: "\(WeatherKitData.forecastSymbol[2])", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0, weight: .bold))!, maxTemp: "\(WeatherKitData.TempMaxForecast[2])", minTemp: "0.0")
-            forecasts4 = Forecasts(image: UIImage(systemName: "\(WeatherKitData.forecastSymbol[3])", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0, weight: .bold))!, maxTemp: "\(WeatherKitData.TempMaxForecast[3])", minTemp: "0.0")
+            let largeConfig = UIImage.SymbolConfiguration(pointSize: 36, weight: .bold, scale: .large)      //size config for symbols
+            var forecasts = [Forecasts]()
+            
+            for i in 0...6 {
+                forecasts.append(Forecasts(image: UIImage(systemName: "\(WeatherKitData.forecastSymbol[i]).fill", withConfiguration: largeConfig)!.withRenderingMode(.alwaysOriginal), maxTemp: "to \(WeatherKitData.TempMaxForecast[i])", minTemp: "From \(WeatherKitData.TempMinForecast[i]) "))
+            }
+            return forecasts
         }
-//        let forecasts1 = Forecasts(image: UIImage(systemName: "sun.min.fill")!, maxTemp: "20", minTemp: "5")
-        return [forecasts1, forecasts2, forecasts3, forecasts4]
-        
+        return []
     }
     
 }

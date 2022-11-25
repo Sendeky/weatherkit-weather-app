@@ -101,6 +101,9 @@ extension MainViewController {
                     let forecastSymbol = result.dailyForecast[i].symbolName
                     WeatherKitData.forecastSymbol.append(forecastSymbol)
                     print("forecastSymbol: \(WeatherKitData.forecastSymbol[i])")
+                    let minTemp = result.dailyForecast[i].lowTemperature
+                    WeatherKitData.TempMinForecast.append(tempMin)
+                    print("TempMinForecast: \(WeatherKitData.TempMinForecast[i])")
 //                    print("WEATHERKITDATA TempMax array: \(WeatherKitData.TempMaxForecast[i])")
                 }
                 
@@ -119,6 +122,12 @@ extension MainViewController {
                 print(symbol)
                 print(rainChance)
                 print(result.hourlyForecast.forecast[0].wind)
+                if result.weatherAlerts!.count > 0 {
+                    print("Weather Alert: \(result.weatherAlerts?[0].summary)")
+                } else {
+                    print("No alerts")
+                }
+                
                 print(Double(WeatherKitData.WindSpeedForecast[1]))
                 WeatherKitData.Temp = temp
                 WeatherKitData.TempMax = tempMax

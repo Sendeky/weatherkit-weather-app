@@ -360,7 +360,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         //Sets settings for topCurrentTempLabel
         topWeatherIconView.translatesAutoresizingMaskIntoConstraints = false
-        let weatherIcon = UIImage(systemName: "sun.max.fill")!.withTintColor(.yellow)
+        let weatherIcon = UIImage(systemName: "sun.max.fill")!
+        topWeatherIconView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(paletteColors: [.white, .yellow, .gray])
         topWeatherIconView.image = weatherIcon
         
         //Sets settings for topCurrentTempLabel
@@ -432,11 +433,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         topSubStackview.addArrangedSubview(topTempMinLabel)
         
         //Adds weatherIconView to topWeatherIconStackView
-        topWeatherIconStackView.addArrangedSubview(topWeatherIconView)
+//        topWeatherIconStackView.addArrangedSubview(topWeatherIconView)
         
         //Adds topSubStackview, uv index, city name labels, and topMinMaxTempView into topStackView
         topStackview.addSubview(topSubStackview)
-        topStackview.addSubview(topWeatherIconStackView)
+        topStackview.addSubview(topWeatherIconView)
         topStackview.addSubview(topCurrentTempLabel)
         topStackview.addSubview(topUVIndexLabel)
         topStackview.addSubview(topCityNameLabel)
@@ -518,9 +519,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             topStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             topStackview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             //topWeatherIconStackView constraints
-            topWeatherIconStackView.topAnchor.constraint(equalTo: topStackview.topAnchor),
-//            topWeatherIconStackView.widthAnchor.constraint(equalToConstant: 60),
-            topWeatherIconStackView.trailingAnchor.constraint(equalTo: topStackview.centerXAnchor, constant: -30),
+//            topWeatherIconStackView.topAnchor.constraint(equalTo: topStackview.topAnchor),
+//            topWeatherIconStackView.leadingAnchor.constraint(equalTo: topStackview.leadingAnchor, constant: 20),
+            //topWeatherIconView constraints
+            topWeatherIconView.topAnchor.constraint(equalTo: topStackview.topAnchor),
+            topWeatherIconView.trailingAnchor.constraint(equalTo: topStackview.centerXAnchor, constant: -20),
             //topSubStackView constraints
             topSubStackview.topAnchor.constraint(equalTo: topStackview.topAnchor),
             topSubStackview.leadingAnchor.constraint(equalTo: topStackview.centerXAnchor),
@@ -535,8 +538,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             topCityNameLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
             topCityNameLabel.centerYAnchor.constraint(equalTo: topUVIndexLabel.bottomAnchor, constant: 20),
             //topWeatherIconView constraints
-            topWeatherIconView.heightAnchor.constraint(equalToConstant: 60),
-            topWeatherIconView.widthAnchor.constraint(equalToConstant: 60),
+//            topWeatherIconView.heightAnchor.constraint(equalToConstant: 60),
+//            topWeatherIconView.widthAnchor.constraint(equalToConstant: 60),
             //topMinMaxTempView constraints
             topMinMaxTempView.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
             topMinMaxTempView.centerYAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 20),
@@ -705,7 +708,7 @@ extension MainViewController {
         self.pressureLabel.text = "Pressure is \(WeatherKitData.Pressure)"
         self.precipitationLabel.text = "\(WeatherKitData.RainChance)% chance of rain today"
         self.uvLabel.text = "UV Index is currently \(WeatherKitData.UV)"
-        self.topWeatherIconView.image = UIImage(systemName: "\(WeatherKitData.Symbol)",withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0, weight: .bold))
+        self.topWeatherIconView.image = UIImage(systemName: "\(WeatherKitData.Symbol).fill",withConfiguration: UIImage.SymbolConfiguration(pointSize: 56.0, weight: .bold))
     }
     
     //MARK: - Function for the pull to refresh on the scrollview
