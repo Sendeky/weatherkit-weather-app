@@ -92,12 +92,6 @@ class SettingsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             } else if sender.isOn == false {
                 print("sender.tag = 2 and sender is OFF")
             }
-        case 3:
-            if sender.isOn == true {
-                print("sender.tag = 3 and sender is ON")
-            } else if sender.isOn == false{
-                print("sender.tag = 3 and sender is OFF")
-            }
         default:
             print("test")
         }

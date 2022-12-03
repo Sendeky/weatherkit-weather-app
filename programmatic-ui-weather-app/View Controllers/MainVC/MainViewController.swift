@@ -59,7 +59,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let sunriseIcon: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
-        let sunriseIcon = UIImage(systemName: "sunrise")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
+        let sunriseIcon = UIImage(systemName: "sunrise.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
         imageview.image = sunriseIcon
         return imageview
     }()
@@ -90,7 +90,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let sunsetIcon: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
-        let sunsetIcon = UIImage(systemName: "sunset")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
+        let sunsetIcon = UIImage(systemName: "sunset.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
         imageview.image = sunsetIcon
         return imageview
     }()

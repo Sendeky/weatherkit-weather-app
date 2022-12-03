@@ -11,6 +11,7 @@ class ForecastListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var forecastTableView = UITableView()
     var forecasts: [Forecasts] = []
+    let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,11 @@ class ForecastListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func configureTableView() {
         view.addSubview(forecastTableView)
+        forecastTableView.addSubview(refreshControl)
+        
+        //refreshControl settings
+        refreshControl.attributedTitle = NSAttributedString("Refreshing")
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         
         setTableViewDelegates()
         //cell row height
@@ -75,5 +81,13 @@ class ForecastListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         gradientLayer.frame = self.view.bounds
                 
         self.view.layer.insertSublayer(gradientLayer, at:0)
+    }
+    
+    @objc func refresh() {
+        makeForecasts()
+        configureTableView()
+        setGradientBackground()
+        forecastTableView.reloadData()
+        refreshControl.endRefreshing()
     }
 }

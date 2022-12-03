@@ -66,9 +66,8 @@ extension SettingsListVC {
         let settings1 = Settings(image: UIImage(systemName: "bell.circle.fill", withConfiguration: UIImage.SymbolConfiguration(paletteColors: [.white, .red]))!, title: "Notifications")
         let settings2 = Settings(image: UIImage(systemName: "thermometer.sun.circle.fill", withConfiguration: UIImage.SymbolConfiguration(paletteColors: [.white, .orange]))!, title: "Metric Units")
         let settings3 = Settings(image: UIImage(systemName: "map.circle.fill", withConfiguration: UIImage.SymbolConfiguration(paletteColors: [.white, .systemMint]))!, title: "Earthquake Map")
-        let settings4 = Settings(image: UIImage(systemName: "clock.circle.fill", withConfiguration: UIImage.SymbolConfiguration(paletteColors: [.white, .systemYellow]))!, title: "Alarm")
         
-        return [settings1, settings2, settings3, settings4]
+        return [settings1, settings2, settings3]
     }
     
 }

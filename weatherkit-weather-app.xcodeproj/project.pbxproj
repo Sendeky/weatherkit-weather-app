@@ -20,13 +20,25 @@
 		C06F8D33292983810054D5DC /* ForecastsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D32292983810054D5DC /* ForecastsCell.swift */; };
 		C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */; };
 		C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BF2291F361800D887C6 /* TabBarViewController.swift */; };
-		C0B01BF9291F6CAE00D887C6 /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BF8291F6CAE00D887C6 /* ForecastViewController.swift */; };
 		C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpVC.swift */; };
 		C0B01C24292206B600D887C6 /* WindSpeedPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C23292206B600D887C6 /* WindSpeedPopUpVC.swift */; };
 		C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCC2929487800359476 /* SettingsCell.swift */; };
 		C0CF2DD12929487800359476 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCE2929487800359476 /* Settings.swift */; };
 		C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCF2929487800359476 /* SettingsListVC.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C04E9E83293C053200882FC6 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C034703B28F6221900656AA8 /* weatherkit-weather-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "weatherkit-weather-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,7 +55,6 @@
 		C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "programmatic-ui-weather-app.entitlements"; sourceTree = "<group>"; };
 		C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitCallUtil.swift; sourceTree = "<group>"; };
 		C0B01BF2291F361800D887C6 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		C0B01BF8291F6CAE00D887C6 /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
 		C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetPopUpVC.swift; sourceTree = "<group>"; };
 		C0B01C23292206B600D887C6 /* WindSpeedPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVC.swift; sourceTree = "<group>"; };
 		C0CF2DCC2929487800359476 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
@@ -83,8 +94,6 @@
 		C034703D28F6221900656AA8 /* programmatic-ui-weather-app */ = {
 			isa = PBXGroup;
 			children = (
-				C06F8D2C2929803C0054D5DC /* ForecastVC */,
-				C0B01C25292363E500D887C6 /* SettingsVC */,
 				C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */,
 				C034705328F640AD00656AA8 /* Delegates */,
 				C034705228F6406500656AA8 /* Files */,
@@ -142,6 +151,14 @@
 			path = "Forecast Model";
 			sourceTree = "<group>";
 		};
+		C0A68C73293BF22E000A24DC /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				C034704228F6221900656AA8 /* MainViewController.swift */,
+			);
+			path = MainVC;
+			sourceTree = "<group>";
+		};
 		C0B01BF4291F3C3F00D887C6 /* TabBarVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,8 +170,9 @@
 		C0B01BF5291F41F700D887C6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C034704228F6221900656AA8 /* MainViewController.swift */,
-				C0B01BF8291F6CAE00D887C6 /* ForecastViewController.swift */,
+				C0A68C73293BF22E000A24DC /* MainVC */,
+				C06F8D2C2929803C0054D5DC /* ForecastVC */,
+				C0B01C25292363E500D887C6 /* SettingsVC */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -196,6 +214,7 @@
 				C034703728F6221900656AA8 /* Sources */,
 				C034703828F6221900656AA8 /* Frameworks */,
 				C034703928F6221900656AA8 /* Resources */,
+				C04E9E83293C053200882FC6 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -270,7 +289,6 @@
 				C06F8D31292981680054D5DC /* Forecasts.swift in Sources */,
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
 				C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */,
-				C0B01BF9291F6CAE00D887C6 /* ForecastViewController.swift in Sources */,
 				C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */,
 				C034704328F6221900656AA8 /* MainViewController.swift in Sources */,
 				C0CF2DD12929487800359476 /* Settings.swift in Sources */,
@@ -434,7 +452,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -467,7 +485,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

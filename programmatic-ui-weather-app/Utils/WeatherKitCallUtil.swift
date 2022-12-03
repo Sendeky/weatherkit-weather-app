@@ -102,7 +102,7 @@ extension MainViewController {
                     WeatherKitData.forecastSymbol.append(forecastSymbol)
                     print("forecastSymbol: \(WeatherKitData.forecastSymbol[i])")
                     let minTemp = result.dailyForecast[i].lowTemperature
-                    WeatherKitData.TempMinForecast.append(tempMin)
+                    WeatherKitData.TempMinForecast.append(formatter.string(from: minTemp))
                     print("TempMinForecast: \(WeatherKitData.TempMinForecast[i])")
 //                    print("WEATHERKITDATA TempMax array: \(WeatherKitData.TempMaxForecast[i])")
                 }

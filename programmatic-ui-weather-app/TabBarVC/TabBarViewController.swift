@@ -29,7 +29,7 @@ class TabBarViewController: UITabBarController {
         
         //Array of TabBar icons
         guard let items = self.tabBar.items else { return }
-        let images = ["cloud.sun.rain", "chart.bar.xaxis", "gear.circle"]
+        let images = ["cloud.sun.rain.fill", "chart.bar.xaxis", "gear.circle"]
         
         for x in 0...2 {
             items[x].image = UIImage(systemName: images[x])
