@@ -153,25 +153,22 @@ extension MainViewController {
 //                defaults?.set("\(WeatherKitData.Temp)", forKey: "Temp")
 //                defaults?.synchronize()
                 
-                /* Creating some data of our Codable type */
-                var car = Car(make: "Chevy", model: "Volt", owner: "John")
-                var widget = WidgetData(temp: WeatherKitData.Temp, tempMax: WeatherKitData.TempMax, tempMin: WeatherKitData.TempMin)
-                /* Since it's Codable, we can convert it to JSON using JSONEncoder */
-                let widgetData = try! JSONEncoder().encode(widget)
-                /* ...and store it in your shared UserDefaults container */
-                UserDefaults(suiteName:
-                "group.com.ES.weatherkit-programmatic-app")!.set(widgetData, forKey: "widgetData")
+                //puts WidgetData struct into widget
+                var widget = WidgetData(temp: temp, tempMax: tempMax, tempMin: tempMin)
+                let primaryData = PrimaryData(widgetData: widget)
+                //Encodes data into AppGroup
+                primaryData.encode()
                 
-                /* Reading the encoded data from your shared App Group container storage */
-                let encodedData  = UserDefaults(suiteName: "group.com.ES.weatherkit-programmatic-app")!.object(forKey: "widgetData") as? Data
-                /* Decoding it using JSONDecoder*/
-                if let widgetEncoded = encodedData {
-                    let widgetDecoded = try? JSONDecoder().decode(WidgetData.self, from: widgetEncoded)
-                    if let widgetTemp = widgetDecoded?.temp{
-                        // You successfully retrieved your car object!
-                        print("widgetTemp: \(widgetTemp)")
-                    }
-                }
+//                /* Reading the encoded data from your shared App Group container storage */
+//                let encodedData  = UserDefaults(suiteName: "group.com.ES.weatherkit-programmatic-app")!.object(forKey: "widgetData") as? Data
+//                /* Decoding it using JSONDecoder*/
+//                if let widgetEncoded = encodedData {
+//                    let widgetDecoded = try? JSONDecoder().decode(WidgetData.self, from: widgetEncoded)
+//                    if let widgetTemp = widgetDecoded?.temp{
+//                        // You successfully retrieved your car object!
+//                        print("widgetTemp: \(widgetTemp)")
+//                    }
+//                }
                 
                 
             } catch {

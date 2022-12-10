@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct Car : Codable {
-    var make : String
-    var model : String
-    var owner : String
-}
-
 struct WidgetData: Codable {
     var temp: String
     var tempMax: String
