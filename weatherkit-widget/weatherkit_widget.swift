@@ -16,7 +16,7 @@ struct Provider: TimelineProvider {
     
     func placeholder(in context: Context) -> SimpleEntry {
         //Sets widgetData placeholder (before data from main app is passed in)
-        let widgetData = WidgetData(temp: "-", tempMax: "-", tempMin: "-")
+        let widgetData = WidgetData(temp: "-", tempMax: "-", tempMin: "-", symbolName: "-")
         return SimpleEntry(widgetData: widgetData)
     }
 
@@ -60,9 +60,12 @@ struct weatherkit_widgetEntryView : View {
                         .fontWeight(.light)
                         .font(.title)
                 }
-                //Sets text as "temp" from widgetData
-                Text(entry.widgetData.temp)
-                    .font(.system(size: 60))
+                HStack {
+                    //Sets text as "temp" from widgetData
+                    Text(entry.widgetData.temp)
+                        .font(.system(size: 60))
+                    Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 36.0))!)
+                }
             }
         }
         //Sets text as "temp" from widgetData
@@ -86,7 +89,7 @@ struct weatherkit_widget: Widget {
 
 struct weatherkit_widget_Previews: PreviewProvider {
     //Preview WidgetData data (seen when choosing widgets)
-    static let widgetData = WidgetData(temp: "12", tempMax: "16", tempMin: "8")
+    static let widgetData = WidgetData(temp: "12", tempMax: "16", tempMin: "8", symbolName: "cloud.sun.bolt.fill")
     static var previews: some View {
         weatherkit_widgetEntryView(entry: SimpleEntry(widgetData: widgetData))
             .previewContext(WidgetPreviewContext(family: .systemSmall))

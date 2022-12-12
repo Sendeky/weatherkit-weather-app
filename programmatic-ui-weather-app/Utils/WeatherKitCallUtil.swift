@@ -154,7 +154,7 @@ extension MainViewController {
 //                defaults?.synchronize()
                 
                 //puts WidgetData struct into widget
-                var widget = WidgetData(temp: temp, tempMax: tempMax, tempMin: tempMin)
+                var widget = WidgetData(temp: temp, tempMax: tempMax, tempMin: tempMin, symbolName: symbol)
                 let primaryData = PrimaryData(widgetData: widget)
                 //Encodes data into AppGroup
                 primaryData.encode()

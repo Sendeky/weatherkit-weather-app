@@ -11,4 +11,5 @@ struct WidgetData: Codable {
     var temp: String
     var tempMax: String
     var tempMin: String
+    var symbolName: String
 }
