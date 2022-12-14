@@ -36,6 +36,7 @@ struct WeatherKitData: Codable{
     static var Pressure = ""
     static var RainChance = 0
     static var WindSpeedForecast = [0.0]
+    static var HourlyForecast = [0.0]
 }
 
 let weatherService = WeatherService()
@@ -107,6 +108,7 @@ extension MainViewController {
 //                    print("WEATHERKITDATA TempMax array: \(WeatherKitData.TempMaxForecast[i])")
                 }
                 
+                //For loop for 12hour wind
                 for i in 0...11 {
                     let formatter = MeasurementFormatter()
                     formatter.unitOptions = .temperatureWithoutUnit
@@ -115,6 +117,13 @@ extension MainViewController {
                     print(wind)
                     WeatherKitData.WindSpeedForecast.append(wind)
                     print(WeatherKitData.WindSpeedForecast[i])
+                }
+                
+                //For loop for 12 hour weather
+                for i in  0...11 {
+                    let forecast = result.hourlyForecast.forecast[i].temperature.value
+                    WeatherKitData.HourlyForecast.append(forecast)
+                    print("Hourly Forecast: \(WeatherKitData.HourlyForecast[i])")
                 }
                 
                 print(temp)
@@ -129,6 +138,7 @@ extension MainViewController {
                 }
                 
                 print(Double(WeatherKitData.WindSpeedForecast[1]))
+                //Puts fetched data into WeatherKitData struct
                 WeatherKitData.Temp = temp
                 WeatherKitData.TempMax = tempMax
                 WeatherKitData.TempMin = tempMin
@@ -154,7 +164,7 @@ extension MainViewController {
 //                defaults?.synchronize()
                 
                 //puts WidgetData struct into widget
-                var widget = WidgetData(temp: temp, tempMax: tempMax, tempMin: tempMin, symbolName: symbol)
+                var widget = WidgetData(temp: temp, tempMax: tempMax, tempMin: tempMin, symbolName: symbol, hourlyForecast: WeatherKitData.HourlyForecast)
                 let primaryData = PrimaryData(widgetData: widget)
                 //Encodes data into AppGroup
                 primaryData.encode()

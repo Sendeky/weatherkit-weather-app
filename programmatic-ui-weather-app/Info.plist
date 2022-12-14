@@ -19,5 +19,12 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Bonche-Light.otf</string>
+		<string>FredokaOne-Regular.ttf</string>
+		<string>JosefinSans-Light.ttf</string>
+		<string>JosefinSans-Regular.ttf</string>
+	</array>
 </dict>
 </plist>

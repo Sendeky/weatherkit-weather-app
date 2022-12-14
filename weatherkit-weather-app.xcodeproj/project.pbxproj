@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C0028A9C290B5D6C00773529 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = C0028A9B290B5D6C00773529 /* Charts */; };
 		C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034703E28F6221900656AA8 /* AppDelegate.swift */; };
 		C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034704028F6221900656AA8 /* SceneDelegate.swift */; };
 		C034704328F6221900656AA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034704228F6221900656AA8 /* MainViewController.swift */; };
@@ -15,6 +14,12 @@
 		C034704B28F6221A00656AA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C034704928F6221A00656AA8 /* LaunchScreen.storyboard */; };
 		C034705928F7381700656AA8 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = C034705828F7381700656AA8 /* SwiftyJSON */; };
 		C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */; };
+		C03E36B12948273F00FDAC50 /* Bonche-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C03E36B02948273F00FDAC50 /* Bonche-Light.otf */; };
+		C03E36B22948273F00FDAC50 /* Bonche-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C03E36B02948273F00FDAC50 /* Bonche-Light.otf */; };
+		C03E36B429482B1400FDAC50 /* FredokaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C03E36B329482B1400FDAC50 /* FredokaOne-Regular.ttf */; };
+		C03E36B529482B1400FDAC50 /* FredokaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C03E36B329482B1400FDAC50 /* FredokaOne-Regular.ttf */; };
+		C03E36BA29482C8900FDAC50 /* SignikaNegative-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C03E36B929482C8900FDAC50 /* SignikaNegative-Light.ttf */; };
+		C03E36BB29482C8900FDAC50 /* SignikaNegative-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C03E36B929482C8900FDAC50 /* SignikaNegative-Light.ttf */; };
 		C04E9E8C293C28F400882FC6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C04E9E8B293C28F400882FC6 /* WidgetKit.framework */; };
 		C04E9E8E293C28F400882FC6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C04E9E8D293C28F400882FC6 /* SwiftUI.framework */; };
 		C04E9E91293C28F400882FC6 /* weatherkit_widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04E9E90293C28F400882FC6 /* weatherkit_widget.swift */; };
@@ -27,10 +32,18 @@
 		C06F8D2E292980550054D5DC /* ForecastListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D2D292980550054D5DC /* ForecastListVC.swift */; };
 		C06F8D31292981680054D5DC /* Forecasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D30292981680054D5DC /* Forecasts.swift */; };
 		C06F8D33292983810054D5DC /* ForecastsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D32292983810054D5DC /* ForecastsCell.swift */; };
+		C0711C2229484644004D3BD3 /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0711C1F29484643004D3BD3 /* JosefinSans-Regular.ttf */; };
+		C0711C2329484644004D3BD3 /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0711C1F29484643004D3BD3 /* JosefinSans-Regular.ttf */; };
+		C0711C2429484644004D3BD3 /* JosefinSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0711C2029484643004D3BD3 /* JosefinSans-SemiBold.ttf */; };
+		C0711C2529484644004D3BD3 /* JosefinSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0711C2029484643004D3BD3 /* JosefinSans-SemiBold.ttf */; };
+		C0711C2629484644004D3BD3 /* JosefinSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0711C2129484643004D3BD3 /* JosefinSans-Light.ttf */; };
+		C0711C2729484644004D3BD3 /* JosefinSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0711C2129484643004D3BD3 /* JosefinSans-Light.ttf */; };
+		C0711C2929484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711C2829484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift */; };
+		C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */; };
 		C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */; };
 		C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BF2291F361800D887C6 /* TabBarViewController.swift */; };
-		C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpVC.swift */; };
-		C0B01C24292206B600D887C6 /* WindSpeedPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C23292206B600D887C6 /* WindSpeedPopUpVC.swift */; };
+		C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift */; };
+		C0B01C24292206B600D887C6 /* WindSpeedPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C23292206B600D887C6 /* WindSpeedPopUpViewController.swift */; };
 		C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCC2929487800359476 /* SettingsCell.swift */; };
 		C0CF2DD12929487800359476 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCE2929487800359476 /* Settings.swift */; };
 		C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCF2929487800359476 /* SettingsListVC.swift */; };
@@ -79,6 +92,9 @@
 		C034704A28F6221A00656AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C034704C28F6221A00656AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverterUtil.swift; sourceTree = "<group>"; };
+		C03E36B02948273F00FDAC50 /* Bonche-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Bonche-Light.otf"; sourceTree = "<group>"; };
+		C03E36B329482B1400FDAC50 /* FredokaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FredokaOne-Regular.ttf"; sourceTree = "<group>"; };
+		C03E36B929482C8900FDAC50 /* SignikaNegative-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignikaNegative-Light.ttf"; sourceTree = "<group>"; };
 		C04E9E89293C28F400882FC6 /* weatherkit-widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "weatherkit-widgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C04E9E8B293C28F400882FC6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C04E9E8D293C28F400882FC6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -91,11 +107,17 @@
 		C06F8D2D292980550054D5DC /* ForecastListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListVC.swift; sourceTree = "<group>"; };
 		C06F8D30292981680054D5DC /* Forecasts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecasts.swift; sourceTree = "<group>"; };
 		C06F8D32292983810054D5DC /* ForecastsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastsCell.swift; sourceTree = "<group>"; };
+		C0711C1E294844EC004D3BD3 /* SignikaNegative-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignikaNegative-SemiBold.ttf"; sourceTree = "<group>"; };
+		C0711C1F29484643004D3BD3 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
+		C0711C2029484643004D3BD3 /* JosefinSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		C0711C2129484643004D3BD3 /* JosefinSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Light.ttf"; sourceTree = "<group>"; };
+		C0711C2829484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetPopUpVC.swift; sourceTree = "<group>"; };
+		C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVC.swift; sourceTree = "<group>"; };
 		C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "programmatic-ui-weather-app.entitlements"; sourceTree = "<group>"; };
 		C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitCallUtil.swift; sourceTree = "<group>"; };
 		C0B01BF2291F361800D887C6 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetPopUpVC.swift; sourceTree = "<group>"; };
-		C0B01C23292206B600D887C6 /* WindSpeedPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVC.swift; sourceTree = "<group>"; };
+		C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetPopUpViewController.swift; sourceTree = "<group>"; };
+		C0B01C23292206B600D887C6 /* WindSpeedPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpViewController.swift; sourceTree = "<group>"; };
 		C0CF2DCC2929487800359476 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		C0CF2DCE2929487800359476 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C0CF2DCF2929487800359476 /* SettingsListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListVC.swift; sourceTree = "<group>"; };
@@ -107,7 +129,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C034705928F7381700656AA8 /* SwiftyJSON in Frameworks */,
-				C0028A9C290B5D6C00773529 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +174,7 @@
 				C0B01BF4291F3C3F00D887C6 /* TabBarVC */,
 				C0B01BFD2920223A00D887C6 /* PopUp VC */,
 				C0B01BF5291F41F700D887C6 /* View Controllers */,
+				C0711C3029496A3E004D3BD3 /* Fonts */,
 				C034704C28F6221A00656AA8 /* Info.plist */,
 			);
 			path = "programmatic-ui-weather-app";
@@ -187,6 +209,20 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		C03E36BD29482CC200FDAC50 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C0711C2129484643004D3BD3 /* JosefinSans-Light.ttf */,
+				C0711C1F29484643004D3BD3 /* JosefinSans-Regular.ttf */,
+				C0711C2029484643004D3BD3 /* JosefinSans-SemiBold.ttf */,
+				C0711C1E294844EC004D3BD3 /* SignikaNegative-SemiBold.ttf */,
+				C03E36B929482C8900FDAC50 /* SignikaNegative-Light.ttf */,
+				C03E36B329482B1400FDAC50 /* FredokaOne-Regular.ttf */,
+				C03E36B02948273F00FDAC50 /* Bonche-Light.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		C04E9E8A293C28F400882FC6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				C04E9E90293C28F400882FC6 /* weatherkit_widget.swift */,
+				C03E36BD29482CC200FDAC50 /* Fonts */,
 				C04E9E92293C28F600882FC6 /* Assets.xcassets */,
 				C04E9E94293C28F600882FC6 /* Info.plist */,
 			);
@@ -222,6 +259,13 @@
 				C06F8D30292981680054D5DC /* Forecasts.swift */,
 			);
 			path = "Forecast Model";
+			sourceTree = "<group>";
+		};
+		C0711C3029496A3E004D3BD3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		C0A68C73293BF22E000A24DC /* MainVC */ = {
@@ -253,8 +297,10 @@
 		C0B01BFD2920223A00D887C6 /* PopUp VC */ = {
 			isa = PBXGroup;
 			children = (
-				C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpVC.swift */,
-				C0B01C23292206B600D887C6 /* WindSpeedPopUpVC.swift */,
+				C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift */,
+				C0711C2829484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift */,
+				C0B01C23292206B600D887C6 /* WindSpeedPopUpViewController.swift */,
+				C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */,
 			);
 			path = "PopUp VC";
 			sourceTree = "<group>";
@@ -298,7 +344,6 @@
 			name = "weatherkit-weather-app";
 			packageProductDependencies = (
 				C034705828F7381700656AA8 /* SwiftyJSON */,
-				C0028A9B290B5D6C00773529 /* Charts */,
 			);
 			productName = "programmatic-ui-weather-app";
 			productReference = C034703B28F6221900656AA8 /* weatherkit-weather-app.app */;
@@ -350,7 +395,6 @@
 			mainGroup = C034703228F6221900656AA8;
 			packageReferences = (
 				C034705728F7381700656AA8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				C0028A9A290B5D6C00773529 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = C034703C28F6221900656AA8 /* Products */;
 			projectDirPath = "";
@@ -367,8 +411,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0711C2429484644004D3BD3 /* JosefinSans-SemiBold.ttf in Resources */,
+				C0711C2629484644004D3BD3 /* JosefinSans-Light.ttf in Resources */,
+				C03E36B12948273F00FDAC50 /* Bonche-Light.otf in Resources */,
+				C0711C2229484644004D3BD3 /* JosefinSans-Regular.ttf in Resources */,
+				C03E36BA29482C8900FDAC50 /* SignikaNegative-Light.ttf in Resources */,
 				C034704B28F6221A00656AA8 /* LaunchScreen.storyboard in Resources */,
 				C034704828F6221A00656AA8 /* Assets.xcassets in Resources */,
+				C03E36B429482B1400FDAC50 /* FredokaOne-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +427,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C04E9E93293C28F600882FC6 /* Assets.xcassets in Resources */,
+				C0711C2529484644004D3BD3 /* JosefinSans-SemiBold.ttf in Resources */,
+				C03E36B22948273F00FDAC50 /* Bonche-Light.otf in Resources */,
+				C03E36B529482B1400FDAC50 /* FredokaOne-Regular.ttf in Resources */,
+				C0711C2329484644004D3BD3 /* JosefinSans-Regular.ttf in Resources */,
+				C03E36BB29482C8900FDAC50 /* SignikaNegative-Light.ttf in Resources */,
+				C0711C2729484644004D3BD3 /* JosefinSans-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,17 +445,19 @@
 			files = (
 				C06F8D33292983810054D5DC /* ForecastsCell.swift in Sources */,
 				C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */,
-				C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpVC.swift in Sources */,
+				C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift in Sources */,
 				C06F8D31292981680054D5DC /* Forecasts.swift in Sources */,
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
+				C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */,
 				C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */,
+				C0711C2929484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift in Sources */,
 				C04E9E9F29417FA100882FC6 /* WidgetStruct.swift in Sources */,
 				C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */,
 				C034704328F6221900656AA8 /* MainViewController.swift in Sources */,
 				C0CF2DD12929487800359476 /* Settings.swift in Sources */,
 				C04E9EEE2945296C00882FC6 /* PrimaryData.swift in Sources */,
 				C06F8D2E292980550054D5DC /* ForecastListVC.swift in Sources */,
-				C0B01C24292206B600D887C6 /* WindSpeedPopUpVC.swift in Sources */,
+				C0B01C24292206B600D887C6 /* WindSpeedPopUpViewController.swift in Sources */,
 				C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */,
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,
 				C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */,
@@ -709,14 +767,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C0028A9A290B5D6C00773529 /* XCRemoteSwiftPackageReference "Charts" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielgindi/Charts";
-			requirement = {
-				kind = exactVersion;
-				version = 4.1.0;
-			};
-		};
 		C034705728F7381700656AA8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -728,11 +778,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C0028A9B290B5D6C00773529 /* Charts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0028A9A290B5D6C00773529 /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = Charts;
-		};
 		C034705828F7381700656AA8 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C034705728F7381700656AA8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;

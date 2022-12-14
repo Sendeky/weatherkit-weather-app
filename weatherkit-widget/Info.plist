@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Bonche-Light.otf</string>
+		<string>FredokaOne-Regular.ttf</string>
+		<string>SignikaNegative-Light.ttf</string>
+		<string>SignikaNegative-SemiBold.ttf</string>
+		<string>JosefinSans-SemiBold.ttf</string>
+		<string>JosefinSans-Regular.ttf</string>
+		<string>JosefinSans-Light.ttf</string>
+	</array>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>

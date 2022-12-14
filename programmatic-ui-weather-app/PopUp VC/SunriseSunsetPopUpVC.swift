@@ -2,242 +2,111 @@
 //  SunriseSunsetPopUpVC.swift
 //  weatherkit-weather-app
 //
-//  Created by RuslanS on 11/12/22.
+//  Created by RuslanS on 12/12/22.
 //
 
-import UIKit
+import SwiftUI
 import Charts
 
-class SunriseSunsetPopUpVC: UIViewController, ChartViewDelegate {
-    
-    //Creates titleLabel & settings
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Sunrise & Sunset"
-        label.font = .preferredFont(forTextStyle: .title1)
-        return label
-    }()
-    
-    let topSunriseSunsetTimeStackview: UIStackView = {
-        let stackview = UIStackView()
-        stackview.translatesAutoresizingMaskIntoConstraints = false
-        stackview.layer.cornerRadius = 30
-        stackview.backgroundColor = .systemBlue
-        return stackview
-    }()
-    //Sunrise & sunset time labels in Stackview
-    let sunriseTimeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Sunrise: \(WeatherKitData.localSunrise)"
-        label.font = .preferredFont(forTextStyle: .title3)
-        return label
-    }()
-    let sunsetTimeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Sunset: \(WeatherKitData.localSunset)"
-        label.font = .preferredFont(forTextStyle: .title3)
-        return label
-    }()
-    
-    //Creates Chart
-    lazy var sunTimeChartView: LineChartView = {
-        let chartView = LineChartView()
-        
-        chartView.backgroundColor = .systemBlue
-        chartView.translatesAutoresizingMaskIntoConstraints = false
-        chartView.isUserInteractionEnabled = true
-        chartView.pinchZoomEnabled = false
-        chartView.doubleTapToZoomEnabled = false
-        chartView.rightAxis.enabled = false
-        chartView.leftAxis.enabled = false
-        let yAxis = chartView.leftAxis
-        yAxis.drawTopYLabelEntryEnabled = false
-        yAxis.labelPosition = .outsideChart
-        let xAxis = chartView.xAxis
-        xAxis.labelPosition = .bottom
 
-        return chartView
-    }()
-    
-    //Creates stackview for bottom 3 labels
-    let bottomTimeStackview: UIStackView = {
-        let stackview = UIStackView()
-        stackview.translatesAutoresizingMaskIntoConstraints = false
-        stackview.axis = .vertical
-        stackview.spacing = 15
-        return stackview
-    }()
-    
-    //solarNoonView & label
-    let solarNoonView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 20
-        view.backgroundColor = .systemBlue
-        return view
-    }()
-    let solarNoonLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Solar Noon: \(WeatherKitData.SolarNoon)"
-        label.font = .preferredFont(forTextStyle: .title3)
-        return label
-    }()
-    
-    //astronomicalDawnView and label
-    let astronomicalDawnView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 20
-        view.backgroundColor = .systemBlue
-        return view
-    }()
-    let astronomicalDawnLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Astronomical Dawn: \(WeatherKitData.AstronomicalDawn)"
-        label.font = .preferredFont(forTextStyle: .title3)
-        return label
-    }()
+struct Item: Identifiable{
+    var id = UUID()
+    var value1: Double
+    var value2: Double
+}
 
-    //astronomicalDuskView and label
-    let astronomicalDuskView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 20
-        view.backgroundColor = .systemBlue
-        return view
-    }()
-    let astronomicalDuskLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = "Astronomical Dusk: \(WeatherKitData.AstronomicalDusk)"
-    label.font = .preferredFont(forTextStyle: .title3)
-    return label
-}()
+struct SunriseSunsetPopUpVC: View {
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = .systemCyan
-        view.alpha = 0.9
-        layout()
-        setData()
-
-        DateConverter().convertDateToEpoch()
-    }
-  
-    //MARK: TODO
-//    override func viewWillAppear(_ animated: Bool) {
-//        layout()
-//    }
-    
-    
-    private func layout() {
-        //Adds stackviews and topLabel to view
-        view.addSubview(titleLabel)
-        view.addSubview(topSunriseSunsetTimeStackview)
-        view.addSubview(bottomTimeStackview)
-        
-        //Adds label and chart to topSunriseSunsetTimeStackview
-        topSunriseSunsetTimeStackview.addSubview(sunriseTimeLabel)
-        topSunriseSunsetTimeStackview.addSubview(sunsetTimeLabel)
-        topSunriseSunsetTimeStackview.addSubview(sunTimeChartView)
-        
-        //Adds label to solarNoonView
-        solarNoonView.addSubview(solarNoonLabel)
-        
-        //Adds label to astronomicalDawnView
-        astronomicalDawnView.addSubview(astronomicalDawnLabel)
-        
-        //Adds label to astronomicalDuskView
-        astronomicalDuskView.addSubview(astronomicalDuskLabel)
-        
-        //Adds bottom views to bottomTimeStackview
-        bottomTimeStackview.addArrangedSubview(solarNoonView)
-        bottomTimeStackview.addArrangedSubview(astronomicalDawnView)
-        bottomTimeStackview.addArrangedSubview(astronomicalDuskView)
-        
-        NSLayoutConstraint.activate([
-            //titleLabel constraints
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //topSunriseSunsetTimeStackview constraints
-            topSunriseSunsetTimeStackview.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
-            topSunriseSunsetTimeStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            topSunriseSunsetTimeStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            topSunriseSunsetTimeStackview.heightAnchor.constraint(equalToConstant: 300),
-            //sunriseTimeLabel constraints
-            sunriseTimeLabel.leadingAnchor.constraint(equalTo: topSunriseSunsetTimeStackview.leadingAnchor, constant: 10),
-            sunriseTimeLabel.topAnchor.constraint(equalTo: topSunriseSunsetTimeStackview.topAnchor, constant: 15),
-            //sunsetTimeLabel constraints
-            sunsetTimeLabel.trailingAnchor.constraint(equalTo: topSunriseSunsetTimeStackview.trailingAnchor, constant: -10),
-            sunsetTimeLabel.topAnchor.constraint(equalTo: topSunriseSunsetTimeStackview.topAnchor, constant: 15),
-            //sunTimeChartView constraints
-            sunTimeChartView.topAnchor.constraint(equalTo: sunriseTimeLabel.bottomAnchor, constant: 15),
-            sunTimeChartView.leadingAnchor.constraint(equalTo: sunriseTimeLabel.leadingAnchor),
-            sunTimeChartView.trailingAnchor.constraint(equalTo: sunsetTimeLabel.trailingAnchor),
-            sunTimeChartView.heightAnchor.constraint(equalToConstant: 200),
-            //bottomTimeStackview constraints
-            bottomTimeStackview.topAnchor.constraint(equalTo: topSunriseSunsetTimeStackview.bottomAnchor, constant: 20),
-            bottomTimeStackview.leadingAnchor.constraint(equalTo: topSunriseSunsetTimeStackview.leadingAnchor),
-            bottomTimeStackview.trailingAnchor.constraint(equalTo: topSunriseSunsetTimeStackview.trailingAnchor),
-            //solarNoonView constraints
-            solarNoonView.heightAnchor.constraint(equalToConstant: 40),
-            //solarNoonLabel constraints
-            solarNoonLabel.centerYAnchor.constraint(equalTo: solarNoonView.centerYAnchor),
-            solarNoonLabel.leadingAnchor.constraint(equalTo: solarNoonView.leadingAnchor, constant: 15),
-            //astronomicalDawnView constraints
-            astronomicalDawnView.heightAnchor.constraint(equalToConstant: 40),
-            //astronomicalDawnLabel constraints
-            astronomicalDawnLabel.centerYAnchor.constraint(equalTo: astronomicalDawnView.centerYAnchor),
-            astronomicalDawnLabel.leadingAnchor.constraint(equalTo: astronomicalDawnView.leadingAnchor, constant: 15),
-            //astronomicalDuskView constraints
-            astronomicalDuskView.heightAnchor.constraint(equalToConstant: 40),
-            //astronomicalDuskLabel constraints
-            astronomicalDuskLabel.centerYAnchor.constraint(equalTo: astronomicalDuskView.centerYAnchor),
-            astronomicalDuskLabel.leadingAnchor.constraint(equalTo: astronomicalDuskView.leadingAnchor, constant: 15),
-            
-            
-        ])
-    }
-    
-    private func setData() {
-        let set1 = LineChartDataSet(entries: yValues, label: "")
-        
-        set1.drawCirclesEnabled = false
-        set1.mode = .cubicBezier
-        set1.setColor(.white)
-        set1.drawFilledEnabled = true
-        set1.drawCirclesEnabled = true
-        
-        set1.drawHorizontalHighlightIndicatorEnabled = false
-        
-        let set2 = LineChartDataSet(entries: yValues2, label: "Daylight")
-        set2.drawCirclesEnabled = false
-        set2.lineCapType = .round
-        set2.lineWidth = 2.0
-        set2.drawValuesEnabled = false
-        set2.setColor(.systemYellow)
-                                    
-        let data = LineChartData(dataSets: [set1, set2])
-        sunTimeChartView.data = data
-    }
-    
-    let yValues: [ChartDataEntry] = [
-        ChartDataEntry(x: 0.0, y: 0.5),
-        ChartDataEntry(x: Double(sunEventHour.sunriseHour), y: 1.0),
-        ChartDataEntry(x: Double(sunEventHour.sunsetHour - sunEventHour.sunriseHour), y: 2.0),
-        ChartDataEntry(x: Double(sunEventHour.sunsetHour), y: 1.0),
-        ChartDataEntry(x: 24.0, y: 0.5),
+    //@State is used because "items" changes
+    @State var items: [Item] = [
+        Item(value1: 0.0, value2: 0.0),
+        Item(value1: 24.0, value2: 0.0),
     ]
-                                    
-    let yValues2: [ChartDataEntry] = [
-        ChartDataEntry(x: 0.0, y: 1.0),
-        ChartDataEntry(x: 24.0, y: 1.0),
-    ]
+
+        
+    var body: some View {
+        
+        ZStack {
+            Color(UIColor(red: 125.0/255.0, green: 175.0/255.0, blue: 255.0/255.0, alpha: 1.0))
+            VStack(spacing: 0){
+                //Title
+                Text("Sunrise & Sunset")
+                    .font(Font.custom("JosefinSans-Regular", size: 32.0))
+                    .padding()
+                //Rounded Rectangle with Line Chart
+                VStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(height: 300)
+                        .padding(.top, 5)
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.blue)
+                        //Overlays Chart over Rounded Rectangle
+                        .overlay(Chart(items) { item in
+//                            BarMark(
+//                                x: .value("department", item.type),
+//                                y: .value("Profit", item.value)
+//                            )
+                            AreaMark(
+                                x: .value("Department", item.value1),
+                                y: .value("Profit", item.value2)
+                            )
+                            .interpolationMethod(.monotone)
+                            .foregroundStyle(.yellow)
+                            //Outline on Graph
+                            LineMark(
+                                x: .value("Department", item.value1),
+                                y: .value("Profit", item.value2)
+                            )
+                            .foregroundStyle(.black)
+                            .lineStyle(StrokeStyle(lineWidth: 3))
+                            .interpolationMethod(.monotone)
+                        }.padding(.all, 25))
+                    
+                }
+                VStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(height: 40)
+                        .padding(.top, 15)
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.blue)
+                        .overlay(Text("Solar Noon: \(WeatherKitData.AstronomicalDawn)"))
+                }
+                VStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(height: 40)
+                        .padding(.top, 15)
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.blue)
+                        .overlay(Text("Astronomical Dawn: \(WeatherKitData.AstronomicalDawn)"))
+                }
+                VStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(height: 40)
+                        .padding(.top, 15)
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.blue)
+                        .multilineTextAlignment(.leading)
+                        .overlay(Text("Astronomical Dusk: \(WeatherKitData.AstronomicalDawn)"))
+                }
+                Spacer()
+            }
+        }
+        .onAppear {
+            if sunEventHour.sunriseHour > 0 {
+                items = [
+                    Item(value1: 0.0, value2: 0.5),
+                    Item(value1: Double(sunEventHour.sunriseHour), value2: 1.0),
+                    Item(value1: (Double(sunEventHour.sunsetHour) - Double(sunEventHour.sunriseHour)), value2: 2.0),
+                    Item(value1: Double(sunEventHour.sunsetHour), value2: 1.0),
+                    Item(value1: 24.0, value2: 0.5),
+                ]
+            }
+        }
+    }
+}
+
+struct SunriseSunsetPopUpVC_Previews: PreviewProvider {
+    static var previews: some View {
+        SunriseSunsetPopUpVC()
+    }
 }

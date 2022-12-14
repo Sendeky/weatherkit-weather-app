@@ -7,9 +7,11 @@
 
 import Foundation
 
+//Struct for widgetData
 struct WidgetData: Codable {
     var temp: String
     var tempMax: String
     var tempMin: String
     var symbolName: String
+    var hourlyForecast: [Double]
 }

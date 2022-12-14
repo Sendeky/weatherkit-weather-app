@@ -13,10 +13,9 @@ struct PrimaryData {
     @AppStorage("widgetData", store: UserDefaults(suiteName: "group.com.ES.weatherkit-programmatic-app")) var primaryData : Data = Data()
     let widgetData : WidgetData
     
+    //Func to encode data from WidgetData struct
     func encode() {
-        guard let data = try? JSONEncoder().encode(widgetData) else {
-            return
-        }
+        guard let data = try? JSONEncoder().encode(widgetData) else {return}
         primaryData = data
         WidgetCenter.shared.reloadAllTimelines()
     }

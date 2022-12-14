@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import WeatherKit
+import SwiftUI
 
 struct UserLocation {
     static var userLatitude: Double? = 0.0
@@ -797,14 +798,14 @@ extension MainViewController {
     //func for sunrise cell tapped
     @objc func sunriseTapped() {
         print("sunrise Tapped")
-        let sunriseSunsetPop = SunriseSunsetPopUpVC()
+        let sunriseSunsetPop = UIHostingController(rootView: SunriseSunsetPopUpVC())
         present(sunriseSunsetPop, animated: true)
     }
     
     //func for windSpeed cell tapped
     @objc func windSpeedTapped() {
         print("windSpeedView tapped")
-        let windSpeedPopUp = WindSpeedPopUpVC()
+        let windSpeedPopUp = UIHostingController(rootView: WindSpeedPopUpVC())
         present(windSpeedPopUp, animated: true)
     }
 }
