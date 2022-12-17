@@ -106,47 +106,7 @@ struct weatherkit_widgetEntryView : View {
                 }
             }
         case .systemMedium:
-            //Layout for medium widgte
-//            ZStack {
-//                RadialGradient(gradient: Gradient(colors: [.cyan, .indigo]), center: .topTrailing, startRadius: 30, endRadius: 200)
-//                VStack {
-//                    HStack(spacing: 0) {
-//                        //Current Temp VStack
-//                        VStack(spacing: 0) {
-//                            Text("Current")
-//                                .font(.title)
-//                                .frame(width: 140)
-//                                .padding(.vertical)
-//                            Text("\(entry.widgetData.temp)")
-//                                .font(.title)
-//                                .padding(.horizontal)
-//                            Spacer()
-//                        }
-//                        //VStack for symbol
-//                        VStack {
-//                            Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 42.0))!)
-//                            Spacer()
-//                        }.padding(.vertical, 32)
-//                            .padding(.trailing)
-//                        Spacer()
-//                        //Min Max temp VStack
-//                        VStack {
-//                            Text("High Temp: \(entry.widgetData.tempMax)")
-//                                .frame(width: UIScreen.main.bounds.width / 3, height: 70)
-//                            Text("Low Temp: \(entry.widgetData.tempMin)")
-//                                .frame(width: UIScreen.main.bounds.width / 3, height: 10)
-//                            Spacer()
-//                        }
-//                    }
-//                    Chart(items) { item in
-//                        BarMark (x: .value("\(item.type)", item.value), y: .value("\(item.type)", item.value)
-//                        )
-//                    }.padding(.horizontal)
-//                        .chartYAxis(.hidden)
-//                        .frame(width: UIScreen.main.bounds.width / 2)
-//                }
-//            }
-            //MARK: Test
+            //Layout for medium widget
             ZStack {
                 ContainerRelativeShape()
                     .fill(LinearGradient(colors: [.cyan, .indigo], startPoint: .bottomLeading, endPoint: .top))
@@ -172,6 +132,10 @@ struct weatherkit_widgetEntryView : View {
                             x: .value("", item.type),
                             y: .value("", item.value)
                         ).interpolationMethod(.monotone)
+//                        PointMark (
+//                            x: .value("", item.value),
+//                            y: .value("", item.value)
+//                        )
                     }
                     .chartYAxis(.hidden)
                     .padding(.horizontal, 5)

@@ -42,8 +42,6 @@
 		C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */; };
 		C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */; };
 		C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BF2291F361800D887C6 /* TabBarViewController.swift */; };
-		C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift */; };
-		C0B01C24292206B600D887C6 /* WindSpeedPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01C23292206B600D887C6 /* WindSpeedPopUpViewController.swift */; };
 		C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCC2929487800359476 /* SettingsCell.swift */; };
 		C0CF2DD12929487800359476 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCE2929487800359476 /* Settings.swift */; };
 		C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCF2929487800359476 /* SettingsListVC.swift */; };
@@ -116,8 +114,6 @@
 		C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "programmatic-ui-weather-app.entitlements"; sourceTree = "<group>"; };
 		C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitCallUtil.swift; sourceTree = "<group>"; };
 		C0B01BF2291F361800D887C6 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetPopUpViewController.swift; sourceTree = "<group>"; };
-		C0B01C23292206B600D887C6 /* WindSpeedPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpViewController.swift; sourceTree = "<group>"; };
 		C0CF2DCC2929487800359476 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		C0CF2DCE2929487800359476 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C0CF2DCF2929487800359476 /* SettingsListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListVC.swift; sourceTree = "<group>"; };
@@ -297,9 +293,7 @@
 		C0B01BFD2920223A00D887C6 /* PopUp VC */ = {
 			isa = PBXGroup;
 			children = (
-				C0B01BFE2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift */,
 				C0711C2829484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift */,
-				C0B01C23292206B600D887C6 /* WindSpeedPopUpViewController.swift */,
 				C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */,
 			);
 			path = "PopUp VC";
@@ -445,7 +439,6 @@
 			files = (
 				C06F8D33292983810054D5DC /* ForecastsCell.swift in Sources */,
 				C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */,
-				C0B01BFF2920227E00D887C6 /* SunriseSunsetPopUpViewController.swift in Sources */,
 				C06F8D31292981680054D5DC /* Forecasts.swift in Sources */,
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
 				C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */,
@@ -457,7 +450,6 @@
 				C0CF2DD12929487800359476 /* Settings.swift in Sources */,
 				C04E9EEE2945296C00882FC6 /* PrimaryData.swift in Sources */,
 				C06F8D2E292980550054D5DC /* ForecastListVC.swift in Sources */,
-				C0B01C24292206B600D887C6 /* WindSpeedPopUpViewController.swift in Sources */,
 				C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */,
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,
 				C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */,
