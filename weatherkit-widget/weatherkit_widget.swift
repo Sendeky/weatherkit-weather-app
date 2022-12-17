@@ -21,7 +21,7 @@ struct Provider: TimelineProvider {
         let widgetData = WidgetData(temp: "-", tempMax: "-", tempMin: "-", symbolName: "-", hourlyForecast: [0.0])
         return SimpleEntry(widgetData: widgetData)
     }
-
+    
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         //Decodes widgetData from AppGroup
         guard let widgetData = try? JSONDecoder().decode(WidgetData.self, from: primaryData) else {return}
@@ -29,7 +29,7 @@ struct Provider: TimelineProvider {
         let entry = SimpleEntry(widgetData: widgetData)
         completion(entry)
     }
-
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         
         //Decodes widgetData from AppGroup
@@ -60,70 +60,158 @@ struct weatherkit_widgetEntryView : View {
     //@State allows value to be changed
     //Initialises with empty array
     @State var items: [Item] = []
-
+    
+    @Environment(\.widgetFamily) var family
+    
+    @ViewBuilder
     var body: some View {
         
+        switch family {
+        case .systemSmall:
+            //Layout for small widget
+            ZStack {
+                ContainerRelativeShape()
+                    .fill(LinearGradient(colors: [.cyan, .indigo], startPoint: .bottomLeading, endPoint: .top))
+                
+                VStack(spacing: 0) {
+                    //"Current" text at top
+                    Text("Current")
+                        .font(Font.custom("JosefinSans-Regular", size: 32.0))
+                        .frame(height: 50)
+                    //Horizontal stack with temp and icon
+                    HStack {
+                        //Sets text as "temp" from widgetData
+                        Text(entry.widgetData.temp)
+                            .font(.system(size: 32.0))
+                            .padding(.vertical, 5)
+                        //Weather Symbol
+                        Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
+                    }
+                    Spacer()
+                    Chart(items) { item in
+                        BarMark(
+                            x: .value("", item.type),
+                            y: .value("", item.value)
+                        )
+                    }
+                    .chartYAxis(.hidden)
+                    //                .chartXAxis(.hidden)
+                    .padding(.horizontal, 5)
+                    Spacer()
+                }
+            }
+            .onAppear {
+                for i in 1...5 {
+                    items.append(Item(type: "\(i)H", value: entry.widgetData.hourlyForecast[i]))
+                }
+            }
+        case .systemMedium:
+            //Layout for medium widgte
+//            ZStack {
+//                RadialGradient(gradient: Gradient(colors: [.cyan, .indigo]), center: .topTrailing, startRadius: 30, endRadius: 200)
+//                VStack {
+//                    HStack(spacing: 0) {
+//                        //Current Temp VStack
+//                        VStack(spacing: 0) {
+//                            Text("Current")
+//                                .font(.title)
+//                                .frame(width: 140)
+//                                .padding(.vertical)
+//                            Text("\(entry.widgetData.temp)")
+//                                .font(.title)
+//                                .padding(.horizontal)
+//                            Spacer()
+//                        }
+//                        //VStack for symbol
+//                        VStack {
+//                            Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 42.0))!)
+//                            Spacer()
+//                        }.padding(.vertical, 32)
+//                            .padding(.trailing)
+//                        Spacer()
+//                        //Min Max temp VStack
+//                        VStack {
+//                            Text("High Temp: \(entry.widgetData.tempMax)")
+//                                .frame(width: UIScreen.main.bounds.width / 3, height: 70)
+//                            Text("Low Temp: \(entry.widgetData.tempMin)")
+//                                .frame(width: UIScreen.main.bounds.width / 3, height: 10)
+//                            Spacer()
+//                        }
+//                    }
+//                    Chart(items) { item in
+//                        BarMark (x: .value("\(item.type)", item.value), y: .value("\(item.type)", item.value)
+//                        )
+//                    }.padding(.horizontal)
+//                        .chartYAxis(.hidden)
+//                        .frame(width: UIScreen.main.bounds.width / 2)
+//                }
+//            }
+            //MARK: Test
+            ZStack {
+                ContainerRelativeShape()
+                    .fill(LinearGradient(colors: [.cyan, .indigo], startPoint: .bottomLeading, endPoint: .top))
+                
+                VStack(spacing: 0) {
+                    Spacer()
+                    //Horizontal stack with temp and icon
+                    HStack(alignment: .center) {
+                        //Sets text as "temp" from widgetData
+                        Text(entry.widgetData.temp)
+                            .font(.largeTitle)
+                            
+                        //Weather Symbol
+                        Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
+                        VStack {
+                            Text("Max: \(entry.widgetData.tempMax)")
+                            Text("Min: \(entry.widgetData.tempMin)")
+                        }
+                    }
+                    Spacer()
+                    Chart(items) { item in
+                        LineMark (
+                            x: .value("", item.type),
+                            y: .value("", item.value)
+                        ).interpolationMethod(.monotone)
+                    }
+                    .chartYAxis(.hidden)
+                    .padding(.horizontal, 5)
+                    .foregroundColor(.primary)
+                    Spacer()
+                }
+            }
+            .onAppear {
+                for i in 1...12 {
+                    items.append(Item(type: "\(i)H", value: entry.widgetData.hourlyForecast[i]))
+                }
+            }
+
+        case .systemLarge:
+            Text("Large")
+        default:
+            Text("Some other WidgetFamily in the future.")
+        }
+    }
+    
+    @main
+    struct weatherkit_widget: Widget {
+        let kind: String = "weatherkit_widget"
         
-        ZStack {
-            ContainerRelativeShape()
-                .fill(LinearGradient(colors: [.cyan, .indigo], startPoint: .bottomLeading, endPoint: .top))
-            
-            VStack(spacing: 0) {
-                //"Current" text at top
-                Text("Current")
-                    .font(Font.custom("JosefinSans-Regular", size: 32.0))
-                    .frame(height: 50)
-                //Horizontal stack with temp and icon
-                HStack {
-                    //Sets text as "temp" from widgetData
-                    Text(entry.widgetData.temp)
-                        .font(Font.custom("JosefinSans-Regular", size: 40.0))
-                        .padding(.vertical, 5)
-                    //Weather Symbol
-                    Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
-                }
-                Spacer()
-                Chart(items) { item in
-                    BarMark(
-                        x: .value("", item.type),
-                        y: .value("", item.value)
-                    )
-                }
-                .chartYAxis(.hidden)
-//                .chartXAxis(.hidden)
-                .padding(.horizontal, 5)
-                Spacer()
+        var body: some WidgetConfiguration {
+            StaticConfiguration(kind: kind, provider: Provider()) { entry in
+                weatherkit_widgetEntryView(entry: entry)
             }
+            .configurationDisplayName("My Widget")
+            .description("This is an example widget.")
+            .supportedFamilies([.systemSmall, .systemMedium])
         }
-        .onAppear {
-            for i in 1...5 {
-                items.append(Item(type: "\(i)H", value: entry.widgetData.hourlyForecast[i]))
-            }
-        }
-        //Sets text as "temp" from widgetData
-//        Text(entry.widgetData.temp)
     }
-}
-
-@main
-struct weatherkit_widget: Widget {
-    let kind: String = "weatherkit_widget"
-
-    var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            weatherkit_widgetEntryView(entry: entry)
+    
+    struct weatherkit_widget_Previews: PreviewProvider {
+        //Preview WidgetData data (seen when choosing widgets)
+        static let widgetData = WidgetData(temp: "12˚C", tempMax: "16˚C", tempMin: "8˚C", symbolName: "cloud.sun.bolt.fill", hourlyForecast: [12.0])
+        static var previews: some View {
+            weatherkit_widgetEntryView(entry: SimpleEntry(widgetData: widgetData))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
-        .supportedFamilies([.systemSmall, .systemMedium])
-    }
-}
-
-struct weatherkit_widget_Previews: PreviewProvider {
-    //Preview WidgetData data (seen when choosing widgets)
-    static let widgetData = WidgetData(temp: "12˚C", tempMax: "16˚C", tempMin: "8˚C", symbolName: "cloud.sun.bolt.fill", hourlyForecast: [12.0])
-    static var previews: some View {
-        weatherkit_widgetEntryView(entry: SimpleEntry(widgetData: widgetData))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

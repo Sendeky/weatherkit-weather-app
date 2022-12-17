@@ -120,7 +120,7 @@ extension MainViewController {
                 }
                 
                 //For loop for 12 hour weather
-                for i in  0...11 {
+                for i in  0...12 {
                     let forecast = result.hourlyForecast.forecast[i].temperature.value
                     WeatherKitData.HourlyForecast.append(forecast)
                     print("Hourly Forecast: \(WeatherKitData.HourlyForecast[i])")

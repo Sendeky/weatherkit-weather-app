@@ -98,7 +98,7 @@
 		C04E9E89293C28F400882FC6 /* weatherkit-widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "weatherkit-widgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C04E9E8B293C28F400882FC6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C04E9E8D293C28F400882FC6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		C04E9E90293C28F400882FC6 /* weatherkit_widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherkit_widget.swift; sourceTree = "<group>"; };
+		C04E9E90293C28F400882FC6 /* weatherkit_widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherkit_widget.swift; sourceTree = "<group>"; usesTabs = 0; };
 		C04E9E92293C28F600882FC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C04E9E94293C28F600882FC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C04E9E9D293D134B00882FC6 /* weatherkit-widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "weatherkit-widgetExtension.entitlements"; sourceTree = "<group>"; };
@@ -635,7 +635,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.4;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -669,7 +669,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.4;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
