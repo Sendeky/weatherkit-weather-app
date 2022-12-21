@@ -42,11 +42,7 @@ struct SunriseSunsetPopUpVC: View {
                         .foregroundColor(.blue)
                         //Overlays Chart over Rounded Rectangle
                         .overlay(Chart(items) { item in
-//                            BarMark(
-//                                x: .value("department", item.type),
-//                                y: .value("Profit", item.value)
-//                            )
-                            AreaMark(x: .value("Department", item.value1),
+                            BarMark(x: .value("Department", item.value1),
                                      yStart: .value("Min", item.value2 - 3),
                                      yEnd: .value("Max", item.value2 + 3)
                             )
