@@ -95,6 +95,8 @@ struct weatherkit_widgetEntryView : View {
                             y: .value("", item.value)
                         )
                     }
+                    .foregroundStyle(.white)
+                    .opacity(0.5)
                     .chartYAxis(.hidden)
                     Spacer()
                 }
@@ -143,7 +145,7 @@ struct weatherkit_widgetEntryView : View {
                     }
                     .chartYAxis(.hidden)
                     .padding(.horizontal, 5)
-                    .foregroundColor(.primary)
+                    .foregroundColor(.white)
                     Spacer()
                 }
             }
@@ -155,7 +157,58 @@ struct weatherkit_widgetEntryView : View {
             }
 
         case .systemLarge:
-            Text("Large")
+            ZStack {
+                ContainerRelativeShape()
+                    .fill(LinearGradient(colors: [.cyan, .indigo], startPoint: .bottomLeading, endPoint: .top))
+                
+                VStack(spacing: 0) {
+                    Spacer()
+                    //Horizontal stack with temp and icon
+                    HStack(alignment: .center) {
+                        //Sets text as "temp" from widgetData
+                        Text(entry.widgetData.temp)
+                            .font(.largeTitle)
+                            
+                        //Weather Symbol
+                        Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
+                        VStack {
+                            Text("Max: \(entry.widgetData.tempMax)")
+                            Text("Min: \(entry.widgetData.tempMin)")
+                        }
+                    }
+                    Spacer()
+                    Chart(items) { item in
+                        BarMark(x: .value("", item.time),
+                                yStart: .value("", item.value - 1.5),
+                                yEnd: .value("", item.value + 1.5)
+                        )
+                        .opacity(0.5)
+                        .foregroundStyle(.primary)
+                        .interpolationMethod(.monotone)
+                        LineMark (
+                            x: .value("", item.time),
+                            y: .value("", item.value)
+                        )
+                        .interpolationMethod(.monotone)
+                        .lineStyle(StrokeStyle(lineWidth: 4))
+                    }
+                    .frame(width: UIScreen.main.bounds.width - 55, height: UIScreen.main.bounds.height / 5)
+                    .chartYAxis(.hidden)
+                    .padding(.horizontal, 5)
+                    .foregroundColor(.white)
+                    Spacer()
+                    Spacer()
+                    VStack {
+                        Text("Text")
+                    }
+                }
+            }
+            .onAppear {
+                for i in 1...7 {
+                    items.append(Item(type: "\(i)", value: entry.widgetData.hourlyForecast[i], time: entry.widgetData.forecastTimeArray[i - 1]))
+                }
+                
+            }
         default:
             Text("Some other WidgetFamily in the future.")
         }
@@ -171,7 +224,7 @@ struct weatherkit_widgetEntryView : View {
             }
             .configurationDisplayName("My Widget")
             .description("This is an example widget.")
-            .supportedFamilies([.systemSmall, .systemMedium])
+            .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
         }
     }
     
