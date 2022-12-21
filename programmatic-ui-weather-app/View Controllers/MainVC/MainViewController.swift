@@ -418,7 +418,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             return tapGesture
         }
         sunriseView.addGestureRecognizer(sunriseTapGesture)
+        sunriseView.alpha = 1
         sunsetView.addGestureRecognizer(sunriseTapGesture)
+        sunsetView.alpha = 1
         
         var windSpeedTapGesture: UITapGestureRecognizer {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(windSpeedTapped))
@@ -710,6 +712,7 @@ extension MainViewController {
         self.precipitationLabel.text = "\(WeatherKitData.RainChance)% chance of rain today"
         self.uvLabel.text = "UV Index is currently \(WeatherKitData.UV)"
         self.topWeatherIconView.image = UIImage(systemName: "\(WeatherKitData.Symbol).fill",withConfiguration: UIImage.SymbolConfiguration(pointSize: 56.0, weight: .bold))
+        
     }
     
     //MARK: - Function for the pull to refresh on the scrollview
@@ -799,6 +802,12 @@ extension MainViewController {
     @objc func sunriseTapped() {
         print("sunrise Tapped")
         let sunriseSunsetPop = UIHostingController(rootView: SunriseSunsetPopUpVC())
+        UIView.animate(withDuration: 1.5, animations: {
+            for i in 0...10 {
+                self.sunriseView.frame = CGRect(x: self.sunriseView.bounds.minX + CGFloat(i), y: self.sunriseView.bounds.minY + CGFloat(i), width: self.sunriseView.bounds.width + CGFloat(i), height: self.sunriseView.bounds.height + CGFloat(i))
+                self.sunriseView.alpha = 0.4
+            }
+        })
         present(sunriseSunsetPop, animated: true)
     }
     

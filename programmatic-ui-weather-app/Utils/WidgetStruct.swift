@@ -14,4 +14,5 @@ struct WidgetData: Codable {
     var tempMin: String
     var symbolName: String
     var hourlyForecast: [Double]
+    var forecastTimeArray: [String]
 }

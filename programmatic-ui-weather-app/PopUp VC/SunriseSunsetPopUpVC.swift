@@ -46,20 +46,19 @@ struct SunriseSunsetPopUpVC: View {
 //                                x: .value("department", item.type),
 //                                y: .value("Profit", item.value)
 //                            )
-                            AreaMark(
+                            AreaMark(x: .value("Department", item.value1),
+                                     yStart: .value("Min", item.value2 - 3),
+                                     yEnd: .value("Max", item.value2 + 3)
+                            )
+                            .opacity(0.5)
+                            .foregroundStyle(.orange)
+                            LineMark(
                                 x: .value("Department", item.value1),
                                 y: .value("Profit", item.value2)
                             )
                             .interpolationMethod(.monotone)
                             .foregroundStyle(.yellow)
-                            //Outline on Graph
-                            LineMark(
-                                x: .value("Department", item.value1),
-                                y: .value("Profit", item.value2)
-                            )
-                            .foregroundStyle(.black)
                             .lineStyle(StrokeStyle(lineWidth: 3))
-                            .interpolationMethod(.monotone)
                         }.padding(.all, 25))
                     
                 }

@@ -11,6 +11,9 @@ struct sunEventHour {
     static var sunriseHour = 0
     static var sunsetHour = 0
 }
+struct timeArray {
+    static var date = [String]()
+}
 
 class DateConverter{
     func convertDateToEpoch() {
@@ -23,6 +26,17 @@ class DateConverter{
         let sunsetHour = Calendar.current.component(.hour, from: WeatherKitData.SunsetDate)
         print("SunsetHour: \(sunsetHour)")
         sunEventHour.sunsetHour = sunsetHour
+    }
+    
+    func timeArrayMaker() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh a" //"a" prints am or pm
+        let startTime = Date.now
+        for i in 0...10{
+            let hour = (Calendar.current.date(byAdding: .hour, value: i, to: startTime)!)
+            let h = dateFormatter.string(from: hour)
+            timeArray.date.append(h)
+        }
     }
 }
 

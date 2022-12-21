@@ -159,26 +159,13 @@ extension MainViewController {
                 WeatherKitData.SunriseDate = result.dailyForecast.forecast[0].sun.sunrise!
                 WeatherKitData.SunsetDate = result.dailyForecast.forecast[0].sun.sunset!
                 
-//                let defaults = UserDefaults(suiteName: "group.com.ES.weatherkit-programmatic-app")
-//                defaults?.set("\(WeatherKitData.Temp)", forKey: "Temp")
-//                defaults?.synchronize()
                 
+                DateConverter().timeArrayMaker()    //Runs timeArrayMaker func for timeArray in widget
                 //puts WidgetData struct into widget
-                var widget = WidgetData(temp: temp, tempMax: tempMax, tempMin: tempMin, symbolName: symbol, hourlyForecast: WeatherKitData.HourlyForecast)
+                var widget = WidgetData(temp: temp, tempMax: tempMax, tempMin: tempMin, symbolName: symbol, hourlyForecast: WeatherKitData.HourlyForecast, forecastTimeArray: timeArray.date)
                 let primaryData = PrimaryData(widgetData: widget)
                 //Encodes data into AppGroup
                 primaryData.encode()
-                
-//                /* Reading the encoded data from your shared App Group container storage */
-//                let encodedData  = UserDefaults(suiteName: "group.com.ES.weatherkit-programmatic-app")!.object(forKey: "widgetData") as? Data
-//                /* Decoding it using JSONDecoder*/
-//                if let widgetEncoded = encodedData {
-//                    let widgetDecoded = try? JSONDecoder().decode(WidgetData.self, from: widgetEncoded)
-//                    if let widgetTemp = widgetDecoded?.temp{
-//                        // You successfully retrieved your car object!
-//                        print("widgetTemp: \(widgetTemp)")
-//                    }
-//                }
                 
                 
             } catch {
