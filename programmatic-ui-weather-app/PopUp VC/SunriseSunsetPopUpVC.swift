@@ -31,7 +31,7 @@ struct SunriseSunsetPopUpVC: View {
             VStack(spacing: 0){
                 //Title
                 Text("Sunrise & Sunset")
-                    .font(Font.custom("JosefinSans-Regular", size: 32.0))
+                    .font(.largeTitle)
                     .padding()
                 //Rounded Rectangle with Line Chart
                 VStack {
