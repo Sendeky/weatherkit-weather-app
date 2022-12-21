@@ -40,6 +40,7 @@
 		C0711C2729484644004D3BD3 /* JosefinSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0711C2129484643004D3BD3 /* JosefinSans-Light.ttf */; };
 		C0711C2929484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711C2829484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift */; };
 		C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */; };
+		C0A2111A2952E21C00C05917 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A211192952E21C00C05917 /* Animations.swift */; };
 		C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */; };
 		C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BF2291F361800D887C6 /* TabBarViewController.swift */; };
 		C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCC2929487800359476 /* SettingsCell.swift */; };
@@ -111,6 +112,7 @@
 		C0711C2129484643004D3BD3 /* JosefinSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Light.ttf"; sourceTree = "<group>"; };
 		C0711C2829484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetPopUpVC.swift; sourceTree = "<group>"; };
 		C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVC.swift; sourceTree = "<group>"; };
+		C0A211192952E21C00C05917 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "programmatic-ui-weather-app.entitlements"; sourceTree = "<group>"; };
 		C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitCallUtil.swift; sourceTree = "<group>"; };
 		C0B01BF2291F361800D887C6 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -165,10 +167,9 @@
 			children = (
 				C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */,
 				C034705328F640AD00656AA8 /* Delegates */,
+				C0A211182952E20B00C05917 /* Animations */,
 				C034705228F6406500656AA8 /* Files */,
 				C034705628F7363E00656AA8 /* Utils */,
-				C0B01BF4291F3C3F00D887C6 /* TabBarVC */,
-				C0B01BFD2920223A00D887C6 /* PopUp VC */,
 				C0B01BF5291F41F700D887C6 /* View Controllers */,
 				C0711C3029496A3E004D3BD3 /* Fonts */,
 				C034704C28F6221A00656AA8 /* Info.plist */,
@@ -264,6 +265,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		C0A211182952E20B00C05917 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				C0A211192952E21C00C05917 /* Animations.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		C0A68C73293BF22E000A24DC /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,7 +292,9 @@
 		C0B01BF5291F41F700D887C6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C0B01BF4291F3C3F00D887C6 /* TabBarVC */,
 				C0A68C73293BF22E000A24DC /* MainVC */,
+				C0B01BFD2920223A00D887C6 /* PopUp VC */,
 				C06F8D2C2929803C0054D5DC /* ForecastVC */,
 				C0B01C25292363E500D887C6 /* SettingsVC */,
 			);
@@ -439,6 +450,7 @@
 			files = (
 				C06F8D33292983810054D5DC /* ForecastsCell.swift in Sources */,
 				C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */,
+				C0A2111A2952E21C00C05917 /* Animations.swift in Sources */,
 				C06F8D31292981680054D5DC /* Forecasts.swift in Sources */,
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
 				C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */,

@@ -400,8 +400,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         bottomScrollview.translatesAutoresizingMaskIntoConstraints = false
         bottomScrollview.alwaysBounceVertical = true
         bottomScrollview.isScrollEnabled = true
-//        bottomScrollview.delegate = self
-//        bottomScrollview.bounces = bottomScrollview.contentOffset.y > 100
         
         //Sets settings for bottomScrollStackview
         bottomScrollStackview.translatesAutoresizingMaskIntoConstraints = false
@@ -417,9 +415,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sunriseTapped))
             return tapGesture
         }
+        //sunsetTapGesture
+        var sunsetTapGesture: UITapGestureRecognizer {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sunsetTapped))
+            return tapGesture
+        }
         sunriseView.addGestureRecognizer(sunriseTapGesture)
         sunriseView.alpha = 1
-        sunsetView.addGestureRecognizer(sunriseTapGesture)
+        sunsetView.addGestureRecognizer(sunsetTapGesture)
         sunsetView.alpha = 1
         
         var windSpeedTapGesture: UITapGestureRecognizer {
@@ -435,8 +438,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         topSubStackview.addArrangedSubview(topTempMaxLabel)
         topSubStackview.addArrangedSubview(topTempMinLabel)
         
-        //Adds weatherIconView to topWeatherIconStackView
-//        topWeatherIconStackView.addArrangedSubview(topWeatherIconView)
         
         //Adds topSubStackview, uv index, city name labels, and topMinMaxTempView into topStackView
         topStackview.addSubview(topSubStackview)
@@ -446,13 +447,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         topStackview.addSubview(topCityNameLabel)
         topStackview.addSubview(topMinMaxTempView)
         
-        //Adds min and max temp labels into topMinMaxTempView
-//        topMinMaxTempView.addArrangedSubview(topTempMinLabel)
-//        topMinMaxTempView.addArrangedSubview(topTempMaxLabel)
-        
         //Adds sunset, feels like, wind speed, humidity labels into bottomScrollStackview
         bottomScrollStackview.addSubview(sunsetTimeLabel)
-//        bottomScrollStackview.addSubview(feelsLikeTempLabel)
         bottomScrollStackview.addSubview(windSpeedLabel)
         bottomScrollStackview.addSubview(humidityLabel)
         bottomScrollStackview.addSubview(pressureLabel)
@@ -469,7 +465,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         bottomScrollview.addSubview(pressureView)
         bottomScrollview.addSubview(precipitationView)
         bottomScrollview.addSubview(uvIndexView)
-//        bottomScrollview.addSubview(bottomLabel)
         
         //Adds labels to sunriseView
         sunriseView.addSubview(sunriseTitleLabel)
@@ -521,9 +516,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             topStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             topStackview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            //topWeatherIconStackView constraints
-//            topWeatherIconStackView.topAnchor.constraint(equalTo: topStackview.topAnchor),
-//            topWeatherIconStackView.leadingAnchor.constraint(equalTo: topStackview.leadingAnchor, constant: 20),
             //topWeatherIconView constraints
             topWeatherIconView.topAnchor.constraint(equalTo: topStackview.topAnchor),
             topWeatherIconView.trailingAnchor.constraint(equalTo: topStackview.centerXAnchor, constant: -20),
@@ -540,9 +532,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             //topCityNameLabel constraints
             topCityNameLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
             topCityNameLabel.centerYAnchor.constraint(equalTo: topUVIndexLabel.bottomAnchor, constant: 20),
-            //topWeatherIconView constraints
-//            topWeatherIconView.heightAnchor.constraint(equalToConstant: 60),
-//            topWeatherIconView.widthAnchor.constraint(equalToConstant: 60),
             //topMinMaxTempView constraints
             topMinMaxTempView.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
             topMinMaxTempView.centerYAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 20),
@@ -672,9 +661,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             uvLabel.topAnchor.constraint(equalTo: uvTitleLabel.bottomAnchor, constant: 10),
             uvLabel.leadingAnchor.constraint(equalTo: uvIndexView.leadingAnchor, constant: 10),
             uvLabel.trailingAnchor.constraint(equalTo: uvIndexView.trailingAnchor, constant: -10),
-            //bottomLabel constrainst
-//            bottomLabel.topAnchor.constraint(equalTo: uvIndexView.bottomAnchor, constant: 20),
-//            bottomLabel.leadingAnchor.constraint(equalTo: bottomScrollview.leadingAnchor),
         ])
         
     }
@@ -737,7 +723,6 @@ extension MainViewController {
         print("userLatitude: \((UserLocation.userLatitude)!)")
         print("userLongitude: \((UserLocation.userLongitude)!)")
 //        print("weatherTempCelsius: \(WeatherData.WeatherTempCelsius)") DEPRECATED
-//        print("City Name: \(RawWeatherData.cityName)") DEPRECATED
         DispatchQueue.main.async {
             self.refreshControl.endRefreshing()
         }
@@ -798,23 +783,35 @@ extension MainViewController {
 //        print(UserLocation.userCLLocation)
     }
     
-    //func for sunrise cell tapped
+    //func for sunrise view tapped
     @objc func sunriseTapped() {
         print("sunrise Tapped")
         let sunriseSunsetPop = UIHostingController(rootView: SunriseSunsetPopUpVC())
-        UIView.animate(withDuration: 1.5, animations: {
-            for i in 0...10 {
-                self.sunriseView.frame = CGRect(x: self.sunriseView.bounds.minX + CGFloat(i), y: self.sunriseView.bounds.minY + CGFloat(i), width: self.sunriseView.bounds.width + CGFloat(i), height: self.sunriseView.bounds.height + CGFloat(i))
-                self.sunriseView.alpha = 0.4
-            }
-        })
-        present(sunriseSunsetPop, animated: true)
+        
+        //Uses animation from Animations.swift
+        self.sunriseView.showAnimation {
+            self.present(sunriseSunsetPop, animated: true)
+        }
     }
     
-    //func for windSpeed cell tapped
+    //func for sunset view tapped
+    @objc func sunsetTapped() {
+        let sunriseSunsetPop = UIHostingController(rootView: SunriseSunsetPopUpVC())
+        
+        //Uses animation from Animations.swift
+        self.sunsetView.showAnimation {
+            self.present(sunriseSunsetPop, animated: true)
+        }
+    }
+    
+    //func for windSpeed view tapped
     @objc func windSpeedTapped() {
         print("windSpeedView tapped")
         let windSpeedPopUp = UIHostingController(rootView: WindSpeedPopUpVC())
-        present(windSpeedPopUp, animated: true)
+        
+        //Uses animation from Animations.swift
+        self.windSpeedView.showAnimation {
+            self.present(windSpeedPopUp, animated: true)
+        }
     }
 }
