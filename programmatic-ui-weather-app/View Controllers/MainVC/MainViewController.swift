@@ -18,6 +18,7 @@ struct UserLocation {
 
 class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
 
+    /*
     //Intializes all the elements
     let topStackview = UIStackView()
     let topSubStackview = UIStackView()
@@ -31,8 +32,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let topTempMaxLabel = UILabel()
     let bottomScrollview = UIScrollView()
     let bottomScrollStackview = UIStackView()
+    */
     
-    
+    /*
     //Sunrise view & labels
     let sunriseView: UIView = {
         let view = UIView()
@@ -279,7 +281,63 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         imageView.image = UIImage(systemName: "aqi.medium")
         return imageView
     }()
+    */
     
+    
+    //MARK: - stuff
+    let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
+    
+//    view.backgroundColor = .blue
+    
+    let tempStackView = UIStackView()
+    let cityLabel = UILabel()
+    let currentTempLabel = UILabel()
+    let todayTempLabel = UILabel()
+    let rocketView = UIImageView()
+    let scrollView = UIScrollView()
+    let precipitationView = UIView()
+    let precipitationTitleLabel = UILabel()
+    let precipitationLabel = UILabel()
+    let hourlyForecastView = UIView()
+    let hourlyForecastTitleLabel = UILabel()
+    //MARK: - HourlyForecastView Interior stuff
+    let scrollview = UIScrollView()
+    let horizontalStack = UIStackView()
+    let stackview1 = UIStackView()
+    let topLabel1 = UILabel()
+    let iconView1 = UIImageView()
+    let bottomLabel1 = UILabel()
+    
+    
+    let stackview2 = UIStackView()
+    let topLabel2 = UILabel()
+    let iconView2 = UIImageView()
+    let bottomLabel2 = UILabel()
+    
+    
+    let stackview3 = UIStackView()
+    let topLabel3 = UILabel()
+    let iconView3 = UIImageView()
+    let bottomLabel3 = UILabel()
+    
+    
+    let stackview4 = UIStackView()
+    let topLabel4 = UILabel()
+    let iconView4 = UIImageView()
+    let bottomLabel4 = UILabel()
+    
+    
+    let stackview5 = UIStackView()
+    let topLabel5 = UILabel()
+    let iconView5 = UIImageView()
+    let bottomLabel5 = UILabel()
+
+    
+    
+    //windView settings
+    let windView = UIView()
+    let windTitleLabel = UILabel()
+    let windLabel = UILabel()
     
     //Creates a refresh control for the scrollview
     var refreshControl = UIRefreshControl()
@@ -289,7 +347,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .orange
         print("TempMaxForecast Array: \(WeatherKitData.TempMaxForecast)")
                 
         
@@ -308,11 +366,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         DispatchQueue.global().async {
             self.viewDidLoadRefresh()
-            
 
             
 //            Updates all the labels asynchronously
             DispatchQueue.main.async {
+                /*
                 self.topCurrentTempLabel.text = "\(WeatherKitData.Temp)"
 //                self.topCityNameLabel.text = "\(RawWeatherData.cityName)" DEPRECATED
                 self.topTempMinLabel.text = "Min Temp: \(WeatherKitData.TempMin)"
@@ -322,13 +380,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
                 self.windSpeedLabel.text = "Wind speed is \(WeatherKitData.WindSpeed) MPH"
                 self.humidityLabel.text = "Humidity is \(WeatherKitData.Humidity)%"
                 self.pressureLabel.text = "Pressure is \(WeatherKitData.Pressure)"
+                 */
+                self.currentTempLabel.text = "\(WeatherKitData.Temp)"
+                self.todayTempLabel.text = "H:\(WeatherKitData.TempMax) L:\(WeatherKitData.TempMin)"
+                self.windLabel.text = "\(WeatherKitData.WindSpeed)"
             }
         }
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        setGradientBackground() //Function that sets the view to a gradient background
+        setBackground() //Function that sets the view to a gradient background
         viewDidLoadRefresh()
         super.viewWillAppear(true)
     }
@@ -345,6 +407,180 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
 
     
     private func style() {
+        //tempStackView settings
+        tempStackView.axis = .vertical
+        tempStackView.translatesAutoresizingMaskIntoConstraints = false
+        tempStackView.spacing = 15
+        tempStackView.alignment = .center
+        
+        //cityLabel settings
+        cityLabel.font = .preferredFont(forTextStyle: .largeTitle)
+        cityLabel.text = "City"
+        
+        //currentTempLabel settings
+        currentTempLabel.font = .preferredFont(forTextStyle: .title1)
+        currentTempLabel.text = "--˚"
+        
+        //todayTempLabel settings
+        todayTempLabel.font = .preferredFont(forTextStyle: .title1)
+        todayTempLabel.text = "H:--˚ L:--˚"
+        
+        //rocketView settings
+        rocketView.translatesAutoresizingMaskIntoConstraints = false
+        rocketView.contentMode = .scaleAspectFit
+        rocketView.clipsToBounds = true
+        rocketView.image = UIImage(named: "Falcon-Heavy.svg")
+        rocketView.layer.shadowColor = UIColor.black.cgColor
+        rocketView.layer.shadowRadius = 15.0
+        rocketView.layer.shadowOpacity = 0.7
+        rocketView.layer.shadowOffset = CGSize(width: -4, height: 4)
+        rocketView.layer.masksToBounds = false
+        
+        //scrollView settings
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentSize = CGSize(width: 200, height: 300)
+        scrollView.alwaysBounceVertical = true
+        scrollView.isScrollEnabled = true
+        scrollView.alwaysBounceHorizontal = false
+        
+        //precipitationView settings
+        precipitationView.translatesAutoresizingMaskIntoConstraints = false
+        precipitationView.layer.cornerRadius = 20
+        precipitationView.backgroundColor = cyanColor
+    //        precipitationView.applyBlurEffect(.systemUltraThinMaterialDark, cornerRadius: 20)
+        
+        //precupitationTitleLabel settings
+        precipitationTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        precipitationTitleLabel.text = "Precipitation"
+        precipitationTitleLabel.font = .preferredFont(forTextStyle: .body)
+        
+        //precipitationLabel settings
+        precipitationLabel.translatesAutoresizingMaskIntoConstraints = false
+        precipitationLabel.text = "--% Chance"
+        precipitationLabel.font = .preferredFont(forTextStyle: .title2)
+        
+        //hourlyForecastView settings
+        hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
+        hourlyForecastView.layer.cornerRadius = 20
+        hourlyForecastView.backgroundColor = cyanColor
+    //        hourlyForecastView.applyBlurEffect(.systemUltraThinMaterial, cornerRadius: 20)
+        
+        //hourlyForecastTitleLabel
+        hourlyForecastTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        hourlyForecastTitleLabel.text = "Hourly Forecast"
+        hourlyForecastTitleLabel.font = .preferredFont(forTextStyle: .body)
+        
+        //MARK: - hourlyForecastView interior stuff
+        scrollview.translatesAutoresizingMaskIntoConstraints = false
+        scrollview.alwaysBounceHorizontal = true
+        scrollview.contentSize = CGSize(width: 500, height: 100)
+        scrollview.showsHorizontalScrollIndicator = false
+        
+        horizontalStack.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStack.axis = .horizontal
+        horizontalStack.backgroundColor = .orange
+        horizontalStack.alignment = .center
+        horizontalStack.spacing = 20
+        
+        stackview1.translatesAutoresizingMaskIntoConstraints = false
+        stackview1.axis = .vertical
+        stackview1.alignment = .center
+        
+        topLabel1.translatesAutoresizingMaskIntoConstraints = false
+        topLabel1.text = "8˚C"
+        topLabel1.font = .preferredFont(forTextStyle: .title2)
+        
+        iconView1.translatesAutoresizingMaskIntoConstraints = false
+        iconView1.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView1.contentMode = .scaleAspectFit
+        
+        bottomLabel1.translatesAutoresizingMaskIntoConstraints = false
+        bottomLabel1.text = "7PM"
+        bottomLabel1.font = .preferredFont(forTextStyle: .title2)
+        
+        stackview2.translatesAutoresizingMaskIntoConstraints = false
+        stackview2.axis = .vertical
+        stackview2.alignment = .center
+        
+        topLabel2.translatesAutoresizingMaskIntoConstraints = false
+        topLabel2.text = "8˚C"
+        topLabel2.font = .preferredFont(forTextStyle: .title2)
+        
+        iconView2.translatesAutoresizingMaskIntoConstraints = false
+        iconView2.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView2.contentMode = .scaleAspectFit
+        
+        bottomLabel2.translatesAutoresizingMaskIntoConstraints = false
+        bottomLabel2.text = "7PM"
+        bottomLabel2.font = .preferredFont(forTextStyle: .title2)
+        
+        stackview3.translatesAutoresizingMaskIntoConstraints = false
+        stackview3.axis = .vertical
+        stackview3.alignment = .center
+        
+        topLabel3.translatesAutoresizingMaskIntoConstraints = false
+        topLabel3.text = "8˚C"
+        topLabel3.font = .preferredFont(forTextStyle: .title2)
+        
+        iconView3.translatesAutoresizingMaskIntoConstraints = false
+        iconView3.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView3.contentMode = .scaleAspectFit
+        
+        bottomLabel3.translatesAutoresizingMaskIntoConstraints = false
+        bottomLabel3.text = "7PM"
+        bottomLabel3.font = .preferredFont(forTextStyle: .title2)
+        
+        stackview4.translatesAutoresizingMaskIntoConstraints = false
+        stackview4.axis = .vertical
+        stackview4.alignment = .center
+        
+        topLabel4.translatesAutoresizingMaskIntoConstraints = false
+        topLabel4.text = "8˚C"
+        topLabel4.font = .preferredFont(forTextStyle: .title2)
+        
+        iconView4.translatesAutoresizingMaskIntoConstraints = false
+        iconView4.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView4.contentMode = .scaleAspectFit
+        
+        bottomLabel4.translatesAutoresizingMaskIntoConstraints = false
+        bottomLabel4.text = "7PM"
+        bottomLabel4.font = .preferredFont(forTextStyle: .title2)
+        
+        stackview5.translatesAutoresizingMaskIntoConstraints = false
+        stackview5.axis = .vertical
+        stackview5.alignment = .center
+        
+        topLabel5.translatesAutoresizingMaskIntoConstraints = false
+        topLabel5.text = "8˚C"
+        topLabel5.font = .preferredFont(forTextStyle: .title2)
+        
+        windView.translatesAutoresizingMaskIntoConstraints = false
+        windView.backgroundColor = cyanColor
+        windView.layer.cornerRadius = 20
+    //        windView.applyBlurEffect(.systemUltraThinMaterialLight, cornerRadius: 20)
+        
+        iconView5.translatesAutoresizingMaskIntoConstraints = false
+        iconView5.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView5.contentMode = .scaleAspectFit
+        
+        bottomLabel5.translatesAutoresizingMaskIntoConstraints = false
+        bottomLabel5.text = "7PM"
+        bottomLabel5.font = .preferredFont(forTextStyle: .title2)
+        
+        windTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        windTitleLabel.text = "Wind"
+        windTitleLabel.font = .preferredFont(forTextStyle: .body)
+        
+        windLabel.translatesAutoresizingMaskIntoConstraints = false
+        windLabel.text = "--MPH"
+        windLabel.font = .preferredFont(forTextStyle: .title1)
+        
+        //Sets settings for refreshControl
+        refreshControl.translatesAutoresizingMaskIntoConstraints = false
+        refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
+        
+        /*
         //Sets settings for topStackView
         topStackview.translatesAutoresizingMaskIntoConstraints = false
         topStackview.axis = .vertical
@@ -406,10 +642,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         bottomScrollStackview.axis = .vertical
         bottomScrollStackview.spacing = 30
         
-        //Sets settings for refreshControl
-        refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
-        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
-        
         //sunriseTapGesture
         var sunriseTapGesture: UITapGestureRecognizer {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sunriseTapped))
@@ -430,260 +662,427 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             return tapGesture
         }
         windSpeedView.addGestureRecognizer(windSpeedTapGesture)
+         */
+        
+        
         
     }
     
     private func layout(){
-        //Adds rain chance label, weather icon view, and current temp label into the topSubStackview
-        topSubStackview.addArrangedSubview(topTempMaxLabel)
-        topSubStackview.addArrangedSubview(topTempMinLabel)
         
+        /*
+        //Adds labels into top stack view (above scrollview)
+        tempStackView.addArrangedSubview(cityLabel)
+        tempStackView.addArrangedSubview(currentTempLabel)
+        tempStackView.addArrangedSubview(todayTempLabel)
         
-        //Adds topSubStackview, uv index, city name labels, and topMinMaxTempView into topStackView
-        topStackview.addSubview(topSubStackview)
-        topStackview.addSubview(topWeatherIconView)
-        topStackview.addSubview(topCurrentTempLabel)
-        topStackview.addSubview(topUVIndexLabel)
-        topStackview.addSubview(topCityNameLabel)
-        topStackview.addSubview(topMinMaxTempView)
+        //Adds views into scrollview
+        scrollView.addSubview(precipitationView)
+        scrollView.addSubview(hourlyForecastView)
+        scrollView.addSubview(windView)
         
-        //Adds sunset, feels like, wind speed, humidity labels into bottomScrollStackview
-        bottomScrollStackview.addSubview(sunsetTimeLabel)
-        bottomScrollStackview.addSubview(windSpeedLabel)
-        bottomScrollStackview.addSubview(humidityLabel)
-        bottomScrollStackview.addSubview(pressureLabel)
-        bottomScrollStackview.addSubview(sunriseTimeLabel)
-        
-        //Adds bottomScrollStackview into bottomScrollview
-        bottomScrollview.addSubview(bottomScrollStackview)
-        bottomScrollview.addSubview(refreshControl)
-        bottomScrollview.addSubview(sunriseView)
-        bottomScrollview.addSubview(sunsetView)
-        bottomScrollview.addSubview(feelsLikeView)
-        bottomScrollview.addSubview(windSpeedView)
-        bottomScrollview.addSubview(humidityView)
-        bottomScrollview.addSubview(pressureView)
-        bottomScrollview.addSubview(precipitationView)
-        bottomScrollview.addSubview(uvIndexView)
-        
-        //Adds labels to sunriseView
-        sunriseView.addSubview(sunriseTitleLabel)
-        sunriseView.addSubview(sunriseTimeLabel)
-        sunriseView.addSubview(sunriseIcon)
-        
-        //Adds labels to sunsetView
-        sunsetView.addSubview(sunsetTitleLabel)
-        sunsetView.addSubview(sunsetTimeLabel)
-        sunsetView.addSubview(sunsetIcon)
-        
-        //Adds labels to feelsLikeView
-        feelsLikeView.addSubview(feelsLikeTitleLabel)
-        feelsLikeView.addSubview(feelsLikeTempLabel)
-        feelsLikeView.addSubview(feelsLikeIcon)
-        
-        //Adds labels to windSpeedView
-        windSpeedView.addSubview(windSpeedTitleLabel)
-        windSpeedView.addSubview(windSpeedLabel)
-        windSpeedView.addSubview(windSpeedIcon)
-        
-        //Adds labels to humidityView
-        humidityView.addSubview(humidityTitleLabel)
-        humidityView.addSubview(humidityLabel)
-        humidityView.addSubview(humidityIcon)
-        
-        //Adds labels to pressureView
-        pressureView.addSubview(pressureTitleLabel)
-        pressureView.addSubview(pressureLabel)
-        pressureView.addSubview(pressureIcon)
-        
-        //Adds labels to precipitationView
+        //Adds elements into precipitationView
         precipitationView.addSubview(precipitationTitleLabel)
         precipitationView.addSubview(precipitationLabel)
-        precipitationView.addSubview(precipitationIcon)
         
-        //Adds labels to uvIndexView
-        uvIndexView.addSubview(uvTitleLabel)
-        uvIndexView.addSubview(uvLabel)
-        uvIndexView.addSubview(uvIcon)
+        //Adds elements into windView
+        windView.addSubview(windTitleLabel)
+        windView.addSubview(windLabel)
         
-        //Adds the main stacks into the view
-        view.addSubview(topStackview)
-        view.addSubview(bottomScrollview)
+        //Adds elements into hourlyForecastView
+        hourlyForecastView.addSubview(hourlyForecastTitleLabel)
+        hourlyForecastView.addSubview(scrollview)
         
-        //Sets the constraints for everything
+        //Adds Views into main view
+        view.addSubview(scrollView)
+        view.addSubview(rocketView)
+        view.addSubview(tempStackView)
+        */
+        
+        stackview1.addArrangedSubview(iconView1)
+        stackview1.addArrangedSubview(topLabel1)
+        stackview1.addArrangedSubview(bottomLabel1)
+        
+        stackview2.addArrangedSubview(iconView2)
+        stackview2.addArrangedSubview(topLabel2)
+        stackview2.addArrangedSubview(bottomLabel2)
+        
+        stackview3.addArrangedSubview(iconView3)
+        stackview3.addArrangedSubview(topLabel3)
+        stackview3.addArrangedSubview(bottomLabel3)
+        
+        stackview4.addArrangedSubview(iconView4)
+        stackview4.addArrangedSubview(topLabel4)
+        stackview4.addArrangedSubview(bottomLabel4)
+        
+        stackview5.addArrangedSubview(iconView5)
+        stackview5.addArrangedSubview(topLabel5)
+        stackview5.addArrangedSubview(bottomLabel5)
+        
+        horizontalStack.addArrangedSubview(stackview1)
+        horizontalStack.addArrangedSubview(stackview2)
+        horizontalStack.addArrangedSubview(stackview3)
+        horizontalStack.addArrangedSubview(stackview4)
+        horizontalStack.addArrangedSubview(stackview5)
+        
+        scrollview.addSubview(horizontalStack)
+        
+        tempStackView.addArrangedSubview(cityLabel)
+        tempStackView.addArrangedSubview(currentTempLabel)
+        tempStackView.addArrangedSubview(todayTempLabel)
+        
+        //Adds views into scrollview
+        scrollView.addSubview(precipitationView)
+        scrollView.addSubview(hourlyForecastView)
+        scrollView.addSubview(windView)
+        scrollView.addSubview(refreshControl)
+        
+        //Adds elements into precipitationView
+        precipitationView.addSubview(precipitationTitleLabel)
+        precipitationView.addSubview(precipitationLabel)
+        
+        //Adds elements into windView
+        windView.addSubview(windTitleLabel)
+        windView.addSubview(windLabel)
+        
+        //Adds elements into hourlyForecastView
+        hourlyForecastView.addSubview(hourlyForecastTitleLabel)
+        hourlyForecastView.addSubview(scrollview)
+        
+        //Adds Views into main view
+        view.addSubview(scrollView)
+        view.addSubview(rocketView)
+        view.addSubview(tempStackView)
+        
+        
+        
         NSLayoutConstraint.activate([
-            //topStackView constraints
-            topStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topStackview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            //topWeatherIconView constraints
-            topWeatherIconView.topAnchor.constraint(equalTo: topStackview.topAnchor),
-            topWeatherIconView.trailingAnchor.constraint(equalTo: topStackview.centerXAnchor, constant: -20),
-            //topSubStackView constraints
-            topSubStackview.topAnchor.constraint(equalTo: topStackview.topAnchor),
-            topSubStackview.leadingAnchor.constraint(equalTo: topStackview.centerXAnchor),
-            topSubStackview.trailingAnchor.constraint(equalTo: topStackview.trailingAnchor),
-            //topCurrentTempLabel
-            topCurrentTempLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
-            topCurrentTempLabel.centerYAnchor.constraint(equalTo: topSubStackview.bottomAnchor, constant: 20),
-            //topUVIndexLabel constraints
-            topUVIndexLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
-            topUVIndexLabel.centerYAnchor.constraint(equalTo: topCurrentTempLabel.bottomAnchor, constant: 20),
-            //topCityNameLabel constraints
-            topCityNameLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
-            topCityNameLabel.centerYAnchor.constraint(equalTo: topUVIndexLabel.bottomAnchor, constant: 20),
-            //topMinMaxTempView constraints
-            topMinMaxTempView.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
-            topMinMaxTempView.centerYAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 20),
-            //bottomScrollView constraints
-            bottomScrollview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bottomScrollview.topAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 60),
-            bottomScrollview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomScrollview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomScrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            //sunriseView constraints
-            sunriseView.leadingAnchor.constraint(equalTo: bottomScrollview.leadingAnchor, constant: 10),
-            sunriseView.trailingAnchor.constraint(equalToSystemSpacingAfter: bottomScrollview.centerXAnchor, multiplier: 0.5),
-            sunriseView.topAnchor.constraint(equalTo: bottomScrollview.topAnchor, constant: 10),
-            sunriseView.heightAnchor.constraint(equalToConstant: 100),
-            //sunriseTitleLabel constraints
-            sunriseTitleLabel.topAnchor.constraint(equalTo: sunriseView.topAnchor, constant: 5),
-            sunriseTitleLabel.centerXAnchor.constraint(equalTo: sunriseView.centerXAnchor, constant: -30),
-            //sunriseIcon constraints
-            sunriseIcon.centerYAnchor.constraint(equalTo: sunriseTitleLabel.centerYAnchor),
-            sunriseIcon.leadingAnchor.constraint(equalTo: sunriseTitleLabel.trailingAnchor, constant: 5),
-            //sunriseTimeLabel constraints
-            sunriseTimeLabel.topAnchor.constraint(equalTo: sunriseTitleLabel.bottomAnchor, constant: 10),
-            sunriseTimeLabel.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor, constant: 10),
-            sunriseTimeLabel.trailingAnchor.constraint(equalTo: sunriseView.trailingAnchor, constant: -10),
-            //sunsetView constraints
-            sunsetView.leadingAnchor.constraint(equalToSystemSpacingAfter: bottomScrollview.centerXAnchor, multiplier: 0.5),
-            sunsetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            sunsetView.topAnchor.constraint(equalTo: bottomScrollview.topAnchor, constant: 10),
-            sunsetView.heightAnchor.constraint(equalToConstant: 100),
-            //sunsetTitlelabel constraints
-            sunsetTitleLabel.topAnchor.constraint(equalTo: sunsetView.topAnchor, constant: 5),
-            sunsetTitleLabel.centerXAnchor.constraint(equalTo: sunsetView.centerXAnchor, constant: -30),
-            //sunsetIcon constraints
-            sunsetIcon.centerYAnchor.constraint(equalTo: sunsetTitleLabel.centerYAnchor),
-            sunsetIcon.leadingAnchor.constraint(equalTo: sunsetTitleLabel.trailingAnchor, constant: 5),
-            //sunsetTimeLabel constraints
-            sunsetTimeLabel.topAnchor.constraint(equalTo: sunsetTitleLabel.bottomAnchor, constant: 10),
-            sunsetTimeLabel.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor, constant: 10),
-            sunsetTimeLabel.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor, constant: -10),
-            //feelsLikeView constraints
-            feelsLikeView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 15),
-            feelsLikeView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
-            feelsLikeView.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor),
-            feelsLikeView.heightAnchor.constraint(equalToConstant: 100),
-            //feelsLikeTitleLabel constraints
-            feelsLikeTitleLabel.topAnchor.constraint(equalTo: feelsLikeView.topAnchor, constant: 5),
-            feelsLikeTitleLabel.leadingAnchor.constraint(equalTo: sunsetTitleLabel.leadingAnchor),
-            //feelsLikeIcon
-            feelsLikeIcon.centerYAnchor.constraint(equalTo: feelsLikeTitleLabel.centerYAnchor),
-            feelsLikeIcon.leadingAnchor.constraint(equalTo: feelsLikeTitleLabel.trailingAnchor, constant: 5),
-            //feelsLikeTempLabel constraints
-            feelsLikeTempLabel.topAnchor.constraint(equalTo: feelsLikeTitleLabel.bottomAnchor, constant: 10),
-            feelsLikeTempLabel.leadingAnchor.constraint(equalTo: feelsLikeView.leadingAnchor, constant: 10),
-            feelsLikeTempLabel.trailingAnchor.constraint(equalTo: feelsLikeView.trailingAnchor, constant: -10),
-            //windSpeedView constraints
-            windSpeedView.topAnchor.constraint(equalTo: sunsetView.bottomAnchor, constant: 15),
-            windSpeedView.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor),
-            windSpeedView.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor),
-            windSpeedView.heightAnchor.constraint(equalToConstant: 100),
-            //windSpeedTitleLabel constaints
-            windSpeedTitleLabel.topAnchor.constraint(equalTo: windSpeedView.topAnchor, constant: 5),
-            windSpeedTitleLabel.leadingAnchor.constraint(equalTo: sunriseTitleLabel.leadingAnchor),
-            //windSpeedIcon
-            windSpeedIcon.centerYAnchor.constraint(equalTo: windSpeedTitleLabel.centerYAnchor),
-            windSpeedIcon.leadingAnchor.constraint(equalTo: windSpeedTitleLabel.trailingAnchor, constant: 5),
-            //windSpeedLabel constraints
-            windSpeedLabel.topAnchor.constraint(equalTo: windSpeedTitleLabel.bottomAnchor, constant: 10),
-            windSpeedLabel.leadingAnchor.constraint(equalTo: windSpeedView.leadingAnchor, constant: 10),
-            windSpeedLabel.trailingAnchor.constraint(equalTo: windSpeedView.trailingAnchor, constant: -10),
-            //humidityView constraints
-            humidityView.topAnchor.constraint(equalTo: windSpeedView.bottomAnchor, constant: 15),
-            humidityView.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor),
-            humidityView.trailingAnchor.constraint(equalTo: sunriseView.trailingAnchor),
-            humidityView.heightAnchor.constraint(equalToConstant: 100),
-            //humidityTitleLabel constraints
-            humidityTitleLabel.topAnchor.constraint(equalTo: humidityView.topAnchor, constant: 5),
-            humidityTitleLabel.leadingAnchor.constraint(equalTo: sunriseTitleLabel.leadingAnchor),
-            //humidityIcon constraints
-            humidityIcon.centerYAnchor.constraint(equalTo: humidityTitleLabel.centerYAnchor),
-            humidityIcon.leadingAnchor.constraint(equalTo: humidityTitleLabel.trailingAnchor, constant: 5),
-            //humidityLabel constraints
-            humidityLabel.topAnchor.constraint(equalTo: humidityTitleLabel.bottomAnchor, constant: 10),
-            humidityLabel.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor, constant: 10),
-            humidityLabel.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor, constant: -10),
-            //pressureView constraints
-            pressureView.topAnchor.constraint(equalTo: windSpeedView.bottomAnchor, constant: 15),
-            pressureView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
-            pressureView.trailingAnchor.constraint(equalTo: windSpeedView.trailingAnchor),
-            pressureView.heightAnchor.constraint(equalToConstant: 100),
-            //pressureTitleLabel constraints
-            pressureTitleLabel.topAnchor.constraint(equalTo: pressureView.topAnchor, constant: 5),
-            pressureTitleLabel.leadingAnchor.constraint(equalTo: sunsetTitleLabel.leadingAnchor),
-            //pressureIcon
-            pressureIcon.centerYAnchor.constraint(equalTo: pressureTitleLabel.centerYAnchor),
-            pressureIcon.leadingAnchor.constraint(equalTo: pressureTitleLabel.trailingAnchor, constant: 5),
-            //pressureLabel constraints
-            pressureLabel.topAnchor.constraint(equalTo: pressureTitleLabel.bottomAnchor, constant: 10),
-            pressureLabel.leadingAnchor.constraint(equalTo: pressureView.leadingAnchor, constant: 10),
-            pressureLabel.trailingAnchor.constraint(equalTo: pressureView.trailingAnchor, constant: -10),
-            //preciptitaionView constraints
-            precipitationView.topAnchor.constraint(equalTo: humidityView.bottomAnchor, constant: 15),
-            precipitationView.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor),
-            precipitationView.trailingAnchor.constraint(equalTo: pressureView.trailingAnchor),
+            //rocketView constraints
+            rocketView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            rocketView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
+            rocketView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            rocketView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            //tempStackView constraints
+            tempStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tempStackView.leadingAnchor.constraint(equalTo: rocketView.trailingAnchor),
+            tempStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            //scrollView constraints
+            scrollView.topAnchor.constraint(equalTo: tempStackView.bottomAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: rocketView.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            //precipitationView constraints
+            precipitationView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            precipitationView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
+//            precipitationView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
+            precipitationView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             precipitationView.heightAnchor.constraint(equalToConstant: 100),
             //precipitationTitleLabel constraints
-            precipitationTitleLabel.topAnchor.constraint(equalTo: precipitationView.topAnchor, constant: 5),
-            precipitationTitleLabel.leadingAnchor.constraint(equalTo: humidityTitleLabel.leadingAnchor),
-            //precipitationIcon constraints
-            precipitationIcon.centerYAnchor.constraint(equalTo: precipitationTitleLabel.centerYAnchor),
-            precipitationIcon.leadingAnchor.constraint(equalTo: precipitationTitleLabel.trailingAnchor, constant: 5),
+            precipitationTitleLabel.topAnchor.constraint(equalTo: precipitationView.topAnchor, constant: 10),
+            precipitationTitleLabel.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor, constant: 10),
             //precipitationLabel constraints
-            precipitationLabel.topAnchor.constraint(equalTo: precipitationTitleLabel.bottomAnchor, constant: 10),
-            precipitationLabel.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor, constant: 10),
-            precipitationLabel.trailingAnchor.constraint(equalTo: precipitationView.trailingAnchor, constant: -10),
-            //uvIndexView constraints
-            uvIndexView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 15),
-            uvIndexView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor),
-            uvIndexView.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor),
-            uvIndexView.heightAnchor.constraint(equalToConstant: 100),
-            //uvTitleLabel constraints
-            uvTitleLabel.topAnchor.constraint(equalTo: uvIndexView.topAnchor, constant: 5),
-            uvTitleLabel.leadingAnchor.constraint(equalTo: humidityTitleLabel.leadingAnchor),
-            //uvIcon constraints
-            uvIcon.centerYAnchor.constraint(equalTo: uvTitleLabel.centerYAnchor),
-            uvIcon.leadingAnchor.constraint(equalTo: uvTitleLabel.trailingAnchor, constant: 5),
-            //uvLabel
-            uvLabel.topAnchor.constraint(equalTo: uvTitleLabel.bottomAnchor, constant: 10),
-            uvLabel.leadingAnchor.constraint(equalTo: uvIndexView.leadingAnchor, constant: 10),
-            uvLabel.trailingAnchor.constraint(equalTo: uvIndexView.trailingAnchor, constant: -10),
+            precipitationLabel.centerYAnchor.constraint(equalTo: precipitationView.centerYAnchor),
+            precipitationLabel.centerXAnchor.constraint(equalTo: precipitationView.centerXAnchor),
+            //hourlyForecastView constraints
+            hourlyForecastView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 20),
+            hourlyForecastView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor),
+            hourlyForecastView.centerXAnchor.constraint(equalTo: precipitationView.centerXAnchor),
+            hourlyForecastView.heightAnchor.constraint(equalToConstant: 150),
+            //hourlyForecastTitleLable constraints
+            hourlyForecastTitleLabel.topAnchor.constraint(equalTo: hourlyForecastView.topAnchor, constant: 10),
+            hourlyForecastTitleLabel.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor, constant: 10),
+            //scrollview constraints
+            scrollview.topAnchor.constraint(equalTo: hourlyForecastTitleLabel.bottomAnchor, constant: 10),
+            scrollview.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor, constant: 10),
+            scrollview.trailingAnchor.constraint(equalTo: hourlyForecastView.trailingAnchor, constant: -10),
+            scrollview.bottomAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: -10),
+            //horizontalStack constrains
+            horizontalStack.topAnchor.constraint(equalTo: scrollview.topAnchor),
+            horizontalStack.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor),
+            horizontalStack.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor),
+            horizontalStack.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor),
+            //windView constraints
+            windView.topAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: 20),
+            windView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor),
+            windView.centerXAnchor.constraint(equalTo: hourlyForecastView.centerXAnchor),
+            windView.heightAnchor.constraint(equalToConstant: 100),
+            //windTitleLabel constraints
+            windTitleLabel.topAnchor.constraint(equalTo: windView.topAnchor, constant: 10),
+            windTitleLabel.leadingAnchor.constraint(equalTo: windView.leadingAnchor, constant: 10),
+            //windLabel constraints
+            windLabel.centerYAnchor.constraint(equalTo: windView.centerYAnchor),
+            windLabel.leadingAnchor.constraint(equalTo: windView.leadingAnchor, constant: 10),
         ])
         
+        
+        /*
+         //Adds rain chance label, weather icon view, and current temp label into the topSubStackview
+         topSubStackview.addArrangedSubview(topTempMaxLabel)
+         topSubStackview.addArrangedSubview(topTempMinLabel)
+         
+         
+         //Adds topSubStackview, uv index, city name labels, and topMinMaxTempView into topStackView
+         topStackview.addSubview(topSubStackview)
+         topStackview.addSubview(topWeatherIconView)
+         topStackview.addSubview(topCurrentTempLabel)
+         topStackview.addSubview(topUVIndexLabel)
+         topStackview.addSubview(topCityNameLabel)
+         topStackview.addSubview(topMinMaxTempView)
+         
+         //Adds sunset, feels like, wind speed, humidity labels into bottomScrollStackview
+         bottomScrollStackview.addSubview(sunsetTimeLabel)
+         bottomScrollStackview.addSubview(windSpeedLabel)
+         bottomScrollStackview.addSubview(humidityLabel)
+         bottomScrollStackview.addSubview(pressureLabel)
+         bottomScrollStackview.addSubview(sunriseTimeLabel)
+         
+         //Adds bottomScrollStackview into bottomScrollview
+         bottomScrollview.addSubview(bottomScrollStackview)
+         bottomScrollview.addSubview(refreshControl)
+         bottomScrollview.addSubview(sunriseView)
+         bottomScrollview.addSubview(sunsetView)
+         bottomScrollview.addSubview(feelsLikeView)
+         bottomScrollview.addSubview(windSpeedView)
+         bottomScrollview.addSubview(humidityView)
+         bottomScrollview.addSubview(pressureView)
+         bottomScrollview.addSubview(precipitationView)
+         bottomScrollview.addSubview(uvIndexView)
+         
+         //Adds labels to sunriseView
+         sunriseView.addSubview(sunriseTitleLabel)
+         sunriseView.addSubview(sunriseTimeLabel)
+         sunriseView.addSubview(sunriseIcon)
+         
+         //Adds labels to sunsetView
+         sunsetView.addSubview(sunsetTitleLabel)
+         sunsetView.addSubview(sunsetTimeLabel)
+         sunsetView.addSubview(sunsetIcon)
+         
+         //Adds labels to feelsLikeView
+         feelsLikeView.addSubview(feelsLikeTitleLabel)
+         feelsLikeView.addSubview(feelsLikeTempLabel)
+         feelsLikeView.addSubview(feelsLikeIcon)
+         
+         //Adds labels to windSpeedView
+         windSpeedView.addSubview(windSpeedTitleLabel)
+         windSpeedView.addSubview(windSpeedLabel)
+         windSpeedView.addSubview(windSpeedIcon)
+         
+         //Adds labels to humidityView
+         humidityView.addSubview(humidityTitleLabel)
+         humidityView.addSubview(humidityLabel)
+         humidityView.addSubview(humidityIcon)
+         
+         //Adds labels to pressureView
+         pressureView.addSubview(pressureTitleLabel)
+         pressureView.addSubview(pressureLabel)
+         pressureView.addSubview(pressureIcon)
+         
+         //Adds labels to precipitationView
+         precipitationView.addSubview(precipitationTitleLabel)
+         precipitationView.addSubview(precipitationLabel)
+         precipitationView.addSubview(precipitationIcon)
+         
+         //Adds labels to uvIndexView
+         uvIndexView.addSubview(uvTitleLabel)
+         uvIndexView.addSubview(uvLabel)
+         uvIndexView.addSubview(uvIcon)
+         
+         //Adds the main stacks into the view
+         view.addSubview(topStackview)
+         view.addSubview(bottomScrollview)
+         
+         //Sets the constraints for everything
+         NSLayoutConstraint.activate([
+         //topStackView constraints
+         topStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         topStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+         topStackview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+         //topWeatherIconView constraints
+         topWeatherIconView.topAnchor.constraint(equalTo: topStackview.topAnchor),
+         topWeatherIconView.trailingAnchor.constraint(equalTo: topStackview.centerXAnchor, constant: -20),
+         //topSubStackView constraints
+         topSubStackview.topAnchor.constraint(equalTo: topStackview.topAnchor),
+         topSubStackview.leadingAnchor.constraint(equalTo: topStackview.centerXAnchor),
+         topSubStackview.trailingAnchor.constraint(equalTo: topStackview.trailingAnchor),
+         //topCurrentTempLabel
+         topCurrentTempLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
+         topCurrentTempLabel.centerYAnchor.constraint(equalTo: topSubStackview.bottomAnchor, constant: 20),
+         //topUVIndexLabel constraints
+         topUVIndexLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
+         topUVIndexLabel.centerYAnchor.constraint(equalTo: topCurrentTempLabel.bottomAnchor, constant: 20),
+         //topCityNameLabel constraints
+         topCityNameLabel.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
+         topCityNameLabel.centerYAnchor.constraint(equalTo: topUVIndexLabel.bottomAnchor, constant: 20),
+         //topMinMaxTempView constraints
+         topMinMaxTempView.centerXAnchor.constraint(equalTo: topStackview.centerXAnchor),
+         topMinMaxTempView.centerYAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 20),
+         //bottomScrollView constraints
+         bottomScrollview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+         bottomScrollview.topAnchor.constraint(equalTo: topCityNameLabel.bottomAnchor, constant: 60),
+         bottomScrollview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+         bottomScrollview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         bottomScrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+         //sunriseView constraints
+         sunriseView.leadingAnchor.constraint(equalTo: bottomScrollview.leadingAnchor, constant: 10),
+         sunriseView.trailingAnchor.constraint(equalToSystemSpacingAfter: bottomScrollview.centerXAnchor, multiplier: 0.5),
+         sunriseView.topAnchor.constraint(equalTo: bottomScrollview.topAnchor, constant: 10),
+         sunriseView.heightAnchor.constraint(equalToConstant: 100),
+         //sunriseTitleLabel constraints
+         sunriseTitleLabel.topAnchor.constraint(equalTo: sunriseView.topAnchor, constant: 5),
+         sunriseTitleLabel.centerXAnchor.constraint(equalTo: sunriseView.centerXAnchor, constant: -30),
+         //sunriseIcon constraints
+         sunriseIcon.centerYAnchor.constraint(equalTo: sunriseTitleLabel.centerYAnchor),
+         sunriseIcon.leadingAnchor.constraint(equalTo: sunriseTitleLabel.trailingAnchor, constant: 5),
+         //sunriseTimeLabel constraints
+         sunriseTimeLabel.topAnchor.constraint(equalTo: sunriseTitleLabel.bottomAnchor, constant: 10),
+         sunriseTimeLabel.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor, constant: 10),
+         sunriseTimeLabel.trailingAnchor.constraint(equalTo: sunriseView.trailingAnchor, constant: -10),
+         //sunsetView constraints
+         sunsetView.leadingAnchor.constraint(equalToSystemSpacingAfter: bottomScrollview.centerXAnchor, multiplier: 0.5),
+         sunsetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+         sunsetView.topAnchor.constraint(equalTo: bottomScrollview.topAnchor, constant: 10),
+         sunsetView.heightAnchor.constraint(equalToConstant: 100),
+         //sunsetTitlelabel constraints
+         sunsetTitleLabel.topAnchor.constraint(equalTo: sunsetView.topAnchor, constant: 5),
+         sunsetTitleLabel.centerXAnchor.constraint(equalTo: sunsetView.centerXAnchor, constant: -30),
+         //sunsetIcon constraints
+         sunsetIcon.centerYAnchor.constraint(equalTo: sunsetTitleLabel.centerYAnchor),
+         sunsetIcon.leadingAnchor.constraint(equalTo: sunsetTitleLabel.trailingAnchor, constant: 5),
+         //sunsetTimeLabel constraints
+         sunsetTimeLabel.topAnchor.constraint(equalTo: sunsetTitleLabel.bottomAnchor, constant: 10),
+         sunsetTimeLabel.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor, constant: 10),
+         sunsetTimeLabel.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor, constant: -10),
+         //feelsLikeView constraints
+         feelsLikeView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 15),
+         feelsLikeView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
+         feelsLikeView.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor),
+         feelsLikeView.heightAnchor.constraint(equalToConstant: 100),
+         //feelsLikeTitleLabel constraints
+         feelsLikeTitleLabel.topAnchor.constraint(equalTo: feelsLikeView.topAnchor, constant: 5),
+         feelsLikeTitleLabel.leadingAnchor.constraint(equalTo: sunsetTitleLabel.leadingAnchor),
+         //feelsLikeIcon
+         feelsLikeIcon.centerYAnchor.constraint(equalTo: feelsLikeTitleLabel.centerYAnchor),
+         feelsLikeIcon.leadingAnchor.constraint(equalTo: feelsLikeTitleLabel.trailingAnchor, constant: 5),
+         //feelsLikeTempLabel constraints
+         feelsLikeTempLabel.topAnchor.constraint(equalTo: feelsLikeTitleLabel.bottomAnchor, constant: 10),
+         feelsLikeTempLabel.leadingAnchor.constraint(equalTo: feelsLikeView.leadingAnchor, constant: 10),
+         feelsLikeTempLabel.trailingAnchor.constraint(equalTo: feelsLikeView.trailingAnchor, constant: -10),
+         //windSpeedView constraints
+         windSpeedView.topAnchor.constraint(equalTo: sunsetView.bottomAnchor, constant: 15),
+         windSpeedView.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor),
+         windSpeedView.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor),
+         windSpeedView.heightAnchor.constraint(equalToConstant: 100),
+         //windSpeedTitleLabel constaints
+         windSpeedTitleLabel.topAnchor.constraint(equalTo: windSpeedView.topAnchor, constant: 5),
+         windSpeedTitleLabel.leadingAnchor.constraint(equalTo: sunriseTitleLabel.leadingAnchor),
+         //windSpeedIcon
+         windSpeedIcon.centerYAnchor.constraint(equalTo: windSpeedTitleLabel.centerYAnchor),
+         windSpeedIcon.leadingAnchor.constraint(equalTo: windSpeedTitleLabel.trailingAnchor, constant: 5),
+         //windSpeedLabel constraints
+         windSpeedLabel.topAnchor.constraint(equalTo: windSpeedTitleLabel.bottomAnchor, constant: 10),
+         windSpeedLabel.leadingAnchor.constraint(equalTo: windSpeedView.leadingAnchor, constant: 10),
+         windSpeedLabel.trailingAnchor.constraint(equalTo: windSpeedView.trailingAnchor, constant: -10),
+         //humidityView constraints
+         humidityView.topAnchor.constraint(equalTo: windSpeedView.bottomAnchor, constant: 15),
+         humidityView.leadingAnchor.constraint(equalTo: sunriseView.leadingAnchor),
+         humidityView.trailingAnchor.constraint(equalTo: sunriseView.trailingAnchor),
+         humidityView.heightAnchor.constraint(equalToConstant: 100),
+         //humidityTitleLabel constraints
+         humidityTitleLabel.topAnchor.constraint(equalTo: humidityView.topAnchor, constant: 5),
+         humidityTitleLabel.leadingAnchor.constraint(equalTo: sunriseTitleLabel.leadingAnchor),
+         //humidityIcon constraints
+         humidityIcon.centerYAnchor.constraint(equalTo: humidityTitleLabel.centerYAnchor),
+         humidityIcon.leadingAnchor.constraint(equalTo: humidityTitleLabel.trailingAnchor, constant: 5),
+         //humidityLabel constraints
+         humidityLabel.topAnchor.constraint(equalTo: humidityTitleLabel.bottomAnchor, constant: 10),
+         humidityLabel.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor, constant: 10),
+         humidityLabel.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor, constant: -10),
+         //pressureView constraints
+         pressureView.topAnchor.constraint(equalTo: windSpeedView.bottomAnchor, constant: 15),
+         pressureView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
+         pressureView.trailingAnchor.constraint(equalTo: windSpeedView.trailingAnchor),
+         pressureView.heightAnchor.constraint(equalToConstant: 100),
+         //pressureTitleLabel constraints
+         pressureTitleLabel.topAnchor.constraint(equalTo: pressureView.topAnchor, constant: 5),
+         pressureTitleLabel.leadingAnchor.constraint(equalTo: sunsetTitleLabel.leadingAnchor),
+         //pressureIcon
+         pressureIcon.centerYAnchor.constraint(equalTo: pressureTitleLabel.centerYAnchor),
+         pressureIcon.leadingAnchor.constraint(equalTo: pressureTitleLabel.trailingAnchor, constant: 5),
+         //pressureLabel constraints
+         pressureLabel.topAnchor.constraint(equalTo: pressureTitleLabel.bottomAnchor, constant: 10),
+         pressureLabel.leadingAnchor.constraint(equalTo: pressureView.leadingAnchor, constant: 10),
+         pressureLabel.trailingAnchor.constraint(equalTo: pressureView.trailingAnchor, constant: -10),
+         //preciptitaionView constraints
+         precipitationView.topAnchor.constraint(equalTo: humidityView.bottomAnchor, constant: 15),
+         precipitationView.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor),
+         precipitationView.trailingAnchor.constraint(equalTo: pressureView.trailingAnchor),
+         precipitationView.heightAnchor.constraint(equalToConstant: 100),
+         //precipitationTitleLabel constraints
+         precipitationTitleLabel.topAnchor.constraint(equalTo: precipitationView.topAnchor, constant: 5),
+         precipitationTitleLabel.leadingAnchor.constraint(equalTo: humidityTitleLabel.leadingAnchor),
+         //precipitationIcon constraints
+         precipitationIcon.centerYAnchor.constraint(equalTo: precipitationTitleLabel.centerYAnchor),
+         precipitationIcon.leadingAnchor.constraint(equalTo: precipitationTitleLabel.trailingAnchor, constant: 5),
+         //precipitationLabel constraints
+         precipitationLabel.topAnchor.constraint(equalTo: precipitationTitleLabel.bottomAnchor, constant: 10),
+         precipitationLabel.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor, constant: 10),
+         precipitationLabel.trailingAnchor.constraint(equalTo: precipitationView.trailingAnchor, constant: -10),
+         //uvIndexView constraints
+         uvIndexView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 15),
+         uvIndexView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor),
+         uvIndexView.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor),
+         uvIndexView.heightAnchor.constraint(equalToConstant: 100),
+         //uvTitleLabel constraints
+         uvTitleLabel.topAnchor.constraint(equalTo: uvIndexView.topAnchor, constant: 5),
+         uvTitleLabel.leadingAnchor.constraint(equalTo: humidityTitleLabel.leadingAnchor),
+         //uvIcon constraints
+         uvIcon.centerYAnchor.constraint(equalTo: uvTitleLabel.centerYAnchor),
+         uvIcon.leadingAnchor.constraint(equalTo: uvTitleLabel.trailingAnchor, constant: 5),
+         //uvLabel
+         uvLabel.topAnchor.constraint(equalTo: uvTitleLabel.bottomAnchor, constant: 10),
+         uvLabel.leadingAnchor.constraint(equalTo: uvIndexView.leadingAnchor, constant: 10),
+         uvLabel.trailingAnchor.constraint(equalTo: uvIndexView.trailingAnchor, constant: -10),
+         ])
+         */
     }
     
 }
 
 extension MainViewController {
     
-    //MARK: - A function that makes a gradient background and sets it as the sublayer of the view
-    private func setGradientBackground() {
-        let colorTop =  UIColor(red: 0/255.0, green: 235.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
-        let colorBottom = UIColor(red: 100.0/255.0, green: 50.0/255.0, blue: 235.0/255.0, alpha: 1.0).cgColor
-                    
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame = self.view.bounds
-                
-        self.view.layer.insertSublayer(gradientLayer, at:0)
+    //MARK: - A function that makes a background and sets it as the sublayer of the view
+    private func setBackground() {
+        let background = UIImage(named: "Background.svg")
+        
+        let imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        imageView.frame = CGRect(x: -5, y: -5, width: view.bounds.width + 25, height: view.bounds.height + 25)
+        view.addSubview(imageView)
+        view.sendSubviewToBack(imageView)
+        
+        
+        let horizontalMotionEffect = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        horizontalMotionEffect.minimumRelativeValue = -20
+        horizontalMotionEffect.maximumRelativeValue = 20
+        
+        let verticalMotionEffect = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        verticalMotionEffect.minimumRelativeValue = -20
+        verticalMotionEffect.maximumRelativeValue = 20
+        
+        let motionEffectGroup = UIMotionEffectGroup()
+        motionEffectGroup.motionEffects = [horizontalMotionEffect, verticalMotionEffect]
+        
+        imageView.addMotionEffect(motionEffectGroup)
     }
     
     //MARK: - Function to refresh all of the labels
     func updateLabels() {
+        /*
         self.topCurrentTempLabel.text = "\(WeatherKitData.Temp)"
 //        self.topCityNameLabel.text = "\(RawWeatherData.cityName)"
         self.topTempMinLabel.text = "Min Temp: \(WeatherKitData.TempMin)"
@@ -698,6 +1097,10 @@ extension MainViewController {
         self.precipitationLabel.text = "\(WeatherKitData.RainChance)% chance of rain today"
         self.uvLabel.text = "UV Index is currently \(WeatherKitData.UV)"
         self.topWeatherIconView.image = UIImage(systemName: "\(WeatherKitData.Symbol).fill",withConfiguration: UIImage.SymbolConfiguration(pointSize: 56.0, weight: .bold))
+         */
+        self.currentTempLabel.text = "\(WeatherKitData.Temp)"
+        self.todayTempLabel.text = "H:\(WeatherKitData.TempMax) L:\(WeatherKitData.TempMin)"
+        self.windLabel.text = "\(WeatherKitData.WindSpeed)"
         
     }
     
@@ -788,30 +1191,36 @@ extension MainViewController {
         print("sunrise Tapped")
         let sunriseSunsetPop = UIHostingController(rootView: SunriseSunsetPopUpVC())
         
+        /*
         //Uses animation from Animations.swift
         self.sunriseView.showAnimation {
             self.present(sunriseSunsetPop, animated: true)
         }
+         */
     }
     
     //func for sunset view tapped
     @objc func sunsetTapped() {
         let sunriseSunsetPop = UIHostingController(rootView: SunriseSunsetPopUpVC())
         
+        /*
         //Uses animation from Animations.swift
         self.sunsetView.showAnimation {
             self.present(sunriseSunsetPop, animated: true)
         }
+         */
     }
     
     //func for windSpeed view tapped
     @objc func windSpeedTapped() {
         print("windSpeedView tapped")
         let windSpeedPopUp = UIHostingController(rootView: WindSpeedPopUpVC())
-        
+    
+        /*
         //Uses animation from Animations.swift
         self.windSpeedView.showAnimation {
             self.present(windSpeedPopUp, animated: true)
         }
+         */
     }
 }

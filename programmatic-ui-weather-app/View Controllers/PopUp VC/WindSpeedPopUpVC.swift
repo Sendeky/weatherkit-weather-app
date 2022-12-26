@@ -40,7 +40,7 @@ struct WindSpeedPopUpVC: View {
                 }
                 Spacer()
             }
-        }
+        }.ignoresSafeArea()
         .onAppear {
             if WeatherKitData.WindSpeedForecast.isEmpty == false {
                 for i in 0...9 {

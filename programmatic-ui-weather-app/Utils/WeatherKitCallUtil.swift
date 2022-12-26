@@ -176,11 +176,14 @@ extension MainViewController {
     }
     @MainActor
     private func updateLabelsAfterAwait() {
+        
+        /*
         let main = MainViewController()
         main.topTempMaxLabel.text = (WeatherKitData.TempMax)
         main.topWeatherIconView.image = UIImage(systemName: "\(WeatherKitData.Symbol)", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64))
         main.sunriseTimeLabel.text = "Sunrise was at: \(WeatherKitData.localSunrise)"
         main.sunsetTimeLabel.text = "Sunset was at: \(WeatherKitData.localSunset)"
+         */
         
         
         ForecastListVC().forecastTableView.reloadData()

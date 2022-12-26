@@ -43,8 +43,8 @@ struct SunriseSunsetPopUpVC: View {
                         //Overlays Chart over Rounded Rectangle
                         .overlay(Chart(items) { item in
                             BarMark(x: .value("Department", item.value1),
-                                     yStart: .value("Min", item.value2 - 3),
-                                     yEnd: .value("Max", item.value2 + 3)
+                                     yStart: .value("Min", item.value2 - 2),
+                                     yEnd: .value("Max", item.value2 + 2)
                             )
                             .opacity(0.5)
                             .foregroundStyle(.orange)
@@ -85,7 +85,7 @@ struct SunriseSunsetPopUpVC: View {
                 }
                 Spacer()
             }
-        }
+        }.ignoresSafeArea()
         .onAppear {
             if sunEventHour.sunriseHour > 0 {
                 items = [
