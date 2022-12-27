@@ -21,7 +21,8 @@ class SettingsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         title = "Settings"
         settings = makeSettingsCells()
         configureTableView()
-        setGradientBackground()
+//        setGradientBackground()
+        setBackground()
     }
     
     func configureTableView() {
@@ -103,16 +104,32 @@ class SettingsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
     }
     
-    private func setGradientBackground() {
-        let colorTop =  UIColor(red: 0/255.0, green: 235.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
-        let colorBottom = UIColor(red: 100.0/255.0, green: 50.0/255.0, blue: 235.0/255.0, alpha: 1.0).cgColor
-                    
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame = self.view.bounds
-                
-        self.view.layer.insertSublayer(gradientLayer, at:0)
+    private func setBackground() {
+        let background = UIImage(named: "Background.svg")
+        
+        let imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        imageView.frame = CGRect(x: -5, y: -5, width: view.bounds.width + 25, height: view.bounds.height + 25)
+        view.addSubview(imageView)
+        view.sendSubviewToBack(imageView)
+        
+        
+        let horizontalMotionEffect = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        horizontalMotionEffect.minimumRelativeValue = -20
+        horizontalMotionEffect.maximumRelativeValue = 20
+        
+        let verticalMotionEffect = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        verticalMotionEffect.minimumRelativeValue = -20
+        verticalMotionEffect.maximumRelativeValue = 20
+        
+        let motionEffectGroup = UIMotionEffectGroup()
+        motionEffectGroup.motionEffects = [horizontalMotionEffect, verticalMotionEffect]
+        
+        imageView.addMotionEffect(motionEffectGroup)
     }
 
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 844 390" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs/>
+<g id="Layer-1" vectornator:layerName="Layer 1">
+<path d="M207.159 221.885C207.159 177 311.433 86.6447 398.456 132.362C462.688 166.106 523.593 81.644 605.494 81.736C745.912 81.8938 769.467 160.98 769.467 221.885C769.467 253.393 745.309 266.602 675.419 265.586C593.136 264.389 649.998 252.327 511.288 256.922C441.38 259.238 312.259 262.443 312.259 262.443C312.259 262.443 207.159 257.983 207.159 221.885Z" fill="#ededed" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M556.034 181.811C556.034 136.926 482.511 46.5699 421.152 92.2873C375.862 126.032 332.918 41.5692 275.169 41.6613C176.16 41.8191 159.552 120.905 159.552 181.811C159.552 213.318 176.586 226.528 225.865 225.511C283.883 224.314 243.789 212.252 341.594 216.847C390.886 219.163 481.929 222.369 481.929 222.369C481.929 222.369 556.034 217.908 556.034 181.811Z" fill="#ededed" fill-rule="nonzero" opacity="1" stroke="none" vectornator:blendMode="multiply"/>
+<path d="M807.81 259.886C807.81 221.298 704.273 143.62 617.864 182.923C554.085 211.933 493.611 139.321 412.287 139.4C272.86 139.536 249.472 207.526 249.472 259.886C249.472 286.973 273.459 298.328 342.856 297.454C424.559 296.425 368.097 286.056 505.828 290.006C575.243 291.997 703.452 294.753 703.452 294.753C703.452 294.753 807.81 290.918 807.81 259.886Z" fill="#cccccc" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M36.9787 143.156C48.6996 105.195 157.648 58.1433 222.104 141.771C270.862 205.031 375.723 242.238 364.002 280.199C352.281 318.16 185.932 308.825 85.0471 277.675C-15.8379 246.525 25.2577 181.117 36.9787 143.156Z" fill="#aeaeae" fill-rule="nonzero" opacity="1" stroke="none" vectornator:blendMode="multiply"/>
+</g>
+</svg>

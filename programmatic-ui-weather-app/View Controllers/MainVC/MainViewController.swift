@@ -75,10 +75,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     var refreshControl = UIRefreshControl()
     //Creates the location manager
     let locationManager = CLLocationManager()
+    //Creates view for cloud at top
+    let uiView = UIView()
 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBackground() //Function that sets the view to a gradient background
         view.backgroundColor = .orange
         print("TempMaxForecast Array: \(WeatherKitData.TempMaxForecast)")
                 
@@ -111,7 +114,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     
     
     override func viewWillAppear(_ animated: Bool) {
-        setBackground() //Function that sets the view to a gradient background
+        //Animates the cloud at the top
+        UIView.animate(withDuration: 20.0, delay: 0.5, options: [.repeat, .curveLinear] ,animations: {
+            self.uiView.center.x = self.view.bounds.maxX + 200
+            self.uiView.center.x = self.view.bounds.minX - 200
+        })
         viewDidLoadRefresh()
         super.viewWillAppear(true)
     }
@@ -426,6 +433,23 @@ extension MainViewController {
     
     //MARK: - A function that makes a background and sets it as the sublayer of the view
     private func setBackground() {
+        
+        //Creates cloud at top of the screen
+        uiView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4)
+        let cloud = UIImage(named: "Cloud.svg")
+        let cloudView : UIImageView!
+        cloudView = UIImageView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4))
+        cloudView.contentMode =  .scaleAspectFit
+        cloudView.layer.opacity = 0.6
+        cloudView.clipsToBounds = true
+        cloudView.image = cloud
+        cloudView.center = view.center
+        cloudView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4)
+        uiView.addSubview(cloudView)
+        view.addSubview(uiView)
+        view.sendSubviewToBack(uiView)
+        
+        
         let background = UIImage(named: "Background.svg")
         
         let imageView : UIImageView!
