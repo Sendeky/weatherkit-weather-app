@@ -14,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        let mainViewController = MainViewController()
-//        mainViewController.viewDidLoadRefresh()
+        let mainViewController = MainViewController()
+        mainViewController.viewDidLoadRefresh()
         return true
     }
 
@@ -34,13 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func applicationWillTerminate(_ application: UIApplication) {
         //Called when the appcation will be terminated
-//        let main = MainViewController()
-//        main.locationManager.stopUpdatingLocation()
+        let main = MainViewController()
+        main.locationManager.stopUpdatingLocation()
     }
     func applicationDidEnterBackground(_ application: UIApplication) {
         //Called when application enters background
-//        let main = MainViewController()
-//        main.locationManager.stopUpdatingLocation()
+        let main = MainViewController()
+        main.locationManager.stopUpdatingLocation()
     }
 
 }

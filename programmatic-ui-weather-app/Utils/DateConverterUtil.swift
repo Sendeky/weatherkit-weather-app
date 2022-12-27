@@ -12,7 +12,8 @@ struct sunEventHour {
     static var sunsetHour = 0
 }
 struct timeArray {
-    static var date = [String]()
+    static var formattedHours = [String]()
+    static var integerHours = [Int]()
 }
 
 class DateConverter{
@@ -30,12 +31,21 @@ class DateConverter{
     
     func timeArrayMaker() {
         let dateFormatter = DateFormatter()
+        let dateFormatter2 = DateFormatter()
         dateFormatter.dateFormat = "hh a" //"a" prints am or pm
+        dateFormatter2.dateFormat = "hh"
         let startTime = Date.now
         for i in 0...10{
             let hour = (Calendar.current.date(byAdding: .hour, value: i, to: startTime)!)
             let h = dateFormatter.string(from: hour)
-            timeArray.date.append(h)
+            timeArray.formattedHours.append(h)
+        }
+        for i in 0...10 {
+            let hour2 = (Calendar.current.date(byAdding: .hour, value: i, to: startTime)!)
+            let intHour = dateFormatter2.string(from: hour2)
+            let hh = Int(intHour)
+            print(hh)
+            timeArray.integerHours.append(hh!)
         }
     }
 }

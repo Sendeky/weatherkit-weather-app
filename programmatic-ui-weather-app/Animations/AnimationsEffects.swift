@@ -26,4 +26,15 @@ public extension UIView {
             }
         }
     }
+    
+    func applyBlurEffect(_ style: UIBlurEffect.Style = .light, cornerRadius: CGFloat) {
+        let blurEffect = UIBlurEffect(style: style)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = bounds
+        blurEffectView.layer.cornerRadius = cornerRadius
+        blurEffectView.clipsToBounds = true
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurEffectView)
+    }
+
 }
