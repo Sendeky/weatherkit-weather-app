@@ -24,8 +24,15 @@ class TabBarViewController: UITabBarController {
         
         //Assign controllers to tab bar
         self.setViewControllers([mainVC, forecastVC, settingsVC], animated: false)
-        tabBar.backgroundColor = UIColor(red: 100.0/255.0, green: 50.0/255.0, blue: 235.0/255.0, alpha: 1.0)
+//        tabBar.backgroundColor = UIColor(red: 100.0/255.0, green: 50.0/255.0, blue: 235.0/255.0, alpha: 1.0)
         tabBar.isOpaque = true
+        tabBar.backgroundColor = .clear
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = tabBar.bounds
+        blurEffectView.clipsToBounds = true
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tabBar.addSubview(blurEffectView)
         
         //Array of TabBar icons
         guard let items = self.tabBar.items else { return }
