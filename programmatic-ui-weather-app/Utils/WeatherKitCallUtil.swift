@@ -15,7 +15,6 @@ struct WeatherKitData: Codable{
     static var SunriseDate = Date()
     static var SunsetDate = Date()
     
-    
     //Normal, converted values
     static var Temp = ""
     static var TempMax = ""
@@ -48,6 +47,15 @@ extension MainViewController {
     func getWeather(location: CLLocation) {
         Task{
             do {
+                
+                //fetches location
+                UserLocation.userCLLocation?.fetchCityAndCountry(completion: { city, country, error in
+                    guard let city = city, let country = country, error == nil else { return }
+                    print(city + ", " + country)  // City, Country
+                    //Puts city name into cityLabel
+                    self.cityLabel.text = "\(city)"
+                })
+                
                 let calendar = Calendar.current
                 let endDate = calendar.date(byAdding: .hour, value: 12,to: Date.now)
                 let result = try await weatherService.weather(for: location, including: .current, .hourly(startDate: Date.now, endDate: endDate!), .daily)
@@ -180,15 +188,6 @@ extension MainViewController {
     }
     @MainActor
     private func updateLabelsAfterAwait() {
-        
-        /*
-        let main = MainViewController()
-        main.topTempMaxLabel.text = (WeatherKitData.TempMax)
-        main.topWeatherIconView.image = UIImage(systemName: "\(WeatherKitData.Symbol)", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64))
-        main.sunriseTimeLabel.text = "Sunrise was at: \(WeatherKitData.localSunrise)"
-        main.sunsetTimeLabel.text = "Sunset was at: \(WeatherKitData.localSunset)"
-         */
-        
         
         ForecastListVC().forecastTableView.reloadData()
         print("updateLabelsAfterAwait run")

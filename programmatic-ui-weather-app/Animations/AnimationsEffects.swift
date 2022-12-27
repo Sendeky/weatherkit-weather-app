@@ -5,6 +5,7 @@
 //  Created by RuslanS on 12/20/22.
 //
 import UIKit
+import CoreLocation
 
 public extension UIView {
     func showAnimation(_ completionBlock: @escaping () -> Void) {
@@ -36,5 +37,12 @@ public extension UIView {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(blurEffectView)
     }
+}
 
+
+//Extension to fetchCityAndCountry
+extension CLLocation {
+    func fetchCityAndCountry(completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
+        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first?.locality, $0?.first?.country, $1) }
+    }
 }
