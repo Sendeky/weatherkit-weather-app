@@ -98,7 +98,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         layout()
         //initializes location services
         initializeLocationServices()
-        
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound]) { success, error in
+        }
         
         DispatchQueue.global().async {
             self.viewDidLoadRefresh()

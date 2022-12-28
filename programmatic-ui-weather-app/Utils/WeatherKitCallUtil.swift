@@ -27,6 +27,7 @@ struct WeatherKitData: Codable{
     static var Symbol = ""
     static var forecastSymbol = [String]()
     static var Humidity = 0
+    static var Sunset = Date()
     static var localSunrise = ""
     static var localSunset = ""
     static var SolarNoon = ""
@@ -159,6 +160,7 @@ extension MainViewController {
                 WeatherKitData.Symbol = symbol
                 WeatherKitData.Humidity = humidity
                 WeatherKitData.Symbol = symbol
+                WeatherKitData.Sunset = result.2.forecast[0].sun.sunset!
                 WeatherKitData.localSunrise = localSunrise
                 WeatherKitData.localSunset = localSunset
                 WeatherKitData.SolarNoon = solarNoon
@@ -192,7 +194,6 @@ extension MainViewController {
         print("updateLabelsAfterAwait run")
         getWeatherLabelUpdate()
         DateConverter().convertDateToEpoch()
+        createNotification()
     }
 }
-
-
