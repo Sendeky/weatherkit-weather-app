@@ -22,6 +22,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
     
     
+    let iconView = UIImageView()
     let tempStackView = UIStackView()
     let cityLabel = UILabel()
     let currentTempLabel = UILabel()
@@ -81,7 +82,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBackground() //Function that sets the view to a gradient background
+        setBackground() //Function that sets the view to a background
         view.backgroundColor = .orange
         print("TempMaxForecast Array: \(WeatherKitData.TempMaxForecast)")
                 
@@ -102,9 +103,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         DispatchQueue.global().async {
             self.viewDidLoadRefresh()
 
-            
             //Updates all the labels asynchronously
             DispatchQueue.main.async {
+                self.iconView.image = UIImage(systemName: WeatherKitData.Symbol + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
                 self.currentTempLabel.text = "\(WeatherKitData.Temp)"
                 self.todayTempLabel.text = "H:\(WeatherKitData.TempMax) L:\(WeatherKitData.TempMin)"
                 self.windLabel.text = "\(WeatherKitData.WindSpeed)"
@@ -135,6 +136,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
 
     
     private func style() {
+        
+        iconView.translatesAutoresizingMaskIntoConstraints = false
+        iconView.contentMode = .scaleAspectFit
+//        iconView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(
+            iconView.image = UIImage(systemName: "questionmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
         //tempStackView settings
         tempStackView.axis = .vertical
         tempStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -146,7 +152,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         cityLabel.text = "City"
         
         //currentTempLabel settings
-        currentTempLabel.font = .preferredFont(forTextStyle: .title1)
+        currentTempLabel.font = .preferredFont(forTextStyle: .largeTitle)
         currentTempLabel.text = "--˚"
         
         //todayTempLabel settings
@@ -362,6 +368,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         hourlyForecastView.addSubview(scrollview)
         
         //Adds Views into main view
+        view.addSubview(iconView)
         view.addSubview(scrollView)
         view.addSubview(rocketView)
         view.addSubview(tempStackView)
@@ -369,6 +376,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         
         NSLayoutConstraint.activate([
+            //iconView constraints
+            iconView.centerYAnchor.constraint(equalTo: currentTempLabel.centerYAnchor),
+            iconView.centerXAnchor.constraint(equalTo: rocketView.centerXAnchor),
+//            iconView.widthAnchor.constraint(equalToConstant: ),
             //rocketView constraints
             rocketView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             rocketView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
@@ -432,7 +443,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
 extension MainViewController {
     
     //MARK: - A function that makes a background and sets it as the sublayer of the view
-    private func setBackground() {
+    func setBackground() {
         
         //Creates cloud at top of the screen
         uiView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4)
@@ -479,6 +490,7 @@ extension MainViewController {
     
     //MARK: - Function to refresh all of the labels
     func updateLabels() {
+        self.iconView.image = UIImage(systemName: WeatherKitData.Symbol + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
         self.currentTempLabel.text = "\(WeatherKitData.Temp)"
         self.todayTempLabel.text = "H:\(WeatherKitData.TempMax) L:\(WeatherKitData.TempMin)"
         self.windLabel.text = "\(WeatherKitData.WindSpeed)"

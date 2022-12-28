@@ -179,16 +179,15 @@ extension MainViewController {
                 //Encodes data into AppGroup
                 primaryData.encode()
                 
-                
             } catch {
                 print(String(describing: error))
             }
             self.updateLabelsAfterAwait()
         }
     }
+    //@MainActor runs after getweather Task completes
     @MainActor
     private func updateLabelsAfterAwait() {
-        
         ForecastListVC().forecastTableView.reloadData()
         print("updateLabelsAfterAwait run")
         getWeatherLabelUpdate()
