@@ -29,6 +29,7 @@
 		C04E9EA029417FA400882FC6 /* WidgetStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04E9E9E29417FA100882FC6 /* WidgetStruct.swift */; };
 		C04E9EEE2945296C00882FC6 /* PrimaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04E9EED2945296B00882FC6 /* PrimaryData.swift */; };
 		C04E9EEF2945297400882FC6 /* PrimaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04E9EED2945296B00882FC6 /* PrimaryData.swift */; };
+		C053221E295D52F100FF849E /* RocketAnimationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C053221D295D52F100FF849E /* RocketAnimationUtil.swift */; };
 		C055633C295CE4CB008CB6D4 /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C055633B295CE4CB008CB6D4 /* NotificationUtil.swift */; };
 		C06F8D2E292980550054D5DC /* ForecastListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D2D292980550054D5DC /* ForecastListVC.swift */; };
 		C06F8D31292981680054D5DC /* Forecasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D30292981680054D5DC /* Forecasts.swift */; };
@@ -104,6 +105,7 @@
 		C04E9E9D293D134B00882FC6 /* weatherkit-widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "weatherkit-widgetExtension.entitlements"; sourceTree = "<group>"; };
 		C04E9E9E29417FA100882FC6 /* WidgetStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetStruct.swift; sourceTree = "<group>"; };
 		C04E9EED2945296B00882FC6 /* PrimaryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryData.swift; sourceTree = "<group>"; };
+		C053221D295D52F100FF849E /* RocketAnimationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketAnimationUtil.swift; sourceTree = "<group>"; };
 		C055633B295CE4CB008CB6D4 /* NotificationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUtil.swift; sourceTree = "<group>"; };
 		C06F8D2D292980550054D5DC /* ForecastListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListVC.swift; sourceTree = "<group>"; };
 		C06F8D30292981680054D5DC /* Forecasts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecasts.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				C04E9EED2945296B00882FC6 /* PrimaryData.swift */,
 				C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */,
 				C055633B295CE4CB008CB6D4 /* NotificationUtil.swift */,
+				C053221D295D52F100FF849E /* RocketAnimationUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */,
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,
 				C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */,
+				C053221E295D52F100FF849E /* RocketAnimationUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

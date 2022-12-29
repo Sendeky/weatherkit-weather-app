@@ -42,9 +42,6 @@ struct WeatherKitData: Codable{
 
 let weatherService = WeatherService()
 
-class WeatherKitCallUtil {
-}
-
 extension MainViewController {
     func getWeather(location: CLLocation) {
         Task{
@@ -197,5 +194,11 @@ extension MainViewController {
         getWeatherLabelUpdate()
         DateConverter().convertDateToEpoch()
         createNotification()
+        
+        let date = Date.now.addingTimeInterval(10)
+        let rocketTimer = Timer(fireAt: date, interval: 0, target: self, selector: #selector(AnimateRocket), userInfo: nil, repeats: false)
+        RunLoop.main.add(rocketTimer, forMode: RunLoop.Mode.common)
     }
+//    private func make  {
+//    }
 }

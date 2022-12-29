@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 import WeatherKit
-import SwiftUI
+//import SwiftUI
 
 struct UserLocation {
     static var userLatitude: Double? = 0.0
@@ -18,9 +18,8 @@ struct UserLocation {
 
 class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
     
-    //cyanColor constant
+    //cyanColor constant (used in precipitationView, hourlyForecastView, etc.)
     let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
-    
     
     let iconView = UIImageView()
     let tempStackView = UIStackView()
@@ -78,14 +77,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let locationManager = CLLocationManager()
     //Creates view for cloud at top
     let uiView = UIView()
-
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackground() //Function that sets the view to a background
         view.backgroundColor = .orange
-        print("TempMaxForecast Array: \(WeatherKitData.TempMaxForecast)")
-                
         
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
@@ -129,7 +126,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     
     private func initializeLocationServices() {
         locationManager.delegate = self
-
         guard CLLocationManager.locationServicesEnabled() else {
             return
         }
@@ -141,8 +137,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.contentMode = .scaleAspectFit
-//        iconView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(
-            iconView.image = UIImage(systemName: "questionmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
+        iconView.image = UIImage(systemName: "questionmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
         //tempStackView settings
         tempStackView.axis = .vertical
         tempStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -214,7 +209,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         horizontalStack.translatesAutoresizingMaskIntoConstraints = false
         horizontalStack.axis = .horizontal
-//        horizontalStack.backgroundColor = .orange
         horizontalStack.alignment = .center
         horizontalStack.spacing = 20
         
@@ -318,7 +312,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     }
     
     private func layout(){
-        
         stackview1.addArrangedSubview(iconView1)
         stackview1.addArrangedSubview(topLabel1)
         stackview1.addArrangedSubview(bottomLabel1)
@@ -374,7 +367,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         view.addSubview(scrollView)
         view.addSubview(rocketView)
         view.addSubview(tempStackView)
-        
         
         
         NSLayoutConstraint.activate([
@@ -438,9 +430,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             windLabel.centerYAnchor.constraint(equalTo: windView.centerYAnchor),
             windLabel.leadingAnchor.constraint(equalTo: windView.leadingAnchor, constant: 10),
         ])
-    }
-    
-}
+    }//Layout func
+}//MainViewController class
 
 extension MainViewController {
     
@@ -464,7 +455,6 @@ extension MainViewController {
         
         
         let background = UIImage(named: "Background.svg")
-        
         let imageView : UIImageView!
         imageView = UIImageView(frame: view.bounds)
         imageView.contentMode =  .scaleAspectFill
