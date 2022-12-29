@@ -15,6 +15,5 @@ extension MainViewController {
         print("AnimateRocket called")
 //        view.backgroundColor = UIColor(red: 50.0/225.0, green: 40.0/255.0, blue: 125.0/255.0, alpha: 1.0)
         view.backgroundColor = .black
-        
     }
 }

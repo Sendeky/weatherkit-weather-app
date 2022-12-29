@@ -195,7 +195,7 @@ extension MainViewController {
         DateConverter().convertDateToEpoch()
         createNotification()
         
-        let date = Date.now.addingTimeInterval(10)
+        let date = WeatherKitData.SunsetDate
         let rocketTimer = Timer(fireAt: date, interval: 0, target: self, selector: #selector(AnimateRocket), userInfo: nil, repeats: false)
         RunLoop.main.add(rocketTimer, forMode: RunLoop.Mode.common)
     }

@@ -77,9 +77,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let locationManager = CLLocationManager()
     //Creates view for cloud at top
     let uiView = UIView()
-    
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         setBackground() //Function that sets the view to a background
         view.backgroundColor = .orange
@@ -134,6 +134,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
 
     
     private func style() {
+        
         
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.contentMode = .scaleAspectFit
@@ -362,6 +363,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         hourlyForecastView.addSubview(hourlyForecastTitleLabel)
         hourlyForecastView.addSubview(scrollview)
         
+        //Adds tap gesture recognizer
+        
         //Adds Views into main view
         view.addSubview(iconView)
         view.addSubview(scrollView)
@@ -453,7 +456,7 @@ extension MainViewController {
         view.addSubview(uiView)
         view.sendSubviewToBack(uiView)
         
-        
+
         let background = UIImage(named: "Background.svg")
         let imageView : UIImageView!
         imageView = UIImageView(frame: view.bounds)
@@ -586,6 +589,10 @@ extension MainViewController {
 //        print("UserLocation.userLongitude = \((UserLocation.userLongitude)!)")
         UserLocation.userCLLocation = locations[0]
 //        print(UserLocation.userCLLocation)
+    }
+    
+    @objc func launchRocket() {
+        print("rocket launched")
     }
     
     /* MARK: TODO
