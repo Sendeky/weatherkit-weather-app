@@ -4,31 +4,54 @@
 //
 //  Created by RuslanS on 12/28/22.
 //
-
-//import Foundation
 import UIKit
 
 func createNotification() {
-    let notificationContent = UNMutableNotificationContent()
-    notificationContent.title = "Ready for Launch!"
-    notificationContent.body = "Rocket Ready! Sunset in 2 minutes"
+    let sunsetNotificationContent = UNMutableNotificationContent()
+    sunsetNotificationContent.title = "Ready for Launch!"
+    sunsetNotificationContent.body = "Rocket Ready! Sunset in 2 minutes"
     
-    var comp = Calendar.current.dateComponents([.hour, .month], from: WeatherKitData.Sunset)
+    var sunsetTime = Calendar.current.dateComponents([.hour, .minute], from: WeatherKitData.Sunset)
+    print("Comp: \(sunsetTime)")
 //        var comp = DateComponents()
 //        comp.hour = 12
 //        comp.minute = 50
-    let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: comp, repeats: true)
+    let sunsetNotificationTrigger = UNCalendarNotificationTrigger(dateMatching: sunsetTime, repeats: true)
     
-    let notifcationId = UUID().uuidString
+    let sunsetNotifcationId = UUID().uuidString
     
-    let notificationRequest = UNNotificationRequest(identifier: notifcationId, content: notificationContent, trigger: notificationTrigger)
+    let sunsetNotificationRequest = UNNotificationRequest(identifier: sunsetNotifcationId, content: sunsetNotificationContent, trigger: sunsetNotificationTrigger)
     
     UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-    UNUserNotificationCenter.current().add(notificationRequest) { error in
+    UNUserNotificationCenter.current().add(sunsetNotificationRequest) { error in
         if let error = error {
             print("UNUSerNotificationCenter Error: \(error)")
         }
     }
-    print("registered notification")
+    print("registered sunset notification")
+    
+    
+    let sunriseNotificationContent = UNMutableNotificationContent()
+    sunriseNotificationContent.title = "Ready for Launch!"
+    sunriseNotificationContent.body = "Rocket Ready! Sunrise in 2 minutes"
+    
+    var sunriseTime = Calendar.current.dateComponents([.hour, .minute], from: WeatherKitData.Sunrise)
+    print("Comp: \(sunriseTime)")
+//        var comp = DateComponents()
+//        comp.hour = 12
+//        comp.minute = 50
+    let sunriseNotificationTrigger = UNCalendarNotificationTrigger(dateMatching: sunriseTime, repeats: true)
+    
+    let sunriseNotifcationId = UUID().uuidString
+    
+    let sunriseNotificationRequest = UNNotificationRequest(identifier: sunriseNotifcationId, content: sunriseNotificationContent, trigger: sunriseNotificationTrigger)
+    
+    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    UNUserNotificationCenter.current().add(sunriseNotificationRequest) { error in
+        if let error = error {
+            print("UNUSerNotificationCenter Error: \(error)")
+        }
+    }
+    print("registered sunrise notifications")
     
 }

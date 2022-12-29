@@ -27,6 +27,7 @@ struct WeatherKitData: Codable{
     static var Symbol = ""
     static var forecastSymbol = [String]()
     static var Humidity = 0
+    static var Sunrise = Date()
     static var Sunset = Date()
     static var localSunrise = ""
     static var localSunset = ""
@@ -160,6 +161,7 @@ extension MainViewController {
                 WeatherKitData.Symbol = symbol
                 WeatherKitData.Humidity = humidity
                 WeatherKitData.Symbol = symbol
+                WeatherKitData.Sunrise = result.2.forecast[0].sun.sunrise!
                 WeatherKitData.Sunset = result.2.forecast[0].sun.sunset!
                 WeatherKitData.localSunrise = localSunrise
                 WeatherKitData.localSunset = localSunset
