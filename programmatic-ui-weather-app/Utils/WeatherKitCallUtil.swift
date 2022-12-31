@@ -53,6 +53,7 @@ extension MainViewController {
                     print(city + ", " + country)  // City, Country
                     //Puts city name into cityLabel
                     self.cityLabel.text = "\(city)"
+//                    self.cityLabel.text = "San Francisco"
                 })
                 
                 let calendar = Calendar.current
@@ -195,7 +196,7 @@ extension MainViewController {
         DateConverter().convertDateToEpoch()
         createNotification()
         
-        let date = WeatherKitData.SunsetDate
+        let date = WeatherKitData.Sunset
         let rocketTimer = Timer(fireAt: date, interval: 0, target: self, selector: #selector(AnimateRocket), userInfo: nil, repeats: false)
         RunLoop.main.add(rocketTimer, forMode: RunLoop.Mode.common)
     }

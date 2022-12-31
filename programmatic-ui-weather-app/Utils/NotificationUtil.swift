@@ -9,7 +9,7 @@ import UIKit
 func createNotification() {
     let sunsetNotificationContent = UNMutableNotificationContent()
     sunsetNotificationContent.title = "Ready for Launch!"
-    sunsetNotificationContent.body = "Rocket Ready! Sunset in 2 minutes"
+    sunsetNotificationContent.body = "Rocket Ready! Sunset soon"
 
     //Breaks Date() down into DateComponents (hours, minutes, etc.)
     var sunsetTime = Calendar.current.dateComponents([.hour, .minute], from: WeatherKitData.Sunset)
@@ -32,8 +32,8 @@ func createNotification() {
     
     //Breaks Date() down into DateComponents (hours, minutes, etc.)
     let sunriseNotificationContent = UNMutableNotificationContent()
-    sunriseNotificationContent.title = "Ready for Launch!"
-    sunriseNotificationContent.body = "Rocket Ready! Sunrise in 2 minutes"
+    sunriseNotificationContent.title = "Sunrise Soon!"
+    sunriseNotificationContent.body = "Sunrise soon"
     
     var sunriseTime = Calendar.current.dateComponents([.hour, .minute], from: WeatherKitData.Sunrise)
     print("Comp: \(sunriseTime)")
@@ -44,7 +44,7 @@ func createNotification() {
     let sunriseNotificationRequest = UNNotificationRequest(identifier: sunriseNotifcationId, content: sunriseNotificationContent, trigger: sunriseNotificationTrigger)
     
     //Prevents duplicate notifications
-    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     UNUserNotificationCenter.current().add(sunriseNotificationRequest) { error in
         if let error = error {
             print("UNUSerNotificationCenter Error: \(error)")

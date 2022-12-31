@@ -15,11 +15,11 @@ public extension UIView {
                        options: .curveLinear,
                        animations: { [weak self] in
                             self?.transform = CGAffineTransform.init(scaleX: 0.95, y: 0.95)
-        }) {  (done) in
+        }) {  (done) in //Completion block
             UIView.animate(withDuration: 0.1,
                            delay: 0,
                            options: .curveLinear,
-                           animations: { [weak self] in
+                           animations: { [weak self] in //weak self helps free memory
                                 self?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
             }) { [weak self] (_) in
                 self?.isUserInteractionEnabled = true

@@ -26,6 +26,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let cityLabel = UILabel()
     let currentTempLabel = UILabel()
     let todayTempLabel = UILabel()
+    let rocketText = UILabel()
     let rocketView = UIImageView()
     let scrollView = UIScrollView()
     let precipitationView = UIView()
@@ -77,7 +78,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let locationManager = CLLocationManager()
     //Creates view for cloud at top
     let uiView = UIView()
-
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -157,7 +159,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         todayTempLabel.font = .preferredFont(forTextStyle: .title1)
         todayTempLabel.text = "H:--˚ L:--˚"
         
+        //rocketText settings
+        rocketText.text = "--"
+        rocketText.font = .preferredFont(forTextStyle: .body)
+        rocketText.translatesAutoresizingMaskIntoConstraints = false
+        
         //rocketView settings
+        let rocketTapGesture = UITapGestureRecognizer(target: self, action: #selector(launchRocket))
+        rocketTapGesture.isEnabled = false
         rocketView.translatesAutoresizingMaskIntoConstraints = false
         rocketView.contentMode = .scaleAspectFit
         rocketView.clipsToBounds = true
@@ -167,6 +176,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         rocketView.layer.shadowOpacity = 0.7
         rocketView.layer.shadowOffset = CGSize(width: -4, height: 4)
         rocketView.layer.masksToBounds = false
+        rocketView.isUserInteractionEnabled = true
+        rocketView.addGestureRecognizer(rocketTapGesture)
         
         //scrollView settings
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -218,7 +229,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         stackview1.alignment = .center
         
         topLabel1.translatesAutoresizingMaskIntoConstraints = false
-        topLabel1.text = "8˚C"
+        topLabel1.text = "--˚"
         topLabel1.font = .preferredFont(forTextStyle: .title2)
         
         iconView1.translatesAutoresizingMaskIntoConstraints = false
@@ -226,7 +237,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         iconView1.contentMode = .scaleAspectFit
         
         bottomLabel1.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel1.text = "7PM"
+        bottomLabel1.text = "--"
         bottomLabel1.font = .preferredFont(forTextStyle: .body)
         
         stackview2.translatesAutoresizingMaskIntoConstraints = false
@@ -234,7 +245,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         stackview2.alignment = .center
         
         topLabel2.translatesAutoresizingMaskIntoConstraints = false
-        topLabel2.text = "8˚C"
+        topLabel2.text = "--˚"
         topLabel2.font = .preferredFont(forTextStyle: .title2)
         
         iconView2.translatesAutoresizingMaskIntoConstraints = false
@@ -242,7 +253,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         iconView2.contentMode = .scaleAspectFit
         
         bottomLabel2.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel2.text = "7PM"
+        bottomLabel2.text = "--"
         bottomLabel2.font = .preferredFont(forTextStyle: .body)
         
         stackview3.translatesAutoresizingMaskIntoConstraints = false
@@ -250,7 +261,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         stackview3.alignment = .center
         
         topLabel3.translatesAutoresizingMaskIntoConstraints = false
-        topLabel3.text = "8˚C"
+        topLabel3.text = "--˚"
         topLabel3.font = .preferredFont(forTextStyle: .title2)
         
         iconView3.translatesAutoresizingMaskIntoConstraints = false
@@ -258,7 +269,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         iconView3.contentMode = .scaleAspectFit
         
         bottomLabel3.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel3.text = "7PM"
+        bottomLabel3.text = "--"
         bottomLabel3.font = .preferredFont(forTextStyle: .body)
         
         stackview4.translatesAutoresizingMaskIntoConstraints = false
@@ -266,7 +277,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         stackview4.alignment = .center
         
         topLabel4.translatesAutoresizingMaskIntoConstraints = false
-        topLabel4.text = "8˚C"
+        topLabel4.text = "--˚"
         topLabel4.font = .preferredFont(forTextStyle: .title2)
         
         iconView4.translatesAutoresizingMaskIntoConstraints = false
@@ -274,7 +285,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         iconView4.contentMode = .scaleAspectFit
         
         bottomLabel4.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel4.text = "7PM"
+        bottomLabel4.text = "--"
         bottomLabel4.font = .preferredFont(forTextStyle: .body)
         
         stackview5.translatesAutoresizingMaskIntoConstraints = false
@@ -282,7 +293,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         stackview5.alignment = .center
         
         topLabel5.translatesAutoresizingMaskIntoConstraints = false
-        topLabel5.text = "8˚C"
+        topLabel5.text = "--˚"
         topLabel5.font = .preferredFont(forTextStyle: .title2)
         
         windView.translatesAutoresizingMaskIntoConstraints = false
@@ -295,7 +306,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         iconView5.contentMode = .scaleAspectFit
         
         bottomLabel5.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel5.text = "7PM"
+        bottomLabel5.text = "--"
         bottomLabel5.font = .preferredFont(forTextStyle: .body)
         
         windTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -363,9 +374,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         hourlyForecastView.addSubview(hourlyForecastTitleLabel)
         hourlyForecastView.addSubview(scrollview)
         
-        //Adds tap gesture recognizer
         
         //Adds Views into main view
+        view.addSubview(rocketText)
         view.addSubview(iconView)
         view.addSubview(scrollView)
         view.addSubview(rocketView)
@@ -377,6 +388,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             iconView.centerYAnchor.constraint(equalTo: currentTempLabel.centerYAnchor),
             iconView.centerXAnchor.constraint(equalTo: rocketView.centerXAnchor),
 //            iconView.widthAnchor.constraint(equalToConstant: ),
+            //rocketText constraints
+            rocketText.centerXAnchor.constraint(equalTo: rocketView.centerXAnchor),
+            rocketText.bottomAnchor.constraint(equalTo: rocketView.topAnchor),
             //rocketView constraints
             rocketView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             rocketView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
@@ -431,7 +445,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             windTitleLabel.leadingAnchor.constraint(equalTo: windView.leadingAnchor, constant: 10),
             //windLabel constraints
             windLabel.centerYAnchor.constraint(equalTo: windView.centerYAnchor),
-            windLabel.leadingAnchor.constraint(equalTo: windView.leadingAnchor, constant: 10),
+            windLabel.centerXAnchor.constraint(equalTo: windView.centerXAnchor),
         ])
     }//Layout func
 }//MainViewController class
@@ -456,7 +470,7 @@ extension MainViewController {
         view.addSubview(uiView)
         view.sendSubviewToBack(uiView)
         
-
+        
         let background = UIImage(named: "Background.svg")
         let imageView : UIImageView!
         imageView = UIImageView(frame: view.bounds)
@@ -563,8 +577,10 @@ extension MainViewController {
         case .notDetermined:
             print("status: notDetermined")
         case .denied:
+            cityLabel.text = "No Location!"
             print("status: denied")
         case .restricted:
+            cityLabel.text = "No Location!"
             print("status: restricted")
         case .authorizedAlways:
             print("status: authorizedAlways")
@@ -585,14 +601,25 @@ extension MainViewController {
 //        print("locations = \(locValue.latitude) \(locValue.longitude)")
         UserLocation.userLatitude = locValue.latitude
         UserLocation.userLongitude = locValue.longitude
-//        print("UserLocation.userLatitude = \((UserLocation.userLatitude)!)")
-//        print("UserLocation.userLongitude = \((UserLocation.userLongitude)!)")
         UserLocation.userCLLocation = locations[0]
+        getWeather(location: locations[0])
 //        print(UserLocation.userCLLocation)
+//        self.locationManager.delegate = nil
     }
     
     @objc func launchRocket() {
-        print("rocket launched")
+//        rocketView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        UIImageView.animate(withDuration: 4.4, animations: {
+            [weak self] in
+            self!.rocketView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            self!.rocketView.frame.origin.y -= 1000
+        }) { (done) in
+            UIImageView.animate(withDuration: 2.0, delay: 8.0, options: [.curveEaseOut], animations: {
+              [weak self] in
+                self!.rocketView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                self!.rocketView.frame.origin.y += 1000
+            })
+        }
     }
     
     /* MARK: TODO

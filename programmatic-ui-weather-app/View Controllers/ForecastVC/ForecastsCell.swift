@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ForecastsCell: UITableViewCell {
     
@@ -75,7 +76,7 @@ class ForecastsCell: UITableViewCell {
 
 extension ForecastListVC {
     func makeForecastCells() -> [Forecasts] {
-        MainViewController().getWeather(location: UserLocation.userCLLocation!)
+        MainViewController().getWeather(location: UserLocation.userCLLocation ?? CLLocation(latitude: 0.0, longitude: 0.0))
         if WeatherKitData.TempMaxForecast.isEmpty == false {
             let largeConfig = UIImage.SymbolConfiguration(pointSize: 36, weight: .bold, scale: .large)      //size config for symbols
             var forecasts = [Forecasts]()
