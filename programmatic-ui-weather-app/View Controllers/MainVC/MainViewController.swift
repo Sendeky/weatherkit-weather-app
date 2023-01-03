@@ -84,6 +84,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        var i = 0
+
         setBackground() //Function that sets the view to a background
         view.backgroundColor = .orange
         
@@ -597,9 +599,13 @@ extension MainViewController {
             print("status: authorizedAlways")
             locationManager.startUpdatingLocation()
             viewDidLoadRefresh()
+            if UserLocation.userCLLocation != nil {
+                getWeather(location: UserLocation.userCLLocation!)
+            }
         case .authorizedWhenInUse:
             print("status: authorizedWhenInUse")
             locationManager.startUpdatingLocation()
+            
             viewDidLoadRefresh()
         default:
             print("unknown ")
@@ -613,7 +619,11 @@ extension MainViewController {
         UserLocation.userLatitude = locValue.latitude
         UserLocation.userLongitude = locValue.longitude
         UserLocation.userCLLocation = locations[0]
-        getWeather(location: locations[0])
+//        getWeather(location: locations[0])
+        for i in 0...3 {
+            getWeather(location: locations[0])
+        }
+        locationManager.stopUpdatingLocation()
 //        print(UserLocation.userCLLocation)
 //        self.locationManager.delegate = nil
     }
