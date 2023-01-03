@@ -232,7 +232,7 @@ struct weatherkit_widgetEntryView : View {
     
     struct weatherkit_widget_Previews: PreviewProvider {
         //Preview WidgetData data (seen when choosing widgets)
-        static let widgetData = WidgetData(temp: "12˚C", tempMax: "16˚C", tempMin: "8˚C", symbolName: "cloud.sun.bolt.fill", hourlyForecast: [12.0], forecastTimeArray: ["9AM", "10AM", "11AM", "12PM"])
+        static let widgetData = WidgetData(temp: "12˚C", tempMax: "16˚C", tempMin: "8˚C", symbolName: "cloud.sun.bolt.fill", hourlyForecast: [12.0, 11.0, 11.0, 9.0, 7.0], forecastTimeArray: ["9AM", "10AM", "11AM", "12PM"])
         static var previews: some View {
             weatherkit_widgetEntryView(entry: SimpleEntry(widgetData: widgetData))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))

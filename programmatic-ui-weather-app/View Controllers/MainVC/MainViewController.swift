@@ -21,6 +21,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     //cyanColor constant (used in precipitationView, hourlyForecastView, etc.)
     let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
     
+    let infoIcon = UIImageView()
     let iconView = UIImageView()
     let tempStackView = UIStackView()
     let cityLabel = UILabel()
@@ -138,6 +139,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     private func style() {
         
         
+        //iconView settings
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.contentMode = .scaleAspectFit
         iconView.image = UIImage(systemName: "questionmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
@@ -352,6 +354,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         scrollview.addSubview(horizontalStack)
         
+//        tempStackView.addArrangedSubview(infoIcon)
         tempStackView.addArrangedSubview(cityLabel)
         tempStackView.addArrangedSubview(currentTempLabel)
         tempStackView.addArrangedSubview(todayTempLabel)
@@ -376,6 +379,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         
         //Adds Views into main view
+//        view.addSubview(infoIcon)
         view.addSubview(rocketText)
         view.addSubview(iconView)
         view.addSubview(scrollView)
@@ -384,6 +388,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         
         NSLayoutConstraint.activate([
+            //infoIcon constraints
+//            infoIcon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            infoIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            infoIcon.heightAnchor.constraint(equalToConstant: 32),
             //iconView constraints
             iconView.centerYAnchor.constraint(equalTo: currentTempLabel.centerYAnchor),
             iconView.centerXAnchor.constraint(equalTo: rocketView.centerXAnchor),
@@ -555,6 +563,9 @@ extension MainViewController {
     func fetchFromReload() {
         DispatchQueue.main.async {
             if UserLocation.userCLLocation != nil {
+                WeatherKitData.HourlyForecast.removeAll()
+                WeatherKitData.TempMaxForecast.removeAll()
+                WeatherKitData.TempMinForecast.removeAll()
                 self.getWeather(location: UserLocation.userCLLocation!)
             } else {
             }
@@ -620,6 +631,11 @@ extension MainViewController {
                 self!.rocketView.frame.origin.y += 1000
             })
         }
+    }
+    
+    @objc func infoTap() {
+        //infoTap subview brought up
+        print("tapped")
     }
     
     /* MARK: TODO
