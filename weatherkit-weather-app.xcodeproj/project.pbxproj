@@ -13,7 +13,6 @@
 		C034704328F6221900656AA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034704228F6221900656AA8 /* MainViewController.swift */; };
 		C034704828F6221A00656AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C034704728F6221A00656AA8 /* Assets.xcassets */; };
 		C034704B28F6221A00656AA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C034704928F6221A00656AA8 /* LaunchScreen.storyboard */; };
-		C034705928F7381700656AA8 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = C034705828F7381700656AA8 /* SwiftyJSON */; };
 		C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */; };
 		C03E36B12948273F00FDAC50 /* Bonche-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C03E36B02948273F00FDAC50 /* Bonche-Light.otf */; };
 		C03E36B22948273F00FDAC50 /* Bonche-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C03E36B02948273F00FDAC50 /* Bonche-Light.otf */; };
@@ -132,7 +131,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C034705928F7381700656AA8 /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +363,6 @@
 			);
 			name = "weatherkit-weather-app";
 			packageProductDependencies = (
-				C034705828F7381700656AA8 /* SwiftyJSON */,
 			);
 			productName = "programmatic-ui-weather-app";
 			productReference = C034703B28F6221900656AA8 /* weatherkit-weather-app.app */;
@@ -416,7 +413,6 @@
 			);
 			mainGroup = C034703228F6221900656AA8;
 			packageReferences = (
-				C034705728F7381700656AA8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = C034703C28F6221900656AA8 /* Products */;
 			projectDirPath = "";
@@ -646,6 +642,7 @@
 				DEVELOPMENT_TEAM = PT5J4Z6J5K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "programmatic-ui-weather-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = StormyLaunch;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location helps us determine the most relevant weather";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location helps us determine the most relevant weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -659,7 +656,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.2;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -683,6 +680,7 @@
 				DEVELOPMENT_TEAM = PT5J4Z6J5K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "programmatic-ui-weather-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = StormyLaunch;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location helps us determine the most relevant weather";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location helps us determine the most relevant weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -696,7 +694,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.2;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -719,7 +717,7 @@
 				DEVELOPMENT_TEAM = PT5J4Z6J5K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "weatherkit-widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "weatherkit-widget";
+				INFOPLIST_KEY_CFBundleDisplayName = StormyLaunch;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -747,7 +745,7 @@
 				DEVELOPMENT_TEAM = PT5J4Z6J5K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "weatherkit-widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "weatherkit-widget";
+				INFOPLIST_KEY_CFBundleDisplayName = StormyLaunch;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -795,25 +793,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		C034705728F7381700656AA8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		C034705828F7381700656AA8 /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C034705728F7381700656AA8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C034703328F6221900656AA8 /* Project object */;
 }
