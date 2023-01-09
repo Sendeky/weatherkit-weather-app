@@ -38,6 +38,7 @@ struct WeatherKitData: Codable{
     static var RainChance = 0
     static var WindSpeedForecast = [0.0]
     static var HourlyForecast = [0.0]
+    static var HourlyForecastSymbol = [String]()
 }
 
 let weatherService = WeatherService()
@@ -136,6 +137,8 @@ extension MainViewController {
                     let forecast = result.1.forecast[i].temperature.value
                     WeatherKitData.HourlyForecast.append(forecast)
                     print("Hourly Forecast: \(WeatherKitData.HourlyForecast[i])")
+                    let symbol = result.1.forecast[i].symbolName
+                    WeatherKitData.HourlyForecastSymbol.append(symbol)
                 }
                 
                 print(temp)

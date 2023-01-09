@@ -237,7 +237,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         topLabel1.font = .preferredFont(forTextStyle: .title2)
         
         iconView1.translatesAutoresizingMaskIntoConstraints = false
-        iconView1.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView1.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
         iconView1.contentMode = .scaleAspectFit
         
         bottomLabel1.translatesAutoresizingMaskIntoConstraints = false
@@ -253,7 +253,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         topLabel2.font = .preferredFont(forTextStyle: .title2)
         
         iconView2.translatesAutoresizingMaskIntoConstraints = false
-        iconView2.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView2.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
         iconView2.contentMode = .scaleAspectFit
         
         bottomLabel2.translatesAutoresizingMaskIntoConstraints = false
@@ -269,7 +269,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         topLabel3.font = .preferredFont(forTextStyle: .title2)
         
         iconView3.translatesAutoresizingMaskIntoConstraints = false
-        iconView3.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView3.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
         iconView3.contentMode = .scaleAspectFit
         
         bottomLabel3.translatesAutoresizingMaskIntoConstraints = false
@@ -285,7 +285,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         topLabel4.font = .preferredFont(forTextStyle: .title2)
         
         iconView4.translatesAutoresizingMaskIntoConstraints = false
-        iconView4.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView4.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
         iconView4.contentMode = .scaleAspectFit
         
         bottomLabel4.translatesAutoresizingMaskIntoConstraints = false
@@ -306,7 +306,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     //        windView.applyBlurEffect(.systemUltraThinMaterialLight, cornerRadius: 20)
         
         iconView5.translatesAutoresizingMaskIntoConstraints = false
-        iconView5.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!
+        iconView5.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
         iconView5.contentMode = .scaleAspectFit
         
         bottomLabel5.translatesAutoresizingMaskIntoConstraints = false
@@ -525,7 +525,16 @@ extension MainViewController {
             self.topLabel3.text = "\(Int((round(WeatherKitData.HourlyForecast[3])*100)/100))˚"
             self.topLabel4.text = "\(Int((round(WeatherKitData.HourlyForecast[4])*100)/100))˚"
             self.topLabel5.text = "\(Int((round(WeatherKitData.HourlyForecast[5])*100)/100))˚"
-
+        }
+        
+        if WeatherKitData.HourlyForecastSymbol.count < 5 {
+            print("no forecast symbols")
+        } else {
+            self.iconView1.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[1] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            self.iconView2.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[2] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            self.iconView3.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[3] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            self.iconView4.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[4] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            self.iconView5.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[5] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
         }
         
         self.bottomLabel1.text = "\(timeArray.formattedHours[0])"
