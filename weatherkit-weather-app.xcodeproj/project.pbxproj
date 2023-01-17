@@ -48,6 +48,7 @@
 		C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCC2929487800359476 /* SettingsCell.swift */; };
 		C0CF2DD12929487800359476 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCE2929487800359476 /* Settings.swift */; };
 		C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCF2929487800359476 /* SettingsListVC.swift */; };
+		C0D265C0297635480079FBE3 /* WeatherKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D265BF297635480079FBE3 /* WeatherKitData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		C0CF2DCC2929487800359476 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		C0CF2DCE2929487800359476 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C0CF2DCF2929487800359476 /* SettingsListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListVC.swift; sourceTree = "<group>"; };
+		C0D265BF297635480079FBE3 /* WeatherKitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				C034705328F640AD00656AA8 /* Delegates */,
 				C0A211182952E20B00C05917 /* Animations */,
 				C034705228F6406500656AA8 /* Files */,
+				C0D265BE297635230079FBE3 /* WeatherStruct */,
 				C034705628F7363E00656AA8 /* Utils */,
 				C0B01BF5291F41F700D887C6 /* View Controllers */,
 				C0711C3029496A3E004D3BD3 /* Fonts */,
@@ -343,6 +346,14 @@
 			path = "Settings Model";
 			sourceTree = "<group>";
 		};
+		C0D265BE297635230079FBE3 /* WeatherStruct */ = {
+			isa = PBXGroup;
+			children = (
+				C0D265BF297635480079FBE3 /* WeatherKitData.swift */,
+			);
+			path = WeatherStruct;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -470,6 +481,7 @@
 				C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */,
 				C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */,
 				C0711C2929484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift in Sources */,
+				C0D265C0297635480079FBE3 /* WeatherKitData.swift in Sources */,
 				C04E9E9F29417FA100882FC6 /* WidgetStruct.swift in Sources */,
 				C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */,
 				C034704328F6221900656AA8 /* MainViewController.swift in Sources */,

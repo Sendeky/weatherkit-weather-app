@@ -10,36 +10,6 @@ import WeatherKit
 import CoreLocation
 import UIKit
 
-struct WeatherKitData: Codable{
-    //RAW values for other funcs
-    static var SunriseDate = Date()
-    static var SunsetDate = Date()
-    
-    //Normal, converted values
-    static var Temp = ""
-    static var TempMax = ""
-    static var TempMaxForecast = [String]()
-    static var TempMin = ""
-    static var TempMinForecast = [String]()
-    static var TempFeels = 0
-    static var UV = 0
-    static var WindSpeed = ""
-    static var Symbol = ""
-    static var forecastSymbol = [String]()
-    static var Humidity = 0
-    static var Sunrise = Date()
-    static var Sunset = Date()
-    static var localSunrise = ""
-    static var localSunset = ""
-    static var SolarNoon = ""
-    static var AstronomicalDawn = ""
-    static var AstronomicalDusk = ""
-    static var Pressure = ""
-    static var RainChance = 0
-    static var WindSpeedForecast = [0.0]
-    static var HourlyForecast = [0.0]
-    static var HourlyForecastSymbol = [String]()
-}
 
 let weatherService = WeatherService()
 
@@ -47,7 +17,6 @@ extension MainViewController {
     func getWeather(location: CLLocation) {
         Task{
             do {
-                
                 //fetches location
                 UserLocation.userCLLocation?.fetchCityAndCountry(completion: { city, country, error in
                     guard let city = city, let country = country, error == nil else { return }
@@ -80,9 +49,8 @@ extension MainViewController {
                     formatter.numberFormatter.roundingMode = .up
 //                    formatter.unitOptions = .providedUnit
                 }
+                
                 //Data from currentWeather
-//                print(result.currentWeather.temperature.converted(to: .fahrenheit))
-//                print(formatter.string(from: result.currentWeather.temperature.converted(to: .fahrenheit)))
                 let temp = formatter.string(from: result.0.temperature)
                 print("supposed to be fahrenheit:\(temp)")
                 let uv = result.0.uvIndex.value
@@ -104,7 +72,6 @@ extension MainViewController {
                 if rainChance < 15 {
                     rainChance = 0
                 } else {}
-                
                 
                 //For loop for the tempMax for 5 days
                 for i in 0...9 {
@@ -203,6 +170,4 @@ extension MainViewController {
         let rocketTimer = Timer(fireAt: date, interval: 0, target: self, selector: #selector(AnimateRocket), userInfo: nil, repeats: false)
         RunLoop.main.add(rocketTimer, forMode: RunLoop.Mode.common)
     }
-//    private func make  {
-//    }
 }

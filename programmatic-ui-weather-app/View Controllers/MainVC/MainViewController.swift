@@ -21,7 +21,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     //cyanColor constant (used in precipitationView, hourlyForecastView, etc.)
     let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
     
-    let infoIcon = UIImageView()
     let iconView = UIImageView()
     let tempStackView = UIStackView()
     let cityLabel = UILabel()
@@ -84,7 +83,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        var i = 0
 
         setBackground() //Function that sets the view to a background
         view.backgroundColor = .orange
@@ -117,7 +115,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         }
     }
     
-    
+    //Starts animatin gcloud before view loads
     override func viewWillAppear(_ animated: Bool) {
         //Animates the cloud at the top
         UIView.animate(withDuration: 20.0, delay: 0.5, options: [.repeat, .curveLinear] ,animations: {
@@ -128,7 +126,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         super.viewWillAppear(true)
     }
     
-    
+    //func to initialize location services
     private func initializeLocationServices() {
         locationManager.delegate = self
         guard CLLocationManager.locationServicesEnabled() else {
@@ -136,11 +134,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         }
         locationManager.requestAlwaysAuthorization() //Requests always authorization for locationServices
     }
-
     
+    //func to set settings for elements
     private func style() {
-        
-        
         //iconView settings
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.contentMode = .scaleAspectFit
@@ -327,6 +323,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
     }
     
+    //func to set layout for elements
     private func layout(){
         stackview1.addArrangedSubview(iconView1)
         stackview1.addArrangedSubview(topLabel1)
@@ -356,7 +353,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         scrollview.addSubview(horizontalStack)
         
-//        tempStackView.addArrangedSubview(infoIcon)
         tempStackView.addArrangedSubview(cityLabel)
         tempStackView.addArrangedSubview(currentTempLabel)
         tempStackView.addArrangedSubview(todayTempLabel)
@@ -381,7 +377,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         
         //Adds Views into main view
-//        view.addSubview(infoIcon)
         view.addSubview(rocketText)
         view.addSubview(iconView)
         view.addSubview(scrollView)
@@ -390,10 +385,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         
         NSLayoutConstraint.activate([
-            //infoIcon constraints
-//            infoIcon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            infoIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            infoIcon.heightAnchor.constraint(equalToConstant: 32),
             //iconView constraints
             iconView.centerYAnchor.constraint(equalTo: currentTempLabel.centerYAnchor),
             iconView.centerXAnchor.constraint(equalTo: rocketView.centerXAnchor),
@@ -461,7 +452,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
 }//MainViewController class
 
 extension MainViewController {
-    
     //MARK: - A function that makes a background and sets it as the sublayer of the view
     func setBackground() {
         
@@ -589,9 +579,8 @@ extension MainViewController {
             self.updateLabels()
         }
     }
-
    
-    //Function for checing location manager status (starts getting the location if allowed)
+    //Function for checking location manager status (starts getting the location if allowed)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = manager.authorizationStatus
         
@@ -650,11 +639,6 @@ extension MainViewController {
                 self!.rocketView.frame.origin.y += 1000
             })
         }
-    }
-    
-    @objc func infoTap() {
-        //infoTap subview brought up
-        print("tapped")
     }
     
     /* MARK: TODO
