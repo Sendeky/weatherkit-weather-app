@@ -156,8 +156,8 @@ struct weatherkit_widgetEntryView : View {
                 }
                 
             }
-
         case .systemLarge:
+            //Layout for large widget
             ZStack {
                 ContainerRelativeShape()
                     .fill(LinearGradient(colors: [.cyan, .indigo], startPoint: .bottomLeading, endPoint: .top))
