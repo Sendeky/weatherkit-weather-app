@@ -22,6 +22,7 @@ struct ContentView: View {
         .listStyle(CarouselListStyle())
         .onAppear {
             weatherCall()
+            
         }
     }
 }

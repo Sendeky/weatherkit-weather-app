@@ -54,6 +54,7 @@
 		C0711C2729484644004D3BD3 /* JosefinSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0711C2129484643004D3BD3 /* JosefinSans-Light.ttf */; };
 		C0711C2929484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711C2829484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift */; };
 		C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */; };
+		C086977A29A5BE8800B458CA /* WatchWeather Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086977929A5BE8800B458CA /* WatchWeather Model.swift */; };
 		C0A2111A2952E21C00C05917 /* AnimationsEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A211192952E21C00C05917 /* AnimationsEffects.swift */; };
 		C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */; };
 		C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B01BF2291F361800D887C6 /* TabBarViewController.swift */; };
@@ -149,6 +150,7 @@
 		C0711C2129484643004D3BD3 /* JosefinSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Light.ttf"; sourceTree = "<group>"; };
 		C0711C2829484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetPopUpVC.swift; sourceTree = "<group>"; };
 		C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVC.swift; sourceTree = "<group>"; };
+		C086977929A5BE8800B458CA /* WatchWeather Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WatchWeather Model.swift"; sourceTree = "<group>"; };
 		C0A211192952E21C00C05917 /* AnimationsEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsEffects.swift; sourceTree = "<group>"; };
 		C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "programmatic-ui-weather-app.entitlements"; sourceTree = "<group>"; };
 		C0B01BCB291334AC00D887C6 /* WeatherKitCallUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitCallUtil.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				C05951AF29A08FE600FC9FA6 /* weatherkit-watchosExtension Watch App.entitlements */,
+				C086977B29A5BE9A00B458CA /* Model */,
 				C01B200C2995EBFE000363CA /* Views */,
 				C01617DA298C6407006E7C0C /* weatherkit_watchosExtensionApp.swift */,
 				C01617CC298C6016006E7C0C /* ContentView.swift */,
@@ -345,6 +348,14 @@
 				C06F8D30292981680054D5DC /* Forecasts.swift */,
 			);
 			path = "Forecast Model";
+			sourceTree = "<group>";
+		};
+		C086977B29A5BE9A00B458CA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C086977929A5BE8800B458CA /* WatchWeather Model.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C0A211182952E20B00C05917 /* Animations */ = {
@@ -573,6 +584,7 @@
 				C055FD3929970DF7008850A6 /* WindView.swift in Sources */,
 				C055FD3D299721FB008850A6 /* PrimaryData.swift in Sources */,
 				C01617CD298C6016006E7C0C /* ContentView.swift in Sources */,
+				C086977A29A5BE8800B458CA /* WatchWeather Model.swift in Sources */,
 				C01B200E2995EC21000363CA /* CurrentView.swift in Sources */,
 				C055FD3B29970EDC008850A6 /* ForecastView.swift in Sources */,
 				C055FD372997054E008850A6 /* RangeView.swift in Sources */,
