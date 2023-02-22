@@ -82,7 +82,12 @@ extension ForecastListVC {
             var forecasts = [Forecasts]()
             
             for i in 0...6 {
-                forecasts.append(Forecasts(image: UIImage(systemName: "\(WeatherKitData.forecastSymbol[i]).fill", withConfiguration: largeConfig)!.withRenderingMode(.alwaysOriginal), maxTemp: "to \(WeatherKitData.TempMaxForecast[i])", minTemp: "From \(WeatherKitData.TempMinForecast[i]) "))
+                //Really bad fix for when symbol is "wind" ("wind" has no .fill option, so tab crashes when tries to load "wind.fill")
+                if WeatherKitData.forecastSymbol[i] != "wind" {
+                    forecasts.append(Forecasts(image: UIImage(systemName: "\(WeatherKitData.forecastSymbol[i]).fill", withConfiguration: largeConfig)!.withRenderingMode(.alwaysOriginal), maxTemp: "to \(WeatherKitData.TempMaxForecast[i])", minTemp: "From \(WeatherKitData.TempMinForecast[i]) "))
+                } else {
+                    forecasts.append(Forecasts(image: UIImage(systemName: "\(WeatherKitData.forecastSymbol[i])", withConfiguration: largeConfig)!.withRenderingMode(.alwaysOriginal), maxTemp: "to \(WeatherKitData.TempMaxForecast[i])", minTemp: "From \(WeatherKitData.TempMinForecast[i]) "))
+                }
             }
             return forecasts
         }

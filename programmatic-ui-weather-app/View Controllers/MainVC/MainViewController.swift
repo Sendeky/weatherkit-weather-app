@@ -499,7 +499,13 @@ extension MainViewController {
     
     //MARK: - Function to refresh all of the labels
     func updateLabels() {
-        self.iconView.image = UIImage(systemName: WeatherKitData.Symbol + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
+        //Checks if weatherkit returned symbol is "wind"
+        //This is because "wind" (SF Symbol) has no fill option
+        if WeatherKitData.Symbol != "wind" {
+            self.iconView.image = UIImage(systemName: WeatherKitData.Symbol + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
+        } else {
+            self.iconView.image = UIImage(systemName: WeatherKitData.Symbol, withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
+        }
         self.currentTempLabel.text = "\(WeatherKitData.Temp)"
         self.todayTempLabel.text = "H:\(WeatherKitData.TempMax) L:\(WeatherKitData.TempMin)"
         self.windLabel.text = "\(WeatherKitData.WindSpeed)"
@@ -520,11 +526,20 @@ extension MainViewController {
         if WeatherKitData.HourlyForecastSymbol.count < 5 {
             print("no forecast symbols")
         } else {
-            self.iconView1.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[1] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            self.iconView2.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[2] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            self.iconView3.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[3] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            self.iconView4.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[4] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            self.iconView5.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[5] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            //Really bad fix for when returned symbol is wind ("wind" has no fill option)
+            if WeatherKitData.Symbol != "wind" {
+                self.iconView1.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[1] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                self.iconView2.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[2] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                self.iconView3.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[3] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                self.iconView4.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[4] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                self.iconView5.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[5] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            } else {
+                self.iconView1.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[1], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                self.iconView2.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[2], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                self.iconView3.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[3], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                self.iconView4.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[4], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                self.iconView5.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[5], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            }
         }
         
         self.bottomLabel1.text = "\(timeArray.formattedHours[0])"
