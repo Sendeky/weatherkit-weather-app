@@ -86,7 +86,11 @@ struct weatherkit_widgetEntryView : View {
                             .font(.system(size: 32.0))
                             .padding(.vertical, 5)
                         //Weather Symbol
-                        Image(uiImage: UIImage(systemName: entry.widgetData.symbolName + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!).renderingMode(.template)
+                        if entry.widgetData.symbolName != "wind" {
+                            Image(uiImage: UIImage(systemName: entry.widgetData.symbolName + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!).renderingMode(.template)
+                        } else {
+                            Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!).renderingMode(.template)
+                        }
                     }
                     Spacer()
                     Chart(items) { item in
@@ -121,8 +125,14 @@ struct weatherkit_widgetEntryView : View {
                             .font(.largeTitle)
                             
                         //Weather Symbol
-                        Image(uiImage: UIImage(systemName: entry.widgetData.symbolName + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
-                            .renderingMode(.template)
+                        if entry.widgetData.symbolName != "wind" {
+                            Image(uiImage: UIImage(systemName: entry.widgetData.symbolName + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
+                                .renderingMode(.template)
+                        } else {
+                            Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
+                                .renderingMode(.template)
+                        }
+                            
                         VStack {
                             Text("Max: \(entry.widgetData.tempMax)")
                             Text("Min: \(entry.widgetData.tempMin)")
