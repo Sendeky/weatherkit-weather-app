@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @State var curr: Double
+    
     var body: some View {
         TabView {
             List {
@@ -21,8 +24,24 @@ struct ContentView: View {
         }
         .listStyle(CarouselListStyle())
         .onAppear {
-            weatherCall()
-            
+            Task {
+                do {
+                    //TODO: Clean This Up
+                
+                    let formatter = MeasurementFormatter()
+                    formatter.unitStyle = .short
+                    formatter.unitOptions = .temperatureWithoutUnit
+                    
+                    let response = try await weatherCall()
+                    
+                    let temp = response.0.temperature
+                    
+                    curr = temp
+                }
+                catch {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }

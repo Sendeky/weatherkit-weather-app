@@ -9,7 +9,7 @@ import CoreLocation
 import Foundation
 import WeatherKit
 
-func weatherCall() {
+func weatherCall() async throws -> [WeatherData] {
     
     let test = test()
     let weatherService = WeatherService()
