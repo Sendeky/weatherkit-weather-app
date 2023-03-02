@@ -8,5 +8,5 @@
 import Foundation
 
 struct WatchWeatherModel {
-    var curr: Double
+    var curr: String
 }

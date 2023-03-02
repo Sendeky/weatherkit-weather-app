@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State var curr: Double
+    @State var curr: String
     
     var body: some View {
         TabView {
             List {
-                CurrentView(currentTemp: "12˚C")
+                CurrentView(currentTemp: "\(curr)˚C")
                 RangeView(minTemp: "7˚", maxTemp: "12˚")
                 WindView(windSpeed: "12 MPH")
             }
@@ -34,9 +34,10 @@ struct ContentView: View {
                     
                     let response = try await weatherCall()
                     
-                    let temp = response.0.temperature
+                    let temp = response.curr
                     
                     curr = temp
+                    print(curr)
                 }
                 catch {
                     print(error.localizedDescription)
@@ -48,6 +49,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(curr: "0.0")
     }
 }
