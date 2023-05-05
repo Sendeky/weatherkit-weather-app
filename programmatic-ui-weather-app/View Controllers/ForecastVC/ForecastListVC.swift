@@ -58,9 +58,12 @@ class ForecastListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = forecastTableView.dequeueReusableCell(withIdentifier: "forecastsCell") as! ForecastsCell       //Casts as SettingsCell because we want the funcs inside
-//        cell.alpha = 0.5
-        cell.backgroundColor = .clear
         
+        //style options
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        
+        // indexPath is used for iterating (through forecasts array in this case)
         let forecast = forecasts[indexPath.row]           //indexPath will have 3
         cell.set(forecasts: forecast)
         
