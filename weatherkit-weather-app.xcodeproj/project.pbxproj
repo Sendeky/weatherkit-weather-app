@@ -217,7 +217,7 @@
 			children = (
 				C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */,
 				C034705328F640AD00656AA8 /* Delegates */,
-				C0A211182952E20B00C05917 /* Animations */,
+				C0A211182952E20B00C05917 /* AnimationsEffects */,
 				C034705228F6406500656AA8 /* Files */,
 				C0D265BE297635230079FBE3 /* WeatherStruct */,
 				C034705628F7363E00656AA8 /* Utils */,
@@ -318,12 +318,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		C0A211182952E20B00C05917 /* Animations */ = {
+		C0A211182952E20B00C05917 /* AnimationsEffects */ = {
 			isa = PBXGroup;
 			children = (
 				C0A211192952E21C00C05917 /* AnimationsEffects.swift */,
 			);
-			path = Animations;
+			path = AnimationsEffects;
 			sourceTree = "<group>";
 		};
 		C0A68C73293BF22E000A24DC /* MainVC */ = {

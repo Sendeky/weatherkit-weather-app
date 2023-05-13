@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 import WeatherKit
-//import SwiftUI
+import SwiftUI
 
 struct UserLocation {
     static var userLatitude: Double? = 0.0
@@ -296,9 +296,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         topLabel5.text = "--˚"
         topLabel5.font = .preferredFont(forTextStyle: .title2)
         
+        let windTapGesture = UITapGestureRecognizer(target: self, action: #selector(windSpeedTapped))
         windView.translatesAutoresizingMaskIntoConstraints = false
         windView.backgroundColor = cyanColor
         windView.layer.cornerRadius = 20
+        windView.isUserInteractionEnabled = true
+        windView.addGestureRecognizer(windTapGesture)
     //        windView.applyBlurEffect(.systemUltraThinMaterialLight, cornerRadius: 20)
         
         iconView5.translatesAutoresizingMaskIntoConstraints = false
@@ -677,6 +680,7 @@ extension MainViewController {
             self.present(sunriseSunsetPop, animated: true)
         }
     }
+     */
     
     //func for windSpeed view tapped
     @objc func windSpeedTapped() {
@@ -684,9 +688,8 @@ extension MainViewController {
         let windSpeedPopUp = UIHostingController(rootView: WindSpeedPopUpVC())
     
         //Uses animation from Animations.swift
-        self.windSpeedView.showAnimation {
+        self.windView.showAnimation {
             self.present(windSpeedPopUp, animated: true)
         }
     }
-     */
 }

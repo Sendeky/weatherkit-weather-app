@@ -123,7 +123,7 @@ struct weatherkit_widgetEntryView : View {
                         //Sets text as "temp" from widgetData
                         Text(entry.widgetData.temp)
                             .font(.largeTitle)
-                            
+                        
                         //Weather Symbol
                         if entry.widgetData.symbolName != "wind" {
                             Image(uiImage: UIImage(systemName: entry.widgetData.symbolName + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
