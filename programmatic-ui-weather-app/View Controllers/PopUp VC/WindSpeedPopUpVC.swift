@@ -31,30 +31,51 @@ struct WindSpeedPopUpVC: View {
                     .font(.largeTitle)
                     .padding()
                 VStack {
-                    RoundedRectangle(cornerRadius: 20)
-                        .frame(height: 300)
-                        .padding(.top, 5)
-                        .padding(.horizontal, 10)
-                        .foregroundColor(.blue)
+//                    RoundedRectangle(cornerRadius: 20)
+//                        .frame(height: 300)
+//                        .padding(.top, 5)
+//                        .padding(.horizontal, 10)
+                    Color(.clear)
+                        .frame(height: UIScreen.main.bounds.height / 3)
+//                        .foregroundColor(.blue)
                         .overlay(Chart(items) { item in
-                            BarMark(x: .value("Department", item.value1),
+                            BarMark(x: .value("", item.value1),
                                      yStart: .value("Min", item.value2 - 3),
                                      yEnd: .value("Max", item.value2 + 3)
                             ) //BarMark
+                            .opacity(0.5)
+                            .foregroundStyle(.primary)
+                            .interpolationMethod(.monotone)
+                            LineMark (
+                                x: .value("", item.value1),
+                                y: .value("", item.value2)
+                            ) //LineMark
+                            .interpolationMethod(.monotone)
+                            .lineStyle(StrokeStyle(lineWidth: 8))
                         }) //Chart
+                        .chartXScale(domain: 1...9)
+                        .chartXAxisLabel("Time")
+                        .chartYScale(domain: Int(WeatherKitData.WindSpeedForecast.min()! - 5)...Int(WeatherKitData.WindSpeedForecast.max()! + 5))
+                        .chartYAxisLabel("°C")
                         .padding()
+                    Spacer()
                 }
-                Spacer()
+//                Spacer()
             }
         }
             .background(BackgroundBlurView())
         .onAppear {
-            if WeatherKitData.WindSpeedForecast.isEmpty == false {
+            print(WeatherKitData.WindSpeedForecast)
+            /*if WeatherKitData.WindSpeedForecast.isEmpty == false {
                 for i in 1...9 {
-                    
+
                     print("Wind speed forecast \(WeatherKitData.WindSpeedForecast[i])")
                     Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i])
                 }
+            }*/
+            items.removeAll(keepingCapacity: false)
+            for i in 1...9 {
+                items.append(Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i]))
             }
         }.edgesIgnoringSafeArea(.bottom)
     }
