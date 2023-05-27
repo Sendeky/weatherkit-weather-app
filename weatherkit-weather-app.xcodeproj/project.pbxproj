@@ -49,6 +49,8 @@
 		C0CF2DD12929487800359476 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCE2929487800359476 /* Settings.swift */; };
 		C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF2DCF2929487800359476 /* SettingsListVC.swift */; };
 		C0D265C0297635480079FBE3 /* WeatherKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D265BF297635480079FBE3 /* WeatherKitData.swift */; };
+		C0EDB9232A22BDD400C5C1BF /* weatherkit_weather_apptests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EDB9222A22BDD400C5C1BF /* weatherkit_weather_apptests.swift */; };
+		C0EDB92A2A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EDB9292A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C04E9E88293C28F400882FC6;
 			remoteInfo = "weatherkit-widgetExtension";
+		};
+		C0EDB9242A22BDD400C5C1BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C034703328F6221900656AA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C034703A28F6221900656AA8;
+			remoteInfo = "weatherkit-weather-app";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -127,6 +136,9 @@
 		C0CF2DCE2929487800359476 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C0CF2DCF2929487800359476 /* SettingsListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListVC.swift; sourceTree = "<group>"; };
 		C0D265BF297635480079FBE3 /* WeatherKitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitData.swift; sourceTree = "<group>"; };
+		C0EDB9202A22BDD400C5C1BF /* weatherkit-weather-apptests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "weatherkit-weather-apptests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0EDB9222A22BDD400C5C1BF /* weatherkit_weather_apptests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherkit_weather_apptests.swift; sourceTree = "<group>"; };
+		C0EDB9292A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVCTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +155,13 @@
 			files = (
 				C04E9E8E293C28F400882FC6 /* SwiftUI.framework in Frameworks */,
 				C04E9E8C293C28F400882FC6 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0EDB91D2A22BDD400C5C1BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +217,7 @@
 				C034703D28F6221900656AA8 /* programmatic-ui-weather-app */,
 				C04E9E8F293C28F400882FC6 /* weatherkit-widget */,
 				C01617C9298C6016006E7C0C /* weatherkit-watchosExtension Watch App */,
+				C0EDB9212A22BDD400C5C1BF /* weatherkit-weather-apptests */,
 				C04E9E8A293C28F400882FC6 /* Frameworks */,
 				C034703C28F6221900656AA8 /* Products */,
 			);
@@ -208,6 +228,7 @@
 			children = (
 				C034703B28F6221900656AA8 /* weatherkit-weather-app.app */,
 				C04E9E89293C28F400882FC6 /* weatherkit-widgetExtension.appex */,
+				C0EDB9202A22BDD400C5C1BF /* weatherkit-weather-apptests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -390,6 +411,15 @@
 			path = WeatherStruct;
 			sourceTree = "<group>";
 		};
+		C0EDB9212A22BDD400C5C1BF /* weatherkit-weather-apptests */ = {
+			isa = PBXGroup;
+			children = (
+				C0EDB9222A22BDD400C5C1BF /* weatherkit_weather_apptests.swift */,
+				C0EDB9292A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift */,
+			);
+			path = "weatherkit-weather-apptests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -431,6 +461,24 @@
 			productReference = C04E9E89293C28F400882FC6 /* weatherkit-widgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		C0EDB91F2A22BDD400C5C1BF /* weatherkit-weather-apptests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0EDB9262A22BDD400C5C1BF /* Build configuration list for PBXNativeTarget "weatherkit-weather-apptests" */;
+			buildPhases = (
+				C0EDB91C2A22BDD400C5C1BF /* Sources */,
+				C0EDB91D2A22BDD400C5C1BF /* Frameworks */,
+				C0EDB91E2A22BDD400C5C1BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C0EDB9252A22BDD400C5C1BF /* PBXTargetDependency */,
+			);
+			name = "weatherkit-weather-apptests";
+			productName = "weatherkit-weather-apptests";
+			productReference = C0EDB9202A22BDD400C5C1BF /* weatherkit-weather-apptests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -446,6 +494,10 @@
 					};
 					C04E9E88293C28F400882FC6 = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					C0EDB91F2A22BDD400C5C1BF = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = C034703A28F6221900656AA8;
 					};
 				};
 			};
@@ -466,6 +518,7 @@
 			targets = (
 				C034703A28F6221900656AA8 /* weatherkit-weather-app */,
 				C04E9E88293C28F400882FC6 /* weatherkit-widgetExtension */,
+				C0EDB91F2A22BDD400C5C1BF /* weatherkit-weather-apptests */,
 			);
 		};
 /* End PBXProject section */
@@ -497,6 +550,13 @@
 				C0711C2329484644004D3BD3 /* JosefinSans-Regular.ttf in Resources */,
 				C03E36BB29482C8900FDAC50 /* SignikaNegative-Light.ttf in Resources */,
 				C0711C2729484644004D3BD3 /* JosefinSans-Light.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0EDB91E2A22BDD400C5C1BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +601,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0EDB91C2A22BDD400C5C1BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0EDB9232A22BDD400C5C1BF /* weatherkit_weather_apptests.swift in Sources */,
+				C0EDB92A2A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -548,6 +617,11 @@
 			isa = PBXTargetDependency;
 			target = C04E9E88293C28F400882FC6 /* weatherkit-widgetExtension */;
 			targetProxy = C04E9E95293C28F600882FC6 /* PBXContainerItemProxy */;
+		};
+		C0EDB9252A22BDD400C5C1BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C034703A28F6221900656AA8 /* weatherkit-weather-app */;
+			targetProxy = C0EDB9242A22BDD400C5C1BF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -809,6 +883,44 @@
 			};
 			name = Release;
 		};
+		C0EDB9272A22BDD400C5C1BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 983DASAX74;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RS.weatherkit-weather-apptests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/weatherkit-weather-app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/weatherkit-weather-app";
+			};
+			name = Debug;
+		};
+		C0EDB9282A22BDD400C5C1BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 983DASAX74;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RS.weatherkit-weather-apptests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/weatherkit-weather-app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/weatherkit-weather-app";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -835,6 +947,15 @@
 			buildConfigurations = (
 				C04E9E99293C28F600882FC6 /* Debug */,
 				C04E9E9A293C28F600882FC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0EDB9262A22BDD400C5C1BF /* Build configuration list for PBXNativeTarget "weatherkit-weather-apptests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0EDB9272A22BDD400C5C1BF /* Debug */,
+				C0EDB9282A22BDD400C5C1BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

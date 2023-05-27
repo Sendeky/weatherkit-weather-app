@@ -10,8 +10,6 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let mainViewController = MainViewController()
@@ -42,6 +40,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let main = MainViewController()
         main.locationManager.stopUpdatingLocation()
     }
-
 }
 

@@ -21,6 +21,7 @@ struct WindSpeedPopUpVC: View {
         Item(value1: 0.0, value2: 0.0),
         Item(value1: 24.0, value2: 0.0),
     ]
+    @State var currentTime: Any?
     
     var body: some View {
         ZStack {
@@ -30,6 +31,13 @@ struct WindSpeedPopUpVC: View {
                 Text("Wind")
                     .font(.largeTitle)
                     .padding()
+                HStack(alignment: .firstTextBaseline) {
+                    Text("\(WeatherKitData.WindSpeed)")
+                        .font(.system(size: 28, weight: .medium))
+                        .padding(.leading)
+                    Text(WeatherKitData.WindDirection)
+                    Spacer()
+                }
                 VStack {
 //                    RoundedRectangle(cornerRadius: 20)
 //                        .frame(height: 300)
@@ -39,9 +47,9 @@ struct WindSpeedPopUpVC: View {
                         .frame(height: UIScreen.main.bounds.height / 3)
 //                        .foregroundColor(.blue)
                         .overlay(Chart(items) { item in
-                            BarMark(x: .value("", item.value1),
-                                     yStart: .value("Min", item.value2 - 3),
-                                     yEnd: .value("Max", item.value2 + 3)
+                            AreaMark(x: .value("", item.value1),
+                                     yStart: .value("Min", item.value1 > 0 ? item.value1  - item.value1 : item.value1 + item.value1), //ternary for when temp is less than 0
+                                     yEnd: .value("Max", item.value2)
                             ) //BarMark
                             .opacity(0.5)
                             .foregroundStyle(.primary)
@@ -54,9 +62,9 @@ struct WindSpeedPopUpVC: View {
                             .lineStyle(StrokeStyle(lineWidth: 8))
                         }) //Chart
                         .chartXScale(domain: 1...9)
-                        .chartXAxisLabel("Time")
+                        .chartXAxisLabel("\(currentTime ?? "")")
                         .chartYScale(domain: Int(WeatherKitData.WindSpeedForecast.min()! - 5)...Int(WeatherKitData.WindSpeedForecast.max()! + 5))
-                        .chartYAxisLabel("°C")
+                        .chartYAxisLabel("MPH")
                         .padding()
                     Spacer()
                 }
@@ -77,6 +85,19 @@ struct WindSpeedPopUpVC: View {
             for i in 1...9 {
                 items.append(Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i]))
             }
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "h a"
+            
+            // Get the current time
+            let currentTime = Calendar.current.dateComponents([.hour], from: Date())        // gets current time (hour)
+            let currentHour = currentTime.hour ?? 0
+
+            print("Current Time: \(currentHour)")
+            
+            
+            
+            
         }.edgesIgnoringSafeArea(.bottom)
     }
 }

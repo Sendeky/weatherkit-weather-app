@@ -21,6 +21,7 @@ struct WeatherKitData: Codable{
     static var TempFeels = 0
     static var UV = 0
     static var WindSpeed = ""
+    static var WindDirection = ""
     static var Symbol = ""
     static var forecastSymbol = [String]()
     static var Humidity = 0

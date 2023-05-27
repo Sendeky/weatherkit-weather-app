@@ -54,7 +54,8 @@ extension MainViewController {
                 let temp = formatter.string(from: result.0.temperature)
                 print("supposed to be fahrenheit:\(temp)")
                 let uv = result.0.uvIndex.value
-                let wind = formatter.string(from: result.0.wind.speed)
+                let windSpeed = formatter.string(from: result.0.wind.speed)
+                let windDirection = result.0.wind.compassDirection
                 let symbol = result.0.symbolName
                 let humidity = Int(100 * result.0.humidity)
                 let pressure = formatter.string(from: result.0.pressure)
@@ -125,7 +126,8 @@ extension MainViewController {
                 WeatherKitData.TempMax = tempMax
                 WeatherKitData.TempMin = tempMin
                 WeatherKitData.UV = uv
-                WeatherKitData.WindSpeed = wind
+                WeatherKitData.WindSpeed = windSpeed
+                WeatherKitData.WindDirection = "\(windDirection)"
                 WeatherKitData.Symbol = symbol
                 WeatherKitData.Humidity = humidity
                 WeatherKitData.Symbol = symbol
