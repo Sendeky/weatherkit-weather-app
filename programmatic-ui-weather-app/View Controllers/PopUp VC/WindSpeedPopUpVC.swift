@@ -21,7 +21,7 @@ struct WindSpeedPopUpVC: View {
         Item(value1: 0.0, value2: 0.0),
         Item(value1: 24.0, value2: 0.0),
     ]
-    @State var currentTime: Any?
+    @State var currentTime = 0
     
     var body: some View {
         ZStack {
@@ -50,7 +50,7 @@ struct WindSpeedPopUpVC: View {
                         .frame(height: UIScreen.main.bounds.height / 3)
 //                        .foregroundColor(.blue)
                         .overlay(Chart(items) { item in
-                            AreaMark(x: .value("", item.value1),
+                            AreaMark(x: .value("", item.value1 + Double(currentTime)),
                                      yStart: .value("Min", item.value1 > 0 ? item.value1  - item.value1 : item.value1 + item.value1), //ternary for when temp is less than 0
                                      yEnd: .value("Max", item.value2)
                             ) //BarMark
@@ -58,16 +58,19 @@ struct WindSpeedPopUpVC: View {
                             .foregroundStyle(.primary)
                             .interpolationMethod(.monotone)
                             LineMark (
-                                x: .value("", item.value1),
+                                x: .value("", item.value1 + Double(currentTime)),
                                 y: .value("", item.value2)
                             ) //LineMark
                             .interpolationMethod(.monotone)
                             .lineStyle(StrokeStyle(lineWidth: 8))
                         }) //Chart
-                        .chartXScale(domain: 1...9)
-                        .chartXAxisLabel("\(currentTime ?? "")")
+                        .chartXScale(domain: (currentTime + 1)...(currentTime + 9))
+                        .chartXAxisLabel("Time")
                         .chartYScale(domain: Int(WeatherKitData.WindSpeedForecast.min()! - 5)...Int(WeatherKitData.WindSpeedForecast.max()! + 5))
                         .chartYAxisLabel("MPH")
+                        .chartYAxis {
+                            AxisMarks(position: .leading)
+                        }
                         .padding()
                     Spacer()
                 }
@@ -93,13 +96,16 @@ struct WindSpeedPopUpVC: View {
             formatter.dateFormat = "h a"
             
             // Get the current time
-            let currentTime = Calendar.current.dateComponents([.hour], from: Date())        // gets current time (hour)
-            let currentHour = currentTime.hour ?? 0
+            let CurrentTime = Calendar.current.dateComponents([.hour], from: Date())        // gets current time (hour)
+            let currentHour = CurrentTime.hour ?? 0
+            
+            currentTime = currentHour
+            
+            currentTime = currentTime > 12 ? currentTime - 13 : currentTime - 1     // Some extremely stupid logic to get the chart to fill up and have the time line up
+                                                                                    // It's "-13" and "-1" because I think the array starts at 1
+                                                                                    // (first element in windspeed array is empty, so we start with the first one, mgiht fix later)
 
             print("Current Time: \(currentHour)")
-            
-            
-            
             
         }.edgesIgnoringSafeArea(.bottom)
     }
