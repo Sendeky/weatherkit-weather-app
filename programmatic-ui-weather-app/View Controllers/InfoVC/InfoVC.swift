@@ -15,6 +15,8 @@ class InfoVC: UIViewController, UITextViewDelegate {
     let appleWeatherLabel = UILabel()
     let otherSourcesLabel = UITextView()
     
+    let fontGetLabel = UILabel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,10 @@ class InfoVC: UIViewController, UITextViewDelegate {
         otherSourcesLabel.isEditable = false
         otherSourcesLabel.backgroundColor = .clear
         
+        // fontGetLabel (SpaceX Font is from FontGet)
+        fontGetLabel.translatesAutoresizingMaskIntoConstraints = false
+        fontGetLabel.text = "Fonts from FontGet"
+        fontGetLabel.font = .preferredFont(forTextStyle: .title2)
         
     }
     
@@ -59,6 +65,7 @@ class InfoVC: UIViewController, UITextViewDelegate {
         view.addSubview(sourcesStackView)
         view.addSubview(appleWeatherLabel)
         view.addSubview(otherSourcesLabel)
+        view.addSubview(fontGetLabel)
         
         
         NSLayoutConstraint.activate([
@@ -75,6 +82,10 @@ class InfoVC: UIViewController, UITextViewDelegate {
             otherSourcesLabel.topAnchor.constraint(equalTo: appleWeatherLabel.bottomAnchor),
             otherSourcesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             otherSourcesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            fontGetLabel.topAnchor.constraint(equalTo: otherSourcesLabel.bottomAnchor),
+            fontGetLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            fontGetLabel.leadingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
