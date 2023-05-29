@@ -148,8 +148,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         tempStackView.alignment = .center
         
         //cityLabel settings
-        cityLabel.font = .preferredFont(forTextStyle: .largeTitle)
+        guard let customFont = UIFont(name: "SpaceX", size: 24.0) else {
+            fatalError("""
+                Failed to load the "CustomFont-Light" font.
+                Make sure the font file is included in the project and the font name is spelled correctly.
+                """
+            )
+        }
+        cityLabel.font = customFont
+//        cityLabel.font = .preferredFont(forTextStyle: .largeTitle)
         cityLabel.text = "City"
+        cityLabel.adjustsFontSizeToFitWidth = true
         
         //currentTempLabel settings
         currentTempLabel.font = .preferredFont(forTextStyle: .largeTitle)

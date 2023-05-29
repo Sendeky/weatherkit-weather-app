@@ -29,13 +29,16 @@ struct WindSpeedPopUpVC: View {
 //            Color(UIColor(red: 125.0/255.0, green: 175.0/255.0, blue: 255.0/255.0, alpha: 1.0))
             VStack {
                 Text("Wind")
-                    .font(.largeTitle)
+                    .font(Font.custom("SpaceX", size: 24.0))
                     .padding()
                 HStack(alignment: .firstTextBaseline) {
-                    Text("\(WeatherKitData.WindSpeed)")
-                        .font(.system(size: 28, weight: .medium))
-                        .padding(.leading)
-                    Text(WeatherKitData.WindDirection)
+                    VStack {
+                        Text("\(WeatherKitData.WindSpeed)")
+                            .font(Font.custom("SpaceX", size: 24.0))
+                            .padding(.leading)
+                        Text(WeatherKitData.WindDirection)
+//                            .font(Font.custom("SpaceX", size: 10.0))
+                    }
                     Spacer()
                 }
                 VStack {

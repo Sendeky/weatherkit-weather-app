@@ -51,6 +51,8 @@
 		C0D265C0297635480079FBE3 /* WeatherKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D265BF297635480079FBE3 /* WeatherKitData.swift */; };
 		C0EDB9232A22BDD400C5C1BF /* weatherkit_weather_apptests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EDB9222A22BDD400C5C1BF /* weatherkit_weather_apptests.swift */; };
 		C0EDB92A2A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EDB9292A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift */; };
+		C0EDB92D2A2429D300C5C1BF /* SpaceX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */; };
+		C0EDB92E2A2429D300C5C1BF /* SpaceX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,7 @@
 		C0EDB9202A22BDD400C5C1BF /* weatherkit-weather-apptests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "weatherkit-weather-apptests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0EDB9222A22BDD400C5C1BF /* weatherkit_weather_apptests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherkit_weather_apptests.swift; sourceTree = "<group>"; };
 		C0EDB9292A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVCTests.swift; sourceTree = "<group>"; };
+		C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceX.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +246,7 @@
 				C0D265BE297635230079FBE3 /* WeatherStruct */,
 				C034705628F7363E00656AA8 /* Utils */,
 				C0B01BF5291F41F700D887C6 /* View Controllers */,
+				C0EDB92B2A2429AC00C5C1BF /* Fonts */,
 				C034704C28F6221A00656AA8 /* Info.plist */,
 			);
 			path = "programmatic-ui-weather-app";
@@ -420,6 +424,14 @@
 			path = "weatherkit-weather-apptests";
 			sourceTree = "<group>";
 		};
+		C0EDB92B2A2429AC00C5C1BF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -532,6 +544,7 @@
 				C0711C2629484644004D3BD3 /* JosefinSans-Light.ttf in Resources */,
 				C03E36B12948273F00FDAC50 /* Bonche-Light.otf in Resources */,
 				C0711C2229484644004D3BD3 /* JosefinSans-Regular.ttf in Resources */,
+				C0EDB92D2A2429D300C5C1BF /* SpaceX.ttf in Resources */,
 				C03E36BA29482C8900FDAC50 /* SignikaNegative-Light.ttf in Resources */,
 				C034704B28F6221A00656AA8 /* LaunchScreen.storyboard in Resources */,
 				C034704828F6221A00656AA8 /* Assets.xcassets in Resources */,
@@ -545,6 +558,7 @@
 			files = (
 				C04E9E93293C28F600882FC6 /* Assets.xcassets in Resources */,
 				C0711C2529484644004D3BD3 /* JosefinSans-SemiBold.ttf in Resources */,
+				C0EDB92E2A2429D300C5C1BF /* SpaceX.ttf in Resources */,
 				C03E36B22948273F00FDAC50 /* Bonche-Light.otf in Resources */,
 				C03E36B529482B1400FDAC50 /* FredokaOne-Regular.ttf in Resources */,
 				C0711C2329484644004D3BD3 /* JosefinSans-Regular.ttf in Resources */,
