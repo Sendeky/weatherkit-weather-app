@@ -92,6 +92,7 @@ extension MainViewController {
                 
                 //For loop for 12hour wind
                 for i in 0...11 {
+                    WeatherKitData.WindGusts.removeAll(keepingCapacity: false)
                     let formatter = MeasurementFormatter()
                     formatter.unitOptions = .temperatureWithoutUnit
                     let windSpeed = result.1.forecast[i].wind.speed
