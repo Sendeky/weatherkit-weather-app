@@ -56,6 +56,7 @@ extension MainViewController {
                 let uv = result.0.uvIndex.value
                 let windSpeed = formatter.string(from: result.0.wind.speed)
                 let windDirection = result.0.wind.compassDirection
+                print("gust: \(result.0.wind.gust)")
                 let symbol = result.0.symbolName
                 let humidity = Int(100 * result.0.humidity)
                 let pressure = formatter.string(from: result.0.pressure)
@@ -95,9 +96,16 @@ extension MainViewController {
                     formatter.unitOptions = .temperatureWithoutUnit
                     let windSpeed = result.1.forecast[i].wind.speed
                     let wind = (round(windSpeed.value * 10)) / 10
-                    print(wind)
+//                    print("Wind: \(wind)")
                     WeatherKitData.WindSpeedForecast.append(wind)
-                    print(WeatherKitData.WindSpeedForecast[i])
+//                    print(WeatherKitData.WindSpeedForecast[i])
+                    
+                    // gets gusts and unwraps them
+                    let gust = result.1.forecast[i].wind.gust
+                    if let unwrapperGust = gust {
+                        WeatherKitData.WindGusts.append(unwrapperGust)
+                        print("gust#\(i): \(unwrapperGust)")
+                    }
                 }
                 
                 //For loop for 12 hour weather

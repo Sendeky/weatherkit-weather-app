@@ -13,28 +13,38 @@ struct WeatherKitData: Codable{
     static var SunsetDate = Date()
     
     //Normal, converted values
+    static var AstronomicalDawn = ""
+    static var AstronomicalDusk = ""
+    
+    static var forecastSymbol = [String]()
+    
+    static var HourlyForecast = [0.0]
+    static var HourlyForecastSymbol = [String]()
+    static var Humidity = 0
+    
+    static var Pressure = ""
+    
+    static var RainChance = 0
+    
+    static var Symbol = ""
+    static var Sunrise = Date()
+    static var Sunset = Date()
+    static var SolarNoon = ""
+    
     static var Temp = ""
     static var TempMax = ""
     static var TempMaxForecast = [String]()
     static var TempMin = ""
     static var TempMinForecast = [String]()
     static var TempFeels = 0
+    
     static var UV = 0
-    static var WindSpeed = ""
+    
     static var WindDirection = ""
-    static var Symbol = ""
-    static var forecastSymbol = [String]()
-    static var Humidity = 0
-    static var Sunrise = Date()
-    static var Sunset = Date()
+    static var WindGusts = [Measurement<UnitSpeed>]()
+    static var WindSpeed = ""
+    static var WindSpeedForecast = [0.0]
+    
     static var localSunrise = ""
     static var localSunset = ""
-    static var SolarNoon = ""
-    static var AstronomicalDawn = ""
-    static var AstronomicalDusk = ""
-    static var Pressure = ""
-    static var RainChance = 0
-    static var WindSpeedForecast = [0.0]
-    static var HourlyForecast = [0.0]
-    static var HourlyForecastSymbol = [String]()
 }

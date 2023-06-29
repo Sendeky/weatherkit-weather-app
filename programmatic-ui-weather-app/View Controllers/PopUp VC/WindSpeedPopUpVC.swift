@@ -16,12 +16,14 @@ struct Item: Identifiable{
 
 struct WindSpeedPopUpVC: View {
     
-    //@State is used because "items" changes
+    // @State is used because "items" changes
+    // Variable for graph values
     @State var items: [Item] = [
         Item(value1: 0.0, value2: 0.0),
         Item(value1: 24.0, value2: 0.0),
     ]
-    @State var currentTime = 0
+    @State var currentTime = 0  // Array for current time (for graph)
+    @State var gusts: [Double] = [0.0] // An array of gust values
     
     var body: some View {
         ZStack {
@@ -73,6 +75,17 @@ struct WindSpeedPopUpVC: View {
                         }
                         .padding()
                     Spacer()
+                    VStack {
+                        Text("Weather Information")
+                            .font(.title)
+                            .padding(.bottom, 10)
+                               
+                        ForEach(gusts, id: \.self) { gust in
+                            Text("Gust: \(gust)m/s")
+                                   
+                        }
+                        
+                    }
                 }
 //                Spacer()
             }
