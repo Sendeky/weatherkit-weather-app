@@ -23,7 +23,7 @@ struct WindSpeedPopUpVC: View {
         Item(value1: 24.0, value2: 0.0),
     ]
     @State var currentTime = 0  // Array for current time (for graph)
-    @State var gusts: [Double] = [0.0] // An array of gust values
+    @State var gusts = [Measurement<UnitSpeed>]()
     
     var body: some View {
         ZStack {
@@ -44,10 +44,6 @@ struct WindSpeedPopUpVC: View {
                     Spacer()
                 }
                 VStack {
-//                    RoundedRectangle(cornerRadius: 20)
-//                        .frame(height: 300)
-//                        .padding(.top, 5)
-//                        .padding(.horizontal, 10)
                     Color(.clear)
                         .frame(height: UIScreen.main.bounds.height / 3)
 //                        .foregroundColor(.blue)
@@ -65,6 +61,7 @@ struct WindSpeedPopUpVC: View {
                             ) //LineMark
                             .interpolationMethod(.monotone)
                             .lineStyle(StrokeStyle(lineWidth: 8))
+                            
                         }) //Chart
                         .chartXScale(domain: (currentTime + 1)...(currentTime + 9))
                         .chartXAxisLabel("Time")
@@ -74,36 +71,47 @@ struct WindSpeedPopUpVC: View {
                             AxisMarks(position: .leading)
                         }
                         .padding()
-                    Spacer()
-                    VStack {
-                        Text("Weather Information")
-                            .font(.title)
-                            .padding(.bottom, 10)
+//                    Spacer()
+                    
+                    // Will probably do a seperate line/points on graph for gusts
+//                    VStack {
+//                        Text("Weather Information")
+//                            .font(.title)
+//                            .padding(.bottom, 10)
                                
-                        ForEach(gusts, id: \.self) { gust in
-                            Text("Gust: \(gust)m/s")
+//                        ForEach(gusts, id: \.self) { gust in
+//                            Text("Gust: \(gust)m/s")
                                    
-                        }
+//                        }
                         
-                    }
+//                    }
+                    Spacer()
                 }
-//                Spacer()
             }
         }
             .background(BackgroundBlurView())
         .onAppear {
-            print(WeatherKitData.WindSpeedForecast)
-            /*if WeatherKitData.WindSpeedForecast.isEmpty == false {
-                for i in 1...9 {
-
-                    print("Wind speed forecast \(WeatherKitData.WindSpeedForecast[i])")
-                    Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i])
-                }
-            }*/
+//            print(WeatherKitData.WindSpeedForecast)
             items.removeAll(keepingCapacity: false)
-            for i in 1...9 {
-                items.append(Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i]))
+            
+            // Min/Max length of wind forecast, because if 0 app will crash when doing range n...n+
+            var WindForecastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
+//            print("Min: \(WindForecastMin)")
+            var WindForecastMax = Int(WeatherKitData.WindSpeedForecast.max() ?? 0)
+//            print("Max: \(WindForecastMax)")
+            
+            if WindForecastMax > 0 {
+                for i in WindForecastMin...WindForecastMax {
+                    items.append(Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i]))
+                }
             }
+            
+            // MARK: TODO Gusts info
+//            for i in 0...WeatherKitData.WindGusts.count {
+//                gusts = WeatherKitData.WindGusts
+//                print("Gust: \(gust)")
+//                print("Gusts: \(gusts)")
+//            }
             
             let formatter = DateFormatter()
             formatter.dateFormat = "h a"
