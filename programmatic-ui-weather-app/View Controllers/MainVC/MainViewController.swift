@@ -150,7 +150,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         //cityLabel settings
         guard let customFont = UIFont(name: "SpaceX", size: 24.0) else {
             fatalError("""
-                Failed to load the "CustomFont-Light" font.
+                Failed to load the "SpaceX" font.
                 Make sure the font file is included in the project and the font name is spelled correctly.
                 """
             )
@@ -539,27 +539,43 @@ extension MainViewController {
             print("no forecast symbols")
         } else {
             //Really bad fix for when returned symbol is wind ("wind" has no fill option)
-            if WeatherKitData.Symbol != "wind" {
+            
+            //iconview 1
+            if WeatherKitData.HourlyForecastSymbol[1] != "wind"{
                 self.iconView1.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[1] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-                self.iconView2.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[2] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-                self.iconView3.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[3] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-                self.iconView4.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[4] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-                self.iconView5.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[5] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
             } else {
                 self.iconView1.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[1], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            }
+            //iconview 2
+            if WeatherKitData.HourlyForecastSymbol[2] != "wind" {
+                self.iconView2.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[2] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            } else {
                 self.iconView2.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[2], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            }
+            //iconview 3
+            if WeatherKitData.HourlyForecastSymbol[3] != "wind" {
+                self.iconView3.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[3] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            } else {
                 self.iconView3.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[3], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            }
+            //iconviesw 4
+            if WeatherKitData.HourlyForecastSymbol[4] != "wind" {
+                self.iconView4.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[4] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            } else {
                 self.iconView4.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[4], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            }
+            //iconview 5
+            if WeatherKitData.HourlyForecastSymbol[5] != "wind" {
+                self.iconView5.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[5] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            } else {
                 self.iconView5.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[5], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
             }
         }
-        
         self.bottomLabel1.text = "\(timeArray.formattedHours[0])"
         self.bottomLabel2.text = "\(timeArray.formattedHours[1])"
         self.bottomLabel3.text = "\(timeArray.formattedHours[2])"
         self.bottomLabel4.text = "\(timeArray.formattedHours[3])"
         self.bottomLabel5.text = "\(timeArray.formattedHours[4])"
-        
     }
     
     //MARK: - Function for the pull to refresh on the scrollview
