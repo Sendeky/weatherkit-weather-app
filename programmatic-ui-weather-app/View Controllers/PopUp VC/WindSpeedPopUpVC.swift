@@ -74,17 +74,17 @@ struct WindSpeedPopUpVC: View {
 //                    Spacer()
                     
                     // Will probably do a seperate line/points on graph for gusts
-//                    VStack {
-//                        Text("Weather Information")
-//                            .font(.title)
-//                            .padding(.bottom, 10)
+                    VStack {
+                        Text("Weather Information")
+                            .font(.title)
+                            .padding(.bottom, 10)
                                
-//                        ForEach(gusts, id: \.self) { gust in
-//                            Text("Gust: \(gust)m/s")
+                        ForEach(gusts, id: \.self) { gust in
+                            Text("Gust: \(gust)m/s")
                                    
-//                        }
+                        }
                         
-//                    }
+                    }
                     Spacer()
                 }
             }
@@ -95,9 +95,9 @@ struct WindSpeedPopUpVC: View {
             items.removeAll(keepingCapacity: false)
             
             // Min/Max length of wind forecast, because if 0 app will crash when doing range n...n+
-            var WindForecastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
+            let WindForecastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
 //            print("Min: \(WindForecastMin)")
-            var WindForecastMax = Int(WeatherKitData.WindSpeedForecast.max() ?? 0)
+            let WindForecastMax = Int(WeatherKitData.WindSpeedForecast.max() ?? 0)
 //            print("Max: \(WindForecastMax)")
             
             if WindForecastMax > 0 {
@@ -107,11 +107,18 @@ struct WindSpeedPopUpVC: View {
             }
             
             // MARK: TODO Gusts info
-//            for i in 0...WeatherKitData.WindGusts.count {
+            let GustLen = WeatherKitData.WindGusts.count
+            
+            if (GustLen > 10) {
+                for i in 0...9 {
+                    gusts.append(WeatherKitData.WindGusts[i])
+                    print("gusts\(i): \(WeatherKitData.WindGusts[i])")
+                }
+                print("gusts: \(gusts)")
+            }
 //                gusts = WeatherKitData.WindGusts
 //                print("Gust: \(gust)")
 //                print("Gusts: \(gusts)")
-//            }
             
             let formatter = DateFormatter()
             formatter.dateFormat = "h a"
