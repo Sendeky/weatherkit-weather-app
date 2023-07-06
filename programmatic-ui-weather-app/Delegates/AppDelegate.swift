@@ -11,10 +11,25 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // device rotation notification
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
         // Override point for customization after application launch.
         let mainViewController = MainViewController()
         mainViewController.viewDidLoadRefresh()
         return true
+    }
+    
+    // can potentially be used to correct background when changing between horizontal/vertical
+    @objc func rotated() {
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+        }
+
+        if UIDevice.current.orientation.isPortrait {
+            print("Portrait")
+        }
     }
 
     // MARK: UISceneSession Lifecycle

@@ -83,7 +83,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        
         setBackground() //Function that sets the view to a background
         view.backgroundColor = .orange
         
@@ -483,8 +483,8 @@ extension MainViewController {
         view.sendSubviewToBack(uiView)
         
         
-        let background = UIImage(named: "Background.svg")
-        let imageView : UIImageView!
+        var background = UIImage(named: "Background.svg")
+        var imageView : UIImageView!
         imageView = UIImageView(frame: view.bounds)
         imageView.contentMode =  .scaleAspectFill
         imageView.clipsToBounds = true
