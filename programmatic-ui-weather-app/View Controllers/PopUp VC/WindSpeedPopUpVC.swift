@@ -23,7 +23,7 @@ struct WindSpeedPopUpVC: View {
         Item(value1: 24.0, value2: 0.0),
     ]
     @State var currentTime = 0  // Array for current time (for graph)
-    @State var gusts = [Measurement<UnitSpeed>]()
+    @State var gusts = [String]()
     
     var body: some View {
         ZStack {
@@ -110,15 +110,20 @@ struct WindSpeedPopUpVC: View {
             let GustLen = WeatherKitData.WindGusts.count
             
             if (GustLen > 10) {
+                // measurement formatter for gusts
+                let MF = MeasurementFormatter()
+                // maximum 1 digit after decimal
+                MF.numberFormatter.minimumFractionDigits = 1
+                // current locale (ie. mph, kmh, etc.)
+                MF.locale = .current
+                
                 for i in 0...9 {
-                    gusts.append(WeatherKitData.WindGusts[i])
-                    print("gusts\(i): \(WeatherKitData.WindGusts[i])")
+                    // gets (formatted to locale) string from WeatherKitData.WindGusts
+                    let gust = MF.string(from: WeatherKitData.WindGusts[i])
+                    gusts.append(gust)
                 }
-                print("gusts: \(gusts)")
+                print("gusts \(gusts)")
             }
-//                gusts = WeatherKitData.WindGusts
-//                print("Gust: \(gust)")
-//                print("Gusts: \(gusts)")
             
             let formatter = DateFormatter()
             formatter.dateFormat = "h a"
