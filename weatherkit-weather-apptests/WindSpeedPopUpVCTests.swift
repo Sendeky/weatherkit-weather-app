@@ -20,7 +20,6 @@ class WindSpeedPopUpVCTests: XCTestCase {
         view.items.append(Item(value1: 3.0, value2: 10.0))
         XCTAssertEqual(view.items.count, 2, "Items count should increase after appending an item")
     }
-
     // Add more tests as needed
 
 }
