@@ -18,10 +18,7 @@ struct WindSpeedPopUpVC: View {
     
     // @State is used because "items" changes
     // Variable for graph values
-    @State var items: [Item] = [
-        Item(value1: 0.0, value2: 0.0),
-        Item(value1: 24.0, value2: 0.0),
-    ]
+    @State var items = [Item]()
     @State var currentTime = 0  // Array for current time (for graph)
     @State var gusts = [String]()
     
@@ -63,7 +60,7 @@ struct WindSpeedPopUpVC: View {
                             .lineStyle(StrokeStyle(lineWidth: 8))
                             
                         }) //Chart
-                        .chartXScale(domain: (currentTime + 1)...(currentTime + 9))
+                        .chartXScale(domain: (currentTime)...(currentTime + 9))
                         .chartXAxisLabel("Time")
                         .chartYScale(domain: Int(WeatherKitData.WindSpeedForecast.min()! - 5)...Int(WeatherKitData.WindSpeedForecast.max()! + 5))
                         .chartYAxisLabel("MPH")
@@ -80,7 +77,7 @@ struct WindSpeedPopUpVC: View {
                             .padding(.bottom, 10)
                                
                         ForEach(gusts, id: \.self) { gust in
-                            Text("Gust: \(gust)m/s")
+                            Text("Gust: \(gust)")
                                    
                         }
                         
@@ -95,18 +92,19 @@ struct WindSpeedPopUpVC: View {
             items.removeAll(keepingCapacity: false)
             
             // Min/Max length of wind forecast, because if 0 app will crash when doing range n...n+
-            let WindForecastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
-//            print("Min: \(WindForecastMin)")
-            let WindForecastMax = Int(WeatherKitData.WindSpeedForecast.max() ?? 0)
-//            print("Max: \(WindForecastMax)")
+            let ForecastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
+            var CastMax = Int(WeatherKitData.WindSpeedForecast.max() ?? 0)
+            //checks if Forecast has more than 10 entries, so that chart doesn't get too big
+            if CastMax > 9 {CastMax = 9} else {}
             
-            if WindForecastMax > 0 {
-                for i in WindForecastMin...WindForecastMax {
+            if CastMax > 0 {
+                for i in ForecastMin...CastMax {
                     items.append(Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i]))
                 }
+                // I have no bloody clue why this happens but it does. Maybe when [Items] gets initialized??
+                items.remove(at: 0) //need this because the 0 item in "items" is a dummy value
             }
             
-            // MARK: TODO Gusts info
             let GustLen = WeatherKitData.WindGusts.count
             
             if (GustLen > 10) {
