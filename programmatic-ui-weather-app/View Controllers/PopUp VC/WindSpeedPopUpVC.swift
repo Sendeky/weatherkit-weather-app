@@ -43,19 +43,21 @@ struct WindSpeedPopUpVC: View {
                         .frame(height: UIScreen.main.bounds.height / 3)
 //                        .foregroundColor(.blue)
                         .overlay(Chart(items) { item in
+                            // AreaMark for WindSpeed
                             AreaMark(x: .value("", item.value1 + Double(currentTime)),
                                      yStart: .value("Min", item.value1 > 0 ? item.value1  - item.value1 : item.value1 + item.value1), //ternary for when temp is less than 0
                                      yEnd: .value("Max", item.value2)
-                            ) //BarMark
+                            )
                             .opacity(0.5)
                             .foregroundStyle(.primary)
                             .interpolationMethod(.monotone)
+                            // LineMark for WindSpeed (drawn on top of AreaMark)
                             LineMark (
                                 x: .value("", item.value1 + Double(currentTime)),
                                 y: .value("", item.value2)
                             ) //LineMark
                             .interpolationMethod(.monotone)
-                            .lineStyle(StrokeStyle(lineWidth: 8))
+                            .lineStyle(StrokeStyle(lineWidth: 4))
                             
                         }) //Chart
                         .chartXScale(domain: (currentTime + 1)...(currentTime + 10))
@@ -68,6 +70,7 @@ struct WindSpeedPopUpVC: View {
                         .padding()
                     
                     // Will probably do a seperate line/points on graph for gusts
+                    /*
                     VStack {
                         Text("Weather Information")
                             .font(.title)
@@ -75,10 +78,9 @@ struct WindSpeedPopUpVC: View {
                                
                         ForEach(gusts, id: \.self) { gust in
                             Text("Gust: \(gust)")
-                                   
                         }
-                        
                     }
+                     */
                     Spacer()
                 }
             }
@@ -115,6 +117,7 @@ struct WindSpeedPopUpVC: View {
                 
                 for i in 0...9 {
                     // gets (formatted to locale) string from WeatherKitData.WindGusts
+                    print("MF VALUE: \(WeatherKitData.WindGusts[i].value)")
                     let gust = MF.string(from: WeatherKitData.WindGusts[i])
                     gusts.append(gust)
                 }
