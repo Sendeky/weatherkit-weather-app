@@ -35,35 +35,35 @@ extension MainViewController {
                 dateFormatter.dateStyle = DateFormatter.Style.none
                 dateFormatter.timeZone = .current
                 
-                let formatter = MeasurementFormatter()
-                formatter.unitStyle = .short
-                formatter.unitOptions = .temperatureWithoutUnit
-                if UserDefaults.standard.bool(forKey: "METRIC_UNITS") == true{
-                    formatter.locale = Locale.current
-                    formatter.numberFormatter.maximumFractionDigits = 0
-                    formatter.numberFormatter.roundingMode = .up
-                    formatter.unitOptions = [.providedUnit]
-                } else if UserDefaults.standard.bool(forKey: "METRIC_UNITS") == false {
-                    formatter.locale = Locale.current
-                    formatter.numberFormatter.maximumFractionDigits = 0
-                    formatter.numberFormatter.roundingMode = .up
-//                    formatter.unitOptions = .providedUnit
-                }
+                // will have 0 maximumFractionDigits
+                let MF0 = MeasurementFormatter()
+                MF0.unitStyle = .short
+                MF0.locale = .autoupdatingCurrent
+                MF0.numberFormatter.maximumFractionDigits = 0
+                
+                // will have 1 maximumFractionDigits
+                let MF1 = MeasurementFormatter()
+                MF1.unitStyle = .short
+                MF1.locale = .autoupdatingCurrent
+                MF1.numberFormatter.maximumFractionDigits = 1
                 
                 //Data from currentWeather
-                let temp = formatter.string(from: result.0.temperature)
-                print("supposed to be fahrenheit:\(temp)")
+                // needs 0 decimal points
+                let temp = MF0.string(from: result.0.temperature)
+                
+                MF0.numberFormatter.maximumFractionDigits = 3
                 let uv = result.0.uvIndex.value
-                let windSpeed = formatter.string(from: result.0.wind.speed)
+                let windSpeed = MF0.string(from: result.0.wind.speed)
+                print(windSpeed)
                 let windDirection = result.0.wind.compassDirection
                 print("gust: \(result.0.wind.gust)")
                 let symbol = result.0.symbolName
                 let humidity = Int(100 * result.0.humidity)
-                let pressure = formatter.string(from: result.0.pressure)
+                let pressure = MF1.string(from: result.0.pressure)
                 
                 //Data from dailyForecast[0] (today)
-                let tempMax = formatter.string(from: result.2[0].highTemperature)
-                let tempMin = formatter.string(from: result.2[0].lowTemperature)
+                let tempMax = MF0.string(from: result.2[0].highTemperature)
+                let tempMin = MF0.string(from: result.2[0].lowTemperature)
                 let localSunrise = dateFormatter.string(from: result.2.forecast[0].sun.sunrise!)
                 let localSunset = dateFormatter.string(from: result.2.forecast[0].sun.sunset!)
                 let solarNoon = dateFormatter.string(from: result.2.forecast[0].sun.solarNoon!)
@@ -76,16 +76,16 @@ extension MainViewController {
                 } else {}
                 
                 //For loop for the tempMax for 5 days
-                for i in 0...9 {
+                for i in 0...6 {
 //                    print(result.dailyForecast[i].highTemperature)
                     let maxTemp = result.2[i].highTemperature
-                    WeatherKitData.TempMaxForecast.append(formatter.string(from: maxTemp))        //Append is needed to append into array
+                    WeatherKitData.TempMaxForecast.append(MF0.string(from: maxTemp))        //Append is needed to append into array
                     print("TempMaxForecast: \(WeatherKitData.TempMaxForecast[i])")
                     let forecastSymbol = result.2[i].symbolName
                     WeatherKitData.forecastSymbol.append(forecastSymbol)
                     print("forecastSymbol: \(WeatherKitData.forecastSymbol[i])")
                     let minTemp = result.2[i].lowTemperature
-                    WeatherKitData.TempMinForecast.append(formatter.string(from: minTemp))
+                    WeatherKitData.TempMinForecast.append(MF0.string(from: minTemp))
                     print("TempMinForecast: \(WeatherKitData.TempMinForecast[i])")
 //                    print("WEATHERKITDATA TempMax array: \(WeatherKitData.TempMaxForecast[i])")
                 }
@@ -117,11 +117,11 @@ extension MainViewController {
                     WeatherKitData.HourlyForecastSymbol.append(symbol)
                 }
                 
-                print(temp)
-                print(uv)
-                print(symbol)
-                print(rainChance)
-                print(result.1.forecast[0].wind)
+//                print(temp)
+//                print(uv)
+//                print(symbol)
+//                print(rainChance)
+//                print(result.1.forecast[0].wind)
 //                if result.alerts!.count > 0 {
 //                    print("Weather Alert: \(result.weatherAlerts?[0].summary)")
 //                } else {
@@ -150,7 +150,6 @@ extension MainViewController {
                 WeatherKitData.RainChance = rainChance
                 
                 
-
                 WeatherKitData.SunriseDate = result.2.forecast[0].sun.sunrise!
                 WeatherKitData.SunsetDate = result.2.forecast[0].sun.sunset!
                 
@@ -178,7 +177,9 @@ extension MainViewController {
         createNotification()
         
         let date = WeatherKitData.SunsetDate
-        let rocketTimer = Timer(fireAt: date, interval: 0, target: self, selector: #selector(AnimateRocket), userInfo: nil, repeats: false)
+        let interval = WeatherKitData.SunsetDate.timeIntervalSinceReferenceDate - WeatherKitData.SunriseDate.timeIntervalSinceReferenceDate
+        
+        let rocketTimer = Timer(fireAt: date, interval: interval, target: self, selector: #selector(AnimateRocket), userInfo: nil, repeats: false)
         RunLoop.main.add(rocketTimer, forMode: RunLoop.Mode.common)
     }
 }
