@@ -24,8 +24,6 @@ struct WindSpeedPopUpVC: View {
     
     var body: some View {
         ZStack {
-            //        windView.applyBlurEffect(.systemUltraThinMaterialLight, cornerRadius: 20)
-//            Color(UIColor(red: 125.0/255.0, green: 175.0/255.0, blue: 255.0/255.0, alpha: 1.0))
             VStack {
                 Text("Wind")
                     .font(Font.custom("SpaceX", size: 24.0))
@@ -60,7 +58,7 @@ struct WindSpeedPopUpVC: View {
                             .lineStyle(StrokeStyle(lineWidth: 8))
                             
                         }) //Chart
-                        .chartXScale(domain: (currentTime)...(currentTime + 9))
+                        .chartXScale(domain: (currentTime + 1)...(currentTime + 10))
                         .chartXAxisLabel("Time")
                         .chartYScale(domain: Int(WeatherKitData.WindSpeedForecast.min()! - 5)...Int(WeatherKitData.WindSpeedForecast.max()! + 5))
                         .chartYAxisLabel("MPH")
@@ -68,7 +66,6 @@ struct WindSpeedPopUpVC: View {
                             AxisMarks(position: .leading)
                         }
                         .padding()
-//                    Spacer()
                     
                     // Will probably do a seperate line/points on graph for gusts
                     VStack {
@@ -95,12 +92,13 @@ struct WindSpeedPopUpVC: View {
             let ForecastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
             var CastMax = Int(WeatherKitData.WindSpeedForecast.max() ?? 0)
             //checks if Forecast has more than 10 entries, so that chart doesn't get too big
-            if CastMax > 9 {CastMax = 9} else {}
+            if CastMax > 10 {CastMax = 10} else {}
             
             if CastMax > 0 {
                 for i in ForecastMin...CastMax {
                     items.append(Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i]))
                 }
+//                print("items: \(items)")
                 // I have no bloody clue why this happens but it does. Maybe when [Items] gets initialized??
                 items.remove(at: 0) //need this because the 0 item in "items" is a dummy value
             }
@@ -111,7 +109,7 @@ struct WindSpeedPopUpVC: View {
                 // measurement formatter for gusts
                 let MF = MeasurementFormatter()
                 // maximum 1 digit after decimal
-                MF.numberFormatter.minimumFractionDigits = 1
+                MF.numberFormatter.maximumFractionDigits = 1
                 // current locale (ie. mph, kmh, etc.)
                 MF.locale = .current
                 
@@ -131,7 +129,7 @@ struct WindSpeedPopUpVC: View {
             let currentHour = CurrentTime.hour ?? 0
             
             currentTime = currentHour
-            
+            print("currentTime: \(CurrentTime)")
             currentTime = currentTime > 12 ? currentTime - 13 : currentTime - 1     // Some extremely stupid logic to get the chart to fill up and have the time line up
                                                                                     // It's "-13" and "-1" because I think the array starts at 1
                                                                                     // (first element in windspeed array is empty, so we start with the first one, mgiht fix later)
