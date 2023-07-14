@@ -144,19 +144,6 @@ struct WindSpeedPopUpVC: View {
     }
 }
 
-// Background Blur struct
-struct BackgroundBlurView: UIViewRepresentable {
-    //Makes UIView, returns UIView
-    func makeUIView(context: Context) -> UIView {
-        let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
-        DispatchQueue.main.async {
-            view.superview?.superview?.backgroundColor = .clear
-        }
-        return view
-    }
-    func updateUIView(_ uiView: UIView, context: Context) {}
-}
-
 
 // Preview Struct
 struct WindSpeedPopUpVC_Previews: PreviewProvider {

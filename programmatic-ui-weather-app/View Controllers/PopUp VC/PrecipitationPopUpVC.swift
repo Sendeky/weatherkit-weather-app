@@ -60,9 +60,11 @@ struct PrecipitationPopUpVC: View {
                     Spacer()
                 }
             }
-        }
+        }.background(BackgroundBlurView())      //BackgroundBlurView is from "SwiftUIBackgroundBlur.swift" in "AnimationsEffects" folder
+            .edgesIgnoringSafeArea(.bottom)
     }
 }
+
 
 struct PrecipitationPopUpVC_Previews: PreviewProvider {
     static var previews: some View {

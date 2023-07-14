@@ -32,6 +32,7 @@
 		C055633C295CE4CB008CB6D4 /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C055633B295CE4CB008CB6D4 /* NotificationUtil.swift */; };
 		C055FD3C299721F9008850A6 /* PrimaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04E9EED2945296B00882FC6 /* PrimaryData.swift */; };
 		C05606FC2A612DA800F3C705 /* PrecipitationPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05606FB2A612DA800F3C705 /* PrecipitationPopUpVC.swift */; };
+		C05606FE2A61CEBA00F3C705 /* SwiftUIBackgroundBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05606FD2A61CEBA00F3C705 /* SwiftUIBackgroundBlur.swift */; };
 		C06F8D2E292980550054D5DC /* ForecastListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D2D292980550054D5DC /* ForecastListVC.swift */; };
 		C06F8D31292981680054D5DC /* Forecasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D30292981680054D5DC /* Forecasts.swift */; };
 		C06F8D33292983810054D5DC /* ForecastsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D32292983810054D5DC /* ForecastsCell.swift */; };
@@ -120,6 +121,7 @@
 		C055FD3829970DF7008850A6 /* WindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindView.swift; sourceTree = "<group>"; };
 		C055FD3A29970EDC008850A6 /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 		C05606FB2A612DA800F3C705 /* PrecipitationPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecipitationPopUpVC.swift; sourceTree = "<group>"; };
+		C05606FD2A61CEBA00F3C705 /* SwiftUIBackgroundBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftUIBackgroundBlur.swift; path = "programmatic-ui-weather-app/AnimationsEffects/SwiftUIBackgroundBlur.swift"; sourceTree = SOURCE_ROOT; };
 		C05951AD29A08D1F00FC9FA6 /* WatchWeatherCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWeatherCall.swift; sourceTree = "<group>"; };
 		C05951AF29A08FE600FC9FA6 /* weatherkit-watchosExtension Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "weatherkit-watchosExtension Watch App.entitlements"; sourceTree = "<group>"; };
 		C06F8D2D292980550054D5DC /* ForecastListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListVC.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 		C0A211182952E20B00C05917 /* AnimationsEffects */ = {
 			isa = PBXGroup;
 			children = (
+				C05606FD2A61CEBA00F3C705 /* SwiftUIBackgroundBlur.swift */,
 				C0A211192952E21C00C05917 /* AnimationsEffects.swift */,
 			);
 			path = AnimationsEffects;
@@ -597,6 +600,7 @@
 				C04E9E9F29417FA100882FC6 /* WidgetStruct.swift in Sources */,
 				C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */,
 				C034704328F6221900656AA8 /* MainViewController.swift in Sources */,
+				C05606FE2A61CEBA00F3C705 /* SwiftUIBackgroundBlur.swift in Sources */,
 				C0CF2DD12929487800359476 /* Settings.swift in Sources */,
 				C04E9EEE2945296C00882FC6 /* PrimaryData.swift in Sources */,
 				C06F8D2E292980550054D5DC /* ForecastListVC.swift in Sources */,
