@@ -31,6 +31,7 @@
 		C053221E295D52F100FF849E /* RocketAnimationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C053221D295D52F100FF849E /* RocketAnimationUtil.swift */; };
 		C055633C295CE4CB008CB6D4 /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C055633B295CE4CB008CB6D4 /* NotificationUtil.swift */; };
 		C055FD3C299721F9008850A6 /* PrimaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04E9EED2945296B00882FC6 /* PrimaryData.swift */; };
+		C05606FC2A612DA800F3C705 /* PrecipitationPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05606FB2A612DA800F3C705 /* PrecipitationPopUpVC.swift */; };
 		C06F8D2E292980550054D5DC /* ForecastListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D2D292980550054D5DC /* ForecastListVC.swift */; };
 		C06F8D31292981680054D5DC /* Forecasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D30292981680054D5DC /* Forecasts.swift */; };
 		C06F8D33292983810054D5DC /* ForecastsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F8D32292983810054D5DC /* ForecastsCell.swift */; };
@@ -118,6 +119,7 @@
 		C055FD362997054E008850A6 /* RangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeView.swift; sourceTree = "<group>"; };
 		C055FD3829970DF7008850A6 /* WindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindView.swift; sourceTree = "<group>"; };
 		C055FD3A29970EDC008850A6 /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
+		C05606FB2A612DA800F3C705 /* PrecipitationPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecipitationPopUpVC.swift; sourceTree = "<group>"; };
 		C05951AD29A08D1F00FC9FA6 /* WatchWeatherCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWeatherCall.swift; sourceTree = "<group>"; };
 		C05951AF29A08FE600FC9FA6 /* weatherkit-watchosExtension Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "weatherkit-watchosExtension Watch App.entitlements"; sourceTree = "<group>"; };
 		C06F8D2D292980550054D5DC /* ForecastListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListVC.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			children = (
 				C0711C2829484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift */,
 				C0711C2B2949667B004D3BD3 /* WindSpeedPopUpVC.swift */,
+				C05606FB2A612DA800F3C705 /* PrecipitationPopUpVC.swift */,
 			);
 			path = "PopUp VC";
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				C04E9EEE2945296C00882FC6 /* PrimaryData.swift in Sources */,
 				C06F8D2E292980550054D5DC /* ForecastListVC.swift in Sources */,
 				C055633C295CE4CB008CB6D4 /* NotificationUtil.swift in Sources */,
+				C05606FC2A612DA800F3C705 /* PrecipitationPopUpVC.swift in Sources */,
 				C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */,
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,
 				C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */,
@@ -792,7 +796,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.3;
+				MARKETING_VERSION = 0.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -831,7 +835,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.3;
+				MARKETING_VERSION = 0.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -861,7 +865,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app.weatherkit-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -889,7 +893,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app.weatherkit-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

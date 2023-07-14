@@ -25,6 +25,7 @@ extension MainViewController {
                     self.cityLabel.text = "\(city)"
 //                    self.cityLabel.text = "San Francisco"
                 })
+//                let TempLocation = CLLocation(latitude: 39.9042, longitude: 116.4074)     // Beijing
                 
                 let calendar = Calendar.current
                 let endDate = calendar.date(byAdding: .hour, value: 12,to: Date.now)
@@ -48,7 +49,6 @@ extension MainViewController {
                 MF1.numberFormatter.maximumFractionDigits = 1
                 
                 //Data from currentWeather
-                // needs 0 decimal points
                 let temp = MF0.string(from: result.0.temperature)
                 
                 MF0.numberFormatter.maximumFractionDigits = 3
@@ -90,22 +90,25 @@ extension MainViewController {
 //                    print("WEATHERKITDATA TempMax array: \(WeatherKitData.TempMaxForecast[i])")
                 }
                 
-                //For loop for 12hour wind
+                //For loop for 12hours
                 for i in 0...11 {
+                    // wind speed for next 12 hours
                     let formatter = MeasurementFormatter()
                     formatter.unitOptions = .temperatureWithoutUnit
                     let windSpeed = result.1.forecast[i].wind.speed
                     let wind = (round(windSpeed.value * 10)) / 10
 //                    print("Wind: \(wind)")
                     WeatherKitData.WindSpeedForecast.append(wind)
-//                    print(WeatherKitData.WindSpeedForecast[i])
                     
-                    // gets gusts and unwraps them
+                    // gusts for next 12 hours`
                     let gust = result.1.forecast[i].wind.gust
                     if let unwrapperGust = gust {
                         WeatherKitData.WindGusts.append(unwrapperGust)
                         print("gust#\(i): \(unwrapperGust)")
                     }
+                    
+                    // precipitation chance for next 12 hours
+                    print("precipitation chance\(i): \(result.1.forecast[i].precipitationChance)")
                 }
                 
                 //For loop for 12 hour weather
@@ -147,7 +150,7 @@ extension MainViewController {
                 WeatherKitData.AstronomicalDawn = astronomicalDawn
                 WeatherKitData.AstronomicalDusk = astronomicalDusk
                 WeatherKitData.Pressure = pressure
-                WeatherKitData.RainChance = rainChance
+                WeatherKitData.PrecipitationChance = rainChance
                 
                 
                 WeatherKitData.SunriseDate = result.2.forecast[0].sun.sunrise!
