@@ -196,9 +196,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         scrollView.alwaysBounceHorizontal = false
         
         //precipitationView settings
+        let precipitationTapGesture = UITapGestureRecognizer(target: self, action: #selector(precipitationTapped))
         precipitationView.translatesAutoresizingMaskIntoConstraints = false
         precipitationView.layer.cornerRadius = 20
         precipitationView.backgroundColor = cyanColor
+        precipitationView.addGestureRecognizer(precipitationTapGesture)
     //        precipitationView.applyBlurEffect(.systemUltraThinMaterialDark, cornerRadius: 20)
         
         //precupitationTitleLabel settings
@@ -706,6 +708,17 @@ extension MainViewController {
         }
     }
      */
+    
+    //func for Precipitation view tapped
+    @objc func precipitationTapped() {
+        print("precipitationView tapped")
+        let precipitationPopUp = UIHostingController(rootView: PrecipitationPopUpVC())
+    
+        //Uses animation from Animations.swift
+        self.precipitationView.showAnimation {
+            self.present(precipitationPopUp, animated: true)
+        }
+    }
     
     //func for windSpeed view tapped
     @objc func windSpeedTapped() {

@@ -34,6 +34,7 @@ struct WindSpeedPopUpVC: View {
                             .font(Font.custom("SpaceX", size: 24.0))
                             .padding(.leading)
                         Text(WeatherKitData.WindDirection)
+                            .padding(.leading)
 //                            .font(Font.custom("SpaceX", size: 10.0))
                     }
                     Spacer()
