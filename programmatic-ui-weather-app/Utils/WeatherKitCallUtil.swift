@@ -111,7 +111,7 @@ extension MainViewController {
                     print("precipitation chance\(i): \(result.1.forecast[i].precipitationChance)")
                     // doesn't need to be unwrapped because "...forecast[i].precipitationChance" is not optional
                     let precipitationChance = result.1.forecast[i].precipitationChance
-                    WeatherKitData.PrecipitationChanceForecast.append(precipitationChance)
+                    WeatherKitData.PrecipitationChanceForecast.append(precipitationChance * 100) // *100 is needed because precipitationChance is from 0-1
                     
                     
                 }
