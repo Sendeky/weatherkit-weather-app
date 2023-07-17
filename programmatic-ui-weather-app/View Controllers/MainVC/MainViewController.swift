@@ -196,9 +196,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         scrollView.alwaysBounceHorizontal = false
         
         //precipitationView settings
+        let precipitationTapGesture = UITapGestureRecognizer(target: self, action: #selector(precipitationTapped))
         precipitationView.translatesAutoresizingMaskIntoConstraints = false
         precipitationView.layer.cornerRadius = 20
         precipitationView.backgroundColor = cyanColor
+        precipitationView.addGestureRecognizer(precipitationTapGesture)
     //        precipitationView.applyBlurEffect(.systemUltraThinMaterialDark, cornerRadius: 20)
         
         //precupitationTitleLabel settings
@@ -305,14 +307,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         topLabel5.text = "--˚"
         topLabel5.font = .preferredFont(forTextStyle: .title2)
         
-        let windTapGesture = UITapGestureRecognizer(target: self, action: #selector(windSpeedTapped))
-        windView.translatesAutoresizingMaskIntoConstraints = false
-        windView.backgroundColor = cyanColor
-        windView.layer.cornerRadius = 20
-        windView.isUserInteractionEnabled = true
-        windView.addGestureRecognizer(windTapGesture)
-    //        windView.applyBlurEffect(.systemUltraThinMaterialLight, cornerRadius: 20)
-        
         iconView5.translatesAutoresizingMaskIntoConstraints = false
         iconView5.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
         iconView5.contentMode = .scaleAspectFit
@@ -320,6 +314,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         bottomLabel5.translatesAutoresizingMaskIntoConstraints = false
         bottomLabel5.text = "--"
         bottomLabel5.font = .preferredFont(forTextStyle: .body)
+        
+        let windTapGesture = UITapGestureRecognizer(target: self, action: #selector(windSpeedTapped))
+        windView.translatesAutoresizingMaskIntoConstraints = false
+        windView.backgroundColor = cyanColor
+        windView.layer.cornerRadius = 20
+        windView.isUserInteractionEnabled = true
+        windView.addGestureRecognizer(windTapGesture)
+    //        windView.applyBlurEffect(.systemUltraThinMaterialLight, cornerRadius: 20)
         
         windTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         windTitleLabel.text = "Wind"
@@ -521,7 +523,7 @@ extension MainViewController {
         self.currentTempLabel.text = "\(WeatherKitData.Temp)"
         self.todayTempLabel.text = "H:\(WeatherKitData.TempMax) L:\(WeatherKitData.TempMin)"
         self.windLabel.text = "\(WeatherKitData.WindSpeed)"
-        self.precipitationLabel.text = "\(WeatherKitData.RainChance)% Chance"
+        self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
         DateConverter().timeArrayMaker()
 //        getWeather(location: UserLocation.userCLLocation!)
         
@@ -706,6 +708,17 @@ extension MainViewController {
         }
     }
      */
+    
+    //func for Precipitation view tapped
+    @objc func precipitationTapped() {
+        print("precipitationView tapped")
+        let precipitationPopUp = UIHostingController(rootView: PrecipitationPopUpVC())
+    
+        //Uses animation from Animations.swift
+        self.precipitationView.showAnimation {
+            self.present(precipitationPopUp, animated: true)
+        }
+    }
     
     //func for windSpeed view tapped
     @objc func windSpeedTapped() {

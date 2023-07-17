@@ -34,6 +34,7 @@ struct WindSpeedPopUpVC: View {
                             .font(Font.custom("SpaceX", size: 24.0))
                             .padding(.leading)
                         Text(WeatherKitData.WindDirection)
+                            .padding(.leading)
 //                            .font(Font.custom("SpaceX", size: 10.0))
                     }
                     Spacer()
@@ -87,21 +88,21 @@ struct WindSpeedPopUpVC: View {
         }
             .background(BackgroundBlurView())
         .onAppear {
-//            print(WeatherKitData.WindSpeedForecast)
+            // cleans items in case something is left over
             items.removeAll(keepingCapacity: false)
             
             // Min/Max length of wind forecast, because if 0 app will crash when doing range n...n+
-            let ForecastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
+            let CastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
             var CastMax = Int(WeatherKitData.WindSpeedForecast.max() ?? 0)
             //checks if Forecast has more than 10 entries, so that chart doesn't get too big
             if CastMax > 10 {CastMax = 10} else {}
             
             if CastMax > 0 {
-                for i in ForecastMin...CastMax {
+                for i in CastMin...CastMax {
                     items.append(Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i]))
                 }
 //                print("items: \(items)")
-                // I have no bloody clue why this happens but it does. Maybe when [Items] gets initialized??
+                // I have no clue why this happens. Maybe when [Items] gets initialized?
                 items.remove(at: 0) //need this because the 0 item in "items" is a dummy value
             }
             
@@ -124,8 +125,6 @@ struct WindSpeedPopUpVC: View {
                 print("gusts \(gusts)")
             }
             
-            let formatter = DateFormatter()
-            formatter.dateFormat = "h a"
             
             // Get the current time
             let CurrentTime = Calendar.current.dateComponents([.hour], from: Date())        // gets current time (hour)
@@ -141,19 +140,6 @@ struct WindSpeedPopUpVC: View {
             
         }.edgesIgnoringSafeArea(.bottom)
     }
-}
-
-// Background Blur struct
-struct BackgroundBlurView: UIViewRepresentable {
-    //Makes UIView, returns UIView
-    func makeUIView(context: Context) -> UIView {
-        let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
-        DispatchQueue.main.async {
-            view.superview?.superview?.backgroundColor = .clear
-        }
-        return view
-    }
-    func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
 
