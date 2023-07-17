@@ -109,7 +109,13 @@ extension MainViewController {
                     
                     // precipitation chance for next 12 hours
                     print("precipitation chance\(i): \(result.1.forecast[i].precipitationChance)")
+                    // doesn't need to be unwrapped because "...forecast[i].precipitationChance" is not optional
+                    let precipitationChance = result.1.forecast[i].precipitationChance
+                    WeatherKitData.PrecipitationChanceForecast.append(precipitationChance)
+                    
+                    
                 }
+                print("PrecipitatiomnChanceForecast: \(WeatherKitData.PrecipitationChanceForecast)")
                 
                 //For loop for 12 hour weather
                 for i in  0...11 {

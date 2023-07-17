@@ -92,13 +92,13 @@ struct WindSpeedPopUpVC: View {
             items.removeAll(keepingCapacity: false)
             
             // Min/Max length of wind forecast, because if 0 app will crash when doing range n...n+
-            let ForecastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
+            let CastMin = Int(WeatherKitData.WindSpeedForecast.min() ?? 0)
             var CastMax = Int(WeatherKitData.WindSpeedForecast.max() ?? 0)
             //checks if Forecast has more than 10 entries, so that chart doesn't get too big
             if CastMax > 10 {CastMax = 10} else {}
             
             if CastMax > 0 {
-                for i in ForecastMin...CastMax {
+                for i in CastMin...CastMax {
                     items.append(Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i]))
                 }
 //                print("items: \(items)")
