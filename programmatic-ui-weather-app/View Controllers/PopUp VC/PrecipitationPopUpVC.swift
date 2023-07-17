@@ -25,16 +25,13 @@ struct PrecipitationPopUpVC: View {
     var body: some View {
         ZStack {
             VStack {
-                Text("Precipitation")
+                Text("Rain")
                     .font(Font.custom("SpaceX", size: 24.0))
                     .padding()
                 HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading) {
-                        Text("Rain Chance: ")
+                        Text("\(WeatherKitData.PrecipitationChance)% Chance")
                             .font(Font.custom("SpaceX", size: 24.0))
-                            .padding(.leading)
-                        Text("32%")
-                            .font(Font.custom("SpaceX", size: 18.0))
                             .padding(.leading)
                     }
                     Spacer()
@@ -76,27 +73,24 @@ struct PrecipitationPopUpVC: View {
             }
         }.background(BackgroundBlurView())      //BackgroundBlurView is from "SwiftUIBackgroundBlur.swift" in "AnimationsEffects" folder
             .onAppear{
-                print("onAppear")
+                // cleans graphItems in case something is left
                 graphItems.removeAll(keepingCapacity: false)
                 
                 // Min/Max length of precipitationChance forecast, because if 0 app will crash when doing range n...n+
                 let CastMin = Int(WeatherKitData.PrecipitationChanceForecast.min() ?? 0)
-                var CastMax = Int(WeatherKitData.PrecipitationChanceForecast.count ?? 0)
-                print("OAP: \(WeatherKitData.PrecipitationChanceForecast)")
+                var CastMax = Int(WeatherKitData.PrecipitationChanceForecast.count)
                 
-                print("CM: \(CastMax) CMI: \(CastMin)")
                 //checks if Forecast has more than 10 entries, so that chart doesn't get too big
                 if CastMax > 10 {CastMax = 10} else {}
                 
                 if CastMax > 0 {
                     for i in CastMin...CastMax {
 //                        graphItems.append(GraphItem(value1: Double(i), value2: WeatherKitData.PrecipitationChanceForecast[i]))
-                        graphItems.append(GraphItem(value1: Double(i), value2: Double(i)))
-//                        print("yay??")
+                        graphItems.append(GraphItem(value1: Double(i), value2: WeatherKitData.PrecipitationChanceForecast[i]))
                     }
-                    // Probably still applies here (from WindSpeedPopUpVC)
-                    // I have no bloody clue why this happens but it does. Maybe when [Items] gets initialized??
-//                    graphItems.remove(at: 0) //need this because the 0 item in "items" is a dummy value
+                    
+                    // I have no clue why this happens. Maybe when [GraphItems] gets initialized?
+                    graphItems.remove(at: 0) //need this because the 0 item in "items" is a dummy value
                     print("graphItems: \(graphItems)")
                 }
             }

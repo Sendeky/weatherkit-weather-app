@@ -102,7 +102,7 @@ struct WindSpeedPopUpVC: View {
                     items.append(Item(value1: Double(i), value2: WeatherKitData.WindSpeedForecast[i]))
                 }
 //                print("items: \(items)")
-                // I have no bloody clue why this happens but it does. Maybe when [Items] gets initialized??
+                // I have no clue why this happens. Maybe when [Items] gets initialized?
                 items.remove(at: 0) //need this because the 0 item in "items" is a dummy value
             }
             
