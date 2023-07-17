@@ -88,7 +88,7 @@ struct WindSpeedPopUpVC: View {
         }
             .background(BackgroundBlurView())
         .onAppear {
-//            print(WeatherKitData.WindSpeedForecast)
+            // cleans items in case something is left over
             items.removeAll(keepingCapacity: false)
             
             // Min/Max length of wind forecast, because if 0 app will crash when doing range n...n+
@@ -125,8 +125,6 @@ struct WindSpeedPopUpVC: View {
                 print("gusts \(gusts)")
             }
             
-            let formatter = DateFormatter()
-            formatter.dateFormat = "h a"
             
             // Get the current time
             let CurrentTime = Calendar.current.dateComponents([.hour], from: Date())        // gets current time (hour)

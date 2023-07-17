@@ -44,7 +44,7 @@ struct PrecipitationPopUpVC: View {
                         .overlay(Chart(graphItems) { item in
                             // AreaMark for WindSpeed
                             AreaMark(x: .value("", item.value1 + Double(currentTime)),
-                                     yStart: .value("Min", item.value1 > 0 ? item.value1  - item.value1 : item.value1 + item.value1), //ternary for when temp is less than 0
+                                     yStart: .value("Min", item.value2),
                                      yEnd: .value("Max", item.value2)
                             )
                             .opacity(0.5)
@@ -62,8 +62,8 @@ struct PrecipitationPopUpVC: View {
                         }) //Chart
                         .chartXScale(domain: (currentTime + 1)...(currentTime + 10))
                         .chartXAxisLabel("Time")
-                        .chartYScale(domain: Int(WeatherKitData.WindSpeedForecast.min()! - 5)...Int(WeatherKitData.WindSpeedForecast.max()! + 5))
-                        .chartYAxisLabel("MPH")
+                        .chartYScale(domain: 0...100) // 0-100%
+                        .chartYAxisLabel("%")
                         .chartYAxis {
                             AxisMarks(position: .leading)
                         }
@@ -93,6 +93,15 @@ struct PrecipitationPopUpVC: View {
                     graphItems.remove(at: 0) //need this because the 0 item in "items" is a dummy value
                     print("graphItems: \(graphItems)")
                 }
+                
+                // gets currentTime
+                let CurrentTime = (Calendar.current.dateComponents([.hour], from: Date()))        // gets current time (hour)
+//                print("CT: \(CurrentTime.hour)")
+                if var currentHour = CurrentTime.hour {
+                    currentHour = currentHour > 12 ? currentHour - 12 : currentHour
+                    currentTime = currentHour
+                }
+                                   
             }
         .edgesIgnoringSafeArea(.bottom)
     }
