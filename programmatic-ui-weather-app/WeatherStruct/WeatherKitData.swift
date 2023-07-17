@@ -23,8 +23,8 @@ struct WeatherKitData: Codable{
     static var Humidity = 0
     
     static var Pressure = ""
-    
-    static var RainChance = 0
+    static var PrecipitationChance = 0
+    static var PrecipitationChanceForecast = [Double]()
     
     static var Symbol = ""
     static var Sunrise = Date()
