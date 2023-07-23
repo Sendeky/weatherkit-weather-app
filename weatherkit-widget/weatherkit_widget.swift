@@ -79,17 +79,21 @@ struct weatherkit_widgetEntryView : View {
                     Text("Current")
                         .font(Font.custom("JosefinSans-Regular", size: 32.0))
                         .frame(height: 50)
+                        .foregroundColor(.white)
                     //Horizontal stack with temp and icon
                     HStack {
                         //Sets text as "temp" from widgetData
                         Text(entry.widgetData.temp)
                             .font(.system(size: 32.0))
                             .padding(.vertical, 5)
+                            .foregroundStyle(.white)
                         //Weather Symbol
                         if entry.widgetData.symbolName != "wind" {
                             Image(uiImage: UIImage(systemName: entry.widgetData.symbolName + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!).renderingMode(.template)
+                                .foregroundStyle(.white)
                         } else {
                             Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!).renderingMode(.template)
+                                .foregroundStyle(.white)
                         }
                     }
                     Spacer()
@@ -123,19 +127,24 @@ struct weatherkit_widgetEntryView : View {
                         //Sets text as "temp" from widgetData
                         Text(entry.widgetData.temp)
                             .font(.largeTitle)
+                            .foregroundColor(.white)
                         
                         //Weather Symbol
                         if entry.widgetData.symbolName != "wind" {
                             Image(uiImage: UIImage(systemName: entry.widgetData.symbolName + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
                                 .renderingMode(.template)
+                                .foregroundStyle(.white)
                         } else {
                             Image(uiImage: UIImage(systemName: entry.widgetData.symbolName, withConfiguration: UIImage.SymbolConfiguration(pointSize: 28.0))!)
                                 .renderingMode(.template)
+                                .foregroundStyle(.white)
                         }
                             
                         VStack {
                             Text("Max: \(entry.widgetData.tempMax)")
+                                .foregroundColor(.white)
                             Text("Min: \(entry.widgetData.tempMin)")
+                                .foregroundColor(.white)
                         }
                     }
                     Spacer()
@@ -145,7 +154,7 @@ struct weatherkit_widgetEntryView : View {
                                 yEnd: .value("", item.value + 1.5)
                         )
                         .opacity(0.5)
-                        .foregroundStyle(.primary)
+                        .foregroundStyle(.white)
                         .interpolationMethod(.monotone)
                         LineMark (
                             x: .value("", item.time),
@@ -153,6 +162,7 @@ struct weatherkit_widgetEntryView : View {
                         )
                         .interpolationMethod(.monotone)
                         .lineStyle(StrokeStyle(lineWidth: 4))
+                        .foregroundStyle(.white)
                     }
                     .chartYAxis(.hidden)
                     .padding(.horizontal, 5)
