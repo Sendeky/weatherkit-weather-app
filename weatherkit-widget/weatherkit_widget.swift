@@ -76,11 +76,13 @@ struct weatherkit_widgetEntryView : View {
                 
                 VStack(spacing: 0) {
                     //"Current" text at top
-                    Text("Current")
-                        .font(Font.custom("JosefinSans-Regular", size: 32.0))
-                        .frame(height: 50)
-                        .foregroundColor(.white)
+//                    Text("Current")
+//                        .font(Font.custom("JosefinSans-Regular", size: 32.0))
+//                        .frame(height: 50)
+//                        .foregroundColor(.white)
                     //Horizontal stack with temp and icon
+                    Spacer()
+                    Spacer()
                     HStack {
                         //Sets text as "temp" from widgetData
                         Text(entry.widgetData.temp)
