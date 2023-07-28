@@ -95,11 +95,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
-
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         
+        // hourly collection view stuff
         configureCollectionView()
+        // Register the custom cell class for reuse
+        collectionView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
+        
         //Initalizes settings for UI elements and layout for UI elements
         style()
         layout()
@@ -775,20 +778,27 @@ extension MainViewController {
         }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellData.count
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         
-        // Customize your cell here based on the data
-        cell.weatherIcon.image = UIImage(systemName: "sun.max", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+        // checks if there is enough data to show
+        if WeatherKitData.HourlyForecastSymbol.count > 6 {
+            //simple check for when icon is "wind" (doesn't have "fill" option)
+            if WeatherKitData.HourlyForecastSymbol[indexPath.row] != "wind" {
+                cell.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row]).fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            } else {
+                cell.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row])", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+            }
+        } else { cell.weatherIcon.image = UIImage(systemName: "questionmark")}
         
-        if WeatherKitData.HourlyForecast.count > 5 {
+        if WeatherKitData.HourlyForecast.count > 6 {
             cell.tempLabel.text = "\(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))˚"
         } else { cell.tempLabel.text = "--" }
         
-        if timeArray.formattedHours.count > 5 {
+        if timeArray.formattedHours.count > 6 {
             cell.titleLabel.text = "\(timeArray.formattedHours[indexPath.row])"
         } else { cell.titleLabel.text = "--"}
         
