@@ -35,6 +35,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let hourlyForecastView = UIView()
     let hourlyForecastTitleLabel = UILabel()
     //MARK: - HourlyForecastView Interior stuff
+    /*
     let scrollview = UIScrollView()
     let horizontalStack = UIStackView()
     let stackview1 = UIStackView()
@@ -65,6 +66,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let topLabel5 = UILabel()
     let iconView5 = UIImageView()
     let bottomLabel5 = UILabel()
+     */
     
     
     //windView settings
@@ -74,8 +76,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     
     // Data for your collection view cells
     let cellData = ["Cell 1", "Cell 2", "Cell 3", "Cell 4", "Cell 5"]
-    let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-//    let layoutCollectionView:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+    let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())      // need to have frame and layout for UICollectionView
     
     //Creates a refresh control for the scrollview
     var refreshControl = UIRefreshControl()
@@ -231,6 +232,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         hourlyForecastTitleLabel.font = .preferredFont(forTextStyle: .body)
         
         //MARK: - hourlyForecastView interior stuff
+        /*
         scrollview.translatesAutoresizingMaskIntoConstraints = false
         scrollview.alwaysBounceHorizontal = true
         scrollview.contentSize = CGSize(width: 500, height: 100)
@@ -320,6 +322,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         bottomLabel5.translatesAutoresizingMaskIntoConstraints = false
         bottomLabel5.text = "--"
         bottomLabel5.font = .preferredFont(forTextStyle: .body)
+         */
         
         //CollectionView
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -350,6 +353,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     
     //func to set layout for elements
     private func layout(){
+        /*
         stackview1.addArrangedSubview(iconView1)
         stackview1.addArrangedSubview(topLabel1)
         stackview1.addArrangedSubview(bottomLabel1)
@@ -377,6 +381,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         horizontalStack.addArrangedSubview(stackview5)
         
         scrollview.addSubview(horizontalStack)
+         */
         
         tempStackView.addArrangedSubview(cityLabel)
         tempStackView.addArrangedSubview(currentTempLabel)
@@ -398,7 +403,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         //Adds elements into hourlyForecastView
         hourlyForecastView.addSubview(hourlyForecastTitleLabel)
-        hourlyForecastView.addSubview(scrollview)
+//        hourlyForecastView.addSubview(scrollview)
         hourlyForecastView.addSubview(collectionView)
         
         
@@ -448,11 +453,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             hourlyForecastView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 20),
             hourlyForecastView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor),
             hourlyForecastView.centerXAnchor.constraint(equalTo: precipitationView.centerXAnchor),
-            hourlyForecastView.heightAnchor.constraint(equalToConstant: 270),
+            hourlyForecastView.heightAnchor.constraint(equalToConstant: 150),
             //hourlyForecastTitleLable constraints
             hourlyForecastTitleLabel.topAnchor.constraint(equalTo: hourlyForecastView.topAnchor, constant: 10),
             hourlyForecastTitleLabel.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor, constant: 10),
             //scrollview constraints
+            /*
             scrollview.topAnchor.constraint(equalTo: hourlyForecastTitleLabel.bottomAnchor, constant: 10),
             scrollview.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor, constant: 10),
             scrollview.trailingAnchor.constraint(equalTo: hourlyForecastView.trailingAnchor, constant: -10),
@@ -462,11 +468,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             horizontalStack.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor),
             horizontalStack.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor),
             horizontalStack.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor),
+            */
             //HourlyCollectionView constraints
-            collectionView.topAnchor.constraint(equalTo: horizontalStack.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: hourlyForecastTitleLabel.bottomAnchor, constant: 0),
+            collectionView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: hourlyForecastView.trailingAnchor, constant: -10),
+            collectionView.bottomAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: -10),
             //windView constraints
             windView.topAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: 20),
             windView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor),
@@ -544,6 +551,7 @@ extension MainViewController {
         DateConverter().timeArrayMaker()
 //        getWeather(location: UserLocation.userCLLocation!)
         
+        /*
         if WeatherKitData.HourlyForecast.count < 5 {
             print("whoops")
         } else {
@@ -595,6 +603,8 @@ extension MainViewController {
         self.bottomLabel3.text = "\(timeArray.formattedHours[2])"
         self.bottomLabel4.text = "\(timeArray.formattedHours[3])"
         self.bottomLabel5.text = "\(timeArray.formattedHours[4])"
+         
+         */
     }
     
     //MARK: - Function for the pull to refresh on the scrollview
@@ -633,12 +643,14 @@ extension MainViewController {
             } else {
             }
             self.updateLabels()
+            self.collectionView.reloadData()
         }
     }
     
     func getWeatherLabelUpdate() {
         DispatchQueue.main.async {
             self.updateLabels()
+            self.collectionView.reloadData()
         }
     }
    
@@ -770,10 +782,15 @@ extension MainViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         
         // Customize your cell here based on the data
-//        cell.weatherIcon.image = UIImage(systemName: "sun.max")
         cell.weatherIcon.image = UIImage(systemName: "sun.max", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-        cell.tempLabel.text = "20°"
-        cell.titleLabel.text = cellData[indexPath.item]
+        
+        if WeatherKitData.HourlyForecast.count > 5 {
+            cell.tempLabel.text = "\(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))˚"
+        } else { cell.tempLabel.text = "--" }
+        
+        if timeArray.formattedHours.count > 5 {
+            cell.titleLabel.text = "\(timeArray.formattedHours[indexPath.row])"
+        } else { cell.titleLabel.text = "--"}
         
         return cell
     }

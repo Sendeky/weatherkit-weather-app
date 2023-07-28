@@ -27,16 +27,16 @@ class CustomCell: UICollectionViewCell {
         weatherIcon = UIImageView()
 //        weatherIcon.image = UIImage(systemName: "sun.fill")
         weatherIcon.image = UIImage(systemName: "sun.max", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-        weatherIcon.contentMode = .scaleAspectFit
+        weatherIcon.contentMode = .scaleAspectFill
         
         tempLabel = UILabel()
         tempLabel.textAlignment = .center
-        tempLabel.font = UIFont.systemFont(ofSize: 16.0)
+        tempLabel.font = UIFont.systemFont(ofSize: 20.0)
         tempLabel.text = "20°"
         
         titleLabel = UILabel()
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 16.0)
+        titleLabel.font = UIFont.systemFont(ofSize: 20.0)
         
         contentView.addSubview(weatherIcon)
         contentView.addSubview(tempLabel)
@@ -48,19 +48,20 @@ class CustomCell: UICollectionViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             weatherIcon.topAnchor.constraint(equalTo: contentView.topAnchor),
-            weatherIcon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            weatherIcon.heightAnchor.constraint(greaterThanOrEqualToConstant: 25),
+            weatherIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            weatherIcon.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+            weatherIcon.widthAnchor.constraint(greaterThanOrEqualToConstant: 30),
 //            weatherIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
 //            weatherIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 //            weatherIcon.widthAnchor.constraint(greaterThanOrEqualToConstant: 15),
 //            weatherIcon.heightAnchor.constraint(greaterThanOrEqualToConstant: 15),
             
-            tempLabel.topAnchor.constraint(equalTo: weatherIcon.bottomAnchor),
+            tempLabel.topAnchor.constraint(equalTo: weatherIcon.bottomAnchor, constant: 15),
             tempLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             tempLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             tempLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15),
             
-            titleLabel.topAnchor.constraint(equalTo: tempLabel.bottomAnchor),
+            titleLabel.topAnchor.constraint(equalTo: tempLabel.bottomAnchor, constant: 5),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
