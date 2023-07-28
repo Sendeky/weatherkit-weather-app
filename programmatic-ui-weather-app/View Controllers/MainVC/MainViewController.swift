@@ -324,6 +324,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         //CollectionView
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
         
         let windTapGesture = UITapGestureRecognizer(target: self, action: #selector(windSpeedTapped))
         windView.translatesAutoresizingMaskIntoConstraints = false
@@ -447,7 +448,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             hourlyForecastView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 20),
             hourlyForecastView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor),
             hourlyForecastView.centerXAnchor.constraint(equalTo: precipitationView.centerXAnchor),
-            hourlyForecastView.heightAnchor.constraint(equalToConstant: 150),
+            hourlyForecastView.heightAnchor.constraint(equalToConstant: 270),
             //hourlyForecastTitleLable constraints
             hourlyForecastTitleLabel.topAnchor.constraint(equalTo: hourlyForecastView.topAnchor, constant: 10),
             hourlyForecastTitleLabel.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor, constant: 10),
@@ -769,6 +770,8 @@ extension MainViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         
         // Customize your cell here based on the data
+        cell.weatherIcon.image = UIImage(systemName: "sun.max")
+        cell.tempLabel.text = "20°"
         cell.titleLabel.text = cellData[indexPath.item]
         
         return cell
