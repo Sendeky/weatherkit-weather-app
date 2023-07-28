@@ -16,7 +16,7 @@ struct UserLocation {
     static var userCLLocation: CLLocation?
 }
 
-class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
+class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     //cyanColor constant (used in precipitationView, hourlyForecastView, etc.)
     let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
@@ -72,6 +72,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let windTitleLabel = UILabel()
     let windLabel = UILabel()
     
+    // Data for your collection view cells
+    let cellData = ["Cell 1", "Cell 2", "Cell 3", "Cell 4", "Cell 5"]
+    let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+//    let layoutCollectionView:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+    
     //Creates a refresh control for the scrollview
     var refreshControl = UIRefreshControl()
     //Creates the location manager
@@ -93,6 +98,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         
+        configureCollectionView()
         //Initalizes settings for UI elements and layout for UI elements
         style()
         layout()
@@ -315,6 +321,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         bottomLabel5.text = "--"
         bottomLabel5.font = .preferredFont(forTextStyle: .body)
         
+        //CollectionView
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsHorizontalScrollIndicator = false
+        
         let windTapGesture = UITapGestureRecognizer(target: self, action: #selector(windSpeedTapped))
         windView.translatesAutoresizingMaskIntoConstraints = false
         windView.backgroundColor = cyanColor
@@ -388,6 +398,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         //Adds elements into hourlyForecastView
         hourlyForecastView.addSubview(hourlyForecastTitleLabel)
         hourlyForecastView.addSubview(scrollview)
+        hourlyForecastView.addSubview(collectionView)
         
         
         //Adds Views into main view
@@ -450,6 +461,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             horizontalStack.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor),
             horizontalStack.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor),
             horizontalStack.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor),
+            //HourlyCollectionView constraints
+            collectionView.topAnchor.constraint(equalTo: horizontalStack.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor),
             //windView constraints
             windView.topAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: 20),
             windView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor),
@@ -729,5 +745,32 @@ extension MainViewController {
         self.windView.showAnimation {
             self.present(windSpeedPopUp, animated: true)
         }
+    }
+    
+    //MARK: Hourly Forecast Collection View
+    private func configureCollectionView() {
+            collectionView.delegate = self
+            collectionView.dataSource = self
+            
+            // Register your custom cell class
+            collectionView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
+            
+            // Set the collection view's layout to horizontal scroll
+            if let layout2 = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout2.scrollDirection = .horizontal
+            }
+        }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return cellData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
+        
+        // Customize your cell here based on the data
+        cell.titleLabel.text = cellData[indexPath.item]
+        
+        return cell
     }
 }
