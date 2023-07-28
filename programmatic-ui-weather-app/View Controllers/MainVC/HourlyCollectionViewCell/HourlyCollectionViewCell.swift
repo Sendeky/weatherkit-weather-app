@@ -27,6 +27,7 @@ class CustomCell: UICollectionViewCell {
         weatherIcon = UIImageView()
 //        weatherIcon.image = UIImage(systemName: "sun.fill")
         weatherIcon.image = UIImage(systemName: "sun.max", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+        weatherIcon.contentMode = .scaleAspectFit
         
         tempLabel = UILabel()
         tempLabel.textAlignment = .center
@@ -48,18 +49,22 @@ class CustomCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             weatherIcon.topAnchor.constraint(equalTo: contentView.topAnchor),
             weatherIcon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            weatherIcon.heightAnchor.constraint(greaterThanOrEqualToConstant: 25),
 //            weatherIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
 //            weatherIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            weatherIcon.heightAnchor.constraint(equalToConstant: 15),
+//            weatherIcon.widthAnchor.constraint(greaterThanOrEqualToConstant: 15),
+//            weatherIcon.heightAnchor.constraint(greaterThanOrEqualToConstant: 15),
             
             tempLabel.topAnchor.constraint(equalTo: weatherIcon.bottomAnchor),
             tempLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             tempLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            tempLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15),
             
             titleLabel.topAnchor.constraint(equalTo: tempLabel.bottomAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15)
         ])
     }
 }

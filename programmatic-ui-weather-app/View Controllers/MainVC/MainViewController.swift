@@ -770,7 +770,8 @@ extension MainViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         
         // Customize your cell here based on the data
-        cell.weatherIcon.image = UIImage(systemName: "sun.max")
+//        cell.weatherIcon.image = UIImage(systemName: "sun.max")
+        cell.weatherIcon.image = UIImage(systemName: "sun.max", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
         cell.tempLabel.text = "20°"
         cell.titleLabel.text = cellData[indexPath.item]
         
