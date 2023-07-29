@@ -34,48 +34,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let precipitationLabel = UILabel()
     let hourlyForecastView = UIView()
     let hourlyForecastTitleLabel = UILabel()
-    //MARK: - HourlyForecastView Interior stuff
-    /*
-    let scrollview = UIScrollView()
-    let horizontalStack = UIStackView()
-    let stackview1 = UIStackView()
-    let topLabel1 = UILabel()
-    let iconView1 = UIImageView()
-    let bottomLabel1 = UILabel()
     
-    
-    let stackview2 = UIStackView()
-    let topLabel2 = UILabel()
-    let iconView2 = UIImageView()
-    let bottomLabel2 = UILabel()
-    
-    
-    let stackview3 = UIStackView()
-    let topLabel3 = UILabel()
-    let iconView3 = UIImageView()
-    let bottomLabel3 = UILabel()
-    
-    
-    let stackview4 = UIStackView()
-    let topLabel4 = UILabel()
-    let iconView4 = UIImageView()
-    let bottomLabel4 = UILabel()
-    
-    
-    let stackview5 = UIStackView()
-    let topLabel5 = UILabel()
-    let iconView5 = UIImageView()
-    let bottomLabel5 = UILabel()
-     */
-    
-    
-    //windView settings
+    //windView variables
     let windView = UIView()
     let windTitleLabel = UILabel()
     let windLabel = UILabel()
     
-    // Data for your collection view cells
-    let cellData = ["Cell 1", "Cell 2", "Cell 3", "Cell 4", "Cell 5"]
+    // collection view for hourly forecast
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())      // need to have frame and layout for UICollectionView
     
     //Creates a refresh control for the scrollview
@@ -87,7 +52,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         setBackground() //Function that sets the view to a background
@@ -234,99 +198,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         hourlyForecastTitleLabel.text = "Hourly Forecast"
         hourlyForecastTitleLabel.font = .preferredFont(forTextStyle: .body)
         
-        //MARK: - hourlyForecastView interior stuff
-        /*
-        scrollview.translatesAutoresizingMaskIntoConstraints = false
-        scrollview.alwaysBounceHorizontal = true
-        scrollview.contentSize = CGSize(width: 500, height: 100)
-        scrollview.showsHorizontalScrollIndicator = false
-        
-        horizontalStack.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStack.axis = .horizontal
-        horizontalStack.alignment = .center
-        horizontalStack.spacing = 20
-        
-        stackview1.translatesAutoresizingMaskIntoConstraints = false
-        stackview1.axis = .vertical
-        stackview1.alignment = .center
-        
-        topLabel1.translatesAutoresizingMaskIntoConstraints = false
-        topLabel1.text = "--˚"
-        topLabel1.font = .preferredFont(forTextStyle: .title2)
-        
-        iconView1.translatesAutoresizingMaskIntoConstraints = false
-        iconView1.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
-        iconView1.contentMode = .scaleAspectFit
-        
-        bottomLabel1.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel1.text = "--"
-        bottomLabel1.font = .preferredFont(forTextStyle: .body)
-        
-        stackview2.translatesAutoresizingMaskIntoConstraints = false
-        stackview2.axis = .vertical
-        stackview2.alignment = .center
-        
-        topLabel2.translatesAutoresizingMaskIntoConstraints = false
-        topLabel2.text = "--˚"
-        topLabel2.font = .preferredFont(forTextStyle: .title2)
-        
-        iconView2.translatesAutoresizingMaskIntoConstraints = false
-        iconView2.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
-        iconView2.contentMode = .scaleAspectFit
-        
-        bottomLabel2.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel2.text = "--"
-        bottomLabel2.font = .preferredFont(forTextStyle: .body)
-        
-        stackview3.translatesAutoresizingMaskIntoConstraints = false
-        stackview3.axis = .vertical
-        stackview3.alignment = .center
-        
-        topLabel3.translatesAutoresizingMaskIntoConstraints = false
-        topLabel3.text = "--˚"
-        topLabel3.font = .preferredFont(forTextStyle: .title2)
-        
-        iconView3.translatesAutoresizingMaskIntoConstraints = false
-        iconView3.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
-        iconView3.contentMode = .scaleAspectFit
-        
-        bottomLabel3.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel3.text = "--"
-        bottomLabel3.font = .preferredFont(forTextStyle: .body)
-        
-        stackview4.translatesAutoresizingMaskIntoConstraints = false
-        stackview4.axis = .vertical
-        stackview4.alignment = .center
-        
-        topLabel4.translatesAutoresizingMaskIntoConstraints = false
-        topLabel4.text = "--˚"
-        topLabel4.font = .preferredFont(forTextStyle: .title2)
-        
-        iconView4.translatesAutoresizingMaskIntoConstraints = false
-        iconView4.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
-        iconView4.contentMode = .scaleAspectFit
-        
-        bottomLabel4.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel4.text = "--"
-        bottomLabel4.font = .preferredFont(forTextStyle: .body)
-        
-        stackview5.translatesAutoresizingMaskIntoConstraints = false
-        stackview5.axis = .vertical
-        stackview5.alignment = .center
-        
-        topLabel5.translatesAutoresizingMaskIntoConstraints = false
-        topLabel5.text = "--˚"
-        topLabel5.font = .preferredFont(forTextStyle: .title2)
-        
-        iconView5.translatesAutoresizingMaskIntoConstraints = false
-        iconView5.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))!.withRenderingMode(.alwaysOriginal)
-        iconView5.contentMode = .scaleAspectFit
-        
-        bottomLabel5.translatesAutoresizingMaskIntoConstraints = false
-        bottomLabel5.text = "--"
-        bottomLabel5.font = .preferredFont(forTextStyle: .body)
-         */
-        
         //CollectionView
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -356,35 +227,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     
     //func to set layout for elements
     private func layout(){
-        /*
-        stackview1.addArrangedSubview(iconView1)
-        stackview1.addArrangedSubview(topLabel1)
-        stackview1.addArrangedSubview(bottomLabel1)
-        
-        stackview2.addArrangedSubview(iconView2)
-        stackview2.addArrangedSubview(topLabel2)
-        stackview2.addArrangedSubview(bottomLabel2)
-        
-        stackview3.addArrangedSubview(iconView3)
-        stackview3.addArrangedSubview(topLabel3)
-        stackview3.addArrangedSubview(bottomLabel3)
-        
-        stackview4.addArrangedSubview(iconView4)
-        stackview4.addArrangedSubview(topLabel4)
-        stackview4.addArrangedSubview(bottomLabel4)
-        
-        stackview5.addArrangedSubview(iconView5)
-        stackview5.addArrangedSubview(topLabel5)
-        stackview5.addArrangedSubview(bottomLabel5)
-        
-        horizontalStack.addArrangedSubview(stackview1)
-        horizontalStack.addArrangedSubview(stackview2)
-        horizontalStack.addArrangedSubview(stackview3)
-        horizontalStack.addArrangedSubview(stackview4)
-        horizontalStack.addArrangedSubview(stackview5)
-        
-        scrollview.addSubview(horizontalStack)
-         */
         
         tempStackView.addArrangedSubview(cityLabel)
         tempStackView.addArrangedSubview(currentTempLabel)
@@ -406,7 +248,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         //Adds elements into hourlyForecastView
         hourlyForecastView.addSubview(hourlyForecastTitleLabel)
-//        hourlyForecastView.addSubview(scrollview)
         hourlyForecastView.addSubview(collectionView)
         
         
@@ -460,18 +301,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             //hourlyForecastTitleLable constraints
             hourlyForecastTitleLabel.topAnchor.constraint(equalTo: hourlyForecastView.topAnchor, constant: 10),
             hourlyForecastTitleLabel.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor, constant: 10),
-            //scrollview constraints
-            /*
-            scrollview.topAnchor.constraint(equalTo: hourlyForecastTitleLabel.bottomAnchor, constant: 10),
-            scrollview.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor, constant: 10),
-            scrollview.trailingAnchor.constraint(equalTo: hourlyForecastView.trailingAnchor, constant: -10),
-            scrollview.bottomAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: -10),
-            //horizontalStack constrains
-            horizontalStack.topAnchor.constraint(equalTo: scrollview.topAnchor),
-            horizontalStack.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor),
-            horizontalStack.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor),
-            horizontalStack.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor),
-            */
             //HourlyCollectionView constraints
             collectionView.topAnchor.constraint(equalTo: hourlyForecastTitleLabel.bottomAnchor, constant: 0),
             collectionView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor, constant: 10),
@@ -552,62 +381,6 @@ extension MainViewController {
         self.windLabel.text = "\(WeatherKitData.WindSpeed)"
         self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
         DateConverter().timeArrayMaker()
-//        getWeather(location: UserLocation.userCLLocation!)
-        
-        /*
-        if WeatherKitData.HourlyForecast.count < 5 {
-            print("whoops")
-        } else {
-            self.topLabel1.text = "\(Int((round(WeatherKitData.HourlyForecast[1])*100)/100))˚"
-            self.topLabel2.text = "\(Int((round(WeatherKitData.HourlyForecast[2])*100)/100))˚"
-            self.topLabel3.text = "\(Int((round(WeatherKitData.HourlyForecast[3])*100)/100))˚"
-            self.topLabel4.text = "\(Int((round(WeatherKitData.HourlyForecast[4])*100)/100))˚"
-            self.topLabel5.text = "\(Int((round(WeatherKitData.HourlyForecast[5])*100)/100))˚"
-        }
-        
-        if WeatherKitData.HourlyForecastSymbol.count < 5 {
-            print("no forecast symbols")
-        } else {
-            //Really bad fix for when returned symbol is wind ("wind" has no fill option)
-            
-            //iconview 1
-            if WeatherKitData.HourlyForecastSymbol[1] != "wind"{
-                self.iconView1.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[1] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            } else {
-                self.iconView1.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[1], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            }
-            //iconview 2
-            if WeatherKitData.HourlyForecastSymbol[2] != "wind" {
-                self.iconView2.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[2] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            } else {
-                self.iconView2.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[2], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            }
-            //iconview 3
-            if WeatherKitData.HourlyForecastSymbol[3] != "wind" {
-                self.iconView3.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[3] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            } else {
-                self.iconView3.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[3], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            }
-            //iconviesw 4
-            if WeatherKitData.HourlyForecastSymbol[4] != "wind" {
-                self.iconView4.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[4] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            } else {
-                self.iconView4.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[4], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            }
-            //iconview 5
-            if WeatherKitData.HourlyForecastSymbol[5] != "wind" {
-                self.iconView5.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[5] + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            } else {
-                self.iconView5.image = UIImage(systemName: WeatherKitData.HourlyForecastSymbol[5], withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-            }
-        }
-        self.bottomLabel1.text = "\(timeArray.formattedHours[0])"
-        self.bottomLabel2.text = "\(timeArray.formattedHours[1])"
-        self.bottomLabel3.text = "\(timeArray.formattedHours[2])"
-        self.bottomLabel4.text = "\(timeArray.formattedHours[3])"
-        self.bottomLabel5.text = "\(timeArray.formattedHours[4])"
-         
-         */
     }
     
     //MARK: - Function for the pull to refresh on the scrollview
@@ -694,13 +467,12 @@ extension MainViewController {
         UserLocation.userLatitude = locValue.latitude
         UserLocation.userLongitude = locValue.longitude
         UserLocation.userCLLocation = locations[0]
-//        getWeather(location: locations[0])
+        
         for i in 0...3 {
             getWeather(location: locations[0])
         }
         locationManager.stopUpdatingLocation()
 //        print(UserLocation.userCLLocation)
-//        self.locationManager.delegate = nil
     }
     
     @objc func launchRocket() {
@@ -799,8 +571,8 @@ extension MainViewController {
         } else { cell.tempLabel.text = "--" }
         
         if timeArray.formattedHours.count > 6 {
-            cell.titleLabel.text = "\(timeArray.formattedHours[indexPath.row])"
-        } else { cell.titleLabel.text = "--"}
+            cell.timeLabel.text = "\(timeArray.formattedHours[indexPath.row])"
+        } else { cell.timeLabel.text = "--"}
         
         return cell
     }

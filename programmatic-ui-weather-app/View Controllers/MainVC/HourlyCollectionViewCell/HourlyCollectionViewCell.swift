@@ -14,7 +14,7 @@ class CustomCell: UICollectionViewCell {
     var stackView: UIStackView!
     var weatherIcon: UIImageView!
     var tempLabel: UILabel!
-    var titleLabel: UILabel!
+    var timeLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,33 +27,41 @@ class CustomCell: UICollectionViewCell {
     }
     
     private func setupUI() {
+        // bigger top stackview
         topStack = UIStackView()
         
+        // individual stackview
         stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = 0
         
+        // hourly weather icon
         weatherIcon = UIImageView()
         weatherIcon.image = UIImage(systemName: "sun.max", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
         weatherIcon.contentMode = .scaleAspectFill
         
+        // hourly temp label
         tempLabel = UILabel()
         tempLabel.textAlignment = .center
         tempLabel.font = UIFont.systemFont(ofSize: 20.0)
         tempLabel.text = "20°"
         
-        titleLabel = UILabel()
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 20.0)
-        titleLabel.adjustsFontSizeToFitWidth = true
+        // hour label
+        timeLabel = UILabel()
+        timeLabel.textAlignment = .center
+        timeLabel.font = UIFont.systemFont(ofSize: 20.0)
+        timeLabel.adjustsFontSizeToFitWidth = true
         
+        // add labels, icon to individual stackview
         stackView.addArrangedSubview(weatherIcon)
         stackView.addArrangedSubview(tempLabel)
-        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(timeLabel)
         
+        // add individual stackview to bigger stackview
         topStack.addArrangedSubview(stackView)
         
+        // add bigger stackview to main contentview
         contentView.addSubview(topStack)
         
         // Add constraints or adjust frames
@@ -61,23 +69,12 @@ class CustomCell: UICollectionViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         weatherIcon.translatesAutoresizingMaskIntoConstraints = false
         tempLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             topStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -15),
             topStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             topStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             topStack.heightAnchor.constraint(equalToConstant: 90),
-            
-//            tempLabel.topAnchor.constraint(equalTo: weatherIcon.bottomAnchor, constant: 15),
-//            tempLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            tempLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            tempLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15),
-            
-//            titleLabel.topAnchor.constraint(equalTo: tempLabel.bottomAnchor, constant: 5),
-//            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-//            titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15)
         ])
     }
 }
