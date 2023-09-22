@@ -6,20 +6,35 @@
 //
 
 import UIKit
+import BackgroundTasks
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    // background app refresh stuff
+    let bgAppTaskId = "com.ES.refresh"
+    var bgTask: BGAppRefreshTask?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // device rotation notification
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
+        // Background app referesh (updates weather info and location)
+//        var bgExpirationHandler = {{
+//            if let task = self.bgTask {
+//                task.setTaskCompleted(success: true)
+//            }
+//        }}()
+        // we register the background task
+        registerBackgroundTask()
+        
         // Override point for customization after application launch.
         let mainViewController = MainViewController()
         mainViewController.viewDidLoadRefresh()
         return true
     }
+    
     
     // can potentially be used to correct background when changing between horizontal/vertical
     @objc func rotated() {
@@ -54,6 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Called when application enters background
         let main = MainViewController()
         main.locationManager.stopUpdatingLocation()
+        scheduleWeatherTask(minutes: 60)    // we schedule background weather task to be updated every 60 minutes
+                                            // (depends on how much priority system gives us)
     }
 }
 

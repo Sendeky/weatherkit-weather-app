@@ -56,6 +56,7 @@
 		C0EDB92A2A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EDB9292A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift */; };
 		C0EDB92D2A2429D300C5C1BF /* SpaceX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */; };
 		C0EDB92E2A2429D300C5C1BF /* SpaceX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */; };
+		C0F341142ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F341132ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +149,7 @@
 		C0EDB9222A22BDD400C5C1BF /* weatherkit_weather_apptests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherkit_weather_apptests.swift; sourceTree = "<group>"; };
 		C0EDB9292A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVCTests.swift; sourceTree = "<group>"; };
 		C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceX.ttf; sourceTree = "<group>"; };
+		C0F341132ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateBackgrounRefresh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 			children = (
 				C034703E28F6221900656AA8 /* AppDelegate.swift */,
 				C034704028F6221900656AA8 /* SceneDelegate.swift */,
+				C0F341132ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				C0A2111A2952E21C00C05917 /* AnimationsEffects.swift in Sources */,
 				C06F8D31292981680054D5DC /* Forecasts.swift in Sources */,
 				C006DE2D2963CB5B00E8A44B /* InfoVC.swift in Sources */,
+				C0F341142ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift in Sources */,
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
 				C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */,
 				C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */,
@@ -812,7 +816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.5;
+				MARKETING_VERSION = 0.6.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -851,7 +855,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.5;
+				MARKETING_VERSION = 0.6.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

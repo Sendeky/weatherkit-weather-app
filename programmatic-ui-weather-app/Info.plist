@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SpaceX.ttf</string>
+		<string>Bonche-Light.otf</string>
+		<string>FredokaOne-Regular.ttf</string>
+		<string>JosefinSans-Light.ttf</string>
+		<string>JosefinSans-Regular.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -19,13 +27,13 @@
 			</array>
 		</dict>
 	</dict>
-	<key>UIAppFonts</key>
+	<key>UIBackgroundModes</key>
 	<array>
-		<string>SpaceX.ttf</string>
-		<string>Bonche-Light.otf</string>
-		<string>FredokaOne-Regular.ttf</string>
-		<string>JosefinSans-Light.ttf</string>
-		<string>JosefinSans-Regular.ttf</string>
+		<string>fetch</string>
+	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.ES.refresh</string>
 	</array>
 </dict>
 </plist>
