@@ -89,7 +89,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         }
     }
     
-    //Starts animatin gcloud before view loads
+    //Starts animating cloud before view loads
     override func viewWillAppear(_ animated: Bool) {
         //Animates the cloud at the top
         UIView.animate(withDuration: 20.0, delay: 0.5, options: [.repeat, .curveLinear] ,animations: {
@@ -209,7 +209,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         windView.layer.cornerRadius = 20
         windView.isUserInteractionEnabled = true
         windView.addGestureRecognizer(windTapGesture)
-    //        windView.applyBlurEffect(.systemUltraThinMaterialLight, cornerRadius: 20)
+//            windView.applyBlurEffect(.systemUltraThinMaterialLight, cornerRadius: 20)
         
         windTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         windTitleLabel.text = "Wind"
@@ -263,7 +263,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             //iconView constraints
             iconView.centerYAnchor.constraint(equalTo: currentTempLabel.centerYAnchor),
             iconView.centerXAnchor.constraint(equalTo: rocketView.centerXAnchor),
-//            iconView.widthAnchor.constraint(equalToConstant: ),
             //rocketText constraints
             rocketText.centerXAnchor.constraint(equalTo: rocketView.centerXAnchor),
             rocketText.bottomAnchor.constraint(equalTo: rocketView.topAnchor),
@@ -317,7 +316,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             //windLabel constraints
             windLabel.centerYAnchor.constraint(equalTo: windView.centerYAnchor),
             windLabel.centerXAnchor.constraint(equalTo: windView.centerXAnchor),
-        ])
+        ])//Constraint Array
     }//Layout func
 }//MainViewController class
 
