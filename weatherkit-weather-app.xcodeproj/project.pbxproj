@@ -10,7 +10,7 @@
 		C006DE2D2963CB5B00E8A44B /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C006DE2C2963CB5B00E8A44B /* InfoVC.swift */; };
 		C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034703E28F6221900656AA8 /* AppDelegate.swift */; };
 		C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034704028F6221900656AA8 /* SceneDelegate.swift */; };
-		C034704328F6221900656AA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034704228F6221900656AA8 /* MainViewController.swift */; };
+		C034704328F6221900656AA8 /* iPhoneMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034704228F6221900656AA8 /* iPhoneMainViewController.swift */; };
 		C034704828F6221A00656AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C034704728F6221A00656AA8 /* Assets.xcassets */; };
 		C034704B28F6221A00656AA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C034704928F6221A00656AA8 /* LaunchScreen.storyboard */; };
 		C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034705F28FB08AF00656AA8 /* DateConverterUtil.swift */; };
@@ -59,6 +59,8 @@
 		C0F341142ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F341132ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift */; };
 		C0FDAA522AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */; };
 		C0FDAA532AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */; };
+		C0FDAA562AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */; };
+		C0FDAA572AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +104,7 @@
 		C034703B28F6221900656AA8 /* weatherkit-weather-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "weatherkit-weather-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C034703E28F6221900656AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C034704028F6221900656AA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C034704228F6221900656AA8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		C034704228F6221900656AA8 /* iPhoneMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneMainViewController.swift; sourceTree = "<group>"; };
 		C034704728F6221A00656AA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C034704A28F6221A00656AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C034704C28F6221A00656AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceX.ttf; sourceTree = "<group>"; };
 		C0F341132ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateBackgrounRefresh.swift; sourceTree = "<group>"; };
 		C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainViewController.swift; sourceTree = "<group>"; };
+		C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainTopCurrentStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,7 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				C072FF442A742F6700CCF9B1 /* HourlyCollectionViewCell */,
-				C034704228F6221900656AA8 /* MainViewController.swift */,
+				C034704228F6221900656AA8 /* iPhoneMainViewController.swift */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -459,9 +462,18 @@
 		C0FDAA502AF21E0B00BAB570 /* iPad Version */ = {
 			isa = PBXGroup;
 			children = (
+				C0FDAA542AF2C82600BAB570 /* iPadMainTopCurrentStack */,
 				C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */,
 			);
 			path = "iPad Version";
+			sourceTree = "<group>";
+		};
+		C0FDAA542AF2C82600BAB570 /* iPadMainTopCurrentStack */ = {
+			isa = PBXGroup;
+			children = (
+				C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */,
+			);
+			path = iPadMainTopCurrentStack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -625,9 +637,10 @@
 				C0711C2929484FD3004D3BD3 /* SunriseSunsetPopUpVC.swift in Sources */,
 				C0D265C0297635480079FBE3 /* WeatherKitData.swift in Sources */,
 				C04E9E9F29417FA100882FC6 /* WidgetStruct.swift in Sources */,
+				C0FDAA562AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */,
 				C072FF462A742F8900CCF9B1 /* HourlyCollectionViewCell.swift in Sources */,
 				C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */,
-				C034704328F6221900656AA8 /* MainViewController.swift in Sources */,
+				C034704328F6221900656AA8 /* iPhoneMainViewController.swift in Sources */,
 				C05606FE2A61CEBA00F3C705 /* SwiftUIBackgroundBlur.swift in Sources */,
 				C0CF2DD12929487800359476 /* Settings.swift in Sources */,
 				C04E9EEE2945296C00882FC6 /* PrimaryData.swift in Sources */,
@@ -659,6 +672,7 @@
 				C0EDB9232A22BDD400C5C1BF /* weatherkit_weather_apptests.swift in Sources */,
 				C0EDB92A2A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift in Sources */,
 				C0FDAA532AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */,
+				C0FDAA572AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -838,7 +852,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -877,7 +891,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
