@@ -177,6 +177,7 @@ extension MainViewController {
         }
     }
     //@MainActor runs after getweather Task completes
+    //@MainActor ensures all code runs on main dispatch thread
     @MainActor
     private func updateLabelsAfterAwait() {
         ForecastListVC().forecastTableView.reloadData()
@@ -187,6 +188,7 @@ extension MainViewController {
         
         let date = WeatherKitData.SunsetDate
         let interval = WeatherKitData.SunsetDate.timeIntervalSinceReferenceDate - WeatherKitData.SunriseDate.timeIntervalSinceReferenceDate
+        print("interval time: \(interval)")
         
         let rocketTimer = Timer(fireAt: date, interval: interval, target: self, selector: #selector(AnimateRocket), userInfo: nil, repeats: false)
         RunLoop.main.add(rocketTimer, forMode: RunLoop.Mode.common)

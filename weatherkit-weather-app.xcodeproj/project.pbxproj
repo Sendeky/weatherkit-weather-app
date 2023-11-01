@@ -57,6 +57,8 @@
 		C0EDB92D2A2429D300C5C1BF /* SpaceX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */; };
 		C0EDB92E2A2429D300C5C1BF /* SpaceX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */; };
 		C0F341142ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F341132ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift */; };
+		C0FDAA522AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */; };
+		C0FDAA532AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,7 @@
 		C0EDB9292A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindSpeedPopUpVCTests.swift; sourceTree = "<group>"; };
 		C0EDB92C2A2429D300C5C1BF /* SpaceX.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceX.ttf; sourceTree = "<group>"; };
 		C0F341132ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateBackgrounRefresh.swift; sourceTree = "<group>"; };
+		C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +250,7 @@
 		C034703D28F6221900656AA8 /* programmatic-ui-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				C0FDAA502AF21E0B00BAB570 /* iPad Version */,
 				C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */,
 				C034705328F640AD00656AA8 /* Delegates */,
 				C0A211182952E20B00C05917 /* AnimationsEffects */,
@@ -452,6 +456,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		C0FDAA502AF21E0B00BAB570 /* iPad Version */ = {
+			isa = PBXGroup;
+			children = (
+				C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */,
+			);
+			path = "iPad Version";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -624,6 +636,7 @@
 				C05606FC2A612DA800F3C705 /* PrecipitationPopUpVC.swift in Sources */,
 				C0B01BCC291334AC00D887C6 /* WeatherKitCallUtil.swift in Sources */,
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,
+				C0FDAA522AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */,
 				C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */,
 				C053221E295D52F100FF849E /* RocketAnimationUtil.swift in Sources */,
 			);
@@ -645,6 +658,7 @@
 			files = (
 				C0EDB9232A22BDD400C5C1BF /* weatherkit_weather_apptests.swift in Sources */,
 				C0EDB92A2A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift in Sources */,
+				C0FDAA532AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
