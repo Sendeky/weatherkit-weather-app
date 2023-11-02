@@ -13,6 +13,7 @@ class iPadMainViewController: UIViewController {
     
     // MARK: Top Current Stack Component
     let customView = iPadMainTopCurrentStack()
+    let rocketView = RocketView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +25,10 @@ class iPadMainViewController: UIViewController {
     }
     
     private func setupUI() {
+        rocketView.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .orange
         view.addSubview(customView)
+        view.addSubview(rocketView)
         
         
         NSLayoutConstraint.activate([
@@ -36,6 +39,11 @@ class iPadMainViewController: UIViewController {
             customView.topStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             customView.topStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             customView.topStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 250),
+            rocketView.topAnchor.constraint(equalTo: view.topAnchor),
+            rocketView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            rocketView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            rocketView.widthAnchor.constraint(equalToConstant: 10)
+            rocketView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         ])
     }
     

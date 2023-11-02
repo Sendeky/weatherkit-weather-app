@@ -548,6 +548,7 @@ extension MainViewController {
             }
         }
     
+    // number of hourly cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
