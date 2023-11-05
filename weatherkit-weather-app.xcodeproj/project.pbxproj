@@ -61,8 +61,8 @@
 		C0FDAA532AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */; };
 		C0FDAA562AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */; };
 		C0FDAA572AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */; };
-		C0FDAA5A2AF309F700BAB570 /* RocketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA592AF309F700BAB570 /* RocketView.swift */; };
-		C0FDAA5B2AF309F700BAB570 /* RocketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA592AF309F700BAB570 /* RocketView.swift */; };
+		C0FDAA5E2AF761FF00BAB570 /* LaunchRocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */; };
+		C0FDAA5F2AF761FF00BAB570 /* LaunchRocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,7 +158,7 @@
 		C0F341132ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateBackgrounRefresh.swift; sourceTree = "<group>"; };
 		C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainViewController.swift; sourceTree = "<group>"; };
 		C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainTopCurrentStack.swift; sourceTree = "<group>"; };
-		C0FDAA592AF309F700BAB570 /* RocketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketView.swift; sourceTree = "<group>"; };
+		C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRocket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +465,7 @@
 		C0FDAA502AF21E0B00BAB570 /* iPad Version */ = {
 			isa = PBXGroup;
 			children = (
+				C0FDAA5C2AF761E100BAB570 /* Rocket Utils */,
 				C0FDAA542AF2C82600BAB570 /* iPadMainTopCurrentStack */,
 				C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */,
 			);
@@ -474,18 +475,17 @@
 		C0FDAA542AF2C82600BAB570 /* iPadMainTopCurrentStack */ = {
 			isa = PBXGroup;
 			children = (
-				C0FDAA582AF309E700BAB570 /* RocketView */,
 				C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */,
 			);
 			path = iPadMainTopCurrentStack;
 			sourceTree = "<group>";
 		};
-		C0FDAA582AF309E700BAB570 /* RocketView */ = {
+		C0FDAA5C2AF761E100BAB570 /* Rocket Utils */ = {
 			isa = PBXGroup;
 			children = (
-				C0FDAA592AF309F700BAB570 /* RocketView.swift */,
+				C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */,
 			);
-			path = RocketView;
+			path = "Rocket Utils";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -641,9 +641,9 @@
 				C0CF2DD02929487800359476 /* SettingsCell.swift in Sources */,
 				C0A2111A2952E21C00C05917 /* AnimationsEffects.swift in Sources */,
 				C06F8D31292981680054D5DC /* Forecasts.swift in Sources */,
+				C0FDAA5E2AF761FF00BAB570 /* LaunchRocket.swift in Sources */,
 				C006DE2D2963CB5B00E8A44B /* InfoVC.swift in Sources */,
 				C0F341142ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift in Sources */,
-				C0FDAA5A2AF309F700BAB570 /* RocketView.swift in Sources */,
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
 				C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */,
 				C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */,
@@ -682,8 +682,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0FDAA5B2AF309F700BAB570 /* RocketView.swift in Sources */,
 				C0EDB9232A22BDD400C5C1BF /* weatherkit_weather_apptests.swift in Sources */,
+				C0FDAA5F2AF761FF00BAB570 /* LaunchRocket.swift in Sources */,
 				C0EDB92A2A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift in Sources */,
 				C0FDAA532AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */,
 				C0FDAA572AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */,
