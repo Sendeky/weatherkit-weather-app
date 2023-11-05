@@ -63,6 +63,8 @@
 		C0FDAA572AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */; };
 		C0FDAA5E2AF761FF00BAB570 /* LaunchRocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */; };
 		C0FDAA5F2AF761FF00BAB570 /* LaunchRocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */; };
+		C0FDAA622AF832C100BAB570 /* iPadHumidityStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */; };
+		C0FDAA632AF832C100BAB570 /* iPadHumidityStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +161,7 @@
 		C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainViewController.swift; sourceTree = "<group>"; };
 		C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainTopCurrentStack.swift; sourceTree = "<group>"; };
 		C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRocket.swift; sourceTree = "<group>"; };
+		C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadHumidityStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +468,7 @@
 		C0FDAA502AF21E0B00BAB570 /* iPad Version */ = {
 			isa = PBXGroup;
 			children = (
+				C0FDAA602AF832A400BAB570 /* iPadHumidityStack */,
 				C0FDAA5C2AF761E100BAB570 /* Rocket Utils */,
 				C0FDAA542AF2C82600BAB570 /* iPadMainTopCurrentStack */,
 				C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */,
@@ -486,6 +490,14 @@
 				C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */,
 			);
 			path = "Rocket Utils";
+			sourceTree = "<group>";
+		};
+		C0FDAA602AF832A400BAB570 /* iPadHumidityStack */ = {
+			isa = PBXGroup;
+			children = (
+				C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */,
+			);
+			path = iPadHumidityStack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -654,6 +666,7 @@
 				C072FF462A742F8900CCF9B1 /* HourlyCollectionViewCell.swift in Sources */,
 				C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */,
 				C034704328F6221900656AA8 /* iPhoneMainViewController.swift in Sources */,
+				C0FDAA622AF832C100BAB570 /* iPadHumidityStack.swift in Sources */,
 				C05606FE2A61CEBA00F3C705 /* SwiftUIBackgroundBlur.swift in Sources */,
 				C0CF2DD12929487800359476 /* Settings.swift in Sources */,
 				C04E9EEE2945296C00882FC6 /* PrimaryData.swift in Sources */,
@@ -687,6 +700,7 @@
 				C0EDB92A2A22BDF600C5C1BF /* WindSpeedPopUpVCTests.swift in Sources */,
 				C0FDAA532AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */,
 				C0FDAA572AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */,
+				C0FDAA632AF832C100BAB570 /* iPadHumidityStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

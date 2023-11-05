@@ -8,8 +8,6 @@
 import UIKit
 
 class iPadMainTopCurrentStack: UIView {
-    
-//    var SpaceXFont: UIFont
 
     // MARK: START: stuff needed for UIView
     override init(frame: CGRect) {
@@ -36,6 +34,7 @@ class iPadMainTopCurrentStack: UIView {
         let label = UILabel()
         label.text = "No Location!"
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -53,6 +52,7 @@ class iPadMainTopCurrentStack: UIView {
         let label = UILabel()
         label.text = "Min Temp"
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -61,6 +61,7 @@ class iPadMainTopCurrentStack: UIView {
         let label = UILabel()
         label.text = "Current Temp"
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -68,6 +69,7 @@ class iPadMainTopCurrentStack: UIView {
     let maxTempLabel: UILabel = {
         let label = UILabel()
         label.text = "Max Temp"
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -86,10 +88,10 @@ class iPadMainTopCurrentStack: UIView {
         addSubview(topStack)
         
         // Really important
-        minTempLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentTempLabel.translatesAutoresizingMaskIntoConstraints = false
-        maxTempLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentCityLabel.translatesAutoresizingMaskIntoConstraints = false
+//        minTempLabel.translatesAutoresizingMaskIntoConstraints = false
+//        currentTempLabel.translatesAutoresizingMaskIntoConstraints = false
+//        maxTempLabel.translatesAutoresizingMaskIntoConstraints = false
+//        currentCityLabel.translatesAutoresizingMaskIntoConstraints = false
         topInfoStack.translatesAutoresizingMaskIntoConstraints = false
         topStack.translatesAutoresizingMaskIntoConstraints = false
         
