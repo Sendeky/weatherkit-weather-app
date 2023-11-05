@@ -8,6 +8,8 @@
 import UIKit
 
 class iPadMainTopCurrentStack: UIView {
+    
+//    var SpaceXFont: UIFont
 
     // MARK: START: stuff needed for UIView
     override init(frame: CGRect) {
@@ -71,6 +73,9 @@ class iPadMainTopCurrentStack: UIView {
 
 
     private func setupUI() {
+        var customFont: UIFont
+        customFont = setupFont()
+        
         topInfoStack.addArrangedSubview(minTempLabel)
         topInfoStack.addArrangedSubview(currentTempLabel)
         topInfoStack.addArrangedSubview(maxTempLabel)
@@ -87,6 +92,20 @@ class iPadMainTopCurrentStack: UIView {
         currentCityLabel.translatesAutoresizingMaskIntoConstraints = false
         topInfoStack.translatesAutoresizingMaskIntoConstraints = false
         topStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Set font for the labels
+        currentCityLabel.font = customFont
+    }
+    
+    func setupFont() -> UIFont {
+        guard let customFont = UIFont(name: "SpaceX", size: 24.0) else {
+            fatalError("""
+                Failed to load the "SpaceX" font.
+                Make sure the font file is included in the project and the font name is spelled correctly.
+                """
+            )
+        }
+        return customFont
     }
 
 }
