@@ -20,14 +20,15 @@ class iPadHumidityStack: UIView {
     }
     // MARK: END
 
-    
-    let MainStack: UIStackView = {
+    // mainStack
+    let mainStack: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 15
         stack.axis = .vertical
         return stack
     }()
     
+    // topStack (with humidity)
     let topStack: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 15
@@ -35,6 +36,7 @@ class iPadHumidityStack: UIView {
         return stack
     }()
     
+    // bottomStack (with dew point)
     let bottomStack: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 15
@@ -44,17 +46,21 @@ class iPadHumidityStack: UIView {
     
     let humidityLabel: UILabel = {
         let label = UILabel()
+        label.text = "humidity"
         return label
     }()
     
     let dewPointLabel: UILabel = {
         let label = UILabel()
+        label.text = "dew point"
         return label
     }()
     
+    // func to setup UI
     func setupUI() {
-        MainStack.addArrangedSubview(topStack)
-        MainStack.addArrangedSubview(bottomStack)
+        // add humidity and dew point stacks
+        mainStack.addArrangedSubview(topStack)
+        mainStack.addArrangedSubview(bottomStack)
         
         topStack.addArrangedSubview(humidityLabel)
         
@@ -63,7 +69,7 @@ class iPadHumidityStack: UIView {
         addSubview(topStack)
         
         // Really important
-        MainStack.translatesAutoresizingMaskIntoConstraints = false
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
         topStack.translatesAutoresizingMaskIntoConstraints = false
         bottomStack.translatesAutoresizingMaskIntoConstraints = false
         humidityLabel.translatesAutoresizingMaskIntoConstraints = false

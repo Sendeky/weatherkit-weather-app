@@ -13,8 +13,9 @@ class iPadMainViewController: UIViewController {
     
     // MARK: Top Current Stack Component
     let customView = iPadMainTopCurrentStack()
-    //    let rocketView = RocketView()
+    let humidityView = iPadHumidityStack()
     let rocketView = UIImageView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,23 +46,31 @@ class iPadMainViewController: UIViewController {
     }
     
     private func setupUI() {
-        rocketView.translatesAutoresizingMaskIntoConstraints = false
         customView.translatesAutoresizingMaskIntoConstraints = false
+        humidityView.translatesAutoresizingMaskIntoConstraints = false
+        rocketView.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .orange
         view.addSubview(customView)
+        view.addSubview(humidityView)
         view.addSubview(rocketView)
         
         // activates constraints
         NSLayoutConstraint.activate([
             //customView constraints
             customView.topAnchor.constraint(equalTo: view.topAnchor),
-            customView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            customView.heightAnchor.constraint(equalToConstant: 100),
+//            customView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             customView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             customView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             //topStack constraints
-            customView.topStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            customView.topStack.topAnchor.constraint(equalTo: customView.topAnchor, constant: 20),
             customView.topStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             customView.topStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 250),
+            //humidityView constraints
+            humidityView.topAnchor.constraint(equalTo: customView.bottomAnchor),
+            humidityView.heightAnchor.constraint(equalToConstant: 70),
+            humidityView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 200),
+            humidityView.widthAnchor.constraint(equalToConstant: 50),
             //rocketView constraints
             rocketView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             rocketView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
