@@ -25,6 +25,7 @@ class iPadHumidityStack: UIView {
         let stack = UIStackView()
         stack.spacing = 15
         stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -33,6 +34,7 @@ class iPadHumidityStack: UIView {
         let stack = UIStackView()
         stack.spacing = 15
         stack.axis = .horizontal
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -41,38 +43,37 @@ class iPadHumidityStack: UIView {
         let stack = UIStackView()
         stack.spacing = 15
         stack.axis = .horizontal
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
     let humidityLabel: UILabel = {
         let label = UILabel()
         label.text = "humidity"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let dewPointLabel: UILabel = {
         let label = UILabel()
         label.text = "dew point"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     // func to setup UI
     func setupUI() {
         // add humidity and dew point stacks
-        mainStack.addArrangedSubview(topStack)
-        mainStack.addArrangedSubview(bottomStack)
+        mainStack.addArrangedSubview(humidityLabel)
+        mainStack.addArrangedSubview(dewPointLabel)
         
-        topStack.addArrangedSubview(humidityLabel)
+//        topStack.addArrangedSubview(humidityLabel)
         
-        bottomStack.addArrangedSubview(dewPointLabel)
+//        bottomStack.addArrangedSubview(dewPointLabel)
         
-        addSubview(topStack)
-        
-        // Really important
-        mainStack.translatesAutoresizingMaskIntoConstraints = false
-        topStack.translatesAutoresizingMaskIntoConstraints = false
-        bottomStack.translatesAutoresizingMaskIntoConstraints = false
-        humidityLabel.translatesAutoresizingMaskIntoConstraints = false
-        dewPointLabel.translatesAutoresizingMaskIntoConstraints = false
+        // adds the main stack to the view
+        addSubview(mainStack)
     }
 }

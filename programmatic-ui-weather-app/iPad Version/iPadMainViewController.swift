@@ -70,7 +70,7 @@ class iPadMainViewController: UIViewController {
             humidityView.topAnchor.constraint(equalTo: customView.bottomAnchor),
             humidityView.heightAnchor.constraint(equalToConstant: 70),
             humidityView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 200),
-            humidityView.widthAnchor.constraint(equalToConstant: 50),
+            humidityView.widthAnchor.constraint(equalToConstant: 150),
             //rocketView constraints
             rocketView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             rocketView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
