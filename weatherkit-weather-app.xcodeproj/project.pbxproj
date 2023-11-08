@@ -259,6 +259,7 @@
 		C034703D28F6221900656AA8 /* programmatic-ui-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				C0FDAA642AFB48CC00BAB570 /* HourlyCollectionViewCell */,
 				C0FDAA502AF21E0B00BAB570 /* iPad Version */,
 				C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */,
 				C034705328F640AD00656AA8 /* Delegates */,
@@ -468,10 +469,10 @@
 		C0FDAA502AF21E0B00BAB570 /* iPad Version */ = {
 			isa = PBXGroup;
 			children = (
+				C0FDAA652AFB48DE00BAB570 /* iPad View Controllers */,
 				C0FDAA602AF832A400BAB570 /* iPadHumidityStack */,
 				C0FDAA5C2AF761E100BAB570 /* Rocket Utils */,
 				C0FDAA542AF2C82600BAB570 /* iPadMainTopCurrentStack */,
-				C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */,
 			);
 			path = "iPad Version";
 			sourceTree = "<group>";
@@ -498,6 +499,21 @@
 				C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */,
 			);
 			path = iPadHumidityStack;
+			sourceTree = "<group>";
+		};
+		C0FDAA642AFB48CC00BAB570 /* HourlyCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HourlyCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		C0FDAA652AFB48DE00BAB570 /* iPad View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */,
+			);
+			path = "iPad View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

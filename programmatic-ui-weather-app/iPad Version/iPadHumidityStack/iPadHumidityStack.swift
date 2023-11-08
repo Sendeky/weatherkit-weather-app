@@ -10,14 +10,14 @@ import UIKit
 class iPadHumidityStack: UIView {
     
     // MARK: START: stuff needed for UIView
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setupUI()
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
     // MARK: END
 
     // mainStack
