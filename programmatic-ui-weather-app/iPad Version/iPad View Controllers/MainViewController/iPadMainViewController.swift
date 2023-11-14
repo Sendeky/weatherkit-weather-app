@@ -15,7 +15,8 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     let customView = iPadMainTopCurrentStack()
     let humidityView = iPadHumidityStack()
     let rocketView = UIImageView()
-    let sunsetView = UIView()
+    let sunsetView = UIStackView()
+    let UVView = UIStackView()
     //Creates view for cloud at top
     let cloudViewHolder = UIView()
     
@@ -34,6 +35,8 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         setupRocketView()
         // create sunsetView
         createSunsetView()
+        // create UVView
+        createUVView()
         // sets up the UI
         setupUI()
         // configure the hourly forecast view
@@ -72,6 +75,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         view.addSubview(rocketView)
         view.addSubview(collectionView)
         view.addSubview(sunsetView)
+        view.addSubview(UVView)
         
         // activates constraints
         NSLayoutConstraint.activate([
@@ -104,7 +108,12 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             sunsetView.topAnchor.constraint(equalTo: humidityView.bottomAnchor, constant: 15),
             sunsetView.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor),
             sunsetView.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor),
-            sunsetView.heightAnchor.constraint(equalToConstant: 80),
+            sunsetView.heightAnchor.constraint(equalToConstant: 120),
+            // UVView constraints
+            UVView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 15),
+            UVView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
+            UVView.widthAnchor.constraint(equalToConstant: 100),
+            UVView.heightAnchor.constraint(equalToConstant: 100),
         ])
     }
     
@@ -163,7 +172,30 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     private func createSunsetView() {
         sunsetView.translatesAutoresizingMaskIntoConstraints = false
         sunsetView.layer.cornerRadius = 15
+        sunsetView.axis = .vertical
         sunsetView.backgroundColor = cyanColor
+        
+        let sunsetViewTitleLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Sunset & Sunrise"
+            label.textAlignment = .center
+            return label
+        }()
+        let sunriseLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Sunrise: --"
+            label.textAlignment = .center
+            return label
+        }()
+        let sunsetLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Sunset: --"
+            label.textAlignment = .center
+            return label
+        }()
+        sunsetView.addArrangedSubview(sunsetViewTitleLabel)
+        sunsetView.addArrangedSubview(sunriseLabel)
+        sunsetView.addArrangedSubview(sunsetLabel)
     }
     
     //MARK: Hourly Forecast Collection View

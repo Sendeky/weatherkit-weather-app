@@ -65,6 +65,7 @@
 		C0FDAA5F2AF761FF00BAB570 /* LaunchRocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */; };
 		C0FDAA622AF832C100BAB570 /* iPadHumidityStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */; };
 		C0FDAA632AF832C100BAB570 /* iPadHumidityStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */; };
+		C0FDAA6A2B0354FF00BAB570 /* UVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA692B0354FF00BAB570 /* UVView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainTopCurrentStack.swift; sourceTree = "<group>"; };
 		C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRocket.swift; sourceTree = "<group>"; };
 		C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadHumidityStack.swift; sourceTree = "<group>"; };
+		C0FDAA692B0354FF00BAB570 /* UVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,9 +513,26 @@
 		C0FDAA652AFB48DE00BAB570 /* iPad View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */,
+				C0FDAA6B2B03560500BAB570 /* MainViewController */,
 			);
 			path = "iPad View Controllers";
+			sourceTree = "<group>";
+		};
+		C0FDAA6B2B03560500BAB570 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C0FDAA6C2B03561300BAB570 /* Components */,
+				C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		C0FDAA6C2B03561300BAB570 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C0FDAA692B0354FF00BAB570 /* UVView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -672,6 +691,7 @@
 				C0FDAA5E2AF761FF00BAB570 /* LaunchRocket.swift in Sources */,
 				C006DE2D2963CB5B00E8A44B /* InfoVC.swift in Sources */,
 				C0F341142ABD2AA9006501A7 /* AppDelegateBackgrounRefresh.swift in Sources */,
+				C0FDAA6A2B0354FF00BAB570 /* UVView.swift in Sources */,
 				C034706028FB08AF00656AA8 /* DateConverterUtil.swift in Sources */,
 				C0711C2C2949667B004D3BD3 /* WindSpeedPopUpVC.swift in Sources */,
 				C0B01BF3291F361900D887C6 /* TabBarViewController.swift in Sources */,
