@@ -15,6 +15,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     let customView = iPadMainTopCurrentStack()
     let humidityView = iPadHumidityStack()
     let rocketView = UIImageView()
+    let sunsetView = UIView()
     //Creates view for cloud at top
     let cloudViewHolder = UIView()
     
@@ -31,6 +32,8 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         // sets SVG background
         setBackground()
         setupRocketView()
+        // create sunsetView
+        createSunsetView()
         // sets up the UI
         setupUI()
         // configure the hourly forecast view
@@ -68,6 +71,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         view.addSubview(humidityView)
         view.addSubview(rocketView)
         view.addSubview(collectionView)
+        view.addSubview(sunsetView)
         
         // activates constraints
         NSLayoutConstraint.activate([
@@ -95,26 +99,31 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             collectionView.topAnchor.constraint(equalTo: customView.bottomAnchor, constant: 15),
             collectionView.leadingAnchor.constraint(equalTo: humidityView.trailingAnchor, constant: 15),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 100)
+            collectionView.heightAnchor.constraint(equalToConstant: 100),
+            // sunsetView constraints
+            sunsetView.topAnchor.constraint(equalTo: humidityView.bottomAnchor, constant: 15),
+            sunsetView.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor),
+            sunsetView.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor),
+            sunsetView.heightAnchor.constraint(equalToConstant: 80),
         ])
     }
     
     
     func setBackground() {
-                //Creates cloud at top of the screen
-                cloudViewHolder.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4)
-                let cloud = UIImage(named: "Cloud.svg")
-                let cloudView : UIImageView!
-                cloudView = UIImageView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4))
-                cloudView.contentMode =  .scaleAspectFit
-                cloudView.layer.opacity = 0.6
-                cloudView.clipsToBounds = true
-                cloudView.image = cloud
-                cloudView.center = view.center
-                cloudView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4)
+        //Creates cloud at top of the screen
+        cloudViewHolder.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4)
+        let cloud = UIImage(named: "Cloud.svg")
+        let cloudView : UIImageView!
+        cloudView = UIImageView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4))
+        cloudView.contentMode =  .scaleAspectFit
+        cloudView.layer.opacity = 0.6
+        cloudView.clipsToBounds = true
+        cloudView.image = cloud
+        cloudView.center = view.center
+        cloudView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height / 4)
         cloudViewHolder.addSubview(cloudView)
-//                view.addSubview(cloudViewHolder)
-                view.sendSubviewToBack(cloudViewHolder)
+        view.sendSubviewToBack(cloudViewHolder)
+
         
         let background = UIImage(named: "Background.svg")
         var imageView : UIImageView!
@@ -151,6 +160,11 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         imageView.addMotionEffect(motionEffectGroup)
     }
     
+    private func createSunsetView() {
+        sunsetView.translatesAutoresizingMaskIntoConstraints = false
+        sunsetView.layer.cornerRadius = 15
+        sunsetView.backgroundColor = cyanColor
+    }
     
     //MARK: Hourly Forecast Collection View
     private func configureCollectionView() {
