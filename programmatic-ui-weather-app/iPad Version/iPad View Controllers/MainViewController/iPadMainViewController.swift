@@ -17,11 +17,15 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     let rocketView = UIImageView()
     let sunsetView = UIStackView()
     let UVView = UIStackView()
+    let precipitationView = UIStackView()
     //Creates view for cloud at top
     let cloudViewHolder = UIView()
     
     // collection view for hourly forecast
-    let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())      // need to have frame and layout for UICollectionView
+    let hourlyForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())      // need to have frame and layout for UICollectionView
+    
+    // collection view for daily forecast
+    let dailyForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     // cyanColor for views in mainview
     let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
@@ -37,6 +41,8 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         createSunsetView()
         // create UVView
         createUVView()
+        // create precipitationView
+        createPrecipitationView()
         // sets up the UI
         setupUI()
         // configure the hourly forecast view
@@ -65,7 +71,8 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         customView.translatesAutoresizingMaskIntoConstraints = false
         humidityView.translatesAutoresizingMaskIntoConstraints = false
         rocketView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
+        dailyForecastView.translatesAutoresizingMaskIntoConstraints = false
         
         humidityView.backgroundColor = cyanColor
         humidityView.layer.cornerRadius = 15
@@ -73,9 +80,11 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         view.addSubview(customView)
         view.addSubview(humidityView)
         view.addSubview(rocketView)
-        view.addSubview(collectionView)
+        view.addSubview(hourlyForecastView)
+        view.addSubview(dailyForecastView)
         view.addSubview(sunsetView)
         view.addSubview(UVView)
+        view.addSubview(precipitationView)
         
         // activates constraints
         NSLayoutConstraint.activate([
@@ -100,20 +109,31 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             rocketView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             rocketView.trailingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 250),
             // hourly forecast view constraints
-            collectionView.topAnchor.constraint(equalTo: customView.bottomAnchor, constant: 15),
-            collectionView.leadingAnchor.constraint(equalTo: humidityView.trailingAnchor, constant: 15),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 100),
+            hourlyForecastView.topAnchor.constraint(equalTo: customView.bottomAnchor, constant: 15),
+            hourlyForecastView.leadingAnchor.constraint(equalTo: humidityView.trailingAnchor, constant: 15),
+            hourlyForecastView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hourlyForecastView.heightAnchor.constraint(equalToConstant: 100),
+            // daily forecast view constraints
+            dailyForecastView.topAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: 15),
+            dailyForecastView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor),
+            dailyForecastView.widthAnchor.constraint(equalToConstant: 220),
+            dailyForecastView.bottomAnchor.constraint(equalTo: precipitationView.bottomAnchor),
+//            dailyForecastView.heightAnchor.constraint(equalToConstant: 200),
             // sunsetView constraints
             sunsetView.topAnchor.constraint(equalTo: humidityView.bottomAnchor, constant: 15),
             sunsetView.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor),
             sunsetView.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor),
             sunsetView.heightAnchor.constraint(equalToConstant: 120),
             // UVView constraints
-            UVView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 15),
-            UVView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
-            UVView.widthAnchor.constraint(equalToConstant: 100),
-            UVView.heightAnchor.constraint(equalToConstant: 120),
+//            UVView.topAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: 15),
+//            UVView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor),
+//            UVView.widthAnchor.constraint(equalToConstant: 100),
+//            UVView.heightAnchor.constraint(equalToConstant: 120),
+            // precipitationView constraints
+            precipitationView.topAnchor.constraint(equalTo: sunsetView.bottomAnchor, constant: 15),
+            precipitationView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
+            precipitationView.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor),
+            precipitationView.heightAnchor.constraint(equalToConstant: 120),
         ])
     }
     
@@ -203,35 +223,65 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     //MARK: Hourly Forecast Collection View
     private func configureCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        hourlyForecastView.delegate = self
+        hourlyForecastView.dataSource = self
+        dailyForecastView.delegate = self
+        dailyForecastView.dataSource = self
         
-        // stylistic options
-        collectionView.layer.cornerRadius = 15
-        collectionView.backgroundColor = cyanColor
-        collectionView.showsHorizontalScrollIndicator = false
+        // stylistic options for hourly view
+        hourlyForecastView.layer.cornerRadius = 15
+        hourlyForecastView.backgroundColor = cyanColor
+        hourlyForecastView.showsHorizontalScrollIndicator = false
+        
+        // stylistic options for daily view
+        dailyForecastView.layer.cornerRadius = 15
+        dailyForecastView.backgroundColor = cyanColor
+        dailyForecastView.showsVerticalScrollIndicator = false
             
         // Register your custom cell class
-        collectionView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
+        hourlyForecastView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
         // Set the collection view's layout to horizontal scroll
-        if let layout2 = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let layout2 = hourlyForecastView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout2.scrollDirection = .horizontal
+        }
+        
+        dailyForecastView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
+        if let layout3 = dailyForecastView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout3.scrollDirection = .vertical
         }
     }
     
     // number of hourly cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 16
+        // if hourlyForecastView, then we have 16 cells, otherwise 10
+        if collectionView == self.hourlyForecastView {
+            return 16
+        }
+        else { return 10 }
     }
         
     // populates hourly cells
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         
-        cell.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
-        cell.timeLabel.text = "PM"
-        cell.tempLabel.text = "--"
-        
-        return cell
+        // use hourly cell if hourlyForecastView
+        if collectionView == self.hourlyForecastView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
+            
+            cell.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
+            cell.timeLabel.text = "PM"
+            cell.tempLabel.text = "--"
+            
+            return cell
+        }
+        // else use daily cell (for dailyForecastView)
+        else {
+            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
+            
+            cell2.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
+            cell2.timeLabel.text = "DAY"
+            cell2.tempLabel.text = "----"
+            
+            return cell2
+        }
     }
 }

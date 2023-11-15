@@ -66,6 +66,7 @@
 		C0FDAA622AF832C100BAB570 /* iPadHumidityStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */; };
 		C0FDAA632AF832C100BAB570 /* iPadHumidityStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */; };
 		C0FDAA6A2B0354FF00BAB570 /* UVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA692B0354FF00BAB570 /* UVView.swift */; };
+		C0FDAA6E2B045CC900BAB570 /* PrecipitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA6D2B045CC900BAB570 /* PrecipitationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 		C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRocket.swift; sourceTree = "<group>"; };
 		C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadHumidityStack.swift; sourceTree = "<group>"; };
 		C0FDAA692B0354FF00BAB570 /* UVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVView.swift; sourceTree = "<group>"; };
+		C0FDAA6D2B045CC900BAB570 /* PrecipitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecipitationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -531,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				C0FDAA692B0354FF00BAB570 /* UVView.swift */,
+				C0FDAA6D2B045CC900BAB570 /* PrecipitationView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				C034703F28F6221900656AA8 /* AppDelegate.swift in Sources */,
 				C0FDAA522AF21E8A00BAB570 /* iPadMainViewController.swift in Sources */,
 				C034704128F6221900656AA8 /* SceneDelegate.swift in Sources */,
+				C0FDAA6E2B045CC900BAB570 /* PrecipitationView.swift in Sources */,
 				C053221E295D52F100FF849E /* RocketAnimationUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
