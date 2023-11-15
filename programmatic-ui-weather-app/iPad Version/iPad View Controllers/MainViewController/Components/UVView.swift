@@ -14,6 +14,10 @@ extension iPadMainViewController {
         UVView.layer.cornerRadius = 15
         UVView.axis = .vertical
         UVView.backgroundColor = cyanColor
+//        UVView.isLayoutMarginsRelativeArrangement = true
+        UVView.isLayoutMarginsRelativeArrangement = true
+        UVView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+        UVView.spacing = 20
         
         let UVViewTitleLabel: UILabel = {
             let label = UILabel()

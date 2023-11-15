@@ -113,7 +113,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             UVView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 15),
             UVView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
             UVView.widthAnchor.constraint(equalToConstant: 100),
-            UVView.heightAnchor.constraint(equalToConstant: 100),
+            UVView.heightAnchor.constraint(equalToConstant: 120),
         ])
     }
     
@@ -174,6 +174,9 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         sunsetView.layer.cornerRadius = 15
         sunsetView.axis = .vertical
         sunsetView.backgroundColor = cyanColor
+        sunsetView.isLayoutMarginsRelativeArrangement = true
+        sunsetView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+        
         
         let sunsetViewTitleLabel: UILabel = {
             let label = UILabel()
