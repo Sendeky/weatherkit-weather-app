@@ -249,7 +249,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         // stylistic options for daily view
         dailyForecastView.layer.cornerRadius = 15
         dailyForecastView.backgroundColor = cyanColor
-        dailyForecastView.showsVerticalScrollIndicator = false
+        dailyForecastView.showsHorizontalScrollIndicator = false
             
         // Register your custom cell class
         hourlyForecastView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
@@ -260,7 +260,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         dailyForecastView.register(iPadDailyCollectionViewCell.self, forCellWithReuseIdentifier: "iPadDailyCollectionViewCell")
         if let layout3 = dailyForecastView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout3.scrollDirection = .vertical
+            layout3.scrollDirection = .horizontal
         }
     }
     
@@ -270,7 +270,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         if collectionView == self.hourlyForecastView {
             return 16
         }
-        else { return 10 }
+        else { return 20 }
     }
         
     // populates hourly cells
@@ -290,9 +290,9 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         else {
             let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "iPadDailyCollectionViewCell", for: indexPath) as! iPadDailyCollectionViewCell
             
-            cell2.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
-            cell2.timeLabel.text = "SATURDAY"
-            cell2.tempLabel.text = "----"
+//            cell2.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
+//            cell2.timeLabel.text = "SATURDAY"
+//            cell2.tempLabel.text = "----"
             
             return cell2
         }
