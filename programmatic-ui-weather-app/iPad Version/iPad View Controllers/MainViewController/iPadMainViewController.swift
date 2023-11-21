@@ -17,7 +17,9 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     let rocketView = UIImageView()
     let sunsetView = UIStackView()
     let UVView = UIStackView()
+    let windView = UIStackView()
     let precipitationView = UIStackView()
+    let pressureView = UIStackView()
     //Creates view for cloud at top
     let cloudViewHolder = UIView()
     
@@ -43,6 +45,10 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         createUVView()
         // create precipitationView
         createPrecipitationView()
+        // create windView
+        createWindView()
+        // create pressureView
+        createPressureView()
         // sets up the UI
         setupUI()
         // configure the hourly forecast view
@@ -85,6 +91,8 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         view.addSubview(sunsetView)
         view.addSubview(UVView)
         view.addSubview(precipitationView)
+        view.addSubview(windView)
+        
         
         // activates constraints
         NSLayoutConstraint.activate([
@@ -101,7 +109,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             //humidityView constraints
             humidityView.topAnchor.constraint(equalTo: customView.bottomAnchor, constant: 15),
             humidityView.heightAnchor.constraint(equalToConstant: 100),
-            humidityView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 200),
+            humidityView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 250),
             humidityView.widthAnchor.constraint(equalToConstant: 150),
             //rocketView constraints
             rocketView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -116,14 +124,14 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             // daily forecast view constraints
             dailyForecastView.topAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: 15),
             dailyForecastView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor),
-            dailyForecastView.widthAnchor.constraint(equalToConstant: 220),
+            dailyForecastView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             dailyForecastView.bottomAnchor.constraint(equalTo: precipitationView.bottomAnchor),
 //            dailyForecastView.heightAnchor.constraint(equalToConstant: 200),
             // sunsetView constraints
             sunsetView.topAnchor.constraint(equalTo: humidityView.bottomAnchor, constant: 15),
             sunsetView.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor),
             sunsetView.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor),
-            sunsetView.heightAnchor.constraint(equalToConstant: 120),
+            sunsetView.heightAnchor.constraint(equalToConstant: 100),
             // UVView constraints
 //            UVView.topAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: 15),
 //            UVView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor),
@@ -133,7 +141,12 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             precipitationView.topAnchor.constraint(equalTo: sunsetView.bottomAnchor, constant: 15),
             precipitationView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
             precipitationView.trailingAnchor.constraint(equalTo: sunsetView.trailingAnchor),
-            precipitationView.heightAnchor.constraint(equalToConstant: 120),
+            precipitationView.heightAnchor.constraint(equalToConstant: 100),
+            // windView constraints
+            windView.topAnchor.constraint(equalTo: dailyForecastView.bottomAnchor, constant: 15),
+            windView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor),
+            windView.widthAnchor.constraint(equalToConstant: 150),
+            windView.heightAnchor.constraint(equalToConstant: 100),
         ])
     }
     
@@ -245,7 +258,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
                 layout2.scrollDirection = .horizontal
         }
         
-        dailyForecastView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
+        dailyForecastView.register(iPadDailyCollectionViewCell.self, forCellWithReuseIdentifier: "iPadDailyCollectionViewCell")
         if let layout3 = dailyForecastView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout3.scrollDirection = .vertical
         }
@@ -275,10 +288,10 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
         // else use daily cell (for dailyForecastView)
         else {
-            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
+            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "iPadDailyCollectionViewCell", for: indexPath) as! iPadDailyCollectionViewCell
             
             cell2.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
-            cell2.timeLabel.text = "DAY"
+            cell2.timeLabel.text = "SATURDAY"
             cell2.tempLabel.text = "----"
             
             return cell2

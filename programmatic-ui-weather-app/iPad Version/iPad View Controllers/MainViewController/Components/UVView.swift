@@ -16,7 +16,7 @@ extension iPadMainViewController {
         UVView.backgroundColor = cyanColor
 //        UVView.isLayoutMarginsRelativeArrangement = true
         UVView.isLayoutMarginsRelativeArrangement = true
-        UVView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+        UVView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 40, right: 0)
         UVView.spacing = 20
         
         let UVViewTitleLabel: UILabel = {
