@@ -253,24 +253,25 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             
         // Register your custom cell class
         hourlyForecastView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
-        // Set the collection view's layout to horizontal scroll
+//         Set the collection view's layout to horizontal scroll
         if let layout2 = hourlyForecastView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout2.scrollDirection = .horizontal
         }
         
         dailyForecastView.register(iPadDailyCollectionViewCell.self, forCellWithReuseIdentifier: "iPadDailyCollectionViewCell")
         if let layout3 = dailyForecastView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout3.itemSize = CGSize(width: 100, height: 215)
             layout3.scrollDirection = .horizontal
         }
     }
     
     // number of hourly cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // if hourlyForecastView, then we have 16 cells, otherwise 10
+//         if hourlyForecastView, then we have 16 cells, otherwise 10
         if collectionView == self.hourlyForecastView {
             return 16
         }
-        else { return 20 }
+        else { return 10 }
     }
         
     // populates hourly cells
@@ -279,16 +280,19 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         // use hourly cell if hourlyForecastView
         if collectionView == self.hourlyForecastView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
-            
+
             cell.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
             cell.timeLabel.text = "PM"
             cell.tempLabel.text = "--"
-            
+
             return cell
         }
-        // else use daily cell (for dailyForecastView)
+//         else use daily cell (for dailyForecastView)
         else {
             let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "iPadDailyCollectionViewCell", for: indexPath) as! iPadDailyCollectionViewCell
+            NSLayoutConstraint.activate([
+                cell2.heightAnchor.constraint(equalToConstant: 100)
+            ])
             
 //            cell2.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
 //            cell2.timeLabel.text = "SATURDAY"

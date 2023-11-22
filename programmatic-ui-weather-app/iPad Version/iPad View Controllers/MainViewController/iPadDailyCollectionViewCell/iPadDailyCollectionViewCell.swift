@@ -36,10 +36,14 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(someStack)
         
         NSLayoutConstraint.activate([
+//            contentView.heightAnchor.constraint(equalToConstant: 200),
             someStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            someStack.heightAnchor.constraint(equalToConstant: 175),
+            someStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            someStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            someStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+//            someStack.heightAnchor.constraint(equalToConstant: 175),
 //            someStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
-            someStack.widthAnchor.constraint(equalToConstant: 30),
+//            someStack.widthAnchor.constraint(equalToConstant: 100),
         ])
     }
 }
