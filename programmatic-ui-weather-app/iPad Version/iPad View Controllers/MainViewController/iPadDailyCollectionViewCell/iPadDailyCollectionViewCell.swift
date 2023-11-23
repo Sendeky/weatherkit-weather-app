@@ -17,6 +17,7 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
     var weatherIcon: UIImageView!
     var maxTempLabel: UILabel!
     var minTempLabel: UILabel!
+    var TTT: UIStackView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,10 +34,12 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
         minMaxStack = UIStackView()
         maxTempLabel = UILabel()
         minTempLabel = UILabel()
+        dayOfWeek = UILabel()
         weatherIcon = UIImageView()
         
         topStack.translatesAutoresizingMaskIntoConstraints = false
-//        topStack.backgroundColor = .orange
+        topStack.backgroundColor = .orange
+        topStack.axis = .vertical
         topStack.layer.cornerRadius = 15
         
         weatherIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +48,7 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
         
         minMaxStack.translatesAutoresizingMaskIntoConstraints = false
         minMaxStack.axis = .horizontal
-        minMaxStack.spacing = 15
+        minMaxStack.spacing = 1
         
         maxTempLabel.translatesAutoresizingMaskIntoConstraints = false
         maxTempLabel.text = "Max"
@@ -53,8 +56,14 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
         minTempLabel.translatesAutoresizingMaskIntoConstraints = false
         minTempLabel.text = "Min"
         
+        dayOfWeek = UILabel()
+        dayOfWeek.translatesAutoresizingMaskIntoConstraints = false
+        dayOfWeek.text = "WeekDay"
+        dayOfWeek.textAlignment = .center
+        
         topStack.addArrangedSubview(weatherIcon)
         topStack.addArrangedSubview(minMaxStack)
+        topStack.addArrangedSubview(dayOfWeek)
         minMaxStack.addArrangedSubview(maxTempLabel)
         minMaxStack.addArrangedSubview(minTempLabel)
         contentView.addSubview(topStack)
@@ -66,10 +75,12 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
             topStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             topStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             // minMaxStack constraints
-            minMaxStack.topAnchor.constraint(equalTo: topStack.topAnchor),
-            minMaxStack.bottomAnchor.constraint(equalTo: topStack.bottomAnchor),
-            minMaxStack.leadingAnchor.constraint(equalTo: topStack.leadingAnchor),
-            minMaxStack.trailingAnchor.constraint(equalTo: topStack.trailingAnchor),
+            minMaxStack.heightAnchor.constraint(equalToConstant: 60),
+            dayOfWeek.heightAnchor.constraint(equalToConstant: 40),
+//            minMaxStack.topAnchor.constraint(equalTo: topStack.topAnchor),
+//            minMaxStack.bottomAnchor.constraint(equalTo: topStack.bottomAnchor),
+//            minMaxStack.leadingAnchor.constraint(equalTo: topStack.leadingAnchor),
+//            minMaxStack.trailingAnchor.constraint(equalTo: topStack.trailingAnchor),
         ])
     }
 }
