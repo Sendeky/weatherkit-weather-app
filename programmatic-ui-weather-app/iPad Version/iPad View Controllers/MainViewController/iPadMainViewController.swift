@@ -260,7 +260,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         dailyForecastView.register(iPadDailyCollectionViewCell.self, forCellWithReuseIdentifier: "iPadDailyCollectionViewCell")
         if let layout3 = dailyForecastView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout3.itemSize = CGSize(width: 100, height: 215)
+            layout3.itemSize = CGSize(width: 130, height: 215)
             layout3.scrollDirection = .horizontal
         }
     }
