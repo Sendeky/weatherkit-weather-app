@@ -133,10 +133,10 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             sunsetView.trailingAnchor.constraint(equalTo: humidityView.trailingAnchor),
             sunsetView.heightAnchor.constraint(equalToConstant: 100),
             // UVView constraints
-//            UVView.topAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: 15),
-//            UVView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor),
-//            UVView.widthAnchor.constraint(equalToConstant: 100),
-//            UVView.heightAnchor.constraint(equalToConstant: 120),
+            UVView.topAnchor.constraint(equalTo: dailyForecastView.bottomAnchor, constant: 15),
+            UVView.leadingAnchor.constraint(equalTo: dailyForecastView.leadingAnchor),
+            UVView.widthAnchor.constraint(equalToConstant: 150),
+            UVView.heightAnchor.constraint(equalToConstant: 100),
             // precipitationView constraints
             precipitationView.topAnchor.constraint(equalTo: sunsetView.bottomAnchor, constant: 15),
             precipitationView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
