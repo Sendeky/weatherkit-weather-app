@@ -35,7 +35,6 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // sets SVG background
         setBackground()
         setupRocketView()
@@ -99,7 +98,6 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             //customView constraints
             customView.topAnchor.constraint(equalTo: view.topAnchor),
             customView.heightAnchor.constraint(equalToConstant: 100),
-//            customView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             customView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             customView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             //topStack constraints
@@ -126,7 +124,6 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             dailyForecastView.leadingAnchor.constraint(equalTo: hourlyForecastView.leadingAnchor),
             dailyForecastView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             dailyForecastView.bottomAnchor.constraint(equalTo: precipitationView.bottomAnchor),
-//            dailyForecastView.heightAnchor.constraint(equalToConstant: 200),
             // sunsetView constraints
             sunsetView.topAnchor.constraint(equalTo: humidityView.bottomAnchor, constant: 15),
             sunsetView.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor),
@@ -202,37 +199,6 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         imageView.addMotionEffect(motionEffectGroup)
     }
     
-    private func createSunsetView() {
-        sunsetView.translatesAutoresizingMaskIntoConstraints = false
-        sunsetView.layer.cornerRadius = 15
-        sunsetView.axis = .vertical
-        sunsetView.backgroundColor = cyanColor
-        sunsetView.isLayoutMarginsRelativeArrangement = true
-        sunsetView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
-        
-        
-        let sunsetViewTitleLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Sunset & Sunrise"
-            label.textAlignment = .center
-            return label
-        }()
-        let sunriseLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Sunrise: --"
-            label.textAlignment = .center
-            return label
-        }()
-        let sunsetLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Sunset: --"
-            label.textAlignment = .center
-            return label
-        }()
-        sunsetView.addArrangedSubview(sunsetViewTitleLabel)
-        sunsetView.addArrangedSubview(sunriseLabel)
-        sunsetView.addArrangedSubview(sunsetLabel)
-    }
     
     //MARK: Hourly Forecast Collection View
     private func configureCollectionView() {
@@ -260,7 +226,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         dailyForecastView.register(iPadDailyCollectionViewCell.self, forCellWithReuseIdentifier: "iPadDailyCollectionViewCell")
         if let layout3 = dailyForecastView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout3.itemSize = CGSize(width: 130, height: 215)
+            layout3.itemSize = CGSize(width: 150, height: 215)
             layout3.scrollDirection = .horizontal
         }
     }
@@ -271,9 +237,10 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         if collectionView == self.hourlyForecastView {
             return 16
         }
-        else { return 10 }
+        else { return 7 }
     }
         
+    let testArr = [1,2,3,4,5,6,7,8,9,10]
     // populates hourly cells
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -287,6 +254,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
 
             return cell
         }
+        
 //         else use daily cell (for dailyForecastView)
         else {
             let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "iPadDailyCollectionViewCell", for: indexPath) as! iPadDailyCollectionViewCell
@@ -294,11 +262,57 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
                 cell2.heightAnchor.constraint(equalToConstant: 100)
             ])
             
-//            cell2.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
-//            cell2.timeLabel.text = "SATURDAY"
-//            cell2.tempLabel.text = "----"
+            print("IndexPath: \(indexPath.row)")
+            if WeatherKitData.TempMinForecast.count > 5 {
+                cell2.minTempLabel.text = "\(WeatherKitData.TempMinForecast[indexPath.row])"
+            } else {
+                cell2.minTempLabel.text = "--"
+            }
+            
+            if WeatherKitData.TempMaxForecast.count > 5{
+                cell2.maxTempLabel.text = "\(WeatherKitData.TempMaxForecast[indexPath.row])"
+            } else {
+                cell2.maxTempLabel.text = "--"
+            }
+            
+            // checks if there is enough data to show
+            if WeatherKitData.HourlyForecastSymbol.count > 6 {
+                //simple check for when icon is "wind" (doesn't have "fill" option)
+                if WeatherKitData.HourlyForecastSymbol[indexPath.row] != "wind" {
+                    cell2.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row]).fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                } else {
+                    cell2.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row])", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                }
+            } else { cell2.weatherIcon.image = UIImage(systemName: "questionmark")}
+            print("Cl: \(Calendar.current.weekdaySymbols)")
+            
+            var Day = getCurrentDayOfWeek(offset: indexPath.row)
+            Day = Day.localizedCapitalized
+            cell2.dayOfWeek.text = Day
             
             return cell2
         }
+    }
+    func getCurrentDayOfWeek(offset: Int) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE" // "EEEE" will give you the full day name like "Monday", "Tuesday", etc.
+
+        var currentDate = Date()
+        
+        let daysToAdd = offset
+        if let newDate = Calendar.current.date(byAdding: .day, value: daysToAdd, to: currentDate) {
+            currentDate = newDate
+        }
+        
+        let dayOfWeekString = dateFormatter.string(from: currentDate)
+
+        return dayOfWeekString
+    }
+    
+    //MARK: - Function to refresh all of the labels
+    func updateLabels() {
+        self.customView.currentTempLabel.text = "\(WeatherKitData.Temp)"
+        self.customView.minTempLabel.text = "Low Temp:\(WeatherKitData.TempMin)"
+        self.customView.maxTempLabel.text = "High Temp:\(WeatherKitData.TempMax)"
     }
 }

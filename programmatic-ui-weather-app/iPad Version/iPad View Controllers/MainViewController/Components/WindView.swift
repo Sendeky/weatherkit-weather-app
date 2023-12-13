@@ -15,7 +15,7 @@ extension iPadMainViewController {
         windView.axis = .vertical
         windView.backgroundColor = cyanColor
         windView.isLayoutMarginsRelativeArrangement = true
-        windView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+        windView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         windView.spacing = 20
         
         let WindViewTitleLabel: UILabel = {
@@ -32,6 +32,7 @@ extension iPadMainViewController {
             return label
         }()
         
+        WindSpeedLabel.text = "\(WeatherKitData.WindSpeed)"
         windView.addArrangedSubview(WindViewTitleLabel)
         windView.addArrangedSubview(WindSpeedLabel)
     }

@@ -43,8 +43,8 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
         topStack.layer.cornerRadius = 15
         
         weatherIcon.translatesAutoresizingMaskIntoConstraints = false
-        weatherIcon.image = UIImage(systemName: "sun.max", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
-        weatherIcon.contentMode = .scaleAspectFill
+        weatherIcon.image = UIImage(systemName: "sun.max.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20.0))?.withRenderingMode(.alwaysOriginal)
+        weatherIcon.contentMode = .scaleAspectFit
         
         minMaxStack.translatesAutoresizingMaskIntoConstraints = false
         minMaxStack.axis = .horizontal
@@ -64,9 +64,18 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
         topStack.addArrangedSubview(weatherIcon)
         topStack.addArrangedSubview(minMaxStack)
         topStack.addArrangedSubview(dayOfWeek)
-        minMaxStack.addArrangedSubview(maxTempLabel)
         minMaxStack.addArrangedSubview(minTempLabel)
+        minMaxStack.addArrangedSubview(maxTempLabel)
         contentView.addSubview(topStack)
+        
+        // we set up the font for the labels
+        let customFont: UIFont
+        customFont = setupFont()
+        
+        minTempLabel.font = customFont
+        maxTempLabel.font = customFont
+        minTempLabel.adjustsFontSizeToFitWidth = true
+        maxTempLabel.adjustsFontSizeToFitWidth = true
         
         NSLayoutConstraint.activate([
 //            contentView.heightAnchor.constraint(equalToConstant: 200),
@@ -75,6 +84,8 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
             topStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             topStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             // minMaxStack constraints
+//            weatherIcon.heightAnchor.constraint(equalToConstant: 60),
+//            weatherIcon.widthAnchor.constraint(equalToConstant: 10),
             minMaxStack.heightAnchor.constraint(equalToConstant: 60),
             dayOfWeek.heightAnchor.constraint(equalToConstant: 40),
 //            minMaxStack.topAnchor.constraint(equalTo: topStack.topAnchor),
@@ -82,5 +93,16 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
 //            minMaxStack.leadingAnchor.constraint(equalTo: topStack.leadingAnchor),
 //            minMaxStack.trailingAnchor.constraint(equalTo: topStack.trailingAnchor),
         ])
+    }
+    
+    func setupFont() -> UIFont {
+        guard let customFont = UIFont(name: "SpaceX", size: 20.0) else {
+            fatalError("""
+                Failed to load the "SpaceX" font.
+                Make sure the font file is included in the project and the font name is spelled correctly.
+                """
+            )
+        }
+        return customFont
     }
 }

@@ -15,7 +15,7 @@ extension iPadMainViewController {
         precipitationView.axis = .vertical
         precipitationView.backgroundColor = cyanColor
         precipitationView.isLayoutMarginsRelativeArrangement = true
-        precipitationView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 40, right: 0)
+        precipitationView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
         precipitationView.spacing = 20
         
         let PrecipitationViewTitleLabel: UILabel = {
@@ -31,6 +31,8 @@ extension iPadMainViewController {
             label.textAlignment = .center
             return label
         }()
+        
+        PrecipitationChanceLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
         
         precipitationView.addArrangedSubview(PrecipitationViewTitleLabel)
         precipitationView.addArrangedSubview(PrecipitationChanceLabel)
