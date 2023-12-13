@@ -65,8 +65,8 @@
 		C0FDAA572AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */; };
 		C0FDAA5E2AF761FF00BAB570 /* LaunchRocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */; };
 		C0FDAA5F2AF761FF00BAB570 /* LaunchRocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */; };
-		C0FDAA622AF832C100BAB570 /* iPadHumidityStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */; };
-		C0FDAA632AF832C100BAB570 /* iPadHumidityStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */; };
+		C0FDAA622AF832C100BAB570 /* HumidityStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* HumidityStackView.swift */; };
+		C0FDAA632AF832C100BAB570 /* HumidityStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA612AF832C100BAB570 /* HumidityStackView.swift */; };
 		C0FDAA6A2B0354FF00BAB570 /* UVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA692B0354FF00BAB570 /* UVView.swift */; };
 		C0FDAA6E2B045CC900BAB570 /* PrecipitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA6D2B045CC900BAB570 /* PrecipitationView.swift */; };
 		C0FDAA722B0478B400BAB570 /* WindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FDAA712B0478B400BAB570 /* WindView.swift */; };
@@ -176,7 +176,7 @@
 		C0FDAA512AF21E8A00BAB570 /* iPadMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainViewController.swift; sourceTree = "<group>"; };
 		C0FDAA552AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadMainTopCurrentStack.swift; sourceTree = "<group>"; };
 		C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRocket.swift; sourceTree = "<group>"; };
-		C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadHumidityStack.swift; sourceTree = "<group>"; };
+		C0FDAA612AF832C100BAB570 /* HumidityStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumidityStackView.swift; sourceTree = "<group>"; };
 		C0FDAA692B0354FF00BAB570 /* UVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVView.swift; sourceTree = "<group>"; };
 		C0FDAA6D2B045CC900BAB570 /* PrecipitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecipitationView.swift; sourceTree = "<group>"; };
 		C0FDAA712B0478B400BAB570 /* WindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindView.swift; sourceTree = "<group>"; };
@@ -491,7 +491,6 @@
 			isa = PBXGroup;
 			children = (
 				C0FDAA652AFB48DE00BAB570 /* iPad View Controllers */,
-				C0FDAA602AF832A400BAB570 /* iPadHumidityStack */,
 				C0FDAA5C2AF761E100BAB570 /* Rocket Utils */,
 				C0FDAA542AF2C82600BAB570 /* iPadMainTopCurrentStack */,
 			);
@@ -512,14 +511,6 @@
 				C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */,
 			);
 			path = "Rocket Utils";
-			sourceTree = "<group>";
-		};
-		C0FDAA602AF832A400BAB570 /* iPadHumidityStack */ = {
-			isa = PBXGroup;
-			children = (
-				C0FDAA612AF832C100BAB570 /* iPadHumidityStack.swift */,
-			);
-			path = iPadHumidityStack;
 			sourceTree = "<group>";
 		};
 		C0FDAA642AFB48CC00BAB570 /* HourlyCollectionViewCell */ = {
@@ -556,6 +547,7 @@
 				C0FDAA712B0478B400BAB570 /* WindView.swift */,
 				C0FDAA772B04808200BAB570 /* PressureView.swift */,
 				C0160AB12B2A62A70016F9B0 /* SunsetSunriseView.swift */,
+				C0FDAA612AF832C100BAB570 /* HumidityStackView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -743,7 +735,7 @@
 				C072FF462A742F8900CCF9B1 /* HourlyCollectionViewCell.swift in Sources */,
 				C0CF2DD22929487800359476 /* SettingsListVC.swift in Sources */,
 				C034704328F6221900656AA8 /* iPhoneMainViewController.swift in Sources */,
-				C0FDAA622AF832C100BAB570 /* iPadHumidityStack.swift in Sources */,
+				C0FDAA622AF832C100BAB570 /* HumidityStackView.swift in Sources */,
 				C05606FE2A61CEBA00F3C705 /* SwiftUIBackgroundBlur.swift in Sources */,
 				C0CF2DD12929487800359476 /* Settings.swift in Sources */,
 				C0FDAA782B04808200BAB570 /* PressureView.swift in Sources */,
@@ -789,7 +781,7 @@
 				C0FDAA792B04808200BAB570 /* PressureView.swift in Sources */,
 				C0FDAA572AF2C84E00BAB570 /* iPadMainTopCurrentStack.swift in Sources */,
 				C0160AB32B2A62A70016F9B0 /* SunsetSunriseView.swift in Sources */,
-				C0FDAA632AF832C100BAB570 /* iPadHumidityStack.swift in Sources */,
+				C0FDAA632AF832C100BAB570 /* HumidityStackView.swift in Sources */,
 				C0FDAA812B0C340800BAB570 /* iPadWeatherKitCallUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

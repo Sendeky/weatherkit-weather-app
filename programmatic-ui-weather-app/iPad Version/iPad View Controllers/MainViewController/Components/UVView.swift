@@ -23,6 +23,7 @@ extension iPadMainViewController {
             let label = UILabel()
             label.text = "UV Index"
             label.textAlignment = .center
+            label.font = .boldSystemFont(ofSize: 18.0)
             return label
         }()
         

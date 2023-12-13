@@ -22,6 +22,7 @@ extension iPadMainViewController {
             let label = UILabel()
             label.text = "Pressure"
             label.textAlignment = .center
+            label.font = .boldSystemFont(ofSize: 18.0)
             return label
         }()
         

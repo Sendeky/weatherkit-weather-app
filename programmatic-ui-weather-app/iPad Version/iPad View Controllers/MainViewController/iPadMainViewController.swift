@@ -7,13 +7,15 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
-class iPadMainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    // Contents will be components
+class iPadMainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CLLocationManagerDelegate {
+    //Creates the location manager
+    let locationManager = CLLocationManager()
     
     // MARK: Top Current Stack Component
     let customView = iPadMainTopCurrentStack()
-    let humidityView = iPadHumidityStack()
+    let humidityView = UIStackView()
     let rocketView = UIImageView()
     let sunsetView = UIStackView()
     let UVView = UIStackView()
@@ -35,9 +37,15 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
         // sets SVG background
         setBackground()
         setupRocketView()
+        // create humidityView
+        createHumidityView()
         // create sunsetView
         createSunsetView()
         // create UVView
@@ -74,13 +82,12 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     private func setupUI() {
         customView.translatesAutoresizingMaskIntoConstraints = false
-        humidityView.translatesAutoresizingMaskIntoConstraints = false
+//        humidityView.translatesAutoresizingMaskIntoConstraints = false
         rocketView.translatesAutoresizingMaskIntoConstraints = false
         hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
         dailyForecastView.translatesAutoresizingMaskIntoConstraints = false
         
-        humidityView.backgroundColor = cyanColor
-        humidityView.layer.cornerRadius = 15
+        
         view.backgroundColor = .orange
         view.addSubview(customView)
         view.addSubview(humidityView)
@@ -240,7 +247,6 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         else { return 7 }
     }
         
-    let testArr = [1,2,3,4,5,6,7,8,9,10]
     // populates hourly cells
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -251,6 +257,9 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             cell.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
             cell.timeLabel.text = "PM"
             cell.tempLabel.text = "--"
+            let currentHour = getCurrentHour(offset: indexPath.row)
+            cell.timeLabel.text = currentHour
+            cell.timeLabel.font = .systemFont(ofSize: 16.0)
 
             return cell
         }
@@ -308,11 +317,56 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
 
         return dayOfWeekString
     }
+    func getCurrentHour(offset: Int) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h a" // "EEEE" will give you the full day name like "Monday", "Tuesday", etc.
+
+        var currentHour = Date()
+        
+        let hoursToAdd = offset
+        if let newHour = Calendar.current.date(byAdding: .hour, value: hoursToAdd, to: currentHour) {
+            currentHour = newHour
+        }
+        
+        let currentHourString = dateFormatter.string(from: currentHour)
+
+        return currentHourString
+    }
     
     //MARK: - Function to refresh all of the labels
     func updateLabels() {
         self.customView.currentTempLabel.text = "\(WeatherKitData.Temp)"
         self.customView.minTempLabel.text = "Low Temp:\(WeatherKitData.TempMin)"
         self.customView.maxTempLabel.text = "High Temp:\(WeatherKitData.TempMax)"
+    }
+    
+    //Function for checking location manager status (starts getting the location if allowed)
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let status = manager.authorizationStatus
+        
+        switch status {
+        case .notDetermined:
+            print("status: notDetermined")
+        case .denied:
+            customView.currentCityLabel.text = "No Location!"
+            print("status: denied")
+        case .restricted:
+            customView.currentCityLabel.text = "No Location!"
+            print("status: restricted")
+        case .authorizedAlways:
+            print("status: authorizedAlways")
+            locationManager.startUpdatingLocation()
+//            viewDidLoadRefresh()
+            if UserLocation.userCLLocation != nil {
+                getWeather(location: UserLocation.userCLLocation!)
+            }
+        case .authorizedWhenInUse:
+            print("status: authorizedWhenInUse")
+            locationManager.startUpdatingLocation()
+            
+//            viewDidLoadRefresh()
+        default:
+            print("unknown ")
+        }
     }
 }

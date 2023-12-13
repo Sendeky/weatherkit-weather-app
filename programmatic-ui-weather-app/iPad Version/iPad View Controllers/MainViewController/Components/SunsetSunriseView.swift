@@ -13,15 +13,17 @@ extension iPadMainViewController {
         sunsetView.translatesAutoresizingMaskIntoConstraints = false
         sunsetView.layer.cornerRadius = 15
         sunsetView.axis = .vertical
+        sunsetView.spacing = 10
         sunsetView.backgroundColor = cyanColor
         sunsetView.isLayoutMarginsRelativeArrangement = true
-        sunsetView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+        sunsetView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         
         
         let sunsetViewTitleLabel: UILabel = {
             let label = UILabel()
             label.text = "Sunset & Sunrise"
             label.textAlignment = .center
+            label.font = .boldSystemFont(ofSize: 18.0)
             return label
         }()
         let sunriseLabel: UILabel = {
