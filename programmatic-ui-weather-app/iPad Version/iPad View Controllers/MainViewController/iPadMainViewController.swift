@@ -242,7 +242,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //         if hourlyForecastView, then we have 16 cells, otherwise 10
         if collectionView == self.hourlyForecastView {
-            return 16
+            return 15
         }
         else { return 7 }
     }
@@ -253,13 +253,25 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         // use hourly cell if hourlyForecastView
         if collectionView == self.hourlyForecastView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
-
-            cell.weatherIcon.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal)
-            cell.timeLabel.text = "PM"
             cell.tempLabel.text = "--"
             let currentHour = getCurrentHour(offset: indexPath.row)
             cell.timeLabel.text = currentHour
             cell.timeLabel.font = .systemFont(ofSize: 16.0)
+            
+            // checks if there is enough data to show
+            if WeatherKitData.HourlyForecastSymbol.count > 15 {
+                //simple check for when icon is "wind" (doesn't have "fill" option)
+                if WeatherKitData.HourlyForecastSymbol[indexPath.row] != "wind" {
+                    cell.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row]).fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                } else {
+                    cell.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row])", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                }
+            } else { cell.weatherIcon.image = UIImage(systemName: "questionmark")}
+
+            if WeatherKitData.HourlyForecast.count > 6 {
+                cell.tempLabel.text = "\(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))˚"
+            } else { cell.tempLabel.text = "--" }
+            
 
             return cell
         }
