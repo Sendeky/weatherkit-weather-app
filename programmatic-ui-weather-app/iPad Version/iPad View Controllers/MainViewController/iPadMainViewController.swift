@@ -268,10 +268,10 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
                 }
             } else { cell.weatherIcon.image = UIImage(systemName: "questionmark")}
 
-            if WeatherKitData.HourlyForecast.count > 6 {
+            // checks if there is enough data for hourly forecast
+            if WeatherKitData.HourlyForecast.count > 15 {
                 cell.tempLabel.text = "\(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))˚"
             } else { cell.tempLabel.text = "--" }
-            
 
             return cell
         }

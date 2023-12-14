@@ -30,6 +30,9 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupUI() {
+        // cyanColor for views in mainview
+        let cyanColor = UIColor(red: 95.0/255.0, green: 135.0/255.0, blue: 255.0/255.0, alpha: 0.93)
+        
         topStack = UIStackView()
         minMaxStack = UIStackView()
         maxTempLabel = UILabel()
@@ -38,7 +41,11 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
         weatherIcon = UIImageView()
         
         topStack.translatesAutoresizingMaskIntoConstraints = false
-        topStack.backgroundColor = .orange
+//        topStack.backgroundColor = .orange
+        topStack.backgroundColor = cyanColor
+        topStack.applyBlurEffect(cornerRadius: 10)
+//        topStack.layer.opacity = 0.5
+//        topStack.isOpaque = true
         topStack.axis = .vertical
         topStack.layer.cornerRadius = 15
         
