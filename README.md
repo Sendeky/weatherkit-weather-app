@@ -30,9 +30,9 @@ Minimum iOS: 16.0
 Dependencies: None
 ```
 
-The iOS app is built mostly in UIKit, with some occasionsal SwiftUI elements
-Also has support for iPad
-The WatchOS app is built entirelty in SwiftUI  
+The iOS app is built mostly in UIKit, with some occasionsal SwiftUI elements.  
+Also has support for iPad.  
+The WatchOS app is built entirelty in SwiftUI.  
 
 
 ## Contributing
