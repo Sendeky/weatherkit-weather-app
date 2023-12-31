@@ -297,12 +297,12 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             }
             
             // checks if there is enough data to show
-            if WeatherKitData.HourlyForecastSymbol.count > 6 {
+            if WeatherKitData.forecastSymbol.count > 6 {
                 //simple check for when icon is "wind" (doesn't have "fill" option)
-                if WeatherKitData.HourlyForecastSymbol[indexPath.row] != "wind" {
-                    cell2.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row]).fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                if WeatherKitData.forecastSymbol[indexPath.row] != "wind" {
+                    cell2.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.forecastSymbol[indexPath.row]).fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
                 } else {
-                    cell2.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row])", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
+                    cell2.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.forecastSymbol[indexPath.row])", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
                 }
             } else { cell2.weatherIcon.image = UIImage(systemName: "questionmark")}
             print("Cl: \(Calendar.current.weekdaySymbols)")
@@ -346,11 +346,11 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     //MARK: - Function to refresh all of the labels
-    func updateLabels() {
-        self.customView.currentTempLabel.text = "\(WeatherKitData.Temp)"
-        self.customView.minTempLabel.text = "Low Temp:\(WeatherKitData.TempMin)"
-        self.customView.maxTempLabel.text = "High Temp:\(WeatherKitData.TempMax)"
-    }
+//    func updateLabels() {
+//        self.customView.currentTempLabel.text = "\(WeatherKitData.Temp)"
+//        self.customView.minTempLabel.text = "Low Temp:\(WeatherKitData.TempMin)"
+//        self.customView.maxTempLabel.text = "High Temp:\(WeatherKitData.TempMax)"
+//    }
     
     //Function for checking location manager status (starts getting the location if allowed)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

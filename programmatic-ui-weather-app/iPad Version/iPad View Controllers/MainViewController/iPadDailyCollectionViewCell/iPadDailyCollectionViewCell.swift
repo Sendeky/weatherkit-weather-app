@@ -43,7 +43,7 @@ class iPadDailyCollectionViewCell: UICollectionViewCell {
         topStack.translatesAutoresizingMaskIntoConstraints = false
 //        topStack.backgroundColor = .orange
         topStack.backgroundColor = cyanColor
-        topStack.applyBlurEffect(cornerRadius: 10)
+        topStack.applyBlurEffect(cornerRadius: 15)
 //        topStack.layer.opacity = 0.5
 //        topStack.isOpaque = true
         topStack.axis = .vertical
