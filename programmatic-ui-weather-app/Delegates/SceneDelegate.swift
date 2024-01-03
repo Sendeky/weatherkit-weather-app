@@ -19,10 +19,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let home = TabBarViewController()
-        self.window?.rootViewController = TabBarViewController()
-        window?.windowScene = windowScene
-        window?.makeKeyAndVisible()
+        
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            // It's an iPhone
+            print("iphone")
+            let home = TabBarViewController()
+            self.window?.rootViewController = TabBarViewController()
+            window?.windowScene = windowScene
+            window?.makeKeyAndVisible()
+        case .pad:
+            // It's an iPad (or macOS Catalyst)
+            print("ipad")
+            let home = iPadMainViewController()
+            self.window?.rootViewController = iPadMainViewController()
+            window?.windowScene = windowScene
+            window?.makeKeyAndVisible()
+
+        @unknown default:
+            // Uh, oh! What could it be?
+            print("oops, unknown device")
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

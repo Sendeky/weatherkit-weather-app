@@ -1,8 +1,8 @@
 //
-//  WeatherKitCallUtil.swift
-//  programmatic-ui-weather-app
+//  iPadWeatherKitCallUtil.swift
+//  weatherkit-weather-app
 //
-//  Created by RuslanS on 11/2/22.
+//  Created by Ruslan Spirkin on 11/20/23.
 //
 
 import Foundation
@@ -11,9 +11,9 @@ import CoreLocation
 import UIKit
 
 
-let weatherService = WeatherService()
+//let weatherService = WeatherService()
 
-extension MainViewController {
+extension iPadMainViewController {
     func getWeather(location: CLLocation) {
         Task{
             do {
@@ -22,7 +22,8 @@ extension MainViewController {
                     guard let city = city, let country = country, error == nil else { return }
                     print(city + ", " + country)  // City, Country
                     //Puts city name into cityLabel
-                    self.cityLabel.text = "\(city)"
+//                    self.cityLabel.text = "\(city)"
+                    self.customView.currentCityLabel.text = "\(city)"
 //                    self.cityLabel.text = "San Francisco"
                 })
 //                let TempLocation = CLLocation(latitude: 39.9042, longitude: 116.4074)     // Beijing
@@ -182,7 +183,7 @@ extension MainViewController {
     private func updateLabelsAfterAwait() {
         ForecastListVC().forecastTableView.reloadData()
         print("updateLabelsAfterAwait run")
-        getWeatherLabelUpdate()
+//        getWeatherLabelUpdate()
         DateConverter().convertDateToEpoch()
         createNotification()
         
@@ -190,7 +191,7 @@ extension MainViewController {
         let interval = WeatherKitData.SunsetDate.timeIntervalSinceReferenceDate - WeatherKitData.SunriseDate.timeIntervalSinceReferenceDate
         print("interval time: \(interval)")
         
-        let rocketTimer = Timer(fireAt: date, interval: interval, target: self, selector: #selector(AnimateRocket), userInfo: nil, repeats: false)
-        RunLoop.main.add(rocketTimer, forMode: RunLoop.Mode.common)
+//        let rocketTimer = Timer(fireAt: date, interval: interval, target: self, selector: #selector(AnimateRocket), userInfo: nil, repeats: false)
+//        RunLoop.main.add(rocketTimer, forMode: RunLoop.Mode.common)
     }
 }

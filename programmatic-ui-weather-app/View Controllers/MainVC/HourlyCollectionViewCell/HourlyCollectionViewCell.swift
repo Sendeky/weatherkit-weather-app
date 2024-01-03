@@ -29,6 +29,8 @@ class CustomCell: UICollectionViewCell {
     private func setupUI() {
         // bigger top stackview
         topStack = UIStackView()
+//        topStack.applyBlurEffect(cornerRadius: 15)
+//        topStack.layer.cornerRadius = 15
         
         // individual stackview
         stackView = UIStackView()
