@@ -280,7 +280,6 @@
 		C034703D28F6221900656AA8 /* programmatic-ui-weather-app */ = {
 			isa = PBXGroup;
 			children = (
-				C0FDAA642AFB48CC00BAB570 /* HourlyCollectionViewCell */,
 				C0FDAA502AF21E0B00BAB570 /* iPad Version */,
 				C0B01BCA2912B08A00D887C6 /* programmatic-ui-weather-app.entitlements */,
 				C034705328F640AD00656AA8 /* Delegates */,
@@ -511,13 +510,6 @@
 				C0FDAA5D2AF761FF00BAB570 /* LaunchRocket.swift */,
 			);
 			path = "Rocket Utils";
-			sourceTree = "<group>";
-		};
-		C0FDAA642AFB48CC00BAB570 /* HourlyCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HourlyCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		C0FDAA652AFB48DE00BAB570 /* iPad View Controllers */ = {
@@ -954,7 +946,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.7.0;
+				MARKETING_VERSION = 0.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -993,7 +985,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.7.0;
+				MARKETING_VERSION = 0.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ES.weatherkit-programmatic-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

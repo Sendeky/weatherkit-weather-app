@@ -40,6 +40,34 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let windTitleLabel = UILabel()
     let windLabel = UILabel()
     
+    // uvView variables
+    let uvView = UIView()
+    let uvTitleLabel = UILabel()
+    private let uvProgressView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 4
+        view.clipsToBounds = true
+        view.backgroundColor = UIColor.systemGray2.withAlphaComponent(0.3) // Add this line
+        return view
+    }()
+    
+    private let uvGradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.colors = [
+            UIColor.systemGreen.cgColor,
+            UIColor.systemYellow.cgColor,
+            UIColor.systemOrange.cgColor,
+            UIColor.systemRed.cgColor,
+            UIColor.systemPurple.cgColor
+        ]
+        layer.startPoint = CGPoint(x: 0, y: 0.5)
+        layer.endPoint = CGPoint(x: 1, y: 0.5)
+        layer.cornerRadius = 2 // Add this line to match the view's corner radius
+        return layer
+    }()
+    
+    
     // collection view for hourly forecast
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())      // need to have frame and layout for UICollectionView
     
@@ -49,7 +77,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     let locationManager = CLLocationManager()
     //Creates view for cloud at top
     let uiView = UIView()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,7 +236,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         windView.layer.cornerRadius = 20
         windView.isUserInteractionEnabled = true
         windView.addGestureRecognizer(windTapGesture)
-//            windView.applyBlurEffect(.systemUltraThinMaterialLight, cornerRadius: 20)
+//            windView.applyBlurEffect(.systemUltraThinMaterialDark, cornerRadius: 20)
         
         windTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         windTitleLabel.text = "Wind"
@@ -218,6 +245,15 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         windLabel.translatesAutoresizingMaskIntoConstraints = false
         windLabel.text = "--MPH"
         windLabel.font = .preferredFont(forTextStyle: .title1)
+        
+        uvView.translatesAutoresizingMaskIntoConstraints = false
+        uvView.backgroundColor = cyanColor
+        uvView.layer.cornerRadius = 20
+//        uvView.applyBlurEffect(.systemUltraThinMaterialDark, cornerRadius: 20)
+        
+        uvTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        uvTitleLabel.text = "UV"
+        uvTitleLabel.font = .preferredFont(forTextStyle: .body)
         
         //Sets settings for refreshControl
         refreshControl.translatesAutoresizingMaskIntoConstraints = false
@@ -236,6 +272,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         scrollView.addSubview(precipitationView)
         scrollView.addSubview(hourlyForecastView)
         scrollView.addSubview(windView)
+        scrollView.addSubview(uvView)
         scrollView.addSubview(refreshControl)
         
         //Adds elements into precipitationView
@@ -245,6 +282,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         //Adds elements into windView
         windView.addSubview(windTitleLabel)
         windView.addSubview(windLabel)
+        
+        // Adds elements into uvView
+        uvView.addSubview(uvTitleLabel)
+        uvView.addSubview(uvProgressView)
+        
+        uvProgressView.layer.addSublayer(uvGradientLayer)
         
         //Adds elements into hourlyForecastView
         hourlyForecastView.addSubview(hourlyForecastTitleLabel)
@@ -316,6 +359,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             //windLabel constraints
             windLabel.centerYAnchor.constraint(equalTo: windView.centerYAnchor),
             windLabel.centerXAnchor.constraint(equalTo: windView.centerXAnchor),
+            // uvView contraints
+            uvView.topAnchor.constraint(equalTo: windView.bottomAnchor, constant: 20),
+            uvView.leadingAnchor.constraint(equalTo: windView.leadingAnchor),
+            uvView.trailingAnchor.constraint(equalTo: windView.trailingAnchor),
+            uvView.heightAnchor.constraint(equalToConstant: 100),
+            // uvTitleLabel constraints
+            uvTitleLabel.topAnchor.constraint(equalTo: uvView.topAnchor, constant: 10),
+            uvTitleLabel.leadingAnchor.constraint(equalTo: uvView.leadingAnchor, constant: 10),
+            // uvProgressView constraints
+            uvProgressView.topAnchor.constraint(equalTo: uvTitleLabel.bottomAnchor, constant: 10),
+            uvProgressView.heightAnchor.constraint(equalToConstant: 6),
+            uvProgressView.leadingAnchor.constraint(equalTo: uvView.leadingAnchor, constant: 10),
+            uvProgressView.trailingAnchor.constraint(equalTo: uvView.trailingAnchor, constant: -10)
         ])//Constraint Array
     }//Layout func
 }//MainViewController class
@@ -379,6 +435,7 @@ extension MainViewController {
         self.todayTempLabel.text = "H:\(WeatherKitData.TempMax) L:\(WeatherKitData.TempMin)"
         self.windLabel.text = "\(WeatherKitData.WindSpeed)"
         self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
+        self.updateUVIndex(WeatherKitData.UV)
         DateConverter().timeArrayMaker()
     }
     
@@ -405,6 +462,33 @@ extension MainViewController {
             self.refreshControl.endRefreshing()
         }
         fetchFromReload()
+    }
+    
+    // Stuff so that uvGradientLayer frame works
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update gradient layer frame
+        uvGradientLayer.frame = uvProgressView.bounds
+    }
+    
+    // Function to update the UVIndex
+    func updateUVIndex(_ value: Int) {
+        // Create a mask layer to achieve the progress bar effect
+        let maskLayer = CALayer()
+        let clampedValue = min(max(value, 0), 11)
+        let percentage = CGFloat(clampedValue) / 11.0
+        
+        // The gradient layer should always be full width
+        uvGradientLayer.frame = uvProgressView.bounds
+        
+        // Create a mask that only shows a portion of the gradient
+        maskLayer.frame = CGRect(x: 0, y: 0,
+                               width: uvProgressView.bounds.width * percentage,
+                               height: uvProgressView.bounds.height)
+        maskLayer.backgroundColor = UIColor.white.cgColor
+        
+        // Apply the mask to the gradient layer
+        uvGradientLayer.mask = maskLayer
     }
     
     //Creates a function for running fetchWeather from reload func
@@ -553,6 +637,7 @@ extension MainViewController {
         return 6
     }
     
+    // cell creator
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         
@@ -566,6 +651,7 @@ extension MainViewController {
             }
         } else { cell.weatherIcon.image = UIImage(systemName: "questionmark")}
         
+        // displays them only if more than 6 items in HourluForecast
         if WeatherKitData.HourlyForecast.count > 6 {
             cell.tempLabel.text = "\(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))˚"
         } else { cell.tempLabel.text = "--" }
@@ -576,4 +662,5 @@ extension MainViewController {
         
         return cell
     }
+    
 }
