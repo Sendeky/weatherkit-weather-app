@@ -5,7 +5,7 @@
 
 ## What It Is:
  * An iOS Weather App that uses Apple's WeatherKit API
- 
+   
 <div style="display: flex; justify-content: center;">
   <img src="https://user-images.githubusercontent.com/83136978/210652066-0f5549b8-3f8c-48dc-967e-34bd6565400f.jpg" alt="Image 1" style="margin-right: 10px; height:420px;">
   <img src="https://user-images.githubusercontent.com/83136978/210652073-e86a0af8-fbea-426b-8188-6ce3ca398d15.jpg" alt="Image 2" style="margin-right: 10px; height:420px;">
@@ -13,6 +13,8 @@
   <img src="https://user-images.githubusercontent.com/83136978/210652087-967675d9-dcb0-4372-b986-c3a364c95844.jpg" alt="Image 4" style="margin-right: 10px; height:420px;">
   <img src="https://user-images.githubusercontent.com/83136978/210652091-f347f1d6-8d0e-4d1b-8935-cd41b4518c9a.jpg" alt="Image 5" style="margin-right: 10px; height:420px;">
 </div>
+
+---
 
 ### [App Store Link](https://apps.apple.com/us/app/stormylaunch-weather-app/id6444372213)
  
@@ -28,8 +30,9 @@ Minimum iOS: 16.0
 Dependencies: None
 ```
 
-The iOS app is built mostly in UIKit, with some occasionsal SwiftUI elements  
-The WatchOS app is built entirelty in SwiftUI  
+The iOS app is built mostly in UIKit, with some occasionsal SwiftUI elements.  
+Also has support for iPad.  
+The WatchOS app is built entirelty in SwiftUI.  
 
 
 ## Contributing
