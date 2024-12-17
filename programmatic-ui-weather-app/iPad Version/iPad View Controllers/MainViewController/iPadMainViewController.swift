@@ -34,6 +34,31 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     // cyanColor for views in mainview
     let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
     
+    // our gradient progress bar for uv view
+    let uvProgressView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 4
+        view.clipsToBounds = true
+        view.backgroundColor = UIColor.systemGray2.withAlphaComponent(0.3) // Add this line
+        return view
+    }()
+    
+    let uvGradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.colors = [
+            UIColor.systemGreen.cgColor,
+            UIColor.systemYellow.cgColor,
+            UIColor.systemOrange.cgColor,
+            UIColor.systemRed.cgColor,
+            UIColor.systemPurple.cgColor
+        ]
+        layer.startPoint = CGPoint(x: 0, y: 0.5)
+        layer.endPoint = CGPoint(x: 1, y: 0.5)
+        layer.cornerRadius = 2 // Add this line to match the view's corner radius
+        return layer
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -255,7 +280,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
             cell.tempLabel.text = "--"
             let currentHour = getCurrentHour(offset: indexPath.row)
-            cell.timeLabel.text = currentHour
+            cell.timeLabel.text = " \(currentHour) "    // added some spaces so that cell would be wider
             cell.timeLabel.font = .systemFont(ofSize: 16.0)
             
             // checks if there is enough data to show
