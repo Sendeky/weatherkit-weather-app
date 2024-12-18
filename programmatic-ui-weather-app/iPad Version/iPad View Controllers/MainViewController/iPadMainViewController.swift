@@ -15,6 +15,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     // MARK: Top Current Stack Component
     let customView = iPadMainTopCurrentStack()
+    let mainScrollView = UIScrollView()
     let humidityView = UIStackView()
     let rocketView = UIImageView()
     let sunsetView = UIStackView()
@@ -24,6 +25,9 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     let pressureView = UIStackView()
     //Creates view for cloud at top
     let cloudViewHolder = UIView()
+    //Creates a refresh control for the scrollview
+    var refreshControl = UIRefreshControl()
+    
     
     // collection view for hourly forecast
     let hourlyForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())      // need to have frame and layout for UICollectionView
@@ -85,6 +89,13 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         setupUI()
         // configure the hourly forecast view
         configureCollectionView()
+        //
+        setupMainScrollView()
+        
+        //Sets settings for refreshControl
+        refreshControl.translatesAutoresizingMaskIntoConstraints = false
+        refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
     }
     
     // sets up the RocketView to the right
@@ -112,17 +123,28 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
         dailyForecastView.translatesAutoresizingMaskIntoConstraints = false
         
+        //Sets settings for refreshControl
+        refreshControl.translatesAutoresizingMaskIntoConstraints = false
+        refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
+        
         
         view.backgroundColor = .orange
-        view.addSubview(customView)
-        view.addSubview(humidityView)
+        
+//        mainScrollView.addSubview(customView)
+        mainScrollView.addSubview(humidityView)
+//        mainScrollView.addSubview(rocketView)
+        mainScrollView.addSubview(hourlyForecastView)
+        mainScrollView.addSubview(dailyForecastView)
+        mainScrollView.addSubview(sunsetView)
+        mainScrollView.addSubview(UVView)
+        mainScrollView.addSubview(precipitationView)
+        mainScrollView.addSubview(windView)
+        mainScrollView.addSubview(refreshControl)
+        
         view.addSubview(rocketView)
-        view.addSubview(hourlyForecastView)
-        view.addSubview(dailyForecastView)
-        view.addSubview(sunsetView)
-        view.addSubview(UVView)
-        view.addSubview(precipitationView)
-        view.addSubview(windView)
+        view.addSubview(customView)
+        view.addSubview(mainScrollView)
         
         
         // activates constraints
@@ -136,18 +158,23 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             customView.topStack.topAnchor.constraint(equalTo: customView.topAnchor, constant: 20),
             customView.topStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             customView.topStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 250),
+            //mainScrollView constraints
+            mainScrollView.topAnchor.constraint(equalTo: customView.topStack.bottomAnchor, constant: 20),
+            mainScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 250),
+            mainScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mainScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             //humidityView constraints
-            humidityView.topAnchor.constraint(equalTo: customView.bottomAnchor, constant: 15),
+            humidityView.topAnchor.constraint(equalTo: mainScrollView.topAnchor, constant: 15),
             humidityView.heightAnchor.constraint(equalToConstant: 100),
-            humidityView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 250),
+            humidityView.leadingAnchor.constraint(equalTo: mainScrollView.leadingAnchor),
             humidityView.widthAnchor.constraint(equalToConstant: 150),
             //rocketView constraints
             rocketView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             rocketView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             rocketView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            rocketView.trailingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 250),
+            rocketView.trailingAnchor.constraint(equalTo: mainScrollView.leadingAnchor, constant: 0),
             // hourly forecast view constraints
-            hourlyForecastView.topAnchor.constraint(equalTo: customView.bottomAnchor, constant: 15),
+            hourlyForecastView.topAnchor.constraint(equalTo: mainScrollView.topAnchor, constant: 15),
             hourlyForecastView.leadingAnchor.constraint(equalTo: humidityView.trailingAnchor, constant: 15),
             hourlyForecastView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             hourlyForecastView.heightAnchor.constraint(equalToConstant: 100),
@@ -339,6 +366,54 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             return cell2
         }
     }
+    //MARK: - Function for the pull to refresh on the scrollview
+    @objc func refresh(sender:AnyObject) {
+        // Code to refresh table view
+        print("userLatitude: \((UserLocation.userLatitude)!)")
+        print("userLongitude: \((UserLocation.userLongitude)!)")
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.fetchFromReload()
+        }
+    }
+    
+    //Creates a function for running fetchWeather from reload func
+    func fetchFromReload() {
+        DispatchQueue.main.async {
+            if UserLocation.userCLLocation != nil {
+                WeatherKitData.HourlyForecast.removeAll()
+                WeatherKitData.TempMaxForecast.removeAll()
+                WeatherKitData.TempMinForecast.removeAll()
+                self.getWeather(location: UserLocation.userCLLocation!)
+            } else {
+            }
+            self.updateLabels()
+            self.hourlyForecastView.reloadData()
+            self.dailyForecastView.reloadData()
+        }
+    }
+    
+    //MARK: - Function to refresh all of the labels
+    func updateLabels() {
+        //Checks if weatherkit returned symbol is "wind"
+        //This is because "wind" (SF Symbol) has no fill option
+        /*
+        if WeatherKitData.Symbol != "wind" {
+            self.iconView.image = UIImage(systemName: WeatherKitData.Symbol + ".fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
+        } else {
+            self.iconView.image = UIImage(systemName: WeatherKitData.Symbol, withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
+        }
+        */
+        self.customView.currentTempLabel.text = "\(WeatherKitData.Temp)"
+        self.customView.minTempLabel.text = "High: \(WeatherKitData.TempMax)"
+        self.customView.minTempLabel.text = "Low: \(WeatherKitData.TempMin)"
+        self.updateUVIndex(WeatherKitData.UV)
+//        self.windLabel.text = "\(WeatherKitData.WindSpeed)"
+//        self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
+        self.updateUVIndex(WeatherKitData.UV)
+        DateConverter().timeArrayMaker()
+    }
+    
     func getCurrentDayOfWeek(offset: Int) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE" // "EEEE" will give you the full day name like "Monday", "Tuesday", etc.

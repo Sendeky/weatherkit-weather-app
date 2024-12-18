@@ -50,7 +50,7 @@ class iPadMainTopCurrentStack: UIView {
     // Min Temperature Label
     let minTempLabel: UILabel = {
         let label = UILabel()
-        label.text = "Min Temp"
+        label.text = "--"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -59,7 +59,7 @@ class iPadMainTopCurrentStack: UIView {
     // Current Temp Label
     let currentTempLabel: UILabel = {
         let label = UILabel()
-        label.text = "Current Temp"
+        label.text = "--"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -68,7 +68,7 @@ class iPadMainTopCurrentStack: UIView {
     // Max Temperature Label
     let maxTempLabel: UILabel = {
         let label = UILabel()
-        label.text = "Max Temp"
+        label.text = "--"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
