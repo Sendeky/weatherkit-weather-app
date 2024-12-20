@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import CoreLocation
 
+let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
+
 class iPadMainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CLLocationManagerDelegate {
     //Creates the location manager
     let locationManager = CLLocationManager()
@@ -16,6 +18,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     // MARK: Top Current Stack Component
     let customView = iPadMainTopCurrentStack()
     let mainScrollView = UIScrollView()
+//    let humidityView = iPadHumidityStack()
     let humidityView = UIStackView()
     let rocketView = UIImageView()
     let sunsetView = UIStackView()
@@ -36,7 +39,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     let dailyForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     // cyanColor for views in mainview
-    let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
+//    let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
     
     // our gradient progress bar for uv view
     let uvProgressView: UIView = {
@@ -404,13 +407,12 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             self.iconView.image = UIImage(systemName: WeatherKitData.Symbol, withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
         }
         */
-        self.customView.currentTempLabel.text = "\(WeatherKitData.Temp)"
-        self.customView.minTempLabel.text = "High: \(WeatherKitData.TempMax)"
+        self.customView.currentTempLabel.text = "Current: \(WeatherKitData.Temp)"
+        self.customView.maxTempLabel.text = "High: \(WeatherKitData.TempMax)"
         self.customView.minTempLabel.text = "Low: \(WeatherKitData.TempMin)"
         self.updateUVIndex(WeatherKitData.UV)
 //        self.windLabel.text = "\(WeatherKitData.WindSpeed)"
 //        self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
-        self.updateUVIndex(WeatherKitData.UV)
         DateConverter().timeArrayMaker()
     }
     
