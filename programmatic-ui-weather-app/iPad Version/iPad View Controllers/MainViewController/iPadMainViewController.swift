@@ -18,8 +18,8 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     // MARK: Top Current Stack Component
     let customView = iPadMainTopCurrentStack()
     let mainScrollView = UIScrollView()
-//    let humidityView = iPadHumidityStack()
-    let humidityView = UIStackView()
+    let humidityView = iPadHumidityStack()
+//    let humidityView = UIStackView()
     let rocketView = UIImageView()
     let sunsetView = UIStackView()
     let UVView = UIStackView()
@@ -77,7 +77,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         setBackground()
         setupRocketView()
         // create humidityView
-        createHumidityView()
+//        createHumidityView()
         // create sunsetView
         createSunsetView()
         // create UVView
@@ -121,7 +121,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     private func setupUI() {
         customView.translatesAutoresizingMaskIntoConstraints = false
-//        humidityView.translatesAutoresizingMaskIntoConstraints = false
+        humidityView.translatesAutoresizingMaskIntoConstraints = false
         rocketView.translatesAutoresizingMaskIntoConstraints = false
         hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
         dailyForecastView.translatesAutoresizingMaskIntoConstraints = false
@@ -410,6 +410,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         self.customView.currentTempLabel.text = "Current: \(WeatherKitData.Temp)"
         self.customView.maxTempLabel.text = "High: \(WeatherKitData.TempMax)"
         self.customView.minTempLabel.text = "Low: \(WeatherKitData.TempMin)"
+        self.humidityView.updateHumidityLabels(WeatherKitData.Humidity)
         self.updateUVIndex(WeatherKitData.UV)
 //        self.windLabel.text = "\(WeatherKitData.WindSpeed)"
 //        self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
