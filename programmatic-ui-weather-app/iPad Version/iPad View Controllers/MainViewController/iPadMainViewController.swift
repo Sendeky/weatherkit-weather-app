@@ -23,9 +23,12 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     let rocketView = UIImageView()
 //    let sunsetView = UIStackView()
     let sunsetView = iPadSunsetView()
-    let UVView = UIStackView()
-    let windView = UIStackView()
-    let precipitationView = UIStackView()
+//    let UVView = UIStackView()
+    let UVView = iPadUVView()
+//    let windView = UIStackView()
+    let windView = iPadWindView()
+//    let precipitationView = UIStackView()
+    let precipitationView = iPadPrecipitationView()
     let pressureView = UIStackView()
     //Creates view for cloud at top
     let cloudViewHolder = UIView()
@@ -82,11 +85,11 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         // create sunsetView
 //        createSunsetView()
         // create UVView
-        createUVView()
+//        createUVView()
         // create precipitationView
-        createPrecipitationView()
+//        createPrecipitationView()
         // create windView
-        createWindView()
+//        createWindView()
         // create pressureView
         createPressureView()
         // sets up the UI
@@ -127,6 +130,9 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
         dailyForecastView.translatesAutoresizingMaskIntoConstraints = false
         sunsetView.translatesAutoresizingMaskIntoConstraints = false
+        precipitationView.translatesAutoresizingMaskIntoConstraints = false
+        windView.translatesAutoresizingMaskIntoConstraints = false
+        UVView.translatesAutoresizingMaskIntoConstraints = false
         
         //Sets settings for refreshControl
         refreshControl.translatesAutoresizingMaskIntoConstraints = false
@@ -413,8 +419,10 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         self.customView.maxTempLabel.text = "High: \(WeatherKitData.TempMax)"
         self.customView.minTempLabel.text = "Low: \(WeatherKitData.TempMin)"
         self.humidityView.updateHumidityLabels(WeatherKitData.Humidity)
+        self.precipitationView.updatePrecipitationLabel(WeatherKitData.PrecipitationChance)
         self.sunsetView.updateSunsetLabels(WeatherKitData.Sunrise, WeatherKitData.Sunset)
-        self.updateUVIndex(WeatherKitData.UV)
+        self.windView.updateWindLabel(WeatherKitData.WindSpeed)
+        self.UVView.updateUVIndex(WeatherKitData.UV)
 //        self.windLabel.text = "\(WeatherKitData.WindSpeed)"
 //        self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
         DateConverter().timeArrayMaker()

@@ -288,8 +288,8 @@
             filePath = "programmatic-ui-weather-app/iPad Version/iPad View Controllers/MainViewController/iPadMainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
