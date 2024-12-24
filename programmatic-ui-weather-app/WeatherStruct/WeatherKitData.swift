@@ -41,6 +41,7 @@ struct WeatherKitData: Codable{
     static var UV = 0
     
     static var WindDirection = ""
+    static var WindDirectionAngle = 0.0
     static var WindGusts = [Measurement<UnitSpeed>]()
     static var WindSpeed = ""
     static var WindSpeedForecast = [0.0]

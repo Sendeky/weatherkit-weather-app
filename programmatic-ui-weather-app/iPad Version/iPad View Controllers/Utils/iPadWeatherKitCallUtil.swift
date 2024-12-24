@@ -57,6 +57,7 @@ extension iPadMainViewController {
                 let windSpeed = MF0.string(from: result.0.wind.speed)
                 print(windSpeed)
                 let windDirection = result.0.wind.compassDirection
+                let windDirectionAngle = result.0.wind.direction.converted(to: .degrees)
                 print("gust: \(result.0.wind.gust)")
                 let symbol = result.0.symbolName
                 let humidity = Int(100 * result.0.humidity)
@@ -146,6 +147,7 @@ extension iPadMainViewController {
                 WeatherKitData.UV = uv
                 WeatherKitData.WindSpeed = windSpeed
                 WeatherKitData.WindDirection = "\(windDirection)"
+                WeatherKitData.WindDirectionAngle = windDirectionAngle.value
                 WeatherKitData.Symbol = symbol
                 WeatherKitData.Humidity = humidity
                 WeatherKitData.Symbol = symbol

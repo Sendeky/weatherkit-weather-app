@@ -203,7 +203,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             UVView.topAnchor.constraint(equalTo: dailyForecastView.bottomAnchor, constant: 15),
             UVView.leadingAnchor.constraint(equalTo: dailyForecastView.leadingAnchor),
             UVView.widthAnchor.constraint(equalToConstant: 150),
-            UVView.heightAnchor.constraint(equalToConstant: 100),
+            UVView.heightAnchor.constraint(equalToConstant: 150),
             // precipitationView constraints
             precipitationView.topAnchor.constraint(equalTo: sunsetView.bottomAnchor, constant: 15),
             precipitationView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
@@ -213,7 +213,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             windView.topAnchor.constraint(equalTo: dailyForecastView.bottomAnchor, constant: 15),
             windView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor),
             windView.widthAnchor.constraint(equalToConstant: 150),
-            windView.heightAnchor.constraint(equalToConstant: 100),
+            windView.heightAnchor.constraint(equalToConstant: 150),
         ])
     }
     
