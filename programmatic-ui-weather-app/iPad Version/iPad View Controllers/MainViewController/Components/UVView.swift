@@ -85,23 +85,34 @@ class iPadUVView: UIView {
        stack.axis = .vertical
        stack.backgroundColor = cyanColor
        stack.isLayoutMarginsRelativeArrangement = true
-       stack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-       stack.spacing = 20
+       stack.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
+       stack.spacing = 6
        return stack
    }()
    
    private let UVViewTitleLabel: UILabel = {
        let label = UILabel()
-       label.text = "UV Index"
+       label.text = "UV"
        label.textAlignment = .center
+       label.heightAnchor.constraint(equalToConstant: 30).isActive = true
        label.font = .boldSystemFont(ofSize: 18.0)
        return label
    }()
+    
+    private let UVLabel: UILabel = {
+        let label = UILabel()
+        label.text = "--"
+        label.numberOfLines = 2
+        label.textAlignment = .left
+        return label
+    }()
    
-   private let UVLabel: UILabel = {
+   private let UVStatus: UILabel = {
        let label = UILabel()
        label.text = "--"
        label.textAlignment = .center
+       label.heightAnchor.constraint(equalToConstant: 40).isActive = true
+       label.font = .boldSystemFont(ofSize: 32.0)
        return label
    }()
    
@@ -147,8 +158,9 @@ class iPadUVView: UIView {
        
        // Add subviews to stack
        uvStackView.addArrangedSubview(UVViewTitleLabel)
-       uvStackView.addArrangedSubview(UVLabel)
+       uvStackView.addArrangedSubview(UVStatus)
        uvStackView.addArrangedSubview(uvProgressView)
+       uvStackView.addArrangedSubview(UVLabel)
        
        // Add stack to view
        addSubview(uvStackView)
@@ -163,7 +175,7 @@ class iPadUVView: UIView {
            uvProgressView.heightAnchor.constraint(equalToConstant: 6)
        ])
        
-       updateUVIndex(WeatherKitData.UV)
+       updateUVIndex(WeatherKitData.UV, WeatherKitData.UVCategory)
    }
    
    override func layoutSubviews() {
@@ -172,12 +184,14 @@ class iPadUVView: UIView {
    }
    
    // MARK: - Public Methods
-   func updateUVIndex(_ value: Int) {
-       UVLabel.text = "\(value)"
+    func updateUVIndex(_ value1: Int, _ value2: String) {
+       UVLabel.text = "The UV Index is currently \(value2)"
+        print("skibb: \(value2)")
+       UVStatus.text = "\(value1)"
        
        // Create a mask layer to achieve the progress bar effect
        let maskLayer = CALayer()
-       let clampedValue = min(max(value, 0), 11)
+       let clampedValue = min(max(value1, 0), 11)
        let percentage = CGFloat(clampedValue) / 11.0
        
        // The gradient layer should always be full width

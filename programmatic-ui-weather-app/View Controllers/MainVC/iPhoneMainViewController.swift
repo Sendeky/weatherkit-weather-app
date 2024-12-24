@@ -473,6 +473,7 @@ extension MainViewController {
     
     // Function to update the UVIndex
     func updateUVIndex(_ value: Int) {
+        print("skibb: \(WeatherKitData.UVCategory)")
         // Create a mask layer to achieve the progress bar effect
         let maskLayer = CALayer()
         let clampedValue = min(max(value, 0), 11)

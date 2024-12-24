@@ -53,6 +53,7 @@ extension MainViewController {
                 
                 MF0.numberFormatter.maximumFractionDigits = 3
                 let uv = result.0.uvIndex.value
+                let uvCategory = result.0.uvIndex.category.description
                 let windSpeed = MF0.string(from: result.0.wind.speed)
                 print(windSpeed)
                 let windDirection = result.0.wind.compassDirection
@@ -143,6 +144,7 @@ extension MainViewController {
                 WeatherKitData.TempMax = tempMax
                 WeatherKitData.TempMin = tempMin
                 WeatherKitData.UV = uv
+                WeatherKitData.UVCategory = uvCategory
                 WeatherKitData.WindSpeed = windSpeed
                 WeatherKitData.WindDirection = "\(windDirection)"
                 WeatherKitData.Symbol = symbol

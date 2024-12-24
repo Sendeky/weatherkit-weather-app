@@ -178,7 +178,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             humidityView.topAnchor.constraint(equalTo: mainScrollView.topAnchor, constant: 15),
             humidityView.heightAnchor.constraint(equalToConstant: 100),
             humidityView.leadingAnchor.constraint(equalTo: mainScrollView.leadingAnchor),
-            humidityView.widthAnchor.constraint(equalToConstant: 150),
+            humidityView.widthAnchor.constraint(equalToConstant: 180),
             //rocketView constraints
             rocketView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             rocketView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
@@ -202,8 +202,8 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             // UVView constraints
             UVView.topAnchor.constraint(equalTo: dailyForecastView.bottomAnchor, constant: 15),
             UVView.leadingAnchor.constraint(equalTo: dailyForecastView.leadingAnchor),
-            UVView.widthAnchor.constraint(equalToConstant: 150),
-            UVView.heightAnchor.constraint(equalToConstant: 150),
+            UVView.widthAnchor.constraint(equalToConstant: 180),
+            UVView.heightAnchor.constraint(equalToConstant: 180),
             // precipitationView constraints
             precipitationView.topAnchor.constraint(equalTo: sunsetView.bottomAnchor, constant: 15),
             precipitationView.leadingAnchor.constraint(equalTo: sunsetView.leadingAnchor),
@@ -212,8 +212,8 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             // windView constraints
             windView.topAnchor.constraint(equalTo: dailyForecastView.bottomAnchor, constant: 15),
             windView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor),
-            windView.widthAnchor.constraint(equalToConstant: 150),
-            windView.heightAnchor.constraint(equalToConstant: 150),
+            windView.widthAnchor.constraint(equalToConstant: 180),
+            windView.heightAnchor.constraint(equalToConstant: 180),
         ])
     }
     
@@ -422,7 +422,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         self.precipitationView.updatePrecipitationLabel(WeatherKitData.PrecipitationChance)
         self.sunsetView.updateSunsetLabels(WeatherKitData.Sunrise, WeatherKitData.Sunset)
         self.windView.updateWindLabel(WeatherKitData.WindSpeed)
-        self.UVView.updateUVIndex(WeatherKitData.UV)
+        self.UVView.updateUVIndex(WeatherKitData.UV, WeatherKitData.UVCategory)
 //        self.windLabel.text = "\(WeatherKitData.WindSpeed)"
 //        self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
         DateConverter().timeArrayMaker()

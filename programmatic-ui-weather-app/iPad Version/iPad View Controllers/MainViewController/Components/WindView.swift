@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 
 class WindCompassView: UIView {
@@ -69,6 +70,7 @@ class WindCompassView: UIView {
         let fontSize = min(bounds.width, bounds.height) * 0.15  // Makes font size relative to view size
         let attrs: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: fontSize),
+//            .font: customFont,
             .foregroundColor: UIColor.white
         ]
         
@@ -123,6 +125,17 @@ class WindCompassView: UIView {
         
         context.restoreGState()
     }
+    
+    func setupFont() -> UIFont {
+        guard let customFont = UIFont(name: "SpaceX", size: 20.0) else {
+            fatalError("""
+                Failed to load the "SpaceX" font.
+                Make sure the font file is included in the project and the font name is spelled correctly.
+                """
+            )
+        }
+        return customFont
+    }
 }
 
 
@@ -136,7 +149,7 @@ class iPadWindView: UIView {
         stack.backgroundColor = cyanColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        stack.spacing = 20
+        stack.spacing = 0
         return stack
     }()
     

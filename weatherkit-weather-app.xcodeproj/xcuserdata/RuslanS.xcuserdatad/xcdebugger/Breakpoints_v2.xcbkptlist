@@ -176,8 +176,8 @@
             filePath = "programmatic-ui-weather-app/Utils/WeatherKitCallUtil.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "getWeather(location:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -224,8 +224,8 @@
             filePath = "programmatic-ui-weather-app/Utils/WeatherKitCallUtil.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "getWeather(location:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -272,8 +272,8 @@
             filePath = "programmatic-ui-weather-app/Utils/WeatherKitCallUtil.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "updateLabelsAfterAwait()"
             landmarkType = "7">
          </BreakpointContent>
