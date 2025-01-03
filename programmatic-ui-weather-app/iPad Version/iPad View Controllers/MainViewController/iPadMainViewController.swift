@@ -19,15 +19,10 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     let customView = iPadMainTopCurrentStack()
     let mainScrollView = UIScrollView()
     let humidityView = iPadHumidityStack()
-//    let humidityView = UIStackView()
     let rocketView = UIImageView()
-//    let sunsetView = UIStackView()
     let sunsetView = iPadSunsetView()
-//    let UVView = UIStackView()
     let UVView = iPadUVView()
-//    let windView = UIStackView()
     let windView = iPadWindView()
-//    let precipitationView = UIStackView()
     let precipitationView = iPadPrecipitationView()
     let pressureView = UIStackView()
     //Creates view for cloud at top
@@ -42,9 +37,6 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     // collection view for daily forecast
     let dailyForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    // cyanColor for views in mainview
-//    let cyanColor = UIColor(red: 95.0/255.0, green: 195.0/255.0, blue: 255.0/255.0, alpha: 0.93)
-    
     // our gradient progress bar for uv view
     let uvProgressView: UIView = {
         let view = UIView()
@@ -55,6 +47,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         return view
     }()
     
+    // the gradient for the uvProgressView
     let uvGradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.colors = [
@@ -80,29 +73,33 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         // sets SVG background
         setBackground()
         setupRocketView()
-        // create humidityView
-//        createHumidityView()
-        // create sunsetView
-//        createSunsetView()
-        // create UVView
-//        createUVView()
-        // create precipitationView
-//        createPrecipitationView()
-        // create windView
-//        createWindView()
-        // create pressureView
         createPressureView()
+        
         // sets up the UI
         setupUI()
         // configure the hourly forecast view
         configureCollectionView()
         //
         setupMainScrollView()
+        // init location services
+        initializeLocationServices()
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound]) { success, error in
+        }
         
         //Sets settings for refreshControl
         refreshControl.translatesAutoresizingMaskIntoConstraints = false
         refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
+    }
+    
+    //func to initialize location services
+    private func initializeLocationServices() {
+        locationManager.delegate = self
+        guard CLLocationManager.locationServicesEnabled() else {
+            return
+        }
+        locationManager.requestAlwaysAuthorization() //Requests always authorization for locationServices
     }
     
     // sets up the RocketView to the right
@@ -423,6 +420,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         self.sunsetView.updateSunsetLabels(WeatherKitData.Sunrise, WeatherKitData.Sunset)
         self.windView.updateWindLabel(WeatherKitData.WindSpeed)
         self.UVView.updateUVIndex(WeatherKitData.UV, WeatherKitData.UVCategory)
+        print("data: \(WeatherKitData.Temp)")
 //        self.windLabel.text = "\(WeatherKitData.WindSpeed)"
 //        self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
         DateConverter().timeArrayMaker()
@@ -445,7 +443,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     func getCurrentHour(offset: Int) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h a" // "EEEE" will give you the full day name like "Monday", "Tuesday", etc.
+        dateFormatter.dateFormat = "h a" // "h a" will give you the hour and sign (AM/PM)
 
         var currentHour = Date()
         
@@ -459,12 +457,20 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         return currentHourString
     }
     
-    //MARK: - Function to refresh all of the labels
-//    func updateLabels() {
-//        self.customView.currentTempLabel.text = "\(WeatherKitData.Temp)"
-//        self.customView.minTempLabel.text = "Low Temp:\(WeatherKitData.TempMin)"
-//        self.customView.maxTempLabel.text = "High Temp:\(WeatherKitData.TempMax)"
-//    }
+    //Function for actually getting the location
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        UserLocation.userLatitude = locValue.latitude
+        UserLocation.userLongitude = locValue.longitude
+        UserLocation.userCLLocation = locations[0]
+        
+        for i in 0...3 {
+            getWeather(location: locations[0])
+        }
+        locationManager.stopUpdatingLocation()
+//        print(UserLocation.userCLLocation)
+    }
     
     //Function for checking location manager status (starts getting the location if allowed)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
