@@ -43,6 +43,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
     // uvView variables
     let uvView = UIView()
     let uvTitleLabel = UILabel()
+    let uvIndexLabel = UILabel()
     private let uvProgressView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -255,6 +256,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         uvTitleLabel.text = "UV"
         uvTitleLabel.font = .preferredFont(forTextStyle: .body)
         
+        uvIndexLabel.translatesAutoresizingMaskIntoConstraints = false
+        uvIndexLabel.text = "--"
+        uvIndexLabel.textAlignment = .center
+        uvIndexLabel.font = .preferredFont(forTextStyle: .title1)
+        
         //Sets settings for refreshControl
         refreshControl.translatesAutoresizingMaskIntoConstraints = false
         refreshControl.attributedTitle = NSAttributedString("Fetching Weather")
@@ -285,6 +291,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
         
         // Adds elements into uvView
         uvView.addSubview(uvTitleLabel)
+        uvView.addSubview(uvIndexLabel)
         uvView.addSubview(uvProgressView)
         
         uvProgressView.layer.addSublayer(uvGradientLayer)
@@ -367,8 +374,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIScrollV
             // uvTitleLabel constraints
             uvTitleLabel.topAnchor.constraint(equalTo: uvView.topAnchor, constant: 10),
             uvTitleLabel.leadingAnchor.constraint(equalTo: uvView.leadingAnchor, constant: 10),
+            //uvIndexLabel
+            uvIndexLabel.topAnchor.constraint(equalTo: uvTitleLabel.bottomAnchor, constant: 10),
+            uvIndexLabel.leadingAnchor.constraint(equalTo: uvView.leadingAnchor, constant: 10),
+            uvIndexLabel.trailingAnchor.constraint(equalTo: uvView.trailingAnchor, constant: -10),
             // uvProgressView constraints
-            uvProgressView.topAnchor.constraint(equalTo: uvTitleLabel.bottomAnchor, constant: 10),
+            uvProgressView.topAnchor.constraint(equalTo: uvIndexLabel.bottomAnchor, constant: 10),
             uvProgressView.heightAnchor.constraint(equalToConstant: 6),
             uvProgressView.leadingAnchor.constraint(equalTo: uvView.leadingAnchor, constant: 10),
             uvProgressView.trailingAnchor.constraint(equalTo: uvView.trailingAnchor, constant: -10)
@@ -435,6 +446,7 @@ extension MainViewController {
         self.todayTempLabel.text = "H:\(WeatherKitData.TempMax) L:\(WeatherKitData.TempMin)"
         self.windLabel.text = "\(WeatherKitData.WindSpeed)"
         self.precipitationLabel.text = "\(WeatherKitData.PrecipitationChance)% Chance"
+        self.uvIndexLabel.text = "\(WeatherKitData.UV)"
         self.updateUVIndex(WeatherKitData.UV)
         DateConverter().timeArrayMaker()
     }
