@@ -319,7 +319,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             cell.timeLabel.font = .systemFont(ofSize: 16.0)
             
             // checks if there is enough data to show
-            if WeatherKitData.HourlyForecastSymbol.count > 15 {
+            if WeatherKitData.HourlyForecastSymbol.count >= 15 {
                 //simple check for when icon is "wind" (doesn't have "fill" option)
                 if WeatherKitData.HourlyForecastSymbol[indexPath.row] != "wind" {
                     cell.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row]).fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
@@ -329,8 +329,10 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             } else { cell.weatherIcon.image = UIImage(systemName: "questionmark")}
 
             // checks if there is enough data for hourly forecast
-            if WeatherKitData.HourlyForecast.count > 15 {
+            print(WeatherKitData.HourlyForecast.count)
+            if WeatherKitData.HourlyForecast.count >= 15 {
                 cell.tempLabel.text = "\(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))˚"
+                print("skibb2: \(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))")
             } else { cell.tempLabel.text = "--" }
 
             return cell
@@ -412,7 +414,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             self.iconView.image = UIImage(systemName: WeatherKitData.Symbol, withConfiguration: UIImage.SymbolConfiguration(pointSize: 64.0))?.withRenderingMode(.alwaysOriginal)
         }
         */
-        self.customView.currentTempLabel.text = "Current: \(WeatherKitData.Temp)"
+        self.customView.currentTempLabel.text = "\(WeatherKitData.Temp)"
         self.customView.maxTempLabel.text = "High: \(WeatherKitData.TempMax)"
         self.customView.minTempLabel.text = "Low: \(WeatherKitData.TempMin)"
         self.humidityView.updateHumidityLabels(WeatherKitData.Humidity)

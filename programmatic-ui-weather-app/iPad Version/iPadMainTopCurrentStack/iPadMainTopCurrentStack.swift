@@ -52,6 +52,7 @@ class iPadMainTopCurrentStack: UIView {
         let label = UILabel()
         label.text = "--"
         label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 36, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -61,6 +62,7 @@ class iPadMainTopCurrentStack: UIView {
         let label = UILabel()
         label.text = "--"
         label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 48, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -69,6 +71,8 @@ class iPadMainTopCurrentStack: UIView {
     let maxTempLabel: UILabel = {
         let label = UILabel()
         label.text = "--"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 36, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -88,10 +92,6 @@ class iPadMainTopCurrentStack: UIView {
         addSubview(topStack)
         
         // Really important
-//        minTempLabel.translatesAutoresizingMaskIntoConstraints = false
-//        currentTempLabel.translatesAutoresizingMaskIntoConstraints = false
-//        maxTempLabel.translatesAutoresizingMaskIntoConstraints = false
-//        currentCityLabel.translatesAutoresizingMaskIntoConstraints = false
         topInfoStack.translatesAutoresizingMaskIntoConstraints = false
         topStack.translatesAutoresizingMaskIntoConstraints = false
         
@@ -100,7 +100,7 @@ class iPadMainTopCurrentStack: UIView {
     }
     
     func setupFont() -> UIFont {
-        guard let customFont = UIFont(name: "SpaceX", size: 24.0) else {
+        guard let customFont = UIFont(name: "SpaceX", size: 36.0) else {
             fatalError("""
                 Failed to load the "SpaceX" font.
                 Make sure the font file is included in the project and the font name is spelled correctly.
