@@ -18,7 +18,7 @@ struct WeatherKitData: Codable{
     
     static var forecastSymbol = [String]()
     
-    static var HourlyForecast = [0.0]
+    static var HourlyForecast = [""]
     static var HourlyForecastSymbol = [String]()
     static var Humidity = 0
     

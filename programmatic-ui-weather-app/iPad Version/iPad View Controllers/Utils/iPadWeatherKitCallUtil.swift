@@ -122,7 +122,8 @@ extension iPadMainViewController {
                 
                 //For loop for 12 hour weather
                 for i in  0...11 {
-                    let forecast = result.1.forecast[i].temperature.value
+                    let forecast = MF0.string(from: result.1.forecast[i].temperature)
+//                    let forecast = result.1.forecast[i].temperature.value
                     WeatherKitData.HourlyForecast.append(forecast)
                     print("Hourly Forecast: \(WeatherKitData.HourlyForecast[i])")
                     let symbol = result.1.forecast[i].symbolName

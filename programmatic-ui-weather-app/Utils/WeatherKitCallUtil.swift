@@ -31,6 +31,7 @@ extension MainViewController {
                 let endDate = calendar.date(byAdding: .hour, value: 12,to: Date.now)
                 let result = try await weatherService.weather(for: location, including: .current, .hourly(startDate: Date.now, endDate: endDate!), .daily)
                 
+                
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeStyle = DateFormatter.Style.short
                 dateFormatter.dateStyle = DateFormatter.Style.none
@@ -120,7 +121,8 @@ extension MainViewController {
                 
                 //For loop for 12 hour weather
                 for i in  0...11 {
-                    let forecast = result.1.forecast[i].temperature.value
+                    let forecast = MF0.string(from: result.1.forecast[i].temperature)
+//                    let forecast = result.1.forecast[i].temperature.value
                     WeatherKitData.HourlyForecast.append(forecast)
                     print("Hourly Forecast: \(WeatherKitData.HourlyForecast[i])")
                     let symbol = result.1.forecast[i].symbolName

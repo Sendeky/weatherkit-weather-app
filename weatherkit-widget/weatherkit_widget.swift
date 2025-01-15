@@ -18,7 +18,7 @@ struct Provider: TimelineProvider {
     
     func placeholder(in context: Context) -> SimpleEntry {
         //Sets widgetData placeholder (before data from main app is passed in)
-        let widgetData = WidgetData(temp: "-", tempMax: "-", tempMin: "-", symbolName: "-", hourlyForecast: [0.0], forecastTimeArray: ["-"])
+        let widgetData = WidgetData(temp: "-", tempMax: "-", tempMin: "-", symbolName: "-", hourlyForecast: ["0.0"], forecastTimeArray: ["-"])
         return SimpleEntry(widgetData: widgetData)
     }
     
@@ -113,7 +113,7 @@ struct weatherkit_widgetEntryView : View {
             }
             .onAppear {
                 for i in 1...4 {
-                    items.append(Item(type: "\(i)H", value: entry.widgetData.hourlyForecast[i], time: entry.widgetData.forecastTimeArray[i - 1]))
+                    items.append(Item(type: "\(i)H", value: Double(entry.widgetData.hourlyForecast[i]) ?? 0.0, time: entry.widgetData.forecastTimeArray[i - 1]))
                 }
             }
         case .systemMedium:
@@ -174,7 +174,7 @@ struct weatherkit_widgetEntryView : View {
             }
             .onAppear {
                 for i in 1...7 {
-                    items.append(Item(type: "\(i)", value: entry.widgetData.hourlyForecast[i], time: entry.widgetData.forecastTimeArray[i - 1]))
+                    items.append(Item(type: "\(i)", value: Double(entry.widgetData.hourlyForecast[i]) ?? 0.0, time: entry.widgetData.forecastTimeArray[i - 1]))
                 }
                 
             }
@@ -229,7 +229,7 @@ struct weatherkit_widgetEntryView : View {
             }
             .onAppear {
                 for i in 1...7 {
-                    items.append(Item(type: "\(i)", value: entry.widgetData.hourlyForecast[i], time: entry.widgetData.forecastTimeArray[i - 1]))
+                    items.append(Item(type: "\(i)", value: Double(entry.widgetData.hourlyForecast[i]) ?? 0.0, time: entry.widgetData.forecastTimeArray[i - 1]))
                 }
                 
             }
@@ -254,7 +254,7 @@ struct weatherkit_widgetEntryView : View {
     
     struct weatherkit_widget_Previews: PreviewProvider {
         //Preview WidgetData data (seen when choosing widgets)
-        static let widgetData = WidgetData(temp: "12˚C", tempMax: "16˚C", tempMin: "8˚C", symbolName: "cloud.sun.bolt.fill", hourlyForecast: [12.0, 11.0, 11.0, 9.0, 7.0], forecastTimeArray: ["9AM", "10AM", "11AM", "12PM"])
+        static let widgetData = WidgetData(temp: "12˚C", tempMax: "16˚C", tempMin: "8˚C", symbolName: "cloud.sun.bolt.fill", hourlyForecast: ["12.0", "11.0", "11.0", "9.0", "7.0"], forecastTimeArray: ["9AM", "10AM", "11AM", "12PM"])
         static var previews: some View {
             weatherkit_widgetEntryView(entry: SimpleEntry(widgetData: widgetData))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))

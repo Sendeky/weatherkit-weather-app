@@ -666,7 +666,8 @@ extension MainViewController {
         
         // displays them only if more than 6 items in HourluForecast
         if WeatherKitData.HourlyForecast.count > 6 {
-            cell.tempLabel.text = "\(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))˚"
+//            cell.tempLabel.text = "\(Int((round(Int(WeatherKitData.HourlyForecast[indexPath.row]))*100)/100))˚"
+            cell.tempLabel.text = "\(WeatherKitData.HourlyForecast[indexPath.row])"
         } else { cell.tempLabel.text = "--" }
         
         if timeArray.formattedHours.count > 6 {

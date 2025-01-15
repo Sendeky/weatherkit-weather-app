@@ -288,6 +288,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
         hourlyForecastView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
 //         Set the collection view's layout to horizontal scroll
         if let layout2 = hourlyForecastView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout2.itemSize = CGSize(width: 70, height: 60)
                 layout2.scrollDirection = .horizontal
         }
         
@@ -302,7 +303,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //         if hourlyForecastView, then we have 16 cells, otherwise 10
         if collectionView == self.hourlyForecastView {
-            return 15
+            return 12
         }
         else { return 7 }
     }
@@ -319,7 +320,7 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
             cell.timeLabel.font = .systemFont(ofSize: 16.0)
             
             // checks if there is enough data to show
-            if WeatherKitData.HourlyForecastSymbol.count >= 15 {
+            if WeatherKitData.HourlyForecastSymbol.count >= 11 {
                 //simple check for when icon is "wind" (doesn't have "fill" option)
                 if WeatherKitData.HourlyForecastSymbol[indexPath.row] != "wind" {
                     cell.weatherIcon.image = UIImage(systemName: "\(WeatherKitData.HourlyForecastSymbol[indexPath.row]).fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32.0))?.withRenderingMode(.alwaysOriginal)
@@ -330,9 +331,10 @@ class iPadMainViewController: UIViewController, UICollectionViewDelegate, UIColl
 
             // checks if there is enough data for hourly forecast
             print(WeatherKitData.HourlyForecast.count)
-            if WeatherKitData.HourlyForecast.count >= 15 {
-                cell.tempLabel.text = "\(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))˚"
-                print("skibb2: \(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))")
+            if WeatherKitData.HourlyForecast.count >= 11 {
+//                cell.tempLabel.text = "\(Int((round(Int(WeatherKitData.HourlyForecast[indexPath.row])*100))/100))˚"
+                cell.tempLabel.text = "\(WeatherKitData.HourlyForecast[indexPath.row])"
+//                print("skibb2: \(Int((round(WeatherKitData.HourlyForecast[indexPath.row])*100)/100))")
             } else { cell.tempLabel.text = "--" }
 
             return cell
